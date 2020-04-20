@@ -1,1 +1,0 @@
-# walkingdog project

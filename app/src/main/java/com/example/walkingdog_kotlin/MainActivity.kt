@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("TAG", "test------------")
-        var SERVER_BASE_URL = "http://192.168.0.4:3000"
+        var SERVER_BASE_URL = "http://172.30.73.147:3000"
 
         var retrofit = Retrofit.Builder()
             .baseUrl(SERVER_BASE_URL)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         var getName = retrofit.create(ServerApiRouter::class.java)
         Log.d("TAG", "성공~~")
 
-        getName.getAppName().enqueue(object: Callback<ServerApiModel> {
+        getName.getPostAppName().enqueue(object: Callback<ServerApiModel> {
             override fun onFailure(call: Call<ServerApiModel>, t: Throwable) {
                 //통신실패
                 Log.d("DEBUG", "실패")
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 //통신성공
                 Log.d("DEBUG", ")()()()()()()()()()()()")
                 var appName = response.body()
-                Log.d("DEBUG", appName?.appname.toString())
+                Log.d("DEBUG", appName?.appname)
             }
 
         })

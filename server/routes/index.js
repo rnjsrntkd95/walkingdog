@@ -11,4 +11,11 @@ router.get('/message', function(req, res, next) {
   res.json({ appname: 'walkingdog'});
 })
 
+router.post('/message', function(req, res, next) {
+  console.log('POST 진입')
+  res.json({
+    appname: 'kusang'
+  })
+})
+
 module.exports = router;

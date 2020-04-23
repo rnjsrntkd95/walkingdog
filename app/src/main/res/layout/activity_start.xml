@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StartActivity">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:id="@+id/start_img_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+            <ImageView
+                    android:layout_width="300px"
+                    android:layout_height="300px"
+                    android:src="@drawable/dog_sole">
+            </ImageView>
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/start_btn_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/start_img_layout"
+                android:layout_marginTop="300px">
+
+            <Button
+                    android:id="@+id/start_btn"
+                    android:layout_width="900px"
+                    android:layout_height="150px"
+                    android:text="시작하기"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/colorPrimaryDark"
+                    >
+            </Button>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

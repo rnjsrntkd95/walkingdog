@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Login.Information.NicknameFragment">
+        tools:context=".Login.Information.EmailFragment">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -13,7 +12,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
             <ImageButton
-                    android:id="@+id/previous_btn_nickName"
+                    android:id="@+id/previous_btn_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -24,24 +23,24 @@
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/comment_layout_nickName"
+                android:id="@+id/comment_layout_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_above="@+id/nickName_edit_layout"
+                android:layout_above="@+id/email_edit_layout"
                 android:layout_marginBottom="200dp">
 
             <TextView
-                    android:id="@+id/nickName_comment"
+                    android:id="@+id/email_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="20dp"
-                    android:text="닉네임을 입력하세요"/>
+                    android:text="가입할 이메일을 입력하세요"/>
 
         </LinearLayout>
         <LinearLayout
-                android:id="@+id/nickName_edit_layout"
+                android:id="@+id/email_edit_layout"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -49,7 +48,7 @@
                 android:orientation="vertical">
 
             <EditText
-                    android:id="@+id/nickName_edittext"
+                    android:id="@+id/email_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
             </EditText>
@@ -63,13 +62,13 @@
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/next_layout_nickName"
+                android:id="@+id/email_layout_name"
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_height="90dp">
 
             <Button
-                    android:id="@+id/next_btn_nickName"
+                    android:id="@+id/next_btn_email"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:background="@drawable/mybutton"

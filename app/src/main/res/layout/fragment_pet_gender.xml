@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Login.Information.PetGender">
+        tools:context=".Login.Information.PetGenderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            <ImageButton
+                    android:id="@+id/previous_btn_petGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@drawable/back_arrow"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"/>
 
-</FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/comment_layout_petGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/petGender_edit_layout"
+                android:layout_marginBottom="158dp">
+
+            <TextView
+                    android:id="@+id/petGender_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:text="반려견의 성별을 고르세요"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/petGender_edit_layout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/malebutton"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/white"/>
+
+            <ImageButton
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/femalebutton"
+                    android:background="@color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/next_layout_petGender"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="90dp">
+
+            <Button
+                    android:id="@+id/next_btn_petGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/mybutton"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/white"
+                    android:text="@string/next"
+                    android:textSize="20dp"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

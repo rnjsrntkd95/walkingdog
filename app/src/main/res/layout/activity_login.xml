@@ -8,65 +8,98 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/mainBlue">
 
         <LinearLayout
+                android:id="@+id/appName_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_above="@+id/login_img_layout"
-                android:layout_marginBottom="300px">
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="100dp">
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="워킹멍 나랑 산책하개" />
+                    android:text="워킹멍"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나랑 산책하개"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20dp"/>
         </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/login_img_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/appName_layout"
+                android:layout_marginTop="50dp">
 
             <ImageView
-                    android:layout_width="300px"
-                    android:layout_height="300px"
-                    android:src="@drawable/dog_sole">
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/splash_icon">
             </ImageView>
         </LinearLayout>
 
+
         <LinearLayout
-                android:id="@+id/kakao_login_layout"
+                android:id="@+id/email_signUp_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/login_img_layout"
-                android:layout_marginTop="225px">
+                android:layout_above="@+id/kakao_signUp_layout"
+                android:layout_marginBottom="15dp">
+
             <Button
-                    android:id="@+id/kakao_login_btn"
-                    android:layout_width="900px"
-                    android:layout_height="150px"
-                    android:text="카카오톡 로그인"
+                    android:id="@+id/email_signUp_btn"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:text="이메일로 가입하기"
+                    android:background="@drawable/emailbutton"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/kakao_signUp_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_above="@+id/google_signUp_layout"
+                android:layout_marginBottom="15dp">
+            <Button
+                    android:id="@+id/kakao_signUp_btn"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:text="카카오톡으로 가입하기"
                     android:textColor="#FFFFFF"
-                    android:background="#e4d74e"/>
+                    android:background="@drawable/kakaobutton"/>
 
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/google_login_layout"
+                android:id="@+id/google_signUp_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/kakao_login_layout"
-                android:layout_marginTop="50px">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp">
             <Button
-                    android:id="@+id/google_login_btn"
-                    android:layout_width="900px"
-                    android:layout_height="150px"
-                    android:text="구글 로그인"
+                    android:id="@+id/google_signUp_btn"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:text="구글로 가입하기"
                     android:textColor="#FFFFFF"
-                    android:background="#e4604e"/>
+                    android:background="@drawable/googlebutton"/>
 
         </LinearLayout>
     </RelativeLayout>

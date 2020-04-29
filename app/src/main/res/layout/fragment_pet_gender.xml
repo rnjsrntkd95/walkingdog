@@ -50,14 +50,14 @@
             <ImageButton
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/malebutton"
+                    android:src="@drawable/kakaobutton"
                     android:layout_marginRight="20dp"
                     android:background="@color/white"/>
 
             <ImageButton
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/femalebutton"
+                    android:src="@drawable/googlebutton"
                     android:background="@color/white"/>
 
         </LinearLayout>

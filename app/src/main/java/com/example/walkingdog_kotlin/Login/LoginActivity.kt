@@ -12,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        kakao_login_btn.setOnClickListener { view ->
+        email_signUp_btn.setOnClickListener { view ->
             var intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }

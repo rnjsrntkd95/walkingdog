@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Login.Information.EmailFragment">
+        tools:context=".Login.Information.EmailFragment"
+        android:background="@color/mainBlue">
+
+    <RelativeLayout
+            android:id="@+id/email_signUp_comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/mainBlue">
+
+        <ImageButton
+                android:id="@+id/previous_btn_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/mainBlue"
+                android:src="@drawable/back_arrow"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-            <ImageButton
-                    android:id="@+id/previous_btn_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:src="@drawable/back_arrow"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"/>
+            android:layout_height="match_parent"
+            android:layout_below="@id/email_signUp_comment_layout"
+            android:background="@drawable/loginform_background">
 
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/comment_layout_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_above="@+id/email_edit_layout"
-                android:layout_marginBottom="200dp">
-
-            <TextView
-                    android:id="@+id/email_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:text="가입할 이메일을 입력하세요"/>
-
-        </LinearLayout>
         <LinearLayout
                 android:id="@+id/email_edit_layout"
                 android:layout_width="300dp"
@@ -47,17 +45,25 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-            <EditText
-                    android:id="@+id/email_edittext"
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-            </EditText>
-            <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="1dp"
-                    android:background="@color/black">
 
-            </LinearLayout>
+                <EditText
+                        android:id="@+id/email_edittext"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/input_email">
+                </EditText>
+
+                <TextView
+                        android:id="@+id/email_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/mainOrange"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -65,12 +71,12 @@
                 android:id="@+id/email_layout_name"
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_height="90dp">
+                android:layout_height="wrap_content">
 
             <Button
                     android:id="@+id/next_btn_email"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/mybutton"
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
@@ -84,4 +90,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

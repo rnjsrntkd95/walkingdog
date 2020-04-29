@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FeedFragment">
+        tools:context=".FeedFragment"
+        android:background="@color/mainBlue">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+            android:id="@+id/feed_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@color/mainBlue">
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/feed_main_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="피드페이지야" />
+            android:orientation="vertical"
+            android:layout_below="@+id/feed_top_layout"
+            android:background="@color/mainOrange">
 
-</FrameLayout>
+
+        
+
+    </LinearLayout>
+
+
+</RelativeLayout>

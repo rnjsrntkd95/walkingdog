@@ -37,7 +37,7 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
         //Google 로그인 옵션 구성. requestIdToken 및 Email 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(getString(R.string.google_oauth_client_id))
             .requestEmail()
             .build()
 
@@ -45,8 +45,6 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
         //firebase auth 객체
         firebaseAuth = FirebaseAuth.getInstance()
-
-        signOut()
     }
 
     // onStart. 유저가 앱에 이미 구글 로그인을 했는지 확인

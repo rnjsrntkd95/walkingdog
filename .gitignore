@@ -253,3 +253,7 @@ fabric.properties
 
 #google
 google-services.json
+
+#key value
+/strings.xml
+settings.xml

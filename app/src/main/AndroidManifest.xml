@@ -24,7 +24,7 @@
 
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".GoogleSignInActivity"
+        <activity android:name=".SignInActivity"
                   android:launchMode="singleTop"
                   android:windowSoftInputMode="adjustResize">
             <intent-filter>

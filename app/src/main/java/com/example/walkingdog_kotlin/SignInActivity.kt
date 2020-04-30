@@ -15,11 +15,11 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_google_sign_in.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import com.kakao.auth.Session
 
 
-class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
+class SignInActivity : AppCompatActivity(), View.OnClickListener {
 
     //firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -32,7 +32,7 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_google_sign_in)
+        setContentView(R.layout.activity_sign_in)
 
 //        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }

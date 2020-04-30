@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,29 +12,30 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_google_sign_in.*
+import com.kakao.auth.Session
+
 
 class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
-
 
     //firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
     //google client
     private lateinit var googleSignInClient: GoogleSignInClient
-
     //private const val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 99
+    //Kakao Session Callback
+    private var callback: SessionCallback = SessionCallback(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_google_sign_in)
 
-        //btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
-        btn_googleSignIn.setOnClickListener {signIn()}
+//        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
+        btn_googleSignIn.setOnClickListener { signIn() }
 
         //Google 로그인 옵션 구성. requestIdToken 및 Email 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -45,19 +47,27 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
         //firebase auth 객체
         firebaseAuth = FirebaseAuth.getInstance()
+
+        //Kakao Login
+        Session.getCurrentSession().addCallback(callback)
     }
+
 
     // onStart. 유저가 앱에 이미 구글 로그인을 했는지 확인
     public override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if(account!==null){ // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
+        if (account !== null) { // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
             toMainActivity(firebaseAuth.currentUser)
         }
     } //onStart End
 
     // onActivityResult
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            Log.i("Log", "session get current session")
+            return
+        }
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -97,7 +107,7 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
     // toMainActivity
     fun toMainActivity(user: FirebaseUser?) {
-        if(user !=null) { // MainActivity 로 이동
+        if (user != null) { // MainActivity 로 이동
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -131,4 +141,43 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
+    //////// KaKao Login Callback //////////////
+//    class SessionCallback : ISessionCallback {
+//        override fun onSessionOpenFailed(exception: KakaoException?) {
+//            Log.e("Log", "Session Call back :: onSessionOpenFailed: ${exception?.message}")
+//        }
+//
+//        override fun onSessionOpened() {
+//            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
+//
+//                override fun onFailure(errorResult: ErrorResult?) {
+//                    Log.i("Log", "Session Call back :: on failed ${errorResult?.errorMessage}")
+//                }
+//
+//                override fun onSessionClosed(errorResult: ErrorResult?) {
+//                    Log.i("Log", "Session Call back :: onSessionClosed ${errorResult?.errorMessage}")
+//
+//                }
+//
+//                override fun onSuccess(result: MeV2Response?) {
+//                    Log.i("Log", "아이디 : ${result!!.id}")
+//                    Log.i("Log", "이메일 : ${result.kakaoAccount.email}")
+//                    Log.i("Log", "프로필 이미지 : ${result.profileImagePath}")
+//
+//                    checkNotNull(result) { "session response null" }
+//
+//
+//                    redirectKakaoActivity()
+//                }
+//            })
+//        }
+//    }
+
+    //Kakao destory 메모리 누수 방지?
+    @SuppressLint("MissingSuperCall")
+    override fun onDestroy() {
+        super.onDestroy()
+        Session.getCurrentSession().removeCallback(callback)
+    }
 }

@@ -1,9 +1,13 @@
 package com.example.walkingdog_kotlin
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import java.security.MessageDigest
+
 
 class MainActivity : AppCompatActivity() {
 

@@ -7,4 +7,6 @@
     <color name="mainOrange">#f38847</color>
     <color name="mainGray">#edf1f5</color>
     <color name="mainSkin">#ffece0</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>

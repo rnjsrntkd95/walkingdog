@@ -250,3 +250,10 @@ fabric.properties
 
 # Vscode
 .vscode
+
+#google
+google-services.json
+
+#key value
+/strings.xml
+settings.xml

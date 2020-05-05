@@ -26,8 +26,10 @@
         <activity android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".Login.LoginActivity"/>
+        <activity android:name=".SignInActivity"/>
+        <activity android:name=".MainActivity"/>
+
         <activity android:name=".StartActivity">
-        <activity android:name=".MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

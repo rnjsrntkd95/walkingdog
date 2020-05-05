@@ -76,13 +76,11 @@
                 android:layout_centerInParent="true"
                 android:layout_above="@+id/google_signUp_layout"
                 android:layout_marginBottom="15dp">
-            <Button
-                    android:id="@+id/kakao_signUp_btn"
+
+            <com.kakao.usermgmt.LoginButton
+                    android:id="@+id/btn_kakaoSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:text="카카오톡으로 가입하기"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/kakaobutton"/>
+                    android:layout_height="50dp" />
 
         </LinearLayout>
 
@@ -93,13 +91,12 @@
                 android:layout_centerInParent="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="40dp">
-            <Button
-                    android:id="@+id/google_signUp_btn"
+
+
+            <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_googleSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:text="구글로 가입하기"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/googlebutton"/>
+                    android:layout_height="50dp"/>
 
         </LinearLayout>
     </RelativeLayout>

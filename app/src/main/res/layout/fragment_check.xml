@@ -62,25 +62,46 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/check_list_Recyclerview"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_centerInParent="true"
-                android:background="@color/mainGray">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <ListView
+                android:id="@+id/checkListView"
+                android:layout_width="200dp"
+                android:layout_height="280dp"
+                android:layout_centerInParent="true">
 
-        <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="+"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:background="@drawable/orange_btn_shape"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/check_list_Recyclerview"
-                android:layout_marginTop="10dp"/>
+        </ListView>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkListView"
+                android:layout_centerHorizontal="true">
+
+            <Button
+                    android:id="@+id/sub_item_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="-"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/orange_btn_shape"
+                    android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:id="@+id/add_item_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="+"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/orange_btn_shape"
+                    android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
 
-        supportFragmentManager.beginTransaction().replace(R.id.main_content_framelayout, FeedFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, FeedFragment())
             .commit()
 
         //액티비티에서 상태바 아이콘 흰색으로 만드는 코드

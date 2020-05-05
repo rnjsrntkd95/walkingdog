@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Login.Information.PetBreedFragment">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            <ImageButton
+                    android:id="@+id/previous_btn_petBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@drawable/back_arrow"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/comment_layout_petBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/petBreed_edit_layout"
+                android:layout_marginBottom="158dp">
+
+            <TextView
+                    android:id="@+id/petBreed_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:text="반려견의 품종을 고르세요"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/petBreed_edit_layout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+<!--            <ImageButton-->
+<!--                    android:layout_width="130dp"-->
+<!--                    android:layout_height="130dp"-->
+<!--                    android:src="@drawable/mybutton"-->
+<!--                    android:layout_marginRight="20dp"-->
+<!--                    android:background="@color/white"/>-->
+<!--            <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="뷰페이저로 구성할 것임"/>-->
+
+<!--            <ImageButton-->
+<!--                    android:layout_width="130dp"-->
+<!--                    android:layout_height="130dp"-->
+<!--                    android:src="@drawable/mybutton"-->
+<!--                    android:background="@color/white"/>-->
+
+<!--            <androidx.viewpager.widget.ViewPager-->
+<!--                    android:id="@+id/breed_adapter"-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_height="130dp">-->
+
+<!--            </androidx.viewpager.widget.ViewPager>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/next_layout_petBreed"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="90dp">
+
+            <Button
+                    android:id="@+id/next_btn_petBreed"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/mybutton"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/white"
+                    android:text="@string/next"
+                    android:textSize="20dp"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

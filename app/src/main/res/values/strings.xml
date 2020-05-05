@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">walkingdog_kotlin</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">다음</string>
+    <string name="finish">완료</string>
+    <string name="input_email">가입할 이메일을 입력하세요</string>
+    <string name="input_password">비밀번호를 입력하세요</string>
+    <string name="input_password_confirm">다시 한 번 입력하세요</string>
+    <string name="input_name">이름을 입력하세요</string>
+    <string name="input_nickname">사용할 닉네임을 입력하세요</string>
+    <string name="input_phoneNum">핸드폰 번호를 입력하세요</string>
 </resources>

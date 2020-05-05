@@ -22,15 +22,16 @@
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
 
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".SignInActivity"
-                  android:launchMode="singleTop"
-                  android:windowSoftInputMode="adjustResize">
+        <activity android:name=".WalkingActivity" />
+        <activity android:name=".Login.SignUpActivity"
+                android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Login.LoginActivity"/>
+        <activity android:name=".StartActivity">
+        <activity android:name=".MainActivity" />
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

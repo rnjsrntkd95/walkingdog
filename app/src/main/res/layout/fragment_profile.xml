@@ -10,7 +10,7 @@
 <RelativeLayout
         android:id="@+id/profile_top"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:orientation="horizontal">
 
     <LinearLayout
@@ -21,29 +21,12 @@
             android:layout_marginTop="30dp">
 
         <TextView
-                android:layout_width="130dp"
-                android:layout_height="30dp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
                 android:text="My Profile"
-                android:textColor="#000000"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:gravity="center" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/setting_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/cogwheel_black"
-
-            />
     </LinearLayout>
 
 
@@ -52,7 +35,6 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:orientation="horizontal"
-            android:background="@drawable/image"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/my_profile"
@@ -61,7 +43,7 @@
         <ImageView
                 android:layout_width="97dp"
                 android:layout_height="100dp"
-                android:src="@drawable/user"></ImageView>
+                android:src="@drawable/myprofile_img"></ImageView>
 
     </LinearLayout>
 
@@ -79,7 +61,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Park Joon Sung"
-                android:textColor="#000000"
                 android:textSize="20dp"
                 />
 
@@ -95,50 +76,200 @@
             >
 
 
-        <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/pets">
 
-        </ImageView>
-
-        <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="64dp"
-                android:layout_marginLeft="20dp">
-
-            <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/pets"
-                    >
-
-            </ImageView>
-
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
 
-
-
-
 </RelativeLayout>
 
 
-<RelativeLayout
+<LinearLayout
+        android:id="@+id/profile_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/profile_bottom"
-        android:layout_below="@+id/profile_top">
+        android:layout_below="@+id/profile_top"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/my_photos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/photos"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+        />
+
+        <TextView
+                android:id="@+id/my_phots_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Photos"
+                android:layout_marginLeft="30dp"
+                android:textSize="25dp"
+                android:layout_gravity="center_vertical">
+
+        </TextView>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right"
+                android:layout_marginLeft="130dp"
+                >
+
+        </ImageView>
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#a6a6a6"
+            >
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/statics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/barchart" />
+
+        <TextView
+                android:id="@+id/statics_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statics"
+                android:layout_marginLeft="30dp"
+                android:textSize="25dp"
+                android:layout_gravity="center_vertical">
+
+        </TextView>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right"
+                android:layout_marginLeft="172dp"
+                >
+        </ImageView>
 
 
 
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#a6a6a6"
+            >
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/user2"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                />
+
+        <TextView
+                android:id="@+id/account_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:layout_marginLeft="30dp"
+                android:textSize="25dp"
+                android:layout_gravity="center_vertical">
+
+        </TextView>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right"
+                android:layout_marginLeft="157dp"
+                >
+        </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#a6a6a6"
+            >
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/cogwheel"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                />
+        <TextView
+                android:id="@+id/settings_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:layout_marginLeft="30dp"
+                android:textSize="25dp"
+                android:layout_gravity="center_vertical">
+
+        </TextView>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right"
+                android:layout_marginLeft="157dp"
+                >
+        </ImageView>
+
+    </LinearLayout>
 
 
-
+</LinearLayout>
 </RelativeLayout>

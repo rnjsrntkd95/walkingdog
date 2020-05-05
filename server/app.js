@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 // Router
 var loginRouter = require('./routes/logins');
+var indexRouter = require('./routes/index');
+
 
 // MongoDB Connect
 const mongodb = require('./db.js');
@@ -14,11 +16,12 @@ mongodb();
 var app = express();
 
 // Use Router
+app.use('/',indexRouter);
 app.use('/login', loginRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());

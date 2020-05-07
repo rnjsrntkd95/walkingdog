@@ -11,7 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".WalkingActivity"></activity>
+        <activity android:name=".AddItemPopUpWindow" android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".WalkingActivity" />
         <activity android:name=".Login.SignUpActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Login.LoginActivity" />

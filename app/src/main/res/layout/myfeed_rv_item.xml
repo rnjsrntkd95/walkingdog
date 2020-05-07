@@ -3,14 +3,8 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-    </LinearLayout>
 
     <RelativeLayout
-            android:layout_below="@+id/"
             android:id="@+id/user_myfeedInfo_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp">

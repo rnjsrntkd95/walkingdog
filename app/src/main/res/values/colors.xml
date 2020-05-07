@@ -7,8 +7,8 @@
     <color name="black">#000000</color>
     <color name="mainBlue">#6772f1</color>
     <color name="mainOrange">#F38847</color>
-    <color name="mainGrey">#edf1f5</color>
     <color name="mainSkin">#ffece5</color>
     <color name="green">#188B0D</color>
     <color name="red">#D01111</color>
+    <color name="mainGray">#edf1f5</color>
 </resources>

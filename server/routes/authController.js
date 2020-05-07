@@ -45,8 +45,7 @@ exports.login = function (req, res) {
       throw new Error("login failed");
     } else {
       console.log(user);
-      if (true) {
-        //user.verify(password)
+      if (user.verify(password)) {
         const p = new Promise(function (resolve, reject) {
           jwt.sign(
             {

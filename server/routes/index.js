@@ -7,7 +7,6 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Hello World!" });
 });
 
-router.get("/test", controller.test);
 router.post("/register", controller.register);
 router.post("/login", controller.login);
 router.get("/check", controller.check);

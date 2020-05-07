@@ -58,7 +58,7 @@ userSchema.statics.findOneByUsername = function (username) {
 };
 
 userSchema.methods.verify = function (password) {
-  if (this.passwod === password) return true;
+  if (this.password === password) return true;
   else return false;
 };
 

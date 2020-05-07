@@ -2,7 +2,6 @@ package com.example.walkingdog_kotlin
 
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -86,8 +85,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         firebaseAuth.signOut()
 
-        var challengeFragment = ChallengeFragment()
-
-        supportFragmentManager.beginTransaction().replace(R.id.main_content_frameLayout, challengeFragment).commit()
     }
 }

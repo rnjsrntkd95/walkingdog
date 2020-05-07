@@ -12,18 +12,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
-        required: true,
-        lowercase: true,
-    },
     nickname: {
         type: String,
-        required: true,
-        unique: true,
-    },
-    phone: {
-        type: Number,
         required: true,
         unique: true,
     },
@@ -31,6 +21,11 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    // username: {
+    //     type: String,
+    //     required: true,
+    //     lowercase: true,
+    // },
 })
 
 module.exports = mongoose.model('User', userSchema);

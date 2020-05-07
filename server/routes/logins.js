@@ -1,22 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var controller = require('./loginsController');
 
-const User = require('../models/user');
+
+
 
 // Login
-router.get('/', function(req, res, next) {
-    User.create({
-        email: 'rnjsrntkasdfad@gmail.com',
-        password: 'admindasdfadddd',
-        username: '권구상ddddddafadd',
-        nickname: '구상이dddddasdfasdd',
-        phone: '010950825260000111',
-    }, function (err, user) {
-        
-        if (err) return console.log(err.errmsg);
-        res.status(200).send(user);
-    });
-});
+router.get('/', controller.login);
 
 // Google Login Page
 router.get('/google', function(req, res, next) {

@@ -1,30 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var controller = require('./loginsController');
 
-const User = require('../models/user');
-const Animal = require('../models/animal');
-const Breed = require('../models/breed');
+
 
 
 // Login
-router.get('/', async function(req, res, next) {
-    try {
-        const breed_id = await Breed.findOne({breed: '푸들'})
-        const create_result = await Animal.create({
-            animalName: '까까',
-            breed: breed_id,
-            birth: '2015-01-10',
-            weight: 30,
-        })
-        console.log(breed_id)
-        console.log(create_result)
-        res.json(create_result)
-    } catch (err) {
-        console.log('error')
-        console.log(err.code)
-        res.json(err.code)
-    }
-});
+router.get('/', controller.login);
 
 // Google Login Page
 router.get('/google', function(req, res, next) {

@@ -1,6 +1,10 @@
 package com.example.walkingdog_kotlin
 
 import android.app.Activity
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -10,8 +14,11 @@ import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.auth.FirebaseAuth
+import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId) {
@@ -62,5 +69,25 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //getWindow().setStatusBarColor(Color.parseColor("#edf1f5"))
 
 
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser
+        user?.let {
+            val username = user.displayName
+            val email = user.email
+            val emailVerified = user.isEmailVerified
+            val uid = user.uid
+
+            Log.i("TAG", "username: " + username)
+            Log.i("TAG", "email: " + email)
+            Log.i("TAG", "emailVerified: " + emailVerified)
+            Log.i("TAG", "uid: " + uid)
+        }
+
+        firebaseAuth.signOut()
+
+        var challengeFragment = ChallengeFragment()
+
+        supportFragmentManager.beginTransaction().replace(R.id.main_content_frameLayout, challengeFragment).commit()
     }
 }

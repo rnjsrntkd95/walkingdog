@@ -7,7 +7,13 @@
         <item name="colorPrimaryDark">@color/mainBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <!-- <item name="android:statusBarColor">@color/mainBlue</item> -->
+
+        <!--Status Bar 배경색 -->
+        <item name="android:statusBarColor">@color/mainBlue</item>
+    </style>
+
+    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/dog_sole</item>
     </style>
 
 </resources>

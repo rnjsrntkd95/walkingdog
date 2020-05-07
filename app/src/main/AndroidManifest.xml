@@ -11,7 +11,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MyPhotoActivity"></activity>
+        <activity android:name=".Statics"></activity>
+        <activity android:name=".Account" />
+        <activity android:name=".Settings" />
+        <activity android:name=".MyPhotoActivity" />
         <activity android:name=".WalkingActivity" />
         <activity android:name=".Login.SignUpActivity" />
         <activity android:name=".MainActivity" />

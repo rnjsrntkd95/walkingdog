@@ -6,10 +6,11 @@
         android:layout_height="match_parent"
         tools:context=".MyPhotoActivity">
 
-    <Button
-            android:id="@+id/back_btn"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="뒤로"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myfeed_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

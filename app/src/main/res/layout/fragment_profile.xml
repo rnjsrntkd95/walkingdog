@@ -66,20 +66,18 @@
 
     </LinearLayout>
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_name"
-            android:layout_marginTop="15dp"
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/add_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            >
+            android:layout_below="@+id/profile_name"
+            tools:listitem="@layout/add_dog_item"
 
-
-
-
-    </LinearLayout>
-
+            />
 
 </RelativeLayout>
 
@@ -272,4 +270,5 @@
 
 
 </LinearLayout>
+
 </RelativeLayout>

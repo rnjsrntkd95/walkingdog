@@ -7,21 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.walkingdog_kotlin.model.Challenge
+
 
 class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Challenge>) :
     RecyclerView.Adapter<ChallengeRvAdapter.Holder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.challenege_rv_item, parent, false)
-        return Holder(view)
-    }
-
-    override fun getItemCount(): Int {
-        return challengeList.size
-    }
-
-    override fun onBindViewHolder(holder: Holder?, position: Int) {
-        holder?.bind(challengeList[position], context)
-    }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val challegePhoto = itemView?.findViewById<ImageView>(R.id.ChallengePhoto_Img)
@@ -37,5 +27,21 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
             challengeTitle?.text = challenge.title
         }
     }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeRvAdapter.Holder {
+        val view = LayoutInflater.from(context).inflate(R.layout.challenege_rv_item, parent, false)
+        return Holder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return challengeList.size
+    }
+
+    override fun onBindViewHolder(holder: ChallengeRvAdapter.Holder, position: Int) {
+        holder?.bind(challengeList[position], context)
+    }
+
+
 
 }

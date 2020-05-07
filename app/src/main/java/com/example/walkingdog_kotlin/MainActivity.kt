@@ -30,5 +30,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         firebaseAuth.signOut()
+
+        var challengeFragment = ChallengeFragment()
+
+        supportFragmentManager.beginTransaction().replace(R.id.main_content_frameLayout, challengeFragment).commit()
     }
 }

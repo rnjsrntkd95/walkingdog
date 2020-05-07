@@ -14,8 +14,11 @@ var db = function () {
     }
     connect();
     mongoose.connection.on('disconnected', connect);
-    
+
     require('./models/user.js');
+    require('./models/breed.js');
+    require('./models/animal.js');
+
 }
 
 module.exports = db;

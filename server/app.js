@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 // Router
 var loginRouter = require('./routes/logins');
+var animalRouter = require('./routes/animals');
 var indexRouter = require('./routes/index');
 
 
@@ -18,6 +19,7 @@ var app = express();
 // Use Router
 app.use('/',indexRouter);
 app.use('/login', loginRouter);
+app.use('/animal', animalRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

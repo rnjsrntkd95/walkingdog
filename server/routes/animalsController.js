@@ -12,12 +12,12 @@ exports.register = async (req, res, next) => {
     req.weight = 10.3;
     req.gender = '남';
 
-    const breed = req.breed;
-    const animalName = req.animalName;
-    const birth = req.birth;
-    const weight = req.weight;
-    const gender = req.gender;
-    const user = req.userId;
+    const breed = req.params.breed;
+    const animalName = req.params.animalName;
+    const birth = req.params.birth;
+    const weight = req.params.weight;
+    const gender = req.params.gender;
+    const user = req.params.userId;
 
     try {
         const breedId = await Breed.findOne({ breed });
@@ -45,7 +45,7 @@ exports.register = async (req, res, next) => {
 exports.searchPet = async (req, res, next) => {
     req.userId = '5eb1688e4ab2c850a0f345de';
     
-    const userId = req.userId;
+    const userId = req.params.userId;
 
     try {
         const user = await User.findOne({ _id: userId });

@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
-import com.example.walkingdog_kotlin.SessionCallback
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,25 +18,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.auth.Session
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.btn_googleSignIn
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_login)
-//
-//        email_signUp_btn.setOnClickListener { view ->
-//            var intent = Intent(this, SignUpActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//
-//    }
-//}
-
 
     //firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -46,7 +29,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     //private const val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 99
     //Kakao Session Callback
-    private var callback: SessionCallback = SessionCallback(this)
+    private var callback: SessionCallback =
+        SessionCallback(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,11 +97,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 성공", task.exception)
+                    val user = firebaseAuth?.currentUser
+                    val email = user?.email.toString()
+                    val password = user?.uid.toString()
+                    LoginRetrofitCreator(email, password)
                     toMainActivity(firebaseAuth?.currentUser)
                 } else {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 실패", task.exception)
 //                    Snackbar.make(login_layout, "로그인에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()
-                    Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show()
                 }
             }
     }// firebaseAuthWithGoogle END
@@ -158,39 +146,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInClient.revokeAccess().addOnCompleteListener(this) {
         }
     }
-
-
-    //////// KaKao Login Callback //////////////
-//    class SessionCallback : ISessionCallback {
-//        override fun onSessionOpenFailed(exception: KakaoException?) {
-//            Log.e("Log", "Session Call back :: onSessionOpenFailed: ${exception?.message}")
-//        }
-//
-//        override fun onSessionOpened() {
-//            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
-//
-//                override fun onFailure(errorResult: ErrorResult?) {
-//                    Log.i("Log", "Session Call back :: on failed ${errorResult?.errorMessage}")
-//                }
-//
-//                override fun onSessionClosed(errorResult: ErrorResult?) {
-//                    Log.i("Log", "Session Call back :: onSessionClosed ${errorResult?.errorMessage}")
-//
-//                }
-//
-//                override fun onSuccess(result: MeV2Response?) {
-//                    Log.i("Log", "아이디 : ${result!!.id}")
-//                    Log.i("Log", "이메일 : ${result.kakaoAccount.email}")
-//                    Log.i("Log", "프로필 이미지 : ${result.profileImagePath}")
-//
-//                    checkNotNull(result) { "session response null" }
-//
-//
-//                    redirectKakaoActivity()
-//                }
-//            })
-//        }
-//    }
 
     //Kakao destory 메모리 누수 방지?
     @SuppressLint("MissingSuperCall")

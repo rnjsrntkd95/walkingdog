@@ -4,18 +4,27 @@ const User = require('../models/user');
 const Animal = require('../models/animal');
 const Breed = require('../models/breed');
 
-exports.logIn = (req, res, next) => {
-    // const token = req.token;
-    const email = req.email;
-    console.log(email)
-    const password = req.password;
-    res.json({loginToken: "1111111"});
-    if (!token) {
-        const context ={
-            email,
-            password,
+exports.logIn = async (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try {
+        const userObj = await User.findOne({ email, password });
+
+        if (!userObj) {
+            // User를 DB에 저장
+            const newUser = await new User({
+                email,
+                password,
+            });
+            const resultReg = await User.create(newUser);
         }
-        res.json(context);
+        // 토큰 발행
+        res.json({ loginToken: "1111111", error: 0 })
+
+    } catch(err) {
+        console.log(err)
+        res.json({ loginToken: "0000000", error: 1 })
     }
 };
 

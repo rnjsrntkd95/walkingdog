@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account !== null) { // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
-            toMainActivity(firebaseAuth.currentUser)
+            signOut()
         }
     } //onStart End
 
@@ -100,9 +100,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val user = firebaseAuth?.currentUser
                     val email = user?.email.toString()
                     val password = user?.uid.toString()
-                    LoginRetrofitCreator(email, password)
-                    Log.d("TAG", "지렸따.")
-                    toMainActivity(firebaseAuth?.currentUser)
+                    val retrofit = RetrofitCreators(this)
+                    retrofit.LoginRetrofitCreator(email, password)
+
                 } else {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 실패", task.exception)
 //                    Snackbar.make(login_layout, "로그인에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()
@@ -112,13 +112,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }// firebaseAuthWithGoogle END
 
 
-    // toMainActivity
-    fun toMainActivity(user: FirebaseUser?) {
-        if (user != null) { // MainActivity 로 이동
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-    } // toMainActivity End
+//    // toMainActivity
+//    fun toMainActivity(user: FirebaseUser?) {
+//        if (user != null) { // MainActivity 로 이동
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+//    } // toMainActivity End
 
     // signIn
     private fun signIn() {

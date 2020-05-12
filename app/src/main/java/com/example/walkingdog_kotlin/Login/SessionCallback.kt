@@ -1,10 +1,7 @@
 package com.example.walkingdog_kotlin.Login
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import com.example.walkingdog_kotlin.MainActivity
 import com.kakao.auth.ISessionCallback
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
@@ -37,14 +34,10 @@ class SessionCallback(val context: Context) : ISessionCallback {
                 val email = result.kakaoAccount.email
                 val password = result!!.id.toString()
 
-                LoginRetrofitCreator(email, password)
+                val retrofit = RetrofitCreators(context)
+                retrofit.LoginRetrofitCreator(email, password)
 
                 checkNotNull(result) { "session response null" }
-
-                val intent = Intent(context, MainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                context.startActivity(intent)
-                (context as Activity).finish()
             }
 
         })

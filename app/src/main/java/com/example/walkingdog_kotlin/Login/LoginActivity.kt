@@ -101,6 +101,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val email = user?.email.toString()
                     val password = user?.uid.toString()
                     LoginRetrofitCreator(email, password)
+                    Log.d("TAG", "지렸따.")
                     toMainActivity(firebaseAuth?.currentUser)
                 } else {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 실패", task.exception)

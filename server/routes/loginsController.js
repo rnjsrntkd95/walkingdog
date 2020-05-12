@@ -23,7 +23,7 @@ exports.logIn = async (req, res, next) => {
       userObj = await User.findOne({ email, password });
     }
     // 토큰 발행
-    const token = Jwt.sign(
+    Jwt.sign(
       {
         email: userObj.email,
         created_date: userObj.created_date,
@@ -33,16 +33,14 @@ exports.logIn = async (req, res, next) => {
         expiresIn: "1d",
         issuer: "walkingDog",
         subject: "userInfo",
-      },
-      function (err, token) {
-        if (err) console.log(err);
-        console.log(token);
-        res.json({ token: token, error: 0 });
+      },function(err, loginToken) {
+        if (err) res.json({})
+        else res.json({ loginToken });
       }
     );
-  } catch (err) {
+} catch (err) {
     console.log(err);
-    res.json({ loginToken: "0000000", error: 1 });
+    res.json({});
   }
 };
 

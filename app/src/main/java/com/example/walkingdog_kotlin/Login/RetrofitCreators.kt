@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val serverUrl = "http://192.168.0.4:3000"
+const val serverUrl = "http://192.168.0.51:3000"
 
 fun LoginRetrofitCreator (email: String, password: String) {
     val kakaoRetrofit = Retrofit.Builder()
@@ -26,11 +26,6 @@ fun LoginRetrofitCreator (email: String, password: String) {
         override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
             Log.d("TAG", "Login Retrofit Success!!")
             val token = response.body()?.loginToken
-            Log.d("TAG", token)
-            val error = response.body()?.error
-            Log.d("TAG", error.toString())
         }
-
-
     })
 }

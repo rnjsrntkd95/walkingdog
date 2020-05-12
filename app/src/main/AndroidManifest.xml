@@ -28,6 +28,10 @@
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".SignInActivity" />
+        <activity android:name=".Statics"></activity>
+        <activity android:name=".Account" />
+        <activity android:name=".Settings" />
+        <activity android:name=".MyPhotoActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>

@@ -12,8 +12,15 @@ import kotlinx.android.synthetic.main.fragment_challenge.*
 class ChallengeFragment : Fragment() {
 
     var challengeList = arrayListOf<Challenge>(
-        Challenge("제목1", "challenge01"),
-        Challenge("제목2", "challenge01")
+        Challenge("제목1"),
+        Challenge("제목2"),
+        Challenge("제목3"),
+        Challenge("제목4"),
+        Challenge("제목5"),
+        Challenge("제목6"),
+        Challenge("제목7"),
+        Challenge("제목8"),
+        Challenge("제목9")
     )
 
 

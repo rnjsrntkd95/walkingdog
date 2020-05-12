@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        android:background="@color/mainGray">
 
     <TextView
             android:id="@+id/challengeTitle_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="챌린지 제목"/>
 
-    <ImageView
-            android:id="@+id/ChallengePhoto_Img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@mipmap/ic_launcher"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="challenge comment"
+            android:layout_centerVertical="true"/>
 
-</LinearLayout>
+    <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/profile"
+            android:layout_toLeftOf="@+id/personnel"/>
+
+    <TextView
+            android:id="@+id/personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="인원"/>
+
+    <TextView
+            android:id="@+id/period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="기간:"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="4월 15일 ~ 4월 21일"
+            android:layout_toRightOf="@+id/period"/>
+
+</RelativeLayout>

@@ -14,16 +14,9 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
     RecyclerView.Adapter<ChallengeRvAdapter.Holder>() {
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val challegePhoto = itemView?.findViewById<ImageView>(R.id.ChallengePhoto_Img)
         val challengeTitle = itemView?.findViewById<TextView>(R.id.challengeTitle_Textview)
 
         fun bind (challenge: Challenge, context: Context) {
-            if (challenge.photo != "") {
-                val resourceId = context.resources.getIdentifier(challenge.photo, "drawable", context.packageName)
-                challegePhoto?.setImageResource(resourceId)
-            } else {
-                challegePhoto?.setImageResource(R.mipmap.ic_launcher)
-            }
             challengeTitle?.text = challenge.title
         }
     }

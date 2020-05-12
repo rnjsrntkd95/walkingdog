@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Login.Information.NicknameFragment"
+        android:background="@color/mainBlue">
+
+    <RelativeLayout
+            android:id="@+id/add_pet_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/mainBlue">
+
+        <ImageButton
+                android:id="@+id/previous_btn_addPet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/mainBlue"
+                android:src="@drawable/back_arrow"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="펫 등록"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/add_pet_title_layout"
+            android:background="@drawable/loginform_background">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_above="@+id/finish_btn_addPet"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/rv_image_area"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/dog01"/>
+
+            <LinearLayout
+                    android:layout_width="280dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="이름"/>
+
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="강아지의 이름을 입력하세요"
+                        android:layout_marginBottom="10dp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="나이"/>
+
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="강아지의 나이를 입력하세요"
+                        android:layout_marginBottom="10dp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="견종"
+                        android:layout_marginBottom="5dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/breed_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginBottom="10dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="성별"/>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <Button
+                            android:id="@+id/male_btn"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/breed_shape"
+                            android:text="Male"/>
+
+                    <LinearLayout
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent">
+
+                    </LinearLayout>
+
+                    <Button
+                            android:id="@+id/female_btn"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:textColor="@color/white"
+                            android:background="@drawable/breed_shape"
+                            android:text="Female"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+            <Button
+                    android:id="@+id/finish_btn_addPet"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/bottomnavigation_shape"
+                    android:textColor="@color/white"
+                    android:text="@string/finish"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="20dp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

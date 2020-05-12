@@ -6,4 +6,11 @@
         tools:context=".Login.ProfileFragment"
         android:background="@color/yellow">
 
+    <Button
+            android:id="@+id/testbtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+    </Button>
+
 </FrameLayout>

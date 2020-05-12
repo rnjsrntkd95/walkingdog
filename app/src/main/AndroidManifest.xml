@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.walkingdog_kotlin">
+        package="com.example.walkingdog_kotlin">
     <!-- INTERNET Connect -->
-    <uses-permission android:name="android.permission.INTERNET"/> <!-- Google Login -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Google Login -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
             android:name=".GlobalApplication"
@@ -16,19 +16,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
+        <activity android:name=".AddPet"></activity>
         <!-- 카카오 앱 키 사용 -->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
 
         <activity android:name=".WalkingActivity" />
-        <activity android:name=".Login.SignUpActivity"
-                android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".Login.LoginActivity"/>
-        <activity android:name=".SignInActivity"/>
-        <activity android:name=".MainActivity"/>
-
+        <activity
+                android:name=".Login.SignUpActivity"
+                android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

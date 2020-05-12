@@ -12,19 +12,59 @@
                 android:background="@color/mainBlue"
                 android:layout_weight="6">
 
+            <LinearLayout
+                    android:id="@+id/popular_challenge_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="인기 챌린지"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+                
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/popular_challenge_title_layout"
+                    android:background="@color/yellow"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_centerHorizontal="true">
+            </LinearLayout>
 
         </RelativeLayout>
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/mainOrange"
                 android:layout_weight="4">
+
+            <LinearLayout
+                    android:id="@+id/village_challenge_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="우리동네 챌린지"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/village_challenge_title_layout"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
 
 
             </androidx.recyclerview.widget.RecyclerView>

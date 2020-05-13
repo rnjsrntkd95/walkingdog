@@ -55,12 +55,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val animalRetrofit = AnimalRetrofitCreators(this).BreedRetrofitCreator()
-        animalRetrofit.getAllBreed().enqueue(object : Callback<BreedListModel> {
-            override fun onFailure(call: Call<BreedListModel>, t: Throwable) {
-                Log.d("DEBUG", "Animal Retrofit Failed!!")
-                Log.d("DEBUG", t.message)
-            }
         val bottomNavigationView = findViewById<View>(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
@@ -79,19 +73,27 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //상태바 색 변경하는 코드2
         //getWindow().setStatusBarColor(Color.parseColor("#edf1f5"))
 
-
-
-            override fun onResponse(call: Call<BreedListModel>, response: Response<BreedListModel>) {
-                Log.d("DEBUG", "Animal Retrofit Success!!")
-
-                val breedList = response.body()
-                for (breed in breedList!!.breedList) {
-                    Log.d("TAG", breed.breed)
-                }
-
-            }
-
-        })
+//       // Get All Breed Retrofit Test
+//        val animalRetrofit = AnimalRetrofitCreators(this).BreedRetrofitCreator()
+//        animalRetrofit.getAllBreed().enqueue(object : Callback<BreedListModel> {
+//            override fun onFailure(call: Call<BreedListModel>, t: Throwable) {
+//                Log.d("DEBUG", "Animal Retrofit Failed!!")
+//                Log.d("DEBUG", t.message)
+//            }
+//
+//
+//
+//            override fun onResponse(call: Call<BreedListModel>, response: Response<BreedListModel>) {
+//                Log.d("DEBUG", "Animal Retrofit Success!!")
+//
+//                val breedList = response.body()
+//                for (breed in breedList!!.breedList) {
+//                    Log.d("TAG", breed.breed)
+//                }
+//
+//            }
+//
+//        })
 
     }
 }

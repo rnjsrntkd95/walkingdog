@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.walkingdog_kotlin.AddPet
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.SessionCallback
@@ -51,6 +52,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        email_signUp_btn.setOnClickListener {
+            var intent = Intent(this, AddPet::class.java)
+            startActivity(intent)
+        }
 
 //        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }

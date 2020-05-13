@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.auth.Session
 import kotlinx.android.synthetic.main.activity_login.btn_googleSignIn
+import kotlinx.android.synthetic.main.fragment_nickname.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 

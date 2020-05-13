@@ -1,6 +1,5 @@
 package com.example.walkingdog_kotlin.Login
 
-import com.example.walkingdog_kotlin.GlobalApplication
 import com.kakao.auth.*
 
 class KakaoSDKAdapter : KakaoAdapter() {

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
 
 import com.example.walkingdog_kotlin.R
@@ -69,8 +70,10 @@ class NicknameFragment : Fragment() {
         }
 
         next_btn_nickname.setOnClickListener {
-            if(flag==1)
-                (activity as SignUpActivity).movePhoneNum()
+            val retrofit = RetrofitCreators(context!!)
+            retrofit.SetNicknameRetrofit(nickname_edittext.text.toString())
+
+
         }
 
 

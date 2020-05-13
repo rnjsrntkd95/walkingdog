@@ -29,15 +29,25 @@ app.use(
 // secret
 app.set("jwt-secret", config.secret);
 
+// User Token Decoding
+app.use((req, res, next) => {
+  console.log(req.path)
+  if (req.path === "/login") {
+    next();
+  } else {
+    const Jwt = require("jsonwebtoken");
+    const token = req.body.userToken
+    const secret = req.app.get("jwt-secret");
+    const decodedToken = Jwt.decode(token, secret);
+    req.userToken = decodedToken;
+    next();
+  }
+})
+
 // Use Router
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/animal", animalRouter);
-
-// Session Setup
-// app.use(session({
-//   key: 'sid'
-// }))
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -45,7 +55,6 @@ app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -2,42 +2,58 @@ const User = require('../models/user');
 const Animal = require('../models/animal');
 const Breed = require('../models/breed');
 
+// 모든 견종 조회
+exports.checkBreedList = async (req, res, next) => {
+    // const List = ["푸들", "말티즈", "리트리버"];
+    // for (breed of List) {
+    //     Breed.create({breed});
+    // }
+    try {
+
+        const breedList = await Breed.find().select('breed');
+        console.log(breedList)
+        res.json({breedList})
+        // res.json(breedList.toJSON())
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 // 유저에게 새로운 동물 등록
 exports.register = async (req, res, next) => {
-    req.userId = '5eb1688e4ab2c850a0f345de';
     req.breed = '푸들';
     req.animalName = '까까';
-    req.birth = '2010-01-11';
+    req.age = 10;
     req.weight = 10.3;
     req.gender = '남';
 
+    // const userData = req.userToken;
+    const userData = "5eba848a4d106033289aeafa";
     const breed = req.breed;
     const animalName = req.animalName;
-    const birth = req.birth;
+    const age = req.age;
     const weight = req.weight;
     const gender = req.gender;
-    const user = req.userId;
-
+    console.log(breed);
     try {
         const breedId = await Breed.findOne({ breed });
         console.log(breedId)
-        const userId = await User.findOne({ _id: user });
+        const userId = await User.findOne({ _id: userData });
 
         const animalRegister = await new Animal({
             animalName,
             breed: breedId,
-            birth,
+            age,
             weight,
             gender,
             user: userId,
         });
         const resultReg = await Animal.create(animalRegister);
         console.log(resultReg);
-        res.json({ successFlag: 1, result: resultReg});
+        res.json({});
     } catch (err) {
-        console.log(`Error: ${err}`);
-        res.json({ successFlag: 0, err });
+        console.log(err);
+        res.json({error: 1});
     }
 }
 
@@ -45,7 +61,7 @@ exports.register = async (req, res, next) => {
 exports.searchPet = async (req, res, next) => {
     req.userId = '5eb1688e4ab2c850a0f345de';
     
-    const userId = req.userId;
+    const userId = req.params.userId;
 
     try {
         const user = await User.findOne({ _id: userId });
@@ -53,7 +69,8 @@ exports.searchPet = async (req, res, next) => {
 
         res.json(myPetList);
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        console.log({ error: 1 });
     }
 }
 

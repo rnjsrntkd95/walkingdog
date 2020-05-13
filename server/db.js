@@ -11,6 +11,7 @@ var db = function () {
             console.log('mongodb connected')
         });
         mongoose.set('useCreateIndex', true);
+        mongoose.set('useFindAndModify', false);
     }
     connect();
     mongoose.connection.on('disconnected', connect);

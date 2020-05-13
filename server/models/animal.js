@@ -11,8 +11,8 @@ const animalSchema = new Schema({
         ref: 'Breed',
         required: true,
     },
-    birth: {
-        type: Date,
+    age: {
+        type: Number,
         required: true,
     },
     weight: {

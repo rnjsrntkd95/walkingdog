@@ -5,18 +5,24 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Login.Model.SetNicknameModel
+import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
 
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.fragment_email.*
 import kotlinx.android.synthetic.main.fragment_nickname.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class NicknameFragment : Fragment() {
+class NicknameFragment(context: Context) : Fragment() {
 
     var nicknametest = "jspark"
 
@@ -69,12 +75,35 @@ class NicknameFragment : Fragment() {
         }
 
         next_btn_nickname.setOnClickListener {
-            if(flag==1)
-                (activity as SignUpActivity).movePhoneNum()
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref.getString("userToken", "none")
+            val nickname = nickname_edittext.text.toString()
+
+            val retrofit = RetrofitCreators(context!!)
+            val nicknameRetrofit = retrofit.SetNicknameRetrofit(nickname_edittext.text.toString())
+
+            nicknameRetrofit.setNickname(userToken!!, nickname).enqueue(object: Callback<SetNicknameModel> {
+                override fun onFailure(call: Call<SetNicknameModel>, t: Throwable) {
+                    Log.d("DEBUG", " Nickname Retrofit failed!!")
+                    Log.d("DEBUG", t.message)
+                }
+
+                override fun onResponse(call: Call<SetNicknameModel>, response: Response<SetNicknameModel>) {
+                    val error = response.body()?.error
+                    Log.d("TAG", error.toString())
+
+                    if (error == 0) {
+                        Log.d("TAG", "닉네임 등록에 성공하였습니다.")
+
+                    } else if (error == 11000) {
+                        nickname_status_text.setText("이미 등록된 닉네임입니다.")
+                        Log.d("TAG", "이미 등록된 닉네임입니다.")
+
+                    } else {
+                        Log.d("TAG", "올바르지 않은 닉네임입니다.")
+                    }
+                }
+            })
         }
-
-
-
     }
-
 }

@@ -53,4 +53,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     // Kakao Login
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+
+    // Retrofit, Gson,RxAdapter
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 }

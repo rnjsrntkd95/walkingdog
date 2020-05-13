@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
+import com.example.walkingdog_kotlin.MainActivity
 import com.kakao.auth.ISessionCallback
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
@@ -63,7 +64,7 @@ class SessionCallback(val context: Context) : ISessionCallback {
                             edit.commit()
 
                             if (nickname != null) {
-                                val intent = Intent(context, SignUpActivity::class.java)
+                                val intent = Intent(context, MainActivity::class.java)
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                                 context.startActivity(intent)
                                 (context as Activity).finish()

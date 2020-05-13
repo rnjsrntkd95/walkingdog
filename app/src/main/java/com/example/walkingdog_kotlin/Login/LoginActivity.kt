@@ -1,7 +1,6 @@
 package com.example.walkingdog_kotlin.Login
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
-import com.example.walkingdog_kotlin.AddPet
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,11 +18,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.auth.Session
-import kotlinx.android.synthetic.main.activity_login.btn_googleSignIn
-import kotlinx.android.synthetic.main.fragment_nickname.*
+import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -120,6 +117,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         override fun onFailure(call: Call<LoginModel>, t: Throwable) {
                             Log.d("DEBUG", " Login Retrofit failed!!")
                             Log.d("DEBUG", t.message)
+                            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
@@ -134,7 +132,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 edit.commit()
 
                                 if (nickname != null) {
-                                    val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                                     startActivity(intent)
                                     finish()

@@ -1,7 +1,8 @@
 package com.example.walkingdog_kotlin.Login.Information
 
+import android.app.Activity
 import android.content.Context
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,12 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Login.Model.SetNicknameModel
 import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
 
 import com.example.walkingdog_kotlin.R
-import kotlinx.android.synthetic.main.fragment_email.*
 import kotlinx.android.synthetic.main.fragment_nickname.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -94,6 +95,9 @@ class NicknameFragment(context: Context) : Fragment() {
 
                     if (error == 0) {
                         Log.d("TAG", "닉네임 등록에 성공하였습니다.")
+                        val intent = Intent(context, AddPet::class.java)
+                        startActivity(intent)
+                        (context as Activity).finish()
 
                     } else if (error == 11000) {
                         nickname_status_text.setText("이미 등록된 닉네임입니다.")

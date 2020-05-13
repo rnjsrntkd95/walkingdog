@@ -18,24 +18,23 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".AddPet"></activity>
         <!-- 카카오 앱 키 사용 -->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
 
         <activity android:name=".WalkingActivity" />
+        <!--<activity android:name=".AddPet"/>-->
         <activity
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".SignInActivity" />
         <activity android:name=".Statics"></activity>
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".Animal.AddPet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

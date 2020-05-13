@@ -104,6 +104,5 @@ class CheckFragment : Fragment() {
             startActivity(intent)
         }
 
-
     }
 }

@@ -19,7 +19,35 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/mainOrange"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:padding="20dp"
+            android:gravity="center">
+
+        <TextView
+                android:id="@+id/secondTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"/>
+
+        <TextView
+                android:id="@+id/milliSecondTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0m"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0kcal"
+                android:layout_weight="1"
+                android:gravity="center"/>
 
 
     </LinearLayout>
@@ -28,7 +56,29 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/mainBlue"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:padding="20dp"
+            android:gravity="center">
+
+        <ImageButton
+                android:id="@+id/lapBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/play_icon"/>
+
+        <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dog_house"
+                android:layout_weight="1">
+        </ImageView>
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/camera"
+                android:layout_weight="1">
+        </ImageView>
 
 
     </LinearLayout>

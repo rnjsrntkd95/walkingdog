@@ -19,7 +19,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         //액티비티 호출 시 FramLayout의 defalt 값을 emailFragment로 지정
-        val nicknameFragment = NicknameFragment()
+        val nicknameFragment = NicknameFragment(this)
         supportFragmentManager.beginTransaction().replace(R.id.signUp_content, nicknameFragment)
             .commit()
 
@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     fun moveNickname() {    //FrameLayout에 nickname fragment 지정
-        val nicknameFragment = NicknameFragment()
+        val nicknameFragment = NicknameFragment(this)
         supportFragmentManager.beginTransaction().replace(R.id.signUp_content, nicknameFragment)
             .commit()
     }

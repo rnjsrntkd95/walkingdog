@@ -1,12 +1,15 @@
 package com.example.walkingdog_kotlin.Login
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.walkingdog_kotlin.Login.Model.LoginModel
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,6 +23,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.auth.Session
 import kotlinx.android.synthetic.main.activity_login.btn_googleSignIn
 import kotlinx.android.synthetic.main.fragment_nickname.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -102,8 +108,42 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     val email = user?.email.toString()
                     val password = user?.uid.toString()
                     val retrofit = RetrofitCreators(this)
-                    retrofit.LoginRetrofitCreator(email, password)
+                    val getToken = retrofit.LoginRetrofitCreator(email, password)
 
+                    getToken.getLoginToken(email, password).enqueue(object : Callback<LoginModel> {
+                        override fun onFailure(call: Call<LoginModel>, t: Throwable) {
+                            Log.d("DEBUG", " Login Retrofit failed!!")
+                            Log.d("DEBUG", t.message)
+                        }
+
+                        override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
+                            Log.d("TAG", "Login Retrofit Success!!")
+                            val token = response.body()?.loginToken
+                            val nickname = response.body()?.nickname
+
+                            if (token != null) {
+                                val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+                                val edit = pref.edit()
+                                edit.putString("userToken", token)
+                                edit.commit()
+
+                                if (nickname != null) {
+                                    val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    // 닉네임이 없으면 닉네임 설정 Activity 전송
+                                    val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            } else {
+                                Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    })
                 } else {
                     Log.w("LoginActivity", "firebaseAuthWithGoogle 실패", task.exception)
 //                    Snackbar.make(login_layout, "로그인에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()

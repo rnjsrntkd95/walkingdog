@@ -60,25 +60,47 @@
             android:padding="20dp"
             android:gravity="center">
 
-        <ImageButton
-                android:id="@+id/lapBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/play_icon"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
 
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/dog_house"
-                android:layout_weight="1">
-        </ImageView>
+            <ImageButton
+                    android:id="@+id/lapBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/play_icon"/>
+        </LinearLayout>
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/camera"
-                android:layout_weight="1">
-        </ImageView>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/dog_house"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+            <ImageButton
+                    android:id="@+id/came_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/camera"/>
+        </LinearLayout>
+
 
 
     </LinearLayout>

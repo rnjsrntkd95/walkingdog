@@ -8,9 +8,10 @@ const bodyParser = require("body-parser");
 const config = require("./config");
 
 // Router
-var loginRouter = require("./routes/logins");
-var animalRouter = require("./routes/animals");
-var indexRouter = require("./routes/index");
+const loginRouter = require("./routes/logins");
+const animalRouter = require("./routes/animals");
+const walkingRouter = require("./routes/walkings");
+const postRouter = require("./routes/posts");
 
 // MongoDB Connect
 const mongodb = require("./db.js");
@@ -46,9 +47,10 @@ app.use((req, res, next) => {
 })
 
 // Use Router
-app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/animal", animalRouter);
+app.use("/walking", walkingRouter);
+app.use("/post", postRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

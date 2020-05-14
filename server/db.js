@@ -16,9 +16,12 @@ var db = function () {
     connect();
     mongoose.connection.on('disconnected', connect);
 
-    require('./models/user.js');
-    require('./models/breed.js');
-    require('./models/animal.js');
+    require('./models/user');
+    require('./models/breed');
+    require('./models/animal');
+    require('./models/walking');
+    require('./models/post');
+    require('./models/comment');
 
 }
 

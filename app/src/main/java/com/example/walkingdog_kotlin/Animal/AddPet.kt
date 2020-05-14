@@ -42,11 +42,11 @@ class AddPet : AppCompatActivity() {
         val animalRetrofit = AnimalRetrofitCreators(this).AnimalRetrofitCreator()
         animalRetrofit.getAllBreed().enqueue(object : Callback<BreedListModel> {
             override fun onFailure(call: Call<BreedListModel>, t: Throwable) {
-                Log.d("DEBUG", "Animal Retrofit Failed!!")
+                Log.d("DEBUG", "Breed Retrofit Failed!!")
                 Log.d("DEBUG", t.message)
             }
             override fun onResponse(call: Call<BreedListModel>, response: Response<BreedListModel>) {
-                Log.d("DEBUG", "Animal Retrofit Success!!")
+                Log.d("DEBUG", "Breed Retrofit Success!!")
 
                 val resList = response.body()
                 for (breed in resList!!.breedList) {
@@ -70,7 +70,7 @@ class AddPet : AppCompatActivity() {
             val userToken = pref.getString("userToken", "none")
             val breed = "푸들"
             val animalName = "까까"
-            val age = 10
+            val age = 11
             val weight = 10.3
             val gender = "남"
 
@@ -78,7 +78,8 @@ class AddPet : AppCompatActivity() {
             animalRetrofit.setNewAnimal(userToken!!, breed, animalName, age, weight, gender).enqueue(object : Callback<SetNewAnimalModel> {
                 override fun onFailure(call: Call<SetNewAnimalModel>, t: Throwable) {
                     Log.d("DEBUG", " Add Pet Retrofit failed!!")
-                    Log.d("DEBUG", t.message)                }
+                    Log.d("DEBUG", t.message)
+                }
 
                 override fun onResponse(call: Call<SetNewAnimalModel>, response: Response<SetNewAnimalModel>) {
                     val error = response.body()?.error

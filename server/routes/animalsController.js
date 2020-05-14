@@ -21,23 +21,15 @@ exports.checkBreedList = async (req, res, next) => {
 
 // 유저에게 새로운 동물 등록
 exports.register = async (req, res, next) => {
-    req.breed = '푸들';
-    req.animalName = '까까';
-    req.age = 10;
-    req.weight = 10.3;
-    req.gender = '남';
+    const userData = req.userToken.id;
+    const breed = req.body.breed;
+    const animalName = req.body.animalName;
+    const age = req.body.age;
+    const weight = req.body.weight;
+    const gender = req.body.gender;
 
-    // const userData = req.userToken;
-    const userData = "5eba848a4d106033289aeafa";
-    const breed = req.breed;
-    const animalName = req.animalName;
-    const age = req.age;
-    const weight = req.weight;
-    const gender = req.gender;
-    console.log(breed);
     try {
         const breedId = await Breed.findOne({ breed });
-        console.log(breedId)
         const userId = await User.findOne({ _id: userData });
 
         const animalRegister = await new Animal({
@@ -53,7 +45,9 @@ exports.register = async (req, res, next) => {
         res.json({});
     } catch (err) {
         console.log(err);
-        // Validation 검사 해서 올바르지 않은 item 반환
+        /* Validation 검사 해서 올바르지 않은 item 반환
+        
+        */
         res.json({error: 1});
     }
 }

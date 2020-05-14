@@ -37,6 +37,7 @@ app.use((req, res, next) => {
   } else {
     const Jwt = require("jsonwebtoken");
     const token = req.body.userToken
+    // if (!token) res.json({ error: -1 })
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);
     req.userToken = decodedToken;

@@ -53,6 +53,7 @@ exports.register = async (req, res, next) => {
         res.json({});
     } catch (err) {
         console.log(err);
+        // Validation 검사 해서 올바르지 않은 item 반환
         res.json({error: 1});
     }
 }

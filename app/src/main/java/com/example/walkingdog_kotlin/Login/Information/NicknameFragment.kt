@@ -104,6 +104,7 @@ class NicknameFragment(context: Context) : Fragment() {
                         Log.d("TAG", "이미 등록된 닉네임입니다.")
 
                     } else {
+                        nickname_status_text.setText("올바르지 않은 닉네임입니다.")
                         Log.d("TAG", "올바르지 않은 닉네임입니다.")
                     }
                 }

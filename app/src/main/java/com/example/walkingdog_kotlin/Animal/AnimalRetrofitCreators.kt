@@ -14,7 +14,7 @@ class AnimalRetrofitCreators(val context: Context) {
 
     val serverUrl = context.getString(R.string.server_url)
 
-    fun BreedRetrofitCreator(): AnimalRetrofit {
+    fun AnimalRetrofitCreator(): AnimalRetrofit {
         val retrofit = Retrofit.Builder()
             .baseUrl(serverUrl)
             .addConverterFactory(GsonConverterFactory.create())

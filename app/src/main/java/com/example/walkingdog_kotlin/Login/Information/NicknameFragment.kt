@@ -72,7 +72,12 @@ class NicknameFragment(context: Context) : Fragment() {
         })
 
         previous_btn_nickname.setOnClickListener {
-            (activity as SignUpActivity).moveUserName()
+            (activity as SignUpActivity).finish()
+        }
+
+        pass_tv.setOnClickListener {
+            var intent = Intent(context, AddPet::class.java)
+            startActivity(intent)
         }
 
         next_btn_nickname.setOnClickListener {

@@ -9,8 +9,9 @@
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/mainBlue"
-                android:layout_weight="6">
+                android:background="@drawable/challenge_layout_shape"
+                android:layout_weight="6"
+                android:paddingBottom="10dp">
 
             <LinearLayout
                     android:id="@+id/popular_challenge_title_layout"
@@ -26,17 +27,60 @@
                 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/popular_challenge_title_layout"
-                    android:background="@color/yellow"
+                    android:background="@drawable/popular_challenge_shape"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_centerHorizontal="true">
-            </LinearLayout>
+
+                <TextView
+                        android:id="@+id/challengeTitle_Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="챌린지 제목"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="challenge comment"
+                        android:layout_centerVertical="true"/>
+
+                <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/profile"
+                        android:layout_toLeftOf="@+id/personnel"/>
+
+                <TextView
+                        android:id="@+id/personnel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="인원"/>
+
+                <TextView
+                        android:id="@+id/period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="기간:"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="4월 15일 ~ 4월 21일"
+                        android:layout_toRightOf="@+id/period"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

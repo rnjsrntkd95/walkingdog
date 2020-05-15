@@ -10,7 +10,7 @@
     <RelativeLayout
             android:id="@+id/nickname_signUp_comment_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:background="@color/mainBlue">
 
         <ImageButton
@@ -30,6 +30,16 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"/>
+
+        <TextView
+                android:id="@+id/pass_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="건너뛰기"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -87,7 +97,6 @@
                     android:textSize="20dp"/>
 
         </LinearLayout>
-
 
     </RelativeLayout>
 

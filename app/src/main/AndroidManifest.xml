@@ -24,7 +24,7 @@
                 android:value="@string/kakao_app_key" />
 
         <activity android:name=".WalkingActivity" />
-        <!--<activity android:name=".AddPet"/>-->
+        <activity android:name=".Animal.AddPet"/>
         <activity
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
@@ -34,7 +34,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Animal.AddPet">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

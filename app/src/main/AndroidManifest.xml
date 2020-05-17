@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
             android:name=".GlobalApplication"
@@ -23,7 +24,7 @@
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
 
-        <activity android:name=".WalkingActivity" />
+        <activity android:name=".StartActivity" />
         <activity
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
@@ -34,7 +35,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".WalkingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:mapbox="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".WalkingActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/yellow"
             android:layout_weight="6">
 
-    </LinearLayout>
+        <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                mapbox:mapbox_cameraTargetLat = "37.5326"
+                mapbox:mapbox_cameraTargetLng = "127.0246"
+                mapbox:mapbox_styleUrl = "mapbox://styles/mapbox/streets-v10"
+                mapbox:mapbox_cameraZoom = "12"/>
+
+
+        <Button
+                android:id="@+id/startButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/mapboxGrayLight"
+                android:text="@string/start_navigating"
+                android:textColor="@color/mapboxWhite"
+                mapbox:layout_constraintBottom_toBottomOf="@+id/mapView"
+                mapbox:layout_constraintEnd_toEndOf="parent"
+                mapbox:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -23,31 +48,73 @@
             android:padding="20dp"
             android:gravity="center">
 
-        <TextView
-                android:id="@+id/secondTv"
+        <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"/>
-
-        <TextView
-                android:id="@+id/milliSecondTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0m"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:gravity="center">
 
-        <TextView
+            <TextView
+                    android:id="@+id/secTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="30dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="30dp"/>
+
+            <TextView
+                    android:id="@+id/milliTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textSize="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0kcal"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:gravity="center">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="30dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="m"
+                    android:textSize="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="30dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kcal"
+                    android:textSize="30dp"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -62,41 +129,44 @@
 
         <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
-            <ImageButton
-                    android:id="@+id/lapBtn"
+            <Button
+                    android:id="@+id/playFab"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/play_icon"/>
+
         </LinearLayout>
 
 
         <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
-            <ImageButton
+            <Button
+                    android:id="@+id/resetFab"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/dog_house"/>
+
         </LinearLayout>
 
 
         <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
 
             <ImageButton
                     android:id="@+id/came_btn"
-                    android:layout_width="30dp"
+                    android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:background="@drawable/camera"/>
         </LinearLayout>

@@ -22,6 +22,9 @@ var db = function () {
     require('./models/walking');
     require('./models/post');
     require('./models/comment');
+    require('./models/challenge');
+    require('./models/record');
+    require('./models/userChallenge');
 
 }
 

@@ -12,6 +12,7 @@ const loginRouter = require("./routes/logins");
 const animalRouter = require("./routes/animals");
 const walkingRouter = require("./routes/walkings");
 const postRouter = require("./routes/posts");
+const challengeRouter = require("./routes/challenges");
 
 // MongoDB Connect
 const mongodb = require("./db.js");
@@ -51,6 +52,7 @@ app.use("/login", loginRouter);
 app.use("/animal", animalRouter);
 app.use("/walking", walkingRouter);
 app.use("/post", postRouter);
+app.use("/challenge", challengeRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -20,5 +20,5 @@ data class PostModel (
     val location: String,
     val user: String,
     val nickname: String,
-    val create_date: Date
+    val created_date: Date
 )

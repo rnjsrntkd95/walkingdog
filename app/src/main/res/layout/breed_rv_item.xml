@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ToggleButton xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="120dp"
-        android:id="@+id/breed_btn"
         android:layout_height="50dp"
         android:gravity="center"
         android:layout_marginRight="10dp"
-        android:background="@drawable/breed_shape"
-        android:text="품종"
-        android:textOn="품종"
-        android:textOff="품종"
-        android:textColor="@color/white">
+        android:background="@drawable/breed_shape">
 
 
-<!--        <ToggleButton-->
-<!--                android:id="@+id/breed_btn"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:text="테스트"-->
-<!--                android:textOff="테스트"-->
-<!--                android:textOn="테스트"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:background="@drawable/breed_shape">-->
+        <TextView
+                android:id="@+id/breed_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="품종"
+                android:textColor="@color/white"/>
 
-<!--        </ToggleButton>-->
-
-<!--        <TextView-->
-<!--                android:id="@+id/breed_tv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="품종"-->
-<!--                android:textColor="@color/white"/>-->
-
-</ToggleButton>
+</LinearLayout>

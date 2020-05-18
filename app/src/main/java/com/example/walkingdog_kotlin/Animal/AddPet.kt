@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.core.widget.addTextChangedListener
@@ -28,12 +29,12 @@ import java.lang.Exception
 class AddPet : AppCompatActivity() {
 
     var breedList = arrayListOf<Breed>(
-        Breed("요크셔테리어"),
-        Breed("시츄"),
-        Breed("불독"),
-        Breed("도베르만"),
-        Breed("진돗개"),
-        Breed("시바견")
+        Breed("요크셔테리어", false),
+        Breed("시츄", false),
+        Breed("불독", false),
+        Breed("도베르만", false),
+        Breed("진돗개", false),
+        Breed("시바견", false)
     )
 
     var petName : String = ""
@@ -50,7 +51,7 @@ class AddPet : AppCompatActivity() {
 
         rv_image_area.setOnClickListener { loadImage() }
 
-        val bAdapter = BreedAdapter(this, breedList) { breed ->
+        val bAdapter = BreedAdapter(this, breedList, View.OnClickListener {  }) { breed ->
             petBreed = breed.breed
         }
 
@@ -72,7 +73,7 @@ class AddPet : AppCompatActivity() {
 
                 val resList = response.body()
                 for (breed in resList!!.breedList) {
-                    breedList.add(Breed(breed.breed))
+                    breedList.add(Breed(breed.breed, false))
                 }
 
                 bAdapter.notifyDataSetChanged()
@@ -91,7 +92,8 @@ class AddPet : AppCompatActivity() {
 
         finish_btn_addPet.setOnClickListener {
             //Toast.makeText(this, petGender, Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, petBreed, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "개의 이름은 ${petName}, 몸무게는 ${petWeight}, 나이는 ${petAge}," +
+                    "견종은 ${petBreed}, 성별은 ${petGender} 이다.", Toast.LENGTH_SHORT).show()
         }
 
         petName_editText.addTextChangedListener(object : TextWatcher {

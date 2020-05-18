@@ -6,46 +6,65 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".WalkingActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6">
-
-        <com.mapbox.mapboxsdk.maps.MapView
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                mapbox:mapbox_cameraTargetLat = "37.5326"
-                mapbox:mapbox_cameraTargetLng = "127.0246"
-                mapbox:mapbox_styleUrl = "mapbox://styles/mapbox/streets-v10"
-                mapbox:mapbox_cameraZoom = "12"/>
-
-
-        <Button
-                android:id="@+id/startButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@color/mapboxGrayLight"
-                android:text="@string/start_navigating"
-                android:textColor="@color/mapboxWhite"
-                mapbox:layout_constraintBottom_toBottomOf="@+id/mapView"
-                mapbox:layout_constraintEnd_toEndOf="parent"
-                mapbox:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+<!--지도 레이아웃-->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainOrange"
-            android:layout_weight="2"
-            android:padding="20dp"
+            android:layout_weight="6.5"
+            android:gravity="center">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="맵 레이아웃"/>
+    </LinearLayout>
+
+<!--타이머 레이아웃-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/mainGray"
+            android:layout_weight="1.5"
+            android:gravity="center">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+<!--거리 , 칼로리 레이아웃-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/mainGray"
+            android:layout_weight="0.5"
             android:gravity="center">
 
         <LinearLayout
@@ -55,45 +74,18 @@
                 android:gravity="center">
 
             <TextView
-                    android:id="@+id/secTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="30dp"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=":"
-                    android:textSize="30dp"/>
-
-            <TextView
-                    android:id="@+id/milliTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00"
-                    android:textSize="30dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="30dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="m"
-                    android:textSize="30dp"/>
-
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -101,29 +93,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
-
-
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="30dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="kcal"
-                    android:textSize="30dp"/>
-
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
         </LinearLayout>
-
-
     </LinearLayout>
 
+<!--재생, 종료, 카메라 레이아웃-->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainBlue"
-            android:layout_weight="2"
+            android:background="@color/mainGray"
+            android:layout_weight="1.5"
             android:padding="20dp"
             android:gravity="center">
 
@@ -152,7 +142,7 @@
                     android:id="@+id/resetFab"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/dog_house"/>
+                    android:background="@drawable/dog_house" />
 
         </LinearLayout>
 
@@ -163,15 +153,12 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-
             <ImageButton
                     android:id="@+id/came_btn"
                     android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:background="@drawable/camera"/>
         </LinearLayout>
-
-
 
     </LinearLayout>
 

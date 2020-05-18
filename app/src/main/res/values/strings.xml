@@ -10,6 +10,4 @@
     <string name="input_name">이름을 입력하세요</string>
     <string name="input_nickname">사용할 닉네임을 입력하세요</string>
     <string name="input_phoneNum">핸드폰 번호를 입력하세요</string>
-    <string name="access_token">pk.eyJ1IjoianNwYXJrMjIwMSIsImEiOiJja2E3dWs4cW4wNnQzMnNwNDg4eXZwdWM5In0.tIj-ifv2uT6mNnkcHTng0w</string>
-    <string name="start_navigating">Start Navigating</string>
 </resources>

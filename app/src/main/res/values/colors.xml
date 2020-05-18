@@ -14,8 +14,4 @@
     <color name="green">#188B0D</color>
     <color name="red">#D01111</color>
 
-    <color name="mapboxWhite">#ffffff</color>
-    <color name="mapboxBlue">#4264fb</color>
-    <color name="mapboxGrayLight">#c6d2e1</color>
-
 </resources>

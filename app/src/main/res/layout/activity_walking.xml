@@ -28,6 +28,7 @@
             android:gravity="center">
 
         <TextView
+                android:id="@+id/minTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00"
@@ -40,6 +41,7 @@
                 android:textSize="30dp"
                 android:textStyle="bold"/>
         <TextView
+                android:id="@+id/secTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00"
@@ -52,6 +54,7 @@
                 android:textSize="30dp"
                 android:textStyle="bold"/>
         <TextView
+                android:id="@+id/milliTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00"
@@ -154,7 +157,7 @@
                 android:gravity="center">
 
             <ImageButton
-                    android:id="@+id/came_btn"
+                    android:id="@+id/camera_btn"
                     android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:background="@drawable/camera"/>

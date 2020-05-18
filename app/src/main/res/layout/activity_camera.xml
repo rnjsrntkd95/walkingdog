@@ -10,8 +10,9 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-            
+            android:layout_weight="1"
+            android:background="@color/mainBlue">
+
         <ImageButton
                 android:id="@+id/close_btn"
                 android:layout_width="20dp"
@@ -38,7 +39,10 @@
                 android:id="@+id/takePicture_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="촬영"/>
+                android:text="촬영"
+                android:background="@color/mainBlue"
+                android:textColor="@color/white"
+                android:textSize="16dp"/>
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.Surface
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_camera.*
@@ -35,9 +36,7 @@ class Camera : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
 
         //상태바 색을 그레이로 변경
-        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.mainGray))
-        //상태바 아이콘 색 플레그(흰색->검은색)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.mainBlue))
 
         //버전이 마시멜로우 이상 버전이라면 퍼미션 허용 여부 물어보기
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -47,8 +47,7 @@ const walkingSchema = new Schema({
         required: true,
     },
     animal: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Animal',
+        type: String,
         required: true,
     }],
     user: {

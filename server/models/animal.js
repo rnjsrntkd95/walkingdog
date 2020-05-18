@@ -7,8 +7,7 @@ const animalSchema = new Schema({
         required: true,
     },
     breed: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Breed',
+        type: String,
         required: true,
     },
     age: {

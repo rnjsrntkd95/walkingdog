@@ -29,12 +29,11 @@ exports.register = async (req, res, next) => {
     const gender = req.body.gender;
 
     try {
-        const breedId = await Breed.findOne({ breed });
         const userId = await User.findOne({ _id: userData });
 
         const animalRegister = await new Animal({
             animalName,
-            breed: breedId,
+            breed,
             age,
             weight,
             gender,
@@ -46,7 +45,7 @@ exports.register = async (req, res, next) => {
     } catch (err) {
         console.log(err);
         /* Validation 검사 해서 올바르지 않은 item 반환
-        
+
         */
         res.json({error: 1});
     }

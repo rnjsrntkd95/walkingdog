@@ -53,7 +53,7 @@ exports.setNickname = async (req, res, next) => {
     const nickname = req.body.nickname;
 
     try {
-        const user = await User.findOneAndUpdate({_id: "5eba881b0396fa307027f70a"}, {nickname});
+        const user = await User.findOneAndUpdate({_id: "5eba8b5ca76e3e20f4b0659e"}, {nickname});
         res.json({});
     } catch (err) {
         console.log(err);

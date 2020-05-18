@@ -1,26 +1,13 @@
 package com.example.walkingdog_kotlin
 
-import android.app.Activity
-import android.content.pm.PackageManager
-import android.util.Base64
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.walkingdog_kotlin.Animal.AnimalRetrofit
-import com.example.walkingdog_kotlin.Animal.AnimalRetrofitCreators
-import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.ProfileFragment
+import com.example.walkingdog_kotlin.Post.FeedFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import com.google.firebase.auth.FirebaseAuth
-import retrofit2.Call
-import java.security.MessageDigest
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -28,7 +15,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId) {
             R.id.action_home -> {
-                var feedFragment = FeedFragment()
+                var feedFragment = FeedFragment(this)
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, feedFragment)
                     .commit()
             }
@@ -61,7 +48,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
 
-        supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, FeedFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.main_content_layout,
+            FeedFragment(this)
+        )
             .commit()
 
         //액티비티에서 상태바 아이콘 흰색으로 만드는 코드

@@ -8,9 +8,11 @@ const bodyParser = require("body-parser");
 const config = require("./config");
 
 // Router
-var loginRouter = require("./routes/logins");
-var animalRouter = require("./routes/animals");
-var indexRouter = require("./routes/index");
+const loginRouter = require("./routes/logins");
+const animalRouter = require("./routes/animals");
+const walkingRouter = require("./routes/walkings");
+const postRouter = require("./routes/posts");
+const challengeRouter = require("./routes/challenges");
 
 // MongoDB Connect
 const mongodb = require("./db.js");
@@ -29,15 +31,28 @@ app.use(
 // secret
 app.set("jwt-secret", config.secret);
 
+// User Token Decoding
+app.use((req, res, next) => {
+  console.log(req.path)
+  if (req.path === "/login") {
+    next();
+  } else {
+    const Jwt = require("jsonwebtoken");
+    const token = req.body.userToken
+    // if (!token) res.json({ error: -1 })
+    const secret = req.app.get("jwt-secret");
+    const decodedToken = Jwt.decode(token, secret);
+    req.userToken = decodedToken;
+    next();
+  }
+})
+
 // Use Router
-app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/animal", animalRouter);
-
-// Session Setup
-// app.use(session({
-//   key: 'sid'
-// }))
+app.use("/walking", walkingRouter);
+app.use("/post", postRouter);
+app.use("/challenge", challengeRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -45,7 +60,6 @@ app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 

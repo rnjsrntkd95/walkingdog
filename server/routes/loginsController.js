@@ -12,6 +12,7 @@ exports.logIn = async (req, res, next) => {
 
   try {
     let userObj = await User.findOne({ email, password });
+    let nickname = null
 
     if (!userObj) {
       // User를 DB에 저장
@@ -21,10 +22,13 @@ exports.logIn = async (req, res, next) => {
       });
       const resultReg = await User.create(newUser);
       userObj = await User.findOne({ email, password });
+    } else {
+        nickname = userObj.nickname
     }
     // 토큰 발행
     Jwt.sign(
       {
+        id: userObj._id,
         email: userObj.email,
         created_date: userObj.created_date,
       },
@@ -35,7 +39,7 @@ exports.logIn = async (req, res, next) => {
         subject: "userInfo",
       },function(err, loginToken) {
         if (err) res.json({})
-        else res.json({ loginToken });
+        else res.json({ loginToken, nickname });
       }
     );
 } catch (err) {
@@ -44,9 +48,16 @@ exports.logIn = async (req, res, next) => {
   }
 };
 
-exports.signUp = (req, res, next) => {
-  // const email = req.body.email;
-  // const password = req.body.password;
-  // const salt = Math.round((new Date().valueOf() * Math.random())) + "";
-  // const hashPassword = crypto.createHash("sha512").update(password + salt)
+exports.setNickname = async (req, res, next) => {
+    const userData = req.userToken;
+    const nickname = req.body.nickname;
+
+    try {
+        const user = await User.findOneAndUpdate({_id: "5eba8b5ca76e3e20f4b0659e"}, {nickname});
+        res.json({});
+    } catch (err) {
+        console.log(err);
+        if (err.code === 11000) res.json({error: 11000})
+        else res.json({error: 10000});
+    }
 };

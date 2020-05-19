@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "306765369077",
+    "firebase_url": "https://walkingdog-275512.firebaseio.com",
+    "project_id": "walkingdog-275512",
+    "storage_bucket": "walkingdog-275512.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306765369077:android:d8b2098c318c4af93ebfbc",
+        "android_client_info": {
+          "package_name": "com.example.walkingdog_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306765369077-i6fjgk4bm1tv00peqfeaipd51s9gf7gr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.walkingdog_kotlin",
+            "certificate_hash": "96b699491a3cd4460f208009c435642174f1b824"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-mQuJ1L0v51ALqc9Slykj0V0uAOdXS98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306765369077-9nnf5f93saec5gfdcrunuc4qb7r6es18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

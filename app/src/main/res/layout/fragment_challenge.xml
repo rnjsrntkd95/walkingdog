@@ -1,14 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ChallengeActivity">
+        tools:context=".Challenge.ChallengeFragment"
+        android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/challenge_layout_shape"
+                android:layout_weight="6"
+                android:paddingBottom="10dp">
 
-</FrameLayout>
+            <RelativeLayout
+                    android:id="@+id/popular_challenge_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                <ImageView
+                        android:id="@+id/drawerMenu_icon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/list"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:backgroundTint="@color/mainGray"
+                        android:layout_marginLeft="20dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="인기 챌린지"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"/>
+
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/write_icon2"
+                        android:backgroundTint="@color/mainGray"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"/>
+                
+            </RelativeLayout>
+            <!--인기 챌린지 항목-->
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/popular_challenge_title_layout"
+                    android:background="@drawable/radius_shape_gray"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="10dp">
+
+                <TextView
+                        android:id="@+id/challengeTitle_Textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="한 달 동안 꾸준히 도전하기"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사랑하는 반려견을 위해 한 달 동안 꾸준한 산책을 해보세요!"
+                        android:layout_centerVertical="true"/>
+
+                <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/profile"
+                        android:layout_toLeftOf="@+id/personnel"/>
+
+                <TextView
+                        android:id="@+id/personnel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="200"
+                        android:layout_marginLeft="5dp"/>
+
+                <TextView
+                        android:id="@+id/period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="기간:"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="5월 1일 ~ 5월 31일"
+                        android:layout_toRightOf="@+id/period"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+
+            <LinearLayout
+                    android:id="@+id/village_challenge_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="우리동네 챌린지"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/village_challenge_title_layout"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+
+</LinearLayout>

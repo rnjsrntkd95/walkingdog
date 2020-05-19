@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+            android:id="@+id/user_myfeedInfo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        <ImageView
+                android:id="@+id/myfeed_profile_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp">
+
+        </ImageView>
+
+        <TextView
+                android:id="@+id/myfeed_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nickname"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/myfeed_profile_img"
+                android:layout_marginLeft="10dp"/>
+
+        <TextView
+                android:id="@+id/dateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020년 5월 1일"
+                android:layout_toLeftOf="@+id/myfeed_locate_text"
+                android:layout_marginTop="5dp"/>
+
+        <TextView
+                android:id="@+id/myfeed_locate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수원시"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"/>
+
+        <TextView
+                android:id="@+id/dogNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dog name"
+                android:layout_toRightOf="@id/myfeed_profile_img"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"/>
+
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/menu"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/feed_main_img_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_below="@+id/user_myfeedInfo_layout">
+
+        <ImageView
+                android:id="@+id/feed_main_img"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/pets"
+                android:scaleType="fitXY">
+        </ImageView>
+
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/menu"
+                />
+
+        <ImageView
+                android:id="@+id/map_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/map"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/explain_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="explain content"
+            android:layout_below="@+id/feed_main_img_layout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+            android:id="@+id/feed_walking_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/explain_text"
+            android:layout_margin="10dp"
+            android:gravity="center">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="산책시간"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:id="@+id/walkingTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01:10:21"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="거리"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:id="@+id/walkingDistanceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1km"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="칼로리"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_weight="1"/>
+
+        <TextView
+                android:id="@+id/walkingCalory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500kcal"
+                android:layout_weight="1"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+            <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/favorite_love"/>
+
+            <TextView
+                    android:id="@+id/likesTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feed_walking_info_layout"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp">
+
+        <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="write comments..."/>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#a6a6a6"
+            android:layout_below="@id/comment_layout">
+    </LinearLayout>
+
+</RelativeLayout>

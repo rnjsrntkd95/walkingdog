@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Statics">
+
+    <LinearLayout
+            android:id="@+id/statics_back_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/statics_back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/statics_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/statics_back_layout">
+
+        <TextView
+                android:id="@+id/statics_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statistics"
+                android:textSize="40dp"
+                >
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/statics_graph_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/statics_title_layout"
+            >
+        <org.eazegraph.lib.charts.ValueLineChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/linechart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:egUseCubic="true"
+                app:egUseOverlapFill="true"
+                app:egCurveSmoothness="0.4"
+                app:egIndicatorLineColor="#FE6DA8"
+                app:egLegendHeight="40dp"
+                app:egShowStandardValue="true"/>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

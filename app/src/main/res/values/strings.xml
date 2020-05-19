@@ -10,4 +10,6 @@
     <string name="input_name">이름을 입력하세요</string>
     <string name="input_nickname">사용할 닉네임을 입력하세요</string>
     <string name="input_phoneNum">핸드폰 번호를 입력하세요</string>
+
+    <string name="mapbox_access_token">pk.eyJ1IjoianNwYXJrMjIwMSIsImEiOiJja2E3dWloMDkwOGJtMnRtcmU1aXk4eGhuIn0.z4V849uf62WdmWRAjRiHeg</string>
 </resources>

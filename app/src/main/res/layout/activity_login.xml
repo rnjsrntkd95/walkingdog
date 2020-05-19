@@ -65,8 +65,8 @@
                     android:id="@+id/email_signUp_btn"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
-                    android:text="이메일로 가입하기"
-                    android:background="@drawable/emailbutton"/>
+                    android:text="TEST BUTTON"
+                    android:background="@color/mainSkin"/>
         </LinearLayout>
 
         <LinearLayout

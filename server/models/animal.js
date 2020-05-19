@@ -7,12 +7,11 @@ const animalSchema = new Schema({
         required: true,
     },
     breed: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Breed',
+        type: String,
         required: true,
     },
-    birth: {
-        type: Date,
+    age: {
+        type: Number,
         required: true,
     },
     weight: {

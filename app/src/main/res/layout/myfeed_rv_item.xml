@@ -29,6 +29,7 @@
                 android:layout_marginLeft="10dp"/>
 
         <TextView
+                android:id="@+id/dateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2020년 5월 1일"
@@ -46,6 +47,7 @@
                 android:layout_marginTop="5dp"/>
 
         <TextView
+                android:id="@+id/dogNameTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dog name"
@@ -128,6 +130,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/walkingTimeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01:10:21"
@@ -142,6 +145,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/walkingDistanceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1km"
@@ -156,15 +160,32 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/walkingCalory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1500kcal"
                 android:layout_weight="1"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
 
-        <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/favorite_love"/>
+            <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/favorite_love"/>
+
+            <TextView
+                    android:id="@+id/likesTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"/>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

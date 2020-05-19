@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
@@ -20,35 +21,12 @@ import retrofit2.Response
 
 class FeedFragment(context: Context) : Fragment() {
 
-//    var dogList = arrayListOf<Dog>(
-//        Dog("chow cohw", "Male", "4", "dog00"),
-//        Dog("chow cohw", "Male", "5", "dog01"),
-//        Dog("chow cohw", "Male", "1", "dog02"),
-//        Dog("chow cohw", "Male", "3", "dog03"),
-//        Dog("chow cohw", "Male", "2", "dog04"),
-//        Dog("chow cohw", "Male", "4", "dog05"),
-//        Dog("chow cohw", "Male", "6", "dog06"),
-//        Dog("chow cohw", "Male", "11","dog07"),
-//        Dog("chow cohw", "Male", "7", "dog08"),
-//        Dog("chow cohw", "Male", "7", "dog09"),
-//        Dog("chow cohw", "Male", "7", "dog10"),
-//        Dog("chow cohw", "Male", "7", "dog11"),
-//        Dog("chow cohw", "Male", "7", "dog12"),
-//        Dog("chow cohw", "Male", "7", "dog13")
-//    )
-
     var feedList = arrayListOf<FeedContent>(
-        FeedContent("dog00"),
-        FeedContent("dog01"),
-        FeedContent("dog02"),
-        FeedContent("dog03"),
-        FeedContent("dog04"),
-        FeedContent("dog05"),
-        FeedContent("dog06"),
-        FeedContent("dog07"),
-        FeedContent("dog08"),
-        FeedContent("dog09")
+
     )
+
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -78,8 +56,12 @@ class FeedFragment(context: Context) : Fragment() {
                 Log.d("TAG", posts!![1].toString())
 
                 Log.d("TAG", "error: " + error)
+                posts.forEach(fun(element) {
+                    feedList.add(FeedContent(element))
+                })
 
             }
+
 
         })
 
@@ -96,18 +78,19 @@ class FeedFragment(context: Context) : Fragment() {
             R.color.mainGray
         ))
 
-//        val mAdapter = MainRvAdapter(context!!, dogList)
-//        feed_recyclerview.adapter = mAdapter
-//
-//        val lm = LinearLayoutManager(context!!)
-//        feed_recyclerview.layoutManager = lm
-//        feed_recyclerview.setHasFixedSize(true)
-        val fAdapter = FeedAdaptor(context!!, feedList)
+        val fAdapter = FeedAdaptor(context!!, feedList) { feedContent ->
+
+        }
+
         feed_recyclerview.adapter = fAdapter
 
         val lm = LinearLayoutManager(context!!)
         feed_recyclerview.layoutManager = lm
         feed_recyclerview.setHasFixedSize(true)
+
+        writeBtn.setOnClickListener {
+
+        }
 
     }
 

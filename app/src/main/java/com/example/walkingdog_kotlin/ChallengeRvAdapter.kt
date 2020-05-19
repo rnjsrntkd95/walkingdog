@@ -15,9 +15,17 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val challengeTitle = itemView?.findViewById<TextView>(R.id.challengeTitle_Textview)
+        val challengeComment = itemView?.findViewById<TextView>(R.id.challengeComment_Textview)
+        val challengePeriod = itemView?.findViewById<TextView>(R.id.challengePeriod_Textview)
+        val challengeNumber = itemView?.findViewById<TextView>(R.id.challengeNumber_Textview)
+
+
 
         fun bind (challenge: Challenge, context: Context) {
             challengeTitle?.text = challenge.title
+            challengeComment?.text = challenge.comment
+            challengePeriod?.text = challenge.period
+            challengeNumber?.text = challenge.number
         }
     }
 

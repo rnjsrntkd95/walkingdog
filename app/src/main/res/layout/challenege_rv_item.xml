@@ -4,8 +4,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:padding="5dp"
-        android:background="@color/mainGray">
+        android:padding="10dp"
+        android:background="@drawable/radius_shape_gray">
 
     <TextView
             android:id="@+id/challengeTitle_Textview"
@@ -15,6 +15,7 @@
             android:text="챌린지 제목"/>
 
     <TextView
+            android:id="@+id/challengeComment_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="challenge comment"
@@ -25,14 +26,15 @@
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/profile"
-            android:layout_toLeftOf="@+id/personnel"/>
+            android:layout_toLeftOf="@+id/challengeNumber_Textview"/>
 
     <TextView
-            android:id="@+id/personnel"
+            android:id="@+id/challengeNumber_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
             android:text="인원"/>
 
     <TextView
@@ -43,6 +45,7 @@
             android:text="기간:"/>
 
     <TextView
+            android:id="@+id/challengePeriod_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

@@ -64,4 +64,9 @@ dependencies {
     // Mapbox dependencies
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
+
+    // Retrofit, Gson,RxAdapter
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 }

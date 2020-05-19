@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Post
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.model.FeedContent
 
 class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>) :
@@ -26,7 +27,7 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>) :
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedAdaptor.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.feed_item, parent, false)
         return Holder(view)
     }
@@ -36,7 +37,7 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>) :
 
     }
 
-    override fun onBindViewHolder(holder: FeedAdaptor.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(feedList[position], context)
     }
 }

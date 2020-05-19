@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Login
 import android.app.Application
 import com.kakao.auth.KakaoSDK
 

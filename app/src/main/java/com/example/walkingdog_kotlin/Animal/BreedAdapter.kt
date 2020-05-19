@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Animal
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.walkingdog_kotlin.model.Breed
+import com.example.walkingdog_kotlin.Animal.Model.Breed
+import com.example.walkingdog_kotlin.R
 
 class BreedAdapter (val context:Context, val breedList:ArrayList<Breed>, val itemClick: (Breed) -> Unit) :
         RecyclerView.Adapter<BreedAdapter.Holder>() {
@@ -14,7 +15,7 @@ class BreedAdapter (val context:Context, val breedList:ArrayList<Breed>, val ite
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val breedText = itemView?.findViewById<TextView>(R.id.breed_tv)
 
-        fun bind(breed:Breed, context: Context){
+        fun bind(breed: Breed, context: Context){
             breedText?.text = breed.breed
 
             itemView.setOnClickListener { itemClick(breed)

@@ -9,8 +9,9 @@
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/mainBlue"
-                android:layout_weight="6">
+                android:background="@drawable/challenge_layout_shape"
+                android:layout_weight="6"
+                android:paddingBottom="10dp">
 
             <RelativeLayout
                     android:id="@+id/popular_challenge_title_layout"

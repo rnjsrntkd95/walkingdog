@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
 
         email_signUp_btn.setOnClickListener {
-            var intent = Intent(this, AddPet::class.java)
+            var intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 

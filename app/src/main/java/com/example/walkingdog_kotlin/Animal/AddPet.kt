@@ -89,11 +89,11 @@ class AddPet : AppCompatActivity() {
             val pref = getSharedPreferences("pref", MODE_PRIVATE)
             // Data
             val userToken = pref.getString("userToken", "none")
-            val breed = "푸들"
-            val animalName = "까까"
-            val age = 11
-            val weight = 10.3
-            val gender = "남"
+            val breed = petBreed
+            val animalName = petName
+            val age = petAge
+            val weight = petWeight
+            val gender = petGender
 
             val animalRetrofit = AnimalRetrofitCreators(this).AnimalRetrofitCreator()
             animalRetrofit.setNewAnimal(userToken!!, breed, animalName, age, weight, gender).enqueue(object : Callback<SetNewAnimalModel> {

@@ -22,7 +22,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".Camera"></activity>
-        <activity android:name=".AddPet" /> <!-- 카카오 앱 키 사용 -->
+<!--        <activity android:name=".Animal.AddPet" /> -->
+        <!-- 카카오 앱 키 사용 -->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
@@ -32,13 +33,13 @@
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".SignInActivity" />
         <activity android:name=".Statics" />
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".WalkingActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Animal.AddPet">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

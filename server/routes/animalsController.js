@@ -4,14 +4,9 @@ const Breed = require('../models/breed');
 
 // 모든 견종 조회
 exports.checkBreedList = async (req, res, next) => {
-    // const List = ["푸들", "말티즈", "리트리버"];
-    // for (breed of List) {
-    //     Breed.create({breed});
-    // }
     try {
-
         const breedList = await Breed.find().select('breed');
-        console.log(breedList)
+
         res.json({breedList})
         // res.json(breedList.toJSON())
     } catch (err) {
@@ -27,6 +22,7 @@ exports.register = async (req, res, next) => {
     const age = req.body.age;
     const weight = req.body.weight;
     const gender = req.body.gender;
+    console.log(userData, breed, animalName, age, weight, gender)
 
     try {
         const userId = await User.findOne({ _id: userData });

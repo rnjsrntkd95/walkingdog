@@ -35,7 +35,6 @@ class FeedFragment(context: Context) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val fAdapter = FeedAdaptor(context!!, feedList) { feedContent ->
-
         }
 
         feed_recyclerview.adapter = fAdapter
@@ -48,20 +47,7 @@ class FeedFragment(context: Context) : Fragment() {
 
         }
 
-        // 위치 정보 가져오기
-        val locationManager: LocationManager? = null
-        val REQUEST_CODE_LOCATION: Int = 2
-        val currentLocation: String = ""
-        val latitude: Double? = null
-        val longitude: Double? = null
-
-
-
-
-
-
-
-        //// TimeLine Retrofit
+        //// TimeLine Retrofit ////
         val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
         // Data
         val userToken = pref.getString("userToken", "none")
@@ -77,24 +63,14 @@ class FeedFragment(context: Context) : Fragment() {
             override fun onResponse(call: Call<PostListModel>, response: Response<PostListModel>) {
                 val posts = response.body()?.posts
                 val error = response.body()?.error
-                Log.d("TAG", posts!!.size.toString())
-                Log.d("TAG", posts!![1].toString())
-
                 Log.d("TAG", "error: " + error)
-                posts.forEach(fun(element) {
-                    feedList.add(
-                        FeedContent(
-                            element
-                        )
-                    )
+
+                posts!!.forEach(fun(element) {
+                    feedList.add(FeedContent(element))
                 })
                 fAdapter.notifyDataSetChanged()
             }
-
-
         })
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -106,9 +82,5 @@ class FeedFragment(context: Context) : Fragment() {
         activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
             R.color.mainGray
         ))
-
-
-
     }
-
 }

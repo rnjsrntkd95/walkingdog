@@ -68,13 +68,8 @@ class ChallengeFragment(context: Context) : Fragment() {
 
             override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
                 val challenges = response.body()?.challenges
-                Log.d("TAG", challenges.toString())
-                Log.d("TAG", challenges!![0].create_date.toString())
 
-                val df: DateFormat = SimpleDateFormat("yyyy년 MM월 dd일")
-                Log.d("TAG", df.format(challenges[0].create_date).toString())
-
-                challenges.forEach(fun(element) {
+                challenges!!.forEach(fun(element) {
                     challengeList.add(Challenge(element))
                 })
                 cAdapter.notifyDataSetChanged()

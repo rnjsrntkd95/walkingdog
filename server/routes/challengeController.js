@@ -40,37 +40,43 @@ exports.createChallenge = async (req, res, next) => {
         console.log(err);
 
         res.json({ error: 1 });
-    }
-}
+    };
+};
 
 
 exports.joinChallenge = async (req, res, next) => {
     // const userData = req.userToken.id;
     const userData = '5eba8b5ca76e3e20f4b0659e';
-    const challengeId = '5ec26c24964981578443d490';
+    const challengeId = '5ec28c44abe2802874204a43';
     try {
         const user = await User.findOne({ _id: userData });
-        const challenge = await Challenge.findOneAndUpdate({ _id: challengeId }, {$inc: { population: 1 }}, { new: true });
+        // 같은 챌린지 중복 참여 방지
+        const checkingOverlap = await UserChallenge.find({ userId: user._id, challengeId: challengeId});
+        if (checkingOverlap.length === 0) {
+            const challenge = await Challenge.findOneAndUpdate({ _id: challengeId }, {$inc: { population: 1 }}, { new: true });
+
+            const join = await new UserChallenge({
+                userId: user._id,
+                challengeId: challenge._id,
+            })
+            const resultJoin = await UserChallenge.create(join);
     
-        const join = await new UserChallenge({
-            userId: user._id,
-            challengeId: challenge._id,
-        })
-        const resultJoin = await UserChallenge.create(join);
-
-        const newRecord = await Record({
-            user,
-            challenge,
-            challengeTitle: challenge.title,
-        })
-        const resultNewRecord = await Record.create(newRecord);
-
-        res.json({});
+            const newRecord = await Record({
+                user,
+                challenge,
+                challengeTitle: challenge.title,
+            })
+            const resultNewRecord = await Record.create(newRecord);
+    
+            res.json({});
+        } else {
+            res.json({ error: 2, msg: '이미 가입된 챌린지입니다.'});
+        }
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });
-    }
-}
+    };
+};
 
 exports.searchChallenge = async (req, res, next) => {
 
@@ -82,6 +88,23 @@ exports.searchChallenge = async (req, res, next) => {
     } catch (err) {
         console.log(err);
         res.json({ error : 1 });
-        
-    }
-}
+
+    };
+};
+
+
+exports.dropChallenge = async (req, res, next) => {
+    // const userData = req.userToken.id;
+    // const challengeId = req.body.challengeId;
+    const userData = '5eba8b5ca76e3e20f4b0659e';
+    const challengeId = '5ec28c44abe2802874204a43';
+    try {
+        const challenge = await Challenge.findByIdAndUpdate({ _id: challengeId }, { $inc: { population: -1 }});
+        await UserChallenge.findOneAndDelete({ userId: userData, challengeId });
+        await Record.findOneAndDelete({ user: userData, challenge: challengeId });
+        res.json({});
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    }; 
+};

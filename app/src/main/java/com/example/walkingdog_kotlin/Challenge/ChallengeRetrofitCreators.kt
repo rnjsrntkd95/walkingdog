@@ -9,9 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ChallengeRetrofitCreators(val context: Context) {
 
     val serverUrl = context.getString(R.string.server_url)
-    val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
-    fun PostRetrofitCreator(): ChallengeRetrofit {
+    fun ChallengeRetrofitCreator(): ChallengeRetrofit {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+
         val retrofit = Retrofit.Builder()
             .baseUrl(serverUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))

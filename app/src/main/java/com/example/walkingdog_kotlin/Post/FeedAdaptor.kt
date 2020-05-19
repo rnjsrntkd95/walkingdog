@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.R
-import com.example.walkingdog_kotlin.model.FeedContent
 
 class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, val itemClick: (FeedContent) -> Unit) :
         RecyclerView.Adapter<FeedAdaptor.Holder>() {

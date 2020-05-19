@@ -2,18 +2,18 @@ package com.example.walkingdog_kotlin.Post
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.R
-import com.example.walkingdog_kotlin.model.FeedContent
 import kotlinx.android.synthetic.main.fragment_feed.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,10 +24,7 @@ class FeedFragment(context: Context) : Fragment() {
     var feedList = arrayListOf<FeedContent>(
 
     )
-
-
-
-
+    
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
@@ -37,7 +34,34 @@ class FeedFragment(context: Context) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val fAdapter = FeedAdaptor(context!!, feedList) { feedContent ->
 
+        }
+
+        feed_recyclerview.adapter = fAdapter
+
+        val lm = LinearLayoutManager(context!!)
+        feed_recyclerview.layoutManager = lm
+        feed_recyclerview.setHasFixedSize(true)
+
+        writeBtn.setOnClickListener {
+
+        }
+
+        // 위치 정보 가져오기
+        val locationManager: LocationManager? = null
+        val REQUEST_CODE_LOCATION: Int = 2
+        val currentLocation: String = ""
+        val latitude: Double? = null
+        val longitude: Double? = null
+
+
+
+
+
+
+
+        //// TimeLine Retrofit
         val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
         // Data
         val userToken = pref.getString("userToken", "none")
@@ -47,19 +71,24 @@ class FeedFragment(context: Context) : Fragment() {
         postRetrofit.getTimeline(location, userToken!!).enqueue(object : Callback<PostListModel> {
             override fun onFailure(call: Call<PostListModel>, t: Throwable) {
                 Log.d("DEBUG", " Timeline Retrofit failed!!")
-                Log.d("DEBUG", t.message)            }
+                Log.d("DEBUG", t.message)
+            }
 
             override fun onResponse(call: Call<PostListModel>, response: Response<PostListModel>) {
                 val posts = response.body()?.posts
                 val error = response.body()?.error
-                Log.d("TAG", posts!![0].toString())
+                Log.d("TAG", posts!!.size.toString())
                 Log.d("TAG", posts!![1].toString())
 
                 Log.d("TAG", "error: " + error)
                 posts.forEach(fun(element) {
-                    feedList.add(FeedContent(element))
+                    feedList.add(
+                        FeedContent(
+                            element
+                        )
+                    )
                 })
-
+                fAdapter.notifyDataSetChanged()
             }
 
 
@@ -78,19 +107,7 @@ class FeedFragment(context: Context) : Fragment() {
             R.color.mainGray
         ))
 
-        val fAdapter = FeedAdaptor(context!!, feedList) { feedContent ->
 
-        }
-
-        feed_recyclerview.adapter = fAdapter
-
-        val lm = LinearLayoutManager(context!!)
-        feed_recyclerview.layoutManager = lm
-        feed_recyclerview.setHasFixedSize(true)
-
-        writeBtn.setOnClickListener {
-
-        }
 
     }
 

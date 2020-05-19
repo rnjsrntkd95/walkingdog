@@ -1,13 +1,13 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Challenge
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.walkingdog_kotlin.model.Challenge
+import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Challenge.Model.Challenge
 
 
 class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Challenge>) :
@@ -30,7 +30,7 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeRvAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.challenege_rv_item, parent, false)
         return Holder(view)
     }
@@ -39,7 +39,7 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
         return challengeList.size
     }
 
-    override fun onBindViewHolder(holder: ChallengeRvAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(challengeList[position], context)
     }
 

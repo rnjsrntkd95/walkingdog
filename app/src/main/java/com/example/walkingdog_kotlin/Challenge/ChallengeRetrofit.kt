@@ -7,6 +7,6 @@ import retrofit2.http.Query
 
 interface ChallengeRetrofit {
     @GET("/challenge/search")
-    fun getTimeline(@Query ("userToken") userToken: String): Call<ChallengeListModel>
+    fun getChallengeList(@Query ("userToken") userToken: String): Call<ChallengeListModel>
 
 }

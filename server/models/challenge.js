@@ -6,6 +6,9 @@ const challengeSchema = new Schema({
         type: String,
         required: true,
     },
+    content: {
+        type: String,  
+    },
     start_date: {
         type: Date,
         required: true,

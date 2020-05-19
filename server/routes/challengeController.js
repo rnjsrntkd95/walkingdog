@@ -11,6 +11,7 @@ exports.createChallenge = async (req, res, next) => {
     // const endDate = req.body.endDate;
     
     const title = "새로운 챌린지";
+    const content = "챌린지 모여라~";
     const populationLimit = 50;
     const start_date = '2020-05-19';
     const end_date = "2020-08-01";
@@ -20,6 +21,7 @@ exports.createChallenge = async (req, res, next) => {
         const producer = await User.findOne({ _id: userData });
         const newChallenge = await new Challenge({
             title,
+            content,
             start_date,
             end_date,
             populationLimit,

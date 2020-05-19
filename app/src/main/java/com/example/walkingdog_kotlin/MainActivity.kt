@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import com.example.walkingdog_kotlin.Challenge.ChallengeFragment
 import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.example.walkingdog_kotlin.Post.FeedFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,7 +26,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
             }
             R.id.action_challenge -> {
-                var challengeFragment = ChallengeFragment()
+                var challengeFragment =
+                    ChallengeFragment(
+                        this
+                    )
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, challengeFragment)
                     .commit()
             }

@@ -3,7 +3,7 @@ package com.example.walkingdog_kotlin.Challenge.Model
 import java.util.*
 
 data class ChallengeListModel (
-    val posts: List<ChallengeModel> = listOf(),
+    val challenges: List<ChallengeModel> = listOf(),
     val error: Number
 )
 
@@ -13,6 +13,7 @@ data class ChallengeModel (
     val populationLimit: Int,
     val _id: String,
     val title: String,
+    val content: String,
     val start_date: Date,
     val end_date: Date,
     val producer: String,

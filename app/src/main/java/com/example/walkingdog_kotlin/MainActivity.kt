@@ -1,22 +1,35 @@
 package com.example.walkingdog_kotlin
 
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Challenge.ChallengeFragment
 import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.example.walkingdog_kotlin.Post.FeedFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
-
+    val RequestPermissionCode = 1
+    var mLocation: Location? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId) {
             R.id.action_home -> {
-                var feedFragment = FeedFragment(this)
+                var feedFragment = FeedFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, feedFragment)
                     .commit()
             }
@@ -42,9 +55,66 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return true
     }
 
+    fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermission()
+        } else {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    mLocation = location
+                    if (location != null) {
+                        Log.d("TAG", "${location.latitude}, ${location.longitude}")
+                    } else {
+                        Log.d("TAG", "Location get failed!!")
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("TAG", "Location error is ${it.message}")
+                    it.printStackTrace()
+                }
+        }
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            RequestPermissionCode
+        )
+        this.recreate()
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         val bottomNavigationView = findViewById<View>(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
@@ -53,7 +123,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.selectedItemId = R.id.action_home
 
         supportFragmentManager.beginTransaction().replace(R.id.main_content_layout,
-            FeedFragment(this)
+            FeedFragment()
         )
             .commit()
 

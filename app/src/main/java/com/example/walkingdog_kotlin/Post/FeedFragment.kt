@@ -1,8 +1,6 @@
 package com.example.walkingdog_kotlin.Post
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,7 +17,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FeedFragment(context: Context) : Fragment() {
+class FeedFragment() : Fragment() {
+
+    init {
+    }
 
     var feedList = arrayListOf<FeedContent>(
 
@@ -69,6 +70,24 @@ class FeedFragment(context: Context) : Fragment() {
                     feedList.add(FeedContent(element))
                 })
                 fAdapter.notifyDataSetChanged()
+
+//                locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+//                val locationManager: LocationManager = context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+
+//                val lm: LocationManager = context!!.getSystemService(LOCATION_SERVICE) as LocationManager
+//
+//                var location: Location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+//                if (location == null) {
+//                    location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+//                }
+//                if (location != null) {
+//                    val provider: String = location.getProvider()
+//                    val longitude: Double = location.longitude
+//                    val latitude: Double = location.latitude
+//
+//                    Log.d("TAG", "$longitude, $latitude")
+//                }
             }
         })
     }

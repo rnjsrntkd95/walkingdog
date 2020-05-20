@@ -12,14 +12,15 @@ exports.createWalking = async (req, res, next) => {
     const routeImage = "";
     const walkingTime = 0;
     const walkingAmount = 20;
-    const location = "인천광역시";
+    const addressAdmin = "경기도";
+    const addressLocality = "수원시"
+    const addressThoroughfare = "연무동"
     const animal = ["까까", "브라우니"];
     
     const userData = "5eba8b5ca76e3e20f4b0659e";
     console.log("createWalking 진입");
     try {
         const user = await User.findOne({ _id: userData });
-        console.log(user)
         // 새로운 산책 등록
         const walkingRegister = await new Walking({
             calorie,
@@ -27,7 +28,9 @@ exports.createWalking = async (req, res, next) => {
             routeImage,
             walkingTime,
             walkingAmount,
-            location,
+            addressAdmin,
+            addressLocality,
+            addressThoroughfare,
             animal,
             user,
         });

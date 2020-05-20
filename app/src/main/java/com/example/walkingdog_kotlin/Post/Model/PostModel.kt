@@ -17,7 +17,9 @@ data class PostModel (
     val image: String,
     val routeImage: String,
     val walkingTime: Number,
-    val location: String,
+    val addressAdmin: String,
+    val addressLocality: String,
+    val addressThoroughfare: String,
     val user: String,
     val nickname: String,
     val created_date: Date

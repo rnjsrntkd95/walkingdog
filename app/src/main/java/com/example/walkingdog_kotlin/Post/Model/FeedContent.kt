@@ -20,7 +20,7 @@ class FeedContent() {
 
     constructor(post: PostModel): this() {
         var animalList: String = ""
-        for (animalIndex in 0..post.animal.size - 1) {
+        for (animalIndex in 0 until post.animal.size) {
             if (animalIndex == post.animal.size - 1) {
                 animalList += post.animal[animalIndex]
                 continue
@@ -30,7 +30,7 @@ class FeedContent() {
 
         this.userName = post.nickname
         this.date = ReformatDate("yyyy년 MM월 dd일", post.created_date)
-        this.location = post.location
+        this.location = post.addressAdmin + " " + post.addressLocality
         this.dogName = animalList
         this.uploadImg = post.image
         this.explain = post.content

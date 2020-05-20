@@ -3,9 +3,7 @@ package com.example.walkingdog_kotlin
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -67,18 +65,46 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         ) {
             requestPermission()
         } else {
+            val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     mLocation = location
                     if (location != null) {
                         Log.d("TAG", "${location.latitude}, ${location.longitude}")
+                        val edit = pref.edit()
+                        edit.putString("latitude", location.latitude.toString())
+                        edit.putString("longitude", location.longitude.toString())
+                        edit.commit()
+
+
+                        val geocoder: Geocoder = Geocoder(this)
+                        var address: List<Address>? = null
+
+                        address = geocoder.getFromLocation(location.latitude, location.longitude, 10)
+
+                        if (address != null) {
+                            if (address.size == 0) {
+                                Log.d("TAG", "해당 주소 없음")
+                            } else {
+                                Log.d("TAG", address.toString())
+                                edit.putString("addressAdmin", address[0].adminArea.toString())
+                                edit.putString("addressLocality", address[0].locality.toString())
+                                edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
+                                edit.commit()
+                            }
+                        }
                     } else {
                         Log.d("TAG", "Location get failed!!")
+                        val latitude = pref.getString("latitude", "0").toDouble()
+                        val longitude = pref.getString("longitude", "0").toDouble()
                     }
                 }
                 .addOnFailureListener {
                     Log.d("TAG", "Location error is ${it.message}")
                     it.printStackTrace()
+                    val latitude = pref.getString("latitude", "0").toDouble()
+                    val longitude = pref.getString("longitude", "0").toDouble()
                 }
         }
     }

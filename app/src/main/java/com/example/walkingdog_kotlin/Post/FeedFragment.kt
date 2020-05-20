@@ -52,10 +52,12 @@ class FeedFragment() : Fragment() {
         val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
         // Data
         val userToken = pref.getString("userToken", "none")
-        val location = "인천광역시"
+        val addressAdmin = pref.getString("addressAdmin", "")
+        val addressLocality = pref.getString("addressLocality", "")
+        val addressThoroughfare = pref.getString("addressThoroughfare", "")
 
         val postRetrofit = PostRetrofitCreators(context!!).PostRetrofitCreator()
-        postRetrofit.getTimeline(location, userToken!!).enqueue(object : Callback<PostListModel> {
+        postRetrofit.getTimeline(addressAdmin, addressLocality, addressThoroughfare, userToken!!).enqueue(object : Callback<PostListModel> {
             override fun onFailure(call: Call<PostListModel>, t: Throwable) {
                 Log.d("DEBUG", " Timeline Retrofit failed!!")
                 Log.d("DEBUG", t.message)

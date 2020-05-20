@@ -1,17 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const locationSchema = new Schema({
-    region: {
-        type: String,
-    },
-    city: {
-        type: String,
-    },
-    street: {
-        type: String,
-    }
-})
 
 const postSchema = new Schema({
     content: {
@@ -49,10 +38,14 @@ const postSchema = new Schema({
         type: Number,
         required: true,
     },
-    location: {
-        // type: locationSchema,
+    addressAdmin: {
         type: String,
-        required: true,
+    },
+    addressLocality: {
+        type: String,
+    },
+    addressThoroughfare: {
+        type: String,
     },
     animal: [{
         type: String,

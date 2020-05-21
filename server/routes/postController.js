@@ -9,11 +9,12 @@ exports.createPost = async (req, res, next) => {
     // const userData = req.userToken.id;
     const content = "내용1";
     const image = "";
-    const walkingId = "5ec227624ccf5740cce04cbe";
+    const walkingId = "5ec534591f2f934d780d1385";
     const userData = '5eba8b5ca76e3e20f4b0659e';
     try {
         const user = await User.findOne({ _id: userData });
         const walking = await Walking.findOne({ _id: walkingId });
+
         const postRegister = new Post({
             content,
             image,
@@ -21,7 +22,9 @@ exports.createPost = async (req, res, next) => {
             distance: walking.distance,
             routeImage: walking.routeImage,
             walkingTime: walking.walkingTime,
-            location: walking.location,
+            addressAdmin: walking.addressAdmin,
+            addressLocality: walking.addressLocality,
+            addressThoroughfare: walking.addressThoroughfare,
             animal: walking.animal,
             user,
             nickname: user.nickname,
@@ -41,12 +44,26 @@ exports.createPost = async (req, res, next) => {
 // 유저의 타임라인 조회
 exports.timeline = async (req, res, next) => {
     // const userData = req.userToken.id;
-    const location = "인천광역시";
+    const addressAdmin = req.body.addressAdmin;
+    const addressLocality = req.body.addressLocality;
+    const addressThoroughfare = req.body.addressThoroughfare;
 
     try {
-        const posts = await Post.find({ location });
+        if (addressAdmin && addressLocality) {
+            const posts = await Post.find({ addressAdmin, addressLocality });
+            
+            // 검색된 포스트가 없으면 포스트 전체를 반환
+            if (posts.length == 0) {
+                posts = await posts.find({ });
+            }
+            res.json({ posts })
 
-        res.json({ posts })
+        } else {
+            const posts = await Post.find({ });
+
+            res.json({ posts })
+        }
+        
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });

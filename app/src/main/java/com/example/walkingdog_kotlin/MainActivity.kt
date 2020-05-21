@@ -1,27 +1,38 @@
 package com.example.walkingdog_kotlin
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Challenge.ChallengeFragment
 import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.example.walkingdog_kotlin.Post.FeedFragment
+import com.example.walkingdog_kotlin.Walking.CheckFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
-
+    val RequestPermissionCode = 1
+    var mLocation: Location? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId) {
             R.id.action_home -> {
-                var feedFragment = FeedFragment(this)
+                var feedFragment = FeedFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, feedFragment)
                     .commit()
             }
             R.id.action_Walking -> {
-                var checkFragment = CheckFragment()
+                var checkFragment =
+                    CheckFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, checkFragment)
                     .commit()
             }
@@ -42,9 +53,94 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return true
     }
 
+    fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermission()
+        } else {
+            val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    mLocation = location
+                    if (location != null) {
+                        Log.d("TAG", "${location.latitude}, ${location.longitude}")
+                        val edit = pref.edit()
+                        edit.putString("latitude", location.latitude.toString())
+                        edit.putString("longitude", location.longitude.toString())
+                        edit.commit()
+
+
+                        val geocoder: Geocoder = Geocoder(this)
+                        var address: List<Address>? = null
+
+                        address = geocoder.getFromLocation(location.latitude, location.longitude, 10)
+
+                        if (address != null) {
+                            if (address.size == 0) {
+                                Log.d("TAG", "해당 주소 없음")
+                            } else {
+                                Log.d("TAG", address.toString())
+                                edit.putString("addressAdmin", address[0].adminArea.toString())
+                                edit.putString("addressLocality", address[0].locality.toString())
+                                edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
+                                edit.commit()
+                            }
+                        }
+                    } else {
+                        Log.d("TAG", "Location get failed!!")
+                        val latitude = pref.getString("latitude", "0").toDouble()
+                        val longitude = pref.getString("longitude", "0").toDouble()
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("TAG", "Location error is ${it.message}")
+                    it.printStackTrace()
+                    val latitude = pref.getString("latitude", "0").toDouble()
+                    val longitude = pref.getString("longitude", "0").toDouble()
+                }
+        }
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            RequestPermissionCode
+        )
+        this.recreate()
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         val bottomNavigationView = findViewById<View>(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
@@ -53,7 +149,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.selectedItemId = R.id.action_home
 
         supportFragmentManager.beginTransaction().replace(R.id.main_content_layout,
-            FeedFragment(this)
+            FeedFragment()
         )
             .commit()
 

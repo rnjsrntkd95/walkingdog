@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
             android:usesCleartextTraffic="true"
 
@@ -41,7 +40,7 @@
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
-        <activity android:name=".WalkingActivity" />
+<!--        <activity android:name=".WalkingActivity" />-->
         <activity android:name=".Animal.AddPet" />
         <activity android:name=".MainActivity">
             <intent-filter>

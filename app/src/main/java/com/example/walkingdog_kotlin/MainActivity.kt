@@ -86,12 +86,22 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         if (address != null) {
                             if (address.size == 0) {
                                 Log.d("TAG", "해당 주소 없음")
+                                // Default 처리 필요
+
                             } else {
                                 Log.d("TAG", address.toString())
-                                edit.putString("addressAdmin", address[0].adminArea.toString())
-                                edit.putString("addressLocality", address[0].locality.toString())
-                                edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
-                                edit.commit()
+                                for (addressIndex in address) {
+                                    if (addressIndex.adminArea != null &&
+                                        addressIndex.locality != null &&
+                                        addressIndex.thoroughfare != null){
+                                        edit.putString("addressAdmin", address[0].adminArea.toString())
+                                        edit.putString("addressLocality", address[0].locality.toString())
+                                        edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
+                                        edit.commit()
+                                        break
+                                    }
+                                }
+
                             }
                         }
                     } else {

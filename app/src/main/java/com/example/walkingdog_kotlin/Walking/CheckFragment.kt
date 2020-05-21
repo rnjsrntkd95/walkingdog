@@ -1,18 +1,24 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Walking
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
+import com.example.walkingdog_kotlin.WalkingActivity
 import kotlinx.android.synthetic.main.fragment_check.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CheckFragment : Fragment() {
 
@@ -38,10 +44,39 @@ class CheckFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!, R.color.mainBlue))
+        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
+            R.color.mainBlue
+        ))
 
-        val checkItemAdapter = CheckListAdapter(context!!, checkItemList)
+        val checkItemAdapter =
+            CheckListAdapter(
+                context!!,
+                checkItemList
+            )
         checkListView.adapter = checkItemAdapter
+
+        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        val lat: String? = pref.getString("latitude", "0")
+        val lon: String? = pref.getString("longitude", "0")
+        val appid: String = getString(R.string.openwheather_api_key)
+
+        // 날씨 받아오는 Retrofit
+        val weatherRetrofit = WeatherRetrofitCreators().WeatherRetrofitCreator()
+        weatherRetrofit.getWeatherInfo(lat!!, lon!!, appid).enqueue(object : Callback<WeatherAPIModel> {
+            override fun onFailure(call: Call<WeatherAPIModel>, t: Throwable) {
+                Log.d("TAG", "Weather Retrofit Failed!!")
+                Log.d("TAG", t.message)
+            }
+
+            override fun onResponse(call: Call<WeatherAPIModel>,response: Response<WeatherAPIModel>) {
+                val weather = response.body()?.weather
+                Log.d("TAG", "${weather!![0].main}")
+            }
+        })
+
+
+
 
         //체크리스트 목록을 삭제하는 함수
         sub_item_btn.setOnClickListener {
@@ -89,7 +124,11 @@ class CheckFragment : Fragment() {
 
             add_check_btn.setOnClickListener {
                 if(dialogText.text.isNotBlank() && dialogText.text.isNotEmpty())
-                    checkItemList.add(CheckItem(dialogText.text.toString()))
+                    checkItemList.add(
+                        CheckItem(
+                            dialogText.text.toString()
+                        )
+                    )
 
                 popup.dismiss()
             }

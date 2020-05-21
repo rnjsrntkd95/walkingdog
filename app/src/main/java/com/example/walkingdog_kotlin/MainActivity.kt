@@ -1,7 +1,6 @@
 package com.example.walkingdog_kotlin
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +12,11 @@ import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Challenge.ChallengeFragment
 import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.example.walkingdog_kotlin.Post.FeedFragment
+import com.example.walkingdog_kotlin.Walking.CheckFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     val RequestPermissionCode = 1
@@ -32,7 +31,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
             }
             R.id.action_Walking -> {
-                var checkFragment = CheckFragment()
+                var checkFragment =
+                    CheckFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, checkFragment)
                     .commit()
             }

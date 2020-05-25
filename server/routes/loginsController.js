@@ -23,7 +23,7 @@ exports.logIn = async (req, res, next) => {
       const resultReg = await User.create(newUser);
       userObj = await User.findOne({ email, password });
     } else {
-        nickname = userObj.nickname
+      nickname = userObj.nickname
     }
     // 토큰 발행
     Jwt.sign(
@@ -37,27 +37,40 @@ exports.logIn = async (req, res, next) => {
         expiresIn: "1d",
         issuer: "walkingDog",
         subject: "userInfo",
-      },function(err, loginToken) {
+      }, function (err, loginToken) {
         if (err) res.json({})
         else res.json({ loginToken, nickname });
       }
     );
-} catch (err) {
+  } catch (err) {
     console.log(err);
     res.json({});
   }
 };
 
 exports.setNickname = async (req, res, next) => {
-    const userData = req.userToken;
-    const nickname = req.body.nickname;
-
-    try {
-        const user = await User.findOneAndUpdate({_id: "5eba8b5ca76e3e20f4b0659e"}, {nickname});
-        res.json({});
-    } catch (err) {
-        console.log(err);
-        if (err.code === 11000) res.json({error: 11000})
-        else res.json({error: 10000});
+  const userData = req.userToken;
+  const nickname = req.body.nickname;
+  const requestFiles = req.file;
+  //   if (!requestFiles) {
+  //     image.push('uploads\\default.jpg')
+  // } else {
+  //     for (file of requestFiles) {
+  //         image.push(file.path.replace('public\\', ''))
+  //     }
+  // }
+  try {
+    await User.findOneAndUpdate({ _id: "5eba8b5ca76e3e20f4b0659e" },
+      { $set: { nickname } }, { new: true });
+    if (requestFiles) {
+      await User.findOneAndUpdate({ _id: "5eba8b5ca76e3e20f4b0659e" },
+        { $set: { profileImage: requestFiles.path.replace('public\\', '') } }, { new: true });
     }
+
+    res.json({ });
+  } catch (err) {
+    console.log(err);
+    if (err.code === 11000) res.json({ error: 11000 })
+    else res.json({ error: 10000 });
+  }
 };

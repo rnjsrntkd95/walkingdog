@@ -20,11 +20,10 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  // username: {
-  //     type: String,
-  //     required: true,
-  //     lowercase: true,
-  // },
+  profileImage: {
+    type: String,
+    default: 'uploads\\default_profile.jpg'
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);

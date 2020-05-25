@@ -10,11 +10,11 @@ const postSchema = new Schema({
         type: Number,
         default: 0,
     },
-    image: {
+    image: [{
         type: String,
         // type: Buffer,
         // contentsType: String,
-    },
+    }],
     created_date: {
         type: Date,
         default: Date.now,

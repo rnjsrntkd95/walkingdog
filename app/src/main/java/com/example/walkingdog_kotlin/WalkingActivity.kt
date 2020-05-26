@@ -1,166 +1,159 @@
 package com.example.walkingdog_kotlin
 
-import android.Manifest
-import android.content.Intent
+import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Paint
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.mapbox.android.core.location.LocationEngine
-//import com.mapbox.android.core.location.LocationEngineListener
-//import com.mapbox.android.core.location.LocationEnginePriority
-import com.mapbox.android.core.location.LocationEngineProvider
-import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
-import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
-import kotlinx.android.synthetic.main.activity_walking.*
-import java.util.*
-import kotlin.concurrent.timer
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
 
-class WalkingActivity : AppCompatActivity(){
+class WalkingActivity : AppCompatActivity() {
+    val RequestPermissionCode = 1
+    var mLocation: Location? = null
+    var lat: Double = 0.0
+    var lon: Double = 0.0
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+//    private lateinit var mapView: MapView
 
-    private var time = 0
-    private var isRunning = false
-    private var timerTask: Timer? = null
-    private var lap = 1
-
-    private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walking)
-//
-//        //상태바 색을 그레이로 변경
-//        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.mainGray))
-//        //상태바 아이콘 색 플레그(흰색->검은색)
-//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-//
-//        Mapbox.getInstance(applicationContext, getString(R.string.mapbox_access_token))
-//        mapView = findViewById(R.id.mapView)
-//        mapView.onCreate(savedInstanceState)
-//
-//        camera_btn.setOnClickListener {
-//            var intent = Intent(this, Camera::class.java)
-//            startActivity(intent)
-//        }
-//
-//        playFab.setOnClickListener {
-//            //플레이 버튼
-//            isRunning = !isRunning
-//
-//            if (isRunning) { // true
-//                start()
-//            } else { // false
-//                pause()
-//            }
-//        }
-//
-//        resetFab.setOnClickListener {
-//            //리셋 버튼
-//            reset()
-//        }
 
-    } //onCreate
+        // 현재 위치
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        getLastLocation()
 
-//    override fun onStart() {
-//        super.onStart()
-//        mapView.onStart()
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        mapView.onResume()
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        mapView.onPause()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        mapView.onStop()
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        mapView.onDestroy()
-//    }
-//
-//    override fun onLowMemory() {
-//        super.onLowMemory()
-//        mapView.onLowMemory()
-//    }
-//
-//    private fun pause() { // 타이머 일시정지
-//        playFab.setBackgroundResource(R.drawable.play_icon)
-//        timerTask?.cancel() // 실행중인 타이머가 있다면 취소한다.
-//    }
-//
-//    private fun start() { //타이머 스타트
-//        playFab.setBackgroundResource(R.drawable.pause_icon) //일시정지 이미지로 바꿔줌.
-//
-//        timerTask = timer(period = 10) {
-//            // period = 10 0.01초 , period = 1000 면 1초
-//            time++
-//            // 0.01초마다 변수를 증가시킴
-//
-//            val hour = (time / 144000) % 24 // 1시간
-//            val min = (time / 6000) % 60 // 1분
-//            val sec = (time / 100) % 60 //1초
-//            val milli = time % 100 // 0.01 초
-//            runOnUiThread {
-//                // Ui 를 갱신 시킴.
-//
-//                if (min < 10) { // 분
-//                    minTextView.text = "0$min"
-//                } else {
-//                    minTextView.text = "$min"
-//                }
-//
-//                if (sec < 10) { // 초
-//                    secTextView.text = "0$sec"
-//                } else {
-//                    secTextView.text = "$sec"
-//                }
-//
-//                if (milli < 10) {
-//                    milliTextView.text = "0$milli"
-//                } else {
-//                    milliTextView.text = "$milli"
-//                }
-//
-//                //$ 를 붙여주면 변하는 값을 계속 덮어준다
-//                //ex) $를 붙여주면 기존에 1이라는 값이 잇을때 값이 2로변하면 2로 바꿔준다.
-//
-//            }
-//        }
-//
-//    }
-//
-//    private fun reset() {
-//        timerTask?.cancel()       // 실행중인 타이머 취소
-//
-//        // 모든 변수 초기화
-//        time = 0
-//        isRunning = false
-//        playFab.setBackgroundResource(R.drawable.play_icon)
-//        minTextView.text = "00"
-//        secTextView.text = "00"
-//        milliTextView.text = "00"
-//
-//    }
+        initView()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    // 카카오맵 연결
+    fun initView() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermission()
+        } else {
+            Log.d("NONO", "YES")
+        }
+        var mapView = MapView(this)
+//        mapView = MapView(this)
+        val mapViewContainer: ViewGroup = findViewById<View>(R.id.map_view) as ViewGroup
+//        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(37.2984885, 127.029934), 1, true);
+        mapViewContainer.addView(mapView)
+        mapView.currentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading)
+
+    }
+
+    // 현재 위치의 위도, 경도를 가져오는 함수
+    fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermission()
+        } else {
+            val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    mLocation = location
+                    if (location != null) {
+                        Log.d("TAG", "${location.latitude}, ${location.longitude}")
+                        lat = location.latitude
+                        lon = location.longitude
+
+                        // Map에 현재 위도, 경도의 지도를 출력
+//                        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lon), 1, true);
+                        Log.d("Location222", lat.toString() + lon.toString())
+                        val edit = pref.edit()
+                        edit.putString("latitude", location.latitude.toString())
+                        edit.putString("longitude", location.longitude.toString())
+                        edit.commit()
+
+
+                        val geocoder: Geocoder = Geocoder(this)
+                        var address: List<Address>? = null
+
+                        address = geocoder.getFromLocation(location.latitude, location.longitude, 10)
+
+                        if (address != null) {
+                            if (address.size == 0) {
+                                Log.d("TAG", "해당 주소 없음")
+                                // Default 처리 필요
+
+                            } else {
+                                Log.d("TAG", address.toString())
+                                for (addressIndex in address) {
+                                    if (addressIndex.adminArea != null &&
+                                        addressIndex.locality != null &&
+                                        addressIndex.thoroughfare != null){
+                                        edit.putString("addressAdmin", address[0].adminArea.toString())
+                                        edit.putString("addressLocality", address[0].locality.toString())
+                                        edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
+                                        edit.commit()
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Log.d("TAG", "Location get failed!!")
+                        val latitude = pref.getString("latitude", "0").toDouble()
+                        val longitude = pref.getString("longitude", "0").toDouble()
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("TAG", "Location error is ${it.message}")
+                    it.printStackTrace()
+                    val latitude = pref.getString("latitude", "0").toDouble()
+                    val longitude = pref.getString("longitude", "0").toDouble()
+                }
+        }
+    }
+    // 위치 권한 설정
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            RequestPermissionCode
+        )
+        this.recreate()
+    }
+}
+
+private operator fun MapView.CurrentLocationTrackingMode.invoke(trackingModeOnWithoutHeading: MapView.CurrentLocationTrackingMode) {
 
 }
+
+
+
+
+
+
+

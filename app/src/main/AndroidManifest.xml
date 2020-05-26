@@ -40,10 +40,11 @@
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
-<!--        <activity android:name=".WalkingActivity" />-->
+        <activity android:name=".MainActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
+        <activity android:name=".WalkingActivity">
+
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

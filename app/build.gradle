@@ -63,14 +63,15 @@ dependencies {
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
     // Mapbox dependencies
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0'
+
 
     // Location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
 
-    // Retrofit, Gson,RxAdapter
+    // Retrofit, Gson, RxAdapter
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'

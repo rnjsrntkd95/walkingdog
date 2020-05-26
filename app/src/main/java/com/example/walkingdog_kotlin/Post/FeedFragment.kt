@@ -1,12 +1,15 @@
 package com.example.walkingdog_kotlin.Post
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
@@ -45,7 +48,23 @@ class FeedFragment() : Fragment() {
         feed_recyclerview.setHasFixedSize(true)
 
         writeBtn.setOnClickListener {
+            var intent = Intent(context, WritePost::class.java)
+            startActivity(intent)
+        }
 
+        filter_btn.setOnClickListener {
+            val popupMenu : PopupMenu = PopupMenu(context, filter_btn)
+            popupMenu.menuInflater.inflate(R.menu.post_popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.action_location ->
+                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+                    R.id.action_breed ->
+                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+                }
+                true
+            })
+            popupMenu.show()
         }
 
         //// TimeLine Retrofit ////

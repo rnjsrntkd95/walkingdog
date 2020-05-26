@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Statics">
+        tools:context=".Statics"
+        android:layout_margin="10dp"
+        >
 
     <LinearLayout
             android:id="@+id/statics_back_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            >
 
-        <Button
+        <ImageView
                 android:id="@+id/statics_back_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/left_arrow">
 
-        </Button>
+        </ImageView>
+
 
     </LinearLayout>
 
@@ -32,6 +39,8 @@
                 android:layout_height="wrap_content"
                 android:text="Statistics"
                 android:textSize="40dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 >
         </TextView>
 
@@ -43,12 +52,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/statics_title_layout"
+            android:layout_marginTop="10dp"
+
             >
         <org.eazegraph.lib.charts.ValueLineChart
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="230dp"
                 app:egUseCubic="true"
                 app:egUseOverlapFill="true"
                 app:egCurveSmoothness="0.4"
@@ -57,7 +68,107 @@
                 app:egShowStandardValue="true"/>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statics_all_info"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/statics_graph_layout"
+            android:layout_marginTop="15dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Calories"
+                android:layout_marginRight="120dp">
+
+
+        </TextView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Time">
+
+        </TextView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/statics_cal_time"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/statics_all_info">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="120.5"
+                android:textColor="#000000"
+                android:textSize="20dp">
+
+        </TextView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="kcal"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp">
+
+        </TextView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="80dp"
+                android:text="45:30"
+                android:textColor="#000000"
+                android:textSize="20dp"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/statics_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/statics_cal_time"
+            android:layout_marginTop="30dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="History"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/statics_history_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/statics_history">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/history_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/statics_history_item"
+
+                />
+    </LinearLayout>
 </RelativeLayout>

@@ -21,7 +21,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".Post.WritePost"></activity>
+        <activity android:name=".Challenge.Create_ChallengeActivity"></activity>
+        <activity android:name=".Post.WritePost" />
         <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
         <!-- 카카오 앱 키 사용 -->
         <meta-data

@@ -10,7 +10,7 @@
     <RelativeLayout
             android:id="@+id/topAppbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:background="@drawable/weather_bar_shape"
             android:layout_alignParentTop="true">
 
@@ -60,7 +60,7 @@
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="@color/mainGray">
         </LinearLayout>
 
@@ -75,7 +75,8 @@
                     android:id="@+id/edit_comment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="문구 입력...">
+                    android:hint="문구 입력..."
+                    android:background="@null">
 
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -83,7 +84,7 @@
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="@color/mainGray">
         </LinearLayout>
 

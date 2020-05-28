@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
@@ -28,6 +29,11 @@ class CheckFragment : Fragment() {
         CheckItem("입마개"),
         CheckItem("배변봉투")
     )
+
+    var location_weather: String? = null        //현재 위치의 날씨를 저장할 변수
+    var location_temp:String? = null            //현재 위치의 온도를 저장할 변수
+    var test: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +65,10 @@ class CheckFragment : Fragment() {
 
         val lat: String? = pref.getString("latitude", "0")
         val lon: String? = pref.getString("longitude", "0")
+        Log.d("location", lat+"  "+lon)
         val appid: String = getString(R.string.openwheather_api_key)
+
+        var location_addressLocatlity:String? = pref.getString("addressLocality", "대한민국")//현재 위치의 도시를 저장
 
         // 날씨 받아오는 Retrofit
         val weatherRetrofit = WeatherRetrofitCreators().WeatherRetrofitCreator()
@@ -71,12 +80,46 @@ class CheckFragment : Fragment() {
 
             override fun onResponse(call: Call<WeatherAPIModel>,response: Response<WeatherAPIModel>) {
                 val weather = response.body()?.weather
+                val main = response.body()?.main
                 Log.d("TAG", "${weather!![0].main}")
+
+                Log.d("TAG", (main!!.temp-273).toString())
+
+                location_weather = "${weather!![0].main}"
+                location_temp = (main!!.temp-273).toInt().toString()
+
+                weather_tv.text = "${location_weather}"
+                temporature_tv.text =  "${location_temp}"
+                location_tv.text = location_addressLocatlity
+
+                when(weather_tv.text.toString()) {
+                    "Thunderstorm" -> {
+                        weather_img.setImageResource(R.drawable.thunderstorm)
+                        weather_tv.text = "낙뢰"
+                    }
+                    "Rain" -> {
+                        weather_img.setImageResource(R.drawable.rain)
+                        weather_tv.text ="비"
+                    }
+                    "Snow" -> {
+                        weather_img.setImageResource(R.drawable.snow)
+                        weather_tv.text ="눈"
+                    }
+                    "Clear" -> {
+                        weather_img.setImageResource(R.drawable.clear)
+                        weather_tv.text ="맑음"
+                    }
+                    "Clouds" -> {
+                        weather_img.setImageResource(R.drawable.cloud)
+                        weather_tv.text = "흐림"
+                    }
+                    else -> {
+                        weather_img.setImageResource(R.drawable.mist)
+                        weather_tv.text = "안개"
+                    }
+                }
             }
         })
-
-
-
 
         //체크리스트 목록을 삭제하는 함수
         sub_item_btn.setOnClickListener {

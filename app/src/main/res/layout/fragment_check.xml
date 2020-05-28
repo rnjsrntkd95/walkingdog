@@ -14,6 +14,7 @@
             android:gravity="center">
 
         <ImageView
+                android:id="@+id/weather_img"
                 android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
@@ -21,6 +22,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/weather_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -29,6 +31,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/temporature_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -37,6 +40,7 @@
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/location_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"

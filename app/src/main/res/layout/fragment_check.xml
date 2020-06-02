@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:text="Sunny"
+                android:text="@string/next"
                 android:layout_weight="1"/>
 
         <TextView

@@ -53,9 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/profile_image"
-            android:layout_marginTop="15dp"
-
-        >
+            android:layout_marginTop="15dp">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -240,6 +238,7 @@
             android:layout_weight="1">
 
         <ImageView
+                android:id="@+id/settings_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/cogwheel"

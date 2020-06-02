@@ -9,11 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import com.example.walkingdog_kotlin.MyPhotoActivity
-import com.example.walkingdog_kotlin.ProfileItem
+import com.example.walkingdog_kotlin.*
 
-import com.example.walkingdog_kotlin.R
-import com.example.walkingdog_kotlin.Statics
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 

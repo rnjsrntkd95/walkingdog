@@ -81,6 +81,7 @@ class CheckFragment : Fragment() {
             override fun onResponse(call: Call<WeatherAPIModel>,response: Response<WeatherAPIModel>) {
                 val weather = response.body()?.weather
                 val main = response.body()?.main
+
                 Log.d("TAG", "${weather!![0].main}")
 
                 Log.d("TAG", (main!!.temp-273).toString())
@@ -92,7 +93,7 @@ class CheckFragment : Fragment() {
                 temporature_tv.text =  "${location_temp}"
                 location_tv.text = location_addressLocatlity
 
-                when(weather_tv.text.toString()) {
+                when(weather_tv.text?.toString()) {
                     "Thunderstorm" -> {
                         weather_img.setImageResource(R.drawable.thunderstorm)
                         weather_tv.text = "낙뢰"

@@ -17,6 +17,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_walking.*
 import net.daum.mf.map.api.*
+import java.io.File
 import java.util.*
 import kotlin.concurrent.timer
 import kotlin.math.*
@@ -30,7 +31,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var prevLat: Double? = null
     private var prevLon: Double? = null
     private var walkingDistance: Double = 0.0
-    private var isStart: Boolean = false
+    private var isStart: Boolean = true
     private var isPause: Boolean = false
     private var walkingTimer: Timer? = null
     private var tapTimer: Timer? = null
@@ -109,8 +110,14 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
 
         // 경로 사진 캡처 추가
+//        val routeView: View = map_layout
+//        val screenShot: File = ScreenShot
 
     }
+
+//    private fun screenShot(view: View): File {
+//        view.drawingCa
+//    }
 
     // 배변활동 표시
     private fun toiletActivity() {

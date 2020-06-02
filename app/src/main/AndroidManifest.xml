@@ -13,6 +13,9 @@
     <!--위치 정보-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--    화면 캡처-->
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
 
     <application
             android:usesCleartextTraffic="true"
@@ -40,9 +43,9 @@
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".WalkingActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".WalkingActivity">
+        <activity android:name=".MainActivity">
 
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

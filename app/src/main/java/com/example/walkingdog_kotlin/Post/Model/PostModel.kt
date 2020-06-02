@@ -14,7 +14,7 @@ data class PostModel (
     val animal: List<String> = listOf(),
     val id: String,
     val content: String,
-    val image: String,
+    val image: List<String> = listOf(),
     val routeImage: String,
     val walkingTime: Number,
     val addressAdmin: String,

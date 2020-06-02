@@ -8,6 +8,7 @@
         tools:context=".WalkingActivity">
 <!--지도 레이아웃-->
     <LinearLayout
+            android:id="@+id/map_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6.5"
@@ -21,11 +22,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
         </RelativeLayout>
-
-
-
-
-
     </LinearLayout>
 
 <!--타이머 레이아웃-->

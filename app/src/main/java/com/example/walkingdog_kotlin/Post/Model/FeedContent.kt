@@ -11,7 +11,7 @@ class FeedContent() {
     var date : String = ""
     var location : String = ""
     var dogName : String = ""
-    var uploadImg : String = ""
+    var uploadImg : List<String> = listOf()
     var explain : String = ""
     var time : Number = 0
     var distance : Number = 0

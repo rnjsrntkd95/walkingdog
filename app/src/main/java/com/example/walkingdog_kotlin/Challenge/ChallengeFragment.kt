@@ -51,6 +51,12 @@ class ChallengeFragment(context: Context) : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        var test = challengeTitle_Textview.text
+
+        drawerMenu_icon.setOnClickListener {
+            Toast.makeText(context, test, Toast.LENGTH_LONG).show()
+        }
+
         val cAdapter =
             ChallengeRvAdapter(
                 context!!,

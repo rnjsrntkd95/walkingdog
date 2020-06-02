@@ -6,6 +6,10 @@ data class PostListModel (
     val posts: List<PostModel> = listOf(),
     val error: Number
 )
+data class UserProfileModel (
+    val profileImage: String,
+    val _id: String
+)
 
 data class PostModel (
     val like: Int,
@@ -14,13 +18,13 @@ data class PostModel (
     val animal: List<String> = listOf(),
     val id: String,
     val content: String,
-    val image: String,
+    val image: List<String> = listOf(),
     val routeImage: String,
     val walkingTime: Number,
     val addressAdmin: String,
     val addressLocality: String,
     val addressThoroughfare: String,
-    val user: String,
+    val user: UserProfileModel,
     val nickname: String,
     val created_date: Date
 )

@@ -3,10 +3,7 @@ package com.example.walkingdog_kotlin.Animal
 import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import com.example.walkingdog_kotlin.Animal.Model.SetNewAnimalModel
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface AnimalRetrofit {
 
@@ -21,5 +18,9 @@ interface AnimalRetrofit {
                      @Field("age") age: Int,
                      @Field("weight") weight: Number,
                      @Field("gender") gender: String): Call<SetNewAnimalModel>
+    @GET("animal/mypet")
+    fun findMyPet(@Query("userToken") userToken: String,
+                  @Query("user") _id: String
+    ): Call<SetNewAnimalModel>
 
 }

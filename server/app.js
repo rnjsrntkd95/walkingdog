@@ -13,6 +13,7 @@ const animalRouter = require("./routes/animals");
 const walkingRouter = require("./routes/walkings");
 const postRouter = require("./routes/posts");
 const challengeRouter = require("./routes/challenges");
+const commentRouter = require("./routes/comment");
 
 // MongoDB Connect
 const mongodb = require("./db.js");
@@ -33,26 +34,27 @@ app.set("jwt-secret", config.secret);
 
 // User Token Decoding
 app.use((req, res, next) => {
-  console.log(req.path)
+  console.log(req.path);
   if (req.path === "/login") {
     next();
   } else {
     const Jwt = require("jsonwebtoken");
-    const token = req.body.userToken
+    const token = req.body.userToken;
     // if (!token) res.json({ error: -1 })
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);
     req.userToken = decodedToken;
     next();
   }
-})
+});
 
 // Use Router
-app.use("/login", loginRouter);
+app.use("/testPost", loginRouter);
 app.use("/animal", animalRouter);
 app.use("/walking", walkingRouter);
 app.use("/post", postRouter);
 app.use("/challenge", challengeRouter);
+app.use("/comment", commentRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin.Challenge
+package com.example.walkingdog_kotlin.Comment.Model
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -21,7 +21,7 @@ import retrofit2.Response
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-class ChallengeFragment(context: Context) : Fragment() {
+class CommentFragment(context: Context) : Fragment() {
 
     var challengeList = arrayListOf<Challenge>(
     )

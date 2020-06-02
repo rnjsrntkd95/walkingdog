@@ -1,11 +1,11 @@
-package com.example.walkingdog_kotlin.Animal
+package com.example.walkingdog_kotlin.Comment.Model
 
 import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import com.example.walkingdog_kotlin.Animal.Model.SetNewAnimalModel
 import retrofit2.Call
 import retrofit2.http.*
 
-interface AnimalRetrofit {
+interface CommentRetrofit {
 
     @GET("/animal/breed-list")
     fun getAllBreed(): Call<BreedListModel>

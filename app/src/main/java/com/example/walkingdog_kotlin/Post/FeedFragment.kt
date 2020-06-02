@@ -23,7 +23,6 @@ class FeedFragment() : Fragment() {
     }
 
     var feedList = arrayListOf<FeedContent>(
-
     )
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

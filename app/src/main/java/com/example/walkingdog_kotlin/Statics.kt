@@ -1,18 +1,13 @@
 package com.example.walkingdog_kotlin
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Walking.StaticsItem
-import com.example.walkingdog_kotlin.Statics_RVAdapter
-import kotlinx.android.synthetic.main.activity_my_photo.*
 import kotlinx.android.synthetic.main.activity_statics.*
-import org.eazegraph.lib.charts.ValueLineChart
-import org.eazegraph.lib.models.ValueLinePoint
-import org.eazegraph.lib.models.ValueLineSeries
-
-
-
+import org.eazegraph.lib.charts.BarChart
+import org.eazegraph.lib.models.BarModel
 
 
 class Statics : AppCompatActivity() {
@@ -36,27 +31,19 @@ class Statics : AppCompatActivity() {
         history_recyclerview.layoutManager = lm
         history_recyclerview.setHasFixedSize(true)
 
-        val mCubicValueLineChart =
-            findViewById(R.id.linechart) as ValueLineChart
+        val mBarChart: BarChart = findViewById<View>(R.id.barchart) as BarChart
 
-        val series = ValueLineSeries()
-        series.color = -0xa9480f
 
-        series.addPoint(ValueLinePoint("Jan", 2.4f))
-        series.addPoint(ValueLinePoint("Feb", 3.4f))
-        series.addPoint(ValueLinePoint("Mar", .4f))
-        series.addPoint(ValueLinePoint("Apr", 1.2f))
-        series.addPoint(ValueLinePoint("Mai", 2.6f))
-        series.addPoint(ValueLinePoint("Jun", 1.0f))
-        series.addPoint(ValueLinePoint("Jul", 3.5f))
-        series.addPoint(ValueLinePoint("Aug", 2.4f))
-        series.addPoint(ValueLinePoint("Sep", 2.4f))
-        series.addPoint(ValueLinePoint("Oct", 3.4f))
-        series.addPoint(ValueLinePoint("Nov", .4f))
-        series.addPoint(ValueLinePoint("Dec", 1.3f))
+        mBarChart.addBar(BarModel(2.3f, -0xedcbaa))
+        mBarChart.addBar(BarModel(2f, -0xcbcbaa))
+        mBarChart.addBar(BarModel(3.3f, -0xa9cbaa))
+        mBarChart.addBar(BarModel(1.1f, -0x78c0aa))
+        mBarChart.addBar(BarModel(2.7f, -0xa9480f))
+        mBarChart.addBar(BarModel(2f, -0xcbcbaa))
+        mBarChart.addBar(BarModel(0.4f, -0xe00b54))
+        mBarChart.addBar(BarModel(4f, -0xe45b1a))
 
-        mCubicValueLineChart.addSeries(series)
-        mCubicValueLineChart.startAnimation()
+        mBarChart.startAnimation()
 
 
     }

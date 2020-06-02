@@ -55,17 +55,16 @@
             android:layout_marginTop="10dp"
 
             >
-        <org.eazegraph.lib.charts.ValueLineChart
+
+        <org.eazegraph.lib.charts.BarChart
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/linechart"
+                android:id="@+id/barchart"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                app:egUseCubic="true"
-                app:egUseOverlapFill="true"
-                app:egCurveSmoothness="0.4"
-                app:egIndicatorLineColor="#FE6DA8"
-                app:egLegendHeight="40dp"
-                app:egShowStandardValue="true"/>
+                android:layout_height="256dp"
+                android:padding="10dp"
+                app:egFixedBarWidth="true"
+                app:egBarWidth="20dp"
+                app:egLegendHeight="40dp"/>
 
 
     </LinearLayout>

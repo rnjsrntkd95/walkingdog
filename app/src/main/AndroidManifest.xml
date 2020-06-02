@@ -21,7 +21,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".Walking.Statics_RVAdapter"></activity>
         <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
         <!-- 카카오 앱 키 사용 -->
         <meta-data

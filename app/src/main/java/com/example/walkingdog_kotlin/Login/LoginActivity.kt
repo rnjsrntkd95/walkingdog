@@ -77,8 +77,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // onActivityResult
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Log.i("Log", "session get current session")
-            return
+                Log.i("Log", "session get current session")
+                return
         }
         super.onActivityResult(requestCode, resultCode, data)
 

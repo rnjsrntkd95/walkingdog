@@ -35,7 +35,7 @@
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Statics" />
-        <activity android:name=".Account" />
+        <activity android:name=".MyChallenge" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" /> <!-- <activity android:name=".WalkingActivity" /> -->
         <activity android:name=".Animal.AddPet" />

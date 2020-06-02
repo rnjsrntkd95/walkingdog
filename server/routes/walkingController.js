@@ -9,7 +9,6 @@ exports.createWalking = async (req, res, next) => {
     // const userData = req.userToken.id;
     const calorie = 0;
     const distance = 0;
-    const routeImage = "";
     const walkingTime = 0;
     const walkingAmount = 20;
     const addressAdmin = "경기도";
@@ -18,7 +17,16 @@ exports.createWalking = async (req, res, next) => {
     const animal = ["까까", "브라우니"];
     
     const userData = "5eba8b5ca76e3e20f4b0659e";
-    console.log("createWalking 진입");
+    const requestFile = req.file;
+    let routeImage = "";
+
+    // 산책로 Image 처리
+    if (!requestFile) {
+        routeImage = 'uploads\\default.jpg'
+    } else {
+        routeImage = requestFile.path.replace('public\\', '');
+    };
+
     try {
         const user = await User.findOne({ _id: userData });
         // 새로운 산책 등록

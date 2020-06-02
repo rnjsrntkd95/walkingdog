@@ -32,7 +32,7 @@ class FeedContent() {
         this.date = ReformatDate("yyyy년 MM월 dd일", post.created_date)
         this.location = post.addressAdmin + " " + post.addressLocality
         this.dogName = animalList
-        this.uploadImg = post.image
+//        this.uploadImg = post.image
         this.explain = post.content
         this.time = post.walkingTime
         this.distance = post.distance

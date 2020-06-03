@@ -1,6 +1,7 @@
 package com.example.walkingdog_kotlin.Post
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.R
 
@@ -29,29 +31,26 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
 
 
         fun bind(feedContent : FeedContent, context: Context) {
-//            if(feedContent.profileImg !="") {
-//                val resourceId = context.resources.getIdentifier(feedContent.profileImg, "drawable", context.packageName)
-//                profileImg?.setImageResource(resourceId)
-//            } else {
-//                profileImg?.setImageResource(R.mipmap.ic_launcher)
-//            }
+            if(feedContent.profileImg != "") {
+                Glide.with(context).load("${context.getString(R.string.server_url)}/${feedContent.profileImg}")
+//                        .apply(RequestOptions.overrideOf(300, 250))
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(profileImg)
+            } else {
+                profileImg?.setImageResource(R.mipmap.ic_launcher)
+            }
 
             userName?.text = feedContent.userName
             date?.text = feedContent.date.toString()
             location?.text = feedContent.location
             dogName?.text = feedContent.dogName
-
             if(feedContent.uploadImg.isNotEmpty()) {
                 feedContent.uploadImg.forEach(fun(imageUrl) {
-                    Glide.with(context).load("${R.string.server_url}/${imageUrl}")
+                    Glide.with(context).load("${context.getString(R.string.server_url)}/${imageUrl}")
+//                        .apply(RequestOptions.overrideOf(300, 250))
+                        .apply(RequestOptions.centerCropTransform())
                         .into(feedImg)
                 })
-
-                feedImg?.setImageResource(R.mipmap.ic_launcher)
-                Glide.with(context).load("https://lms.kyonggi.ac.kr/theme/image.php/coursemos_mobile/theme_coursemos_mobile/1587617065/app/iphone")
-                    .into(feedImg)
-//                val resourceId = context.resources.getIdentifier(feedContent.uploadImg, "drawable", context.packageName)
-//                feedImg?.setImageResource(resourceId)
             } else {
                 feedImg?.setImageResource(R.mipmap.ic_launcher)
             }

@@ -6,16 +6,16 @@
     <!-- Google Login -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--위치 정보-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--    화면 캡처-->
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--위치 정보-->
+    <uses-permission android:name="android.permissio
+    n.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--화면 캡처-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
             android:usesCleartextTraffic="true"
@@ -43,9 +43,9 @@
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
-        <activity android:name=".WalkingActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Walking.WalkingActivity">
 
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -106,15 +106,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         }
                     } else {
                         Log.d("TAG", "Location get failed!!")
-                        val latitude = pref.getString("latitude", "0").toDouble()
-                        val longitude = pref.getString("longitude", "0").toDouble()
+                        val latitude = pref.getString("latitude", "37.3004755").toDouble()
+                        val longitude = pref.getString("longitude", "127.034374").toDouble()
                     }
                 }
                 .addOnFailureListener {
                     Log.d("TAG", "Location error is ${it.message}")
                     it.printStackTrace()
-                    val latitude = pref.getString("latitude", "0").toDouble()
-                    val longitude = pref.getString("longitude", "0").toDouble()
+                    val latitude = pref.getString("latitude", "37.3004755").toDouble()
+                    val longitude = pref.getString("longitude", "127.034374").toDouble()
                 }
         }
     }

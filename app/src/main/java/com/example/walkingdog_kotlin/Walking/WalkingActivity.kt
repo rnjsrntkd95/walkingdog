@@ -1,23 +1,16 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Walking
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_walking.*
 import net.daum.mf.map.api.*
-import java.io.File
 import java.util.*
 import kotlin.concurrent.timer
 import kotlin.math.*
@@ -33,8 +26,13 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var walkingDistance: Double = 0.0
     private var isStart: Boolean = true
     private var isPause: Boolean = false
-    private var walkingTimer: Timer? = null
     private var tapTimer: Timer? = null
+    private val route = ArrayList<ArrayList<Double>>()
+
+    private var walkingTimer: Timer? = null
+    private var time = 0
+    private var isTimerRunning: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +42,20 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         initView()
 
         playFab.setOnClickListener {
+            timerSet()
             toiletActivity()
         }
         resetFab.setOnClickListener {
+            timerSet()
             pauseWalking()
             finishWalking()
         }
         camera_btn.setOnClickListener {
+            timerSet()
             restartWalking()
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -78,7 +80,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         mapView!!.setCurrentLocationEventListener(this)
         polyline = MapPolyline()
         polyline!!.tag = 1000
-        polyline!!.lineColor = Color.argb(200, 103, 114, 241)
+        polyline!!.lineColor = Color.argb(255, 103, 114, 241)
     }
 
     // 일시 정지
@@ -102,22 +104,13 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         startMarker.itemName = ""
         startMarker.mapPoint = polyline!!.getPoint(0)
         startMarker.markerType = MapPOIItem.MarkerType.CustomImage
-        startMarker.customImageResourceId = R.drawable.start_walking_icon
+        startMarker.customImageResourceId =
+            R.drawable.start_walking_icon
         startMarker.setCustomImageAnchor(0.5f, 0.5f)
         startMarker.isCustomImageAutoscale = false
         startMarker.isShowCalloutBalloonOnTouch = false
         mapView!!.addPOIItem(startMarker)
-
-
-        // 경로 사진 캡처 추가
-//        val routeView: View = map_layout
-//        val screenShot: File = ScreenShot
-
     }
-
-//    private fun screenShot(view: View): File {
-//        view.drawingCa
-//    }
 
     // 배변활동 표시
     private fun toiletActivity() {
@@ -126,7 +119,8 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         marker.isShowCalloutBalloonOnTouch = false
         marker.mapPoint = mapPoint
         marker.markerType = MapPOIItem.MarkerType.CustomImage
-        marker.customImageResourceId = R.drawable.toilet_activity
+        marker.customImageResourceId =
+            R.drawable.toilet_activity
         marker.isCustomImageAutoscale = false
         marker.setCustomImageAnchor(0.5f, 1.0f)
         mapView!!.addPOIItem(marker)
@@ -167,16 +161,17 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         val lat = p1!!.mapPointGeoCoord.latitude
         val lon = p1!!.mapPointGeoCoord.longitude
 
+        route.add(arrayListOf(lat, lon))
         if (isPause) {
             val pausePolyline = MapPolyline()
-            pausePolyline.lineColor = Color.argb(200, 243, 136, 71)
+            pausePolyline.lineColor = Color.argb(255, 243, 136, 71)
             pausePolyline.addPoint(mapPoint)
             pausePolyline.addPoint(p1)
             p0!!.addPolyline(pausePolyline)
             isPause = false
         } else {
             val newPolyline = MapPolyline()
-            newPolyline.lineColor = Color.argb(200, 103, 114, 241)
+            newPolyline.lineColor = Color.argb(255, 103, 114, 241)
             if (mapPoint != null) {
                 newPolyline.addPoint(mapPoint)
             }
@@ -231,6 +226,50 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         return meter / 1000
     }
 
+
+    private fun timerSet() {
+        isTimerRunning = !isTimerRunning
+        if (isTimerRunning)
+            startTimer()
+        else
+            pauseTimer()
+    }
+
+    private fun startTimer() {
+        walkingTimer = timer(period = 10) {
+            time++
+            val hour = (time / 144000) % 24 // 1시간
+            val min = (time / 6000) % 60 // 1분
+            val sec = (time / 100) % 60 // 1초
+            val milli = time % 100 // 0.01초
+
+            runOnUiThread {
+                if (min < 10) { // 분
+                    minTextView.text = "0$min"
+                } else {
+                    minTextView.text = "$min"
+                }
+
+                if (sec < 10) { // 초
+                    secTextView.text = "0$sec"
+                } else {
+                    secTextView.text = "$sec"
+                }
+
+                if (milli < 10) {
+                    milliTextView.text = "0$milli"
+                } else {
+                    milliTextView.text = "$milli"
+                }
+            }
+        }
+    }
+
+    private fun pauseTimer() {
+        walkingTimer?.cancel()
+    }
+
+
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
     }
 
@@ -269,6 +308,4 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
     }
 }
-
-
 

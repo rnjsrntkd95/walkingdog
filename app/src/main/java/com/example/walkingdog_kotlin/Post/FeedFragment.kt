@@ -67,7 +67,7 @@ class FeedFragment() : Fragment() {
                 val posts = response.body()?.posts
                 val error = response.body()?.error
                 Log.d("TAG", "error: " + error)
-
+                Log.d("FEEDddd", posts!![0].image[0])
                 posts!!.forEach(fun(element) {
                     feedList.add(FeedContent(element))
                 })

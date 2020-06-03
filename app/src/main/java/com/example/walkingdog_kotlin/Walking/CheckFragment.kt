@@ -14,7 +14,6 @@ import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
-import com.example.walkingdog_kotlin.WalkingActivity
 import kotlinx.android.synthetic.main.fragment_check.*
 import retrofit2.Call
 import retrofit2.Callback

@@ -46,6 +46,14 @@ const walkingSchema = new Schema({
         ref: 'User',
         required: true,
     },
+    route: [{
+        lat: {
+            type: Number,
+        },
+        lon: {
+            type: Number
+        }
+    }]
 });
 
 module.exports = mongoose.model("Walking", walkingSchema);

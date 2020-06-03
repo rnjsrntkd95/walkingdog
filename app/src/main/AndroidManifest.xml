@@ -9,8 +9,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!--위치 정보-->
-    <uses-permission android:name="android.permissio
-    n.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--화면 캡처-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -43,9 +42,9 @@
         <activity android:name=".Account" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Walking.WalkingActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".Walking.WalkingActivity">
+        <activity android:name=".MainActivity">
 
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

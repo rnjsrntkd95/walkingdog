@@ -24,14 +24,18 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var prevLat: Double? = null
     private var prevLon: Double? = null
     private var walkingDistance: Double = 0.0
+    private var walkingCalorie: Double = 0.0
     private var isStart: Boolean = true
     private var isPause: Boolean = false
     private var tapTimer: Timer? = null
     private val route = ArrayList<ArrayList<Double>>()
+    private val toiletLoc = ArrayList<ArrayList<Double>>()
+
 
     private var walkingTimer: Timer? = null
     private var time = 0
     private var isTimerRunning: Boolean = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,10 +77,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
         mapView!!.setMapViewEventListener(this)
         // 현위치 트래킹 모드 ON
-        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
         mapView!!.setZoomLevel(0, true)
         mapView!!.setCustomCurrentLocationMarkerTrackingImage(R.drawable.labrador_icon, MapPOIItem.ImageOffset(50,50))
         mapView!!.setCustomCurrentLocationMarkerImage(R.drawable.labrador_icon, MapPOIItem.ImageOffset(50,50))
+        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+        Log.d("트래킹", mapView!!.currentLocationTrackingMode.toString())
         mapView!!.setCurrentLocationEventListener(this)
         polyline = MapPolyline()
         polyline!!.tag = 1000
@@ -128,6 +133,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         marker.isCustomImageAutoscale = false
         marker.setCustomImageAnchor(0.5f, 1.0f)
         mapView!!.addPOIItem(marker)
+        toiletLoc.add(arrayListOf(marker.mapPoint.mapPointGeoCoord.latitude, marker.mapPoint.mapPointGeoCoord.longitude))
     }
 
     // 위치 권한 설정 확인 함수
@@ -191,14 +197,18 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             return
         } else {
             val distance = haversine(prevLat!!, prevLon!!, lat, lon)
+            // 이동 거리 표시
             walkingDistance += distance
-
             if (walkingDistance < 1000) {
                 distanceId.text = String.format("%.1f", walkingDistance)
             } else {
                 digitId.text = "km"
                 distanceId.text = String.format("%.3f", meterToKillo(walkingDistance))
             }
+            // 소모 칼로리 표시
+            walkingCalorie += distance*0.026785714  // 1m당 소모 칼로리
+            calorieView.text = String.format("%.2f", walkingCalorie)
+
             prevLat = lat
             prevLon = lon
         }
@@ -273,7 +283,6 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         walkingTimer?.cancel()
     }
 
-
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
     }
 
@@ -281,17 +290,6 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
-        val mode = mapView!!.currentLocationTrackingMode
-
-        if (mode.toString() == "TrackingModeOff") {
-            return
-        }
-        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeadingWithoutMapMoving
-
-        tapTimer = timer(period = 10000, initialDelay = 3000) {
-            mapView!!.currentLocationTrackingMode = mode
-            cancel()
-        }
     }
 
     override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
@@ -301,6 +299,20 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
+        if (p0!!.currentLocationTrackingMode.toString() == "TrackingModeOff") {
+            return
+        }
+        p0!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
+
+        if (tapTimer != null) {
+            tapTimer!!.cancel()
+        }
+        tapTimer = timer(period = 3000, initialDelay = 3000) {
+            p0!!.setMapCenterPoint(mapPoint, true)
+            p0!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+
+            cancel()
+        }
     }
 
     override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint?) {

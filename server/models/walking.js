@@ -2,11 +2,15 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const walkingSchema = new Schema({
-    calorie: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
+    calories: [{
+        animal: {
+            type: String,
+        },
+        calorie: {
+            type: Number,
+            default: 0,
+        }
+    }],
     distance: {
         type: Number,
         required: true,
@@ -25,9 +29,15 @@ const walkingSchema = new Schema({
         type: Number,
         required: true,
     },
-    walkingAmount: {
-        type: Number,
-    },
+    walkingAmounts: [{
+        animal: {
+            type: String,
+        },
+        amount: {
+            type: Number,
+            default: 0
+        }
+    }],
     addressAdmin: {
         type: String,
     },

@@ -112,6 +112,10 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         mapView!!.addPOIItem(startMarker)
     }
 
+    private fun submitResult() {
+
+    }
+
     // 배변활동 표시
     private fun toiletActivity() {
         val marker: MapPOIItem = MapPOIItem()
@@ -238,7 +242,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private fun startTimer() {
         walkingTimer = timer(period = 10) {
             time++
-            val hour = (time / 144000) % 24 // 1시간
+//            val hour = (time / 144000) % 24 // 1시간
             val min = (time / 6000) % 60 // 1분
             val sec = (time / 100) % 60 // 1초
             val milli = time % 100 // 0.01초

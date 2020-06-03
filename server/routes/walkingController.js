@@ -7,15 +7,14 @@ const UserChallenge = require('../models/userChallenge');
 
 exports.createWalking = async (req, res, next) => {
     // const userData = req.userToken.id;
-    const calorie = 0;
+    const calories = [{animal: "까까", calorie: 30}, {animal: "브라우니", calorie: 20}];
     const distance = 0;
     const walkingTime = 0;
-    const walkingAmount = 30;
+    const walkingAmounts = [{animal: "까까", amount: 40}, {animal: "브라우니", amount: 50}];
     const addressAdmin = "경기도";
     const addressLocality = "수원시"
     const addressThoroughfare = "연무동"
     const animal = ["까까", "브라우니"];
-    
     const userData = "5eba8b5ca76e3e20f4b0659e";
     const requestFile = req.file;
     let routeImage = "";
@@ -38,11 +37,11 @@ exports.createWalking = async (req, res, next) => {
         const user = await User.findOne({ _id: userData });
         // 새로운 산책 등록
         const walkingRegister = await new Walking({
-            calorie,
+            calories,
             distance,
             routeImage,
             walkingTime,
-            walkingAmount,
+            walkingAmounts,
             addressAdmin,
             addressLocality,
             addressThoroughfare,
@@ -51,7 +50,14 @@ exports.createWalking = async (req, res, next) => {
             route,
         });
         const resultReg = await Walking.create(walkingRegister);
-        console.log(resultReg)
+        console.log(resultReg);
+
+        let recordWalkingAmount = 0;
+
+        walkingAmounts.forEach((walking) => {
+            recordWalkingAmount += walking.amount
+        })
+        recordWalkingAmount / walkingAmounts.length
 
         // 유저가 챌린지에 참여 중이면 기록 갱신
         const challengeList = await UserChallenge.find({ userId: userData });
@@ -64,7 +70,7 @@ exports.createWalking = async (req, res, next) => {
                 const walkingCount = record.walkingCount;
                 const newWalkingCount = walkingCount + 1;
                 const walkingAvg = record.walkingAvg;
-                const newWalkingAvg = (walkingCount * walkingAvg + walkingAmount) / newWalkingCount;
+                const newWalkingAvg = (walkingCount * walkingAvg + recordWalkingAmount) / newWalkingCount;
 
                 await record.updateOne({ $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg }});
             })

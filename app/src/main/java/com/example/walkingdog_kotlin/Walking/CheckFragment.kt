@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
-import com.example.walkingdog_kotlin.WalkingActivity
 import kotlinx.android.synthetic.main.fragment_check.*
 import kotlinx.android.synthetic.main.select_dog_popup.*
 import kotlinx.android.synthetic.main.select_dog_popup.view.*
@@ -41,8 +40,8 @@ class CheckFragment : Fragment() {
     )
 
 
-    var location_weather: String? = null        //현재 위치의 날씨를 저장할 변수
-    var location_temp:String? = null            //현재 위치의 온도를 저장할 변수
+    var location_weather: String? = ""        //현재 위치의 날씨를 저장할 변수
+    var location_temp:String? = ""          //현재 위치의 온도를 저장할 변수
     var test: String? = null
 
 
@@ -55,16 +54,6 @@ class CheckFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
-            R.color.mainBlue
-        ))
-
 
 
         val checkItemAdapter = CheckListAdapter(context!!, checkItemList)
@@ -88,18 +77,23 @@ class CheckFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<WeatherAPIModel>,response: Response<WeatherAPIModel>) {
+//                val fragment = fragmentManager!!.getFragment
+
                 val weather = response.body()?.weather
                 val main = response.body()?.main
 
-                Log.d("TAG", "${weather!![0].main}")
+                Log.d("TAG", weather!![0].main)
 
                 Log.d("TAG", (main!!.temp-273).toString())
 
-                location_weather = "${weather!![0].main}"
-                location_temp = (main!!.temp-273).toInt().toString()
+                location_weather = weather[0].main
+                location_temp = (main.temp-273).toInt().toString()
 
-                weather_tv.text = "${location_weather}"
-                temporature_tv.text =  "${location_temp}"
+                if (weather_tv == null) {
+                    return
+                }
+                weather_tv.text = weather[0].main
+                temporature_tv.text = location_temp
                 location_tv.text = location_addressLocatlity
 
                 when(weather_tv.text?.toString()) {
@@ -184,7 +178,7 @@ class CheckFragment : Fragment() {
                     )
 
                 popup.dismiss()
-        }
+            }
 
             checkItemAdapter.notifyDataSetChanged()
         }
@@ -200,7 +194,7 @@ class CheckFragment : Fragment() {
             val wAlertDialog = wBuilder.show()
 
             val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
-                wDialogView.select_dog_listView.adapter = selectDogAdapter
+            wDialogView.select_dog_listView.adapter = selectDogAdapter
 
             wDialogView.selectDog_popup_delete_btn.setOnClickListener {
                 wAlertDialog.dismiss()
@@ -212,6 +206,18 @@ class CheckFragment : Fragment() {
                 wAlertDialog.dismiss()
             }
         }
+
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
+            R.color.mainBlue
+        ))
+
+
 
     }
 }

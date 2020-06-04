@@ -44,7 +44,6 @@
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".Walking.WalkingActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".WalkingActivity" />
         <activity android:name=".MainActivity">
 
         <intent-filter>

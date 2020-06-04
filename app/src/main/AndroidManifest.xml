@@ -21,6 +21,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".MyChallengeActivity"></activity>
         <activity android:name=".Challenge.Create_ChallengeActivity" />
         <activity android:name=".Post.WritePost" />
         <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:text="@string/next"
+                android:text="맑음"
                 android:layout_weight="1"/>
 
         <TextView

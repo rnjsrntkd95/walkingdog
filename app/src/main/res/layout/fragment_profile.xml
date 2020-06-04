@@ -74,7 +74,6 @@
             android:orientation="horizontal"
             android:layout_below="@+id/profile_name"
             tools:listitem="@layout/add_dog_item"
-
             />
 
 </RelativeLayout>
@@ -185,7 +184,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/account"
+            android:id="@+id/myChallenge_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -200,10 +199,10 @@
                 />
 
         <TextView
-                android:id="@+id/account_text"
+                android:id="@+id/myChallenge_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account"
+                android:text="My Challenge"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
                 android:layout_gravity="center_vertical">
@@ -215,8 +214,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/arrow_right"
-                android:layout_marginLeft="157dp"
-                >
+                android:layout_marginLeft="100dp">
         </ImageView>
 
     </LinearLayout>

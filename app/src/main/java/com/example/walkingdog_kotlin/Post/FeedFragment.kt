@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.map_popup.*
+import kotlinx.android.synthetic.main.map_popup.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -110,6 +113,18 @@ class FeedFragment() : Fragment() {
 //                }
             }
         })
+
+        mapTest_btn.setOnClickListener {
+            val mDialogView = LayoutInflater.from(context).inflate(R.layout.map_popup, null)
+
+            val mBuilder = AlertDialog.Builder(context!!).setView(mDialogView)
+
+            val mAlertDialog = mBuilder.show()
+
+            mDialogView.map_popup_delete_btn.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

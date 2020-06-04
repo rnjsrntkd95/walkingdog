@@ -5,7 +5,8 @@ const Animal = require("../models/animal");
 const UserChallenge = require("../models/userChallenge");
 
 exports.createChallenge = async (req, res, next) => {
-  //const userData = req.userToken.id;
+  console.log(req.body);
+  // const userData = req.userToken.id;
   const userData = req.body.userToken;
   const title = req.body.title;
   const content = req.body.content;
@@ -20,7 +21,6 @@ exports.createChallenge = async (req, res, next) => {
   // const start_date = '2020-05-19';
   // const end_date = "2020-08-01";
   // const userData = '5eba8b5ca76e3e20f4b0659e';
-  console.log(req.body);
   // challenge의 고유 id를 반환해줘야 함.
 
   try {

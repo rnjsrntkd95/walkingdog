@@ -99,23 +99,8 @@ exports.joinChallenge = async (req, res, next) => {
     };
 };
 
+
 exports.searchChallenge = async (req, res, next) => {
-  // res.json({
-  //   challenges: [
-  //     {
-  //       title: "새로운 챌린지",
-  //       content: "챌린지 모여라~",
-  //       population: 50,
-  //       start_date: "2020-06-02",
-  //       end_date: "2020-06-16",
-  //       _id: "5eba8b5ca76e3e20f4b0659e",
-  //     },
-  //   ],
-  //   error: 1,
-  // });
-  try {
-    // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
-    const challenges = await Challenge.find({}).sort("-start_date");
 
     try {
         // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
@@ -128,6 +113,7 @@ exports.searchChallenge = async (req, res, next) => {
 
     };
 };
+
 
 exports.dropChallenge = async (req, res, next) => {
     // const userData = req.userToken.id;

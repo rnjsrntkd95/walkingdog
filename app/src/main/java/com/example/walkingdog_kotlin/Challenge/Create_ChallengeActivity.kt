@@ -2,11 +2,17 @@ package com.example.walkingdog_kotlin.Challenge
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_create__challenge.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -91,14 +97,44 @@ class Create_ChallengeActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 create_challenge_breed_tv.text = breed_spinner.getItemAtPosition(position).toString()
+
             }
 
         }
 
 
         createChallenge_complete_btn.setOnClickListener {
-            Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
-        }
+            var title = challenge_title_edit_tv.text.toString()
+            var content = challenge_content_tv.text.toString()
+            var breed = create_challenge_breed_tv.text.toString()
+            var targetMonth = if(target_month_tv.text.toString().length == 1) "0"+target_month_tv.text.toString() else target_month_tv.text.toString()
+            var targetDate = if(target_date_tv.text.toString().length == 1) "0"+target_date_tv.text.toString() else target_date_tv.text.toString()
+            var today = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+            Log.d("DEBUG", today.toString())
+            Log.d("DEBUG1", now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
+            var target = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
+            Log.d("DEBUG2", target.toString())
 
+            val pref = PreferenceManager.getDefaultSharedPreferences(this)
+            var userToken = pref.getString("token", "5ebac6bd59e3d32080d6d941")
+
+            Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
+            val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
+             challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<ChallengeModel> {
+                override fun onFailure(call: Call<ChallengeModel>, t: Throwable) {
+                    Log.d("DEBUG", "Retrofit Failed!!")
+                    Log.d("DEBUG", t.message)
+                }
+                override fun onResponse(
+                    call: Call<ChallengeModel>,
+                    response: Response<ChallengeModel>
+                ) {
+                    Log.d("DEBUG", "Retrofit Success!!")
+                    val title = response.body()?.title
+                    Log.d("TAG", "title: " + title)
+                }
+            })
+            finish()
+        }
     }
 }

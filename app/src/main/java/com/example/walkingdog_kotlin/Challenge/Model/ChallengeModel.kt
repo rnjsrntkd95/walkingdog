@@ -17,5 +17,6 @@ data class ChallengeModel (
     val start_date: Date,
     val end_date: Date,
     val producer: String,
-    val create_date: Date
+    val create_date: Date,
+    val breed: String
 )

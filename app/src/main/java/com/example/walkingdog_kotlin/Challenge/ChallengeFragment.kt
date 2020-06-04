@@ -74,11 +74,12 @@ class ChallengeFragment(context: Context) : Fragment() {
                 Log.d("DEBUG", " Challenge Retrofit failed!!")
                 Log.d("DEBUG", t.message)
             }
-
             override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
+
                 val challenges = response.body()?.challenges
 
                 challenges!!.forEach(fun(element) {
+                    Log.d("element.title : ", element.title)
                     challengeList.add(Challenge(element))
                 })
                 cAdapter.notifyDataSetChanged()

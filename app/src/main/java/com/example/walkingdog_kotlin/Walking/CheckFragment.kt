@@ -14,7 +14,12 @@ import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
+import com.example.walkingdog_kotlin.Walking.Model.SelectDog
+import com.example.walkingdog_kotlin.WalkingActivity
 import kotlinx.android.synthetic.main.fragment_check.*
+import kotlinx.android.synthetic.main.select_dog_popup.*
+import kotlinx.android.synthetic.main.select_dog_popup.view.*
+import kotlinx.android.synthetic.main.select_dog_popup.view.select_dog_listView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +32,19 @@ class CheckFragment : Fragment() {
         CheckItem("입마개"),
         CheckItem("배변봉투")
     )
+
+    var selectDogList : ArrayList<SelectDog> = arrayListOf(
+        SelectDog("뽀삐"),
+        SelectDog("금강이"),
+        SelectDog("부가티"),
+        SelectDog("레오")
+    )
+
+
+    var location_weather: String? = null        //현재 위치의 날씨를 저장할 변수
+    var location_temp:String? = null            //현재 위치의 온도를 저장할 변수
+    var test: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,18 +65,19 @@ class CheckFragment : Fragment() {
             R.color.mainBlue
         ))
 
-        val checkItemAdapter =
-            CheckListAdapter(
-                context!!,
-                checkItemList
-            )
+
+
+        val checkItemAdapter = CheckListAdapter(context!!, checkItemList)
         checkListView.adapter = checkItemAdapter
 
         val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
         val lat: String? = pref.getString("latitude", "0")
         val lon: String? = pref.getString("longitude", "0")
+        Log.d("location", lat+"  "+lon)
         val appid: String = getString(R.string.openwheather_api_key)
+
+        var location_addressLocatlity:String? = pref.getString("addressLocality", "대한민국")//현재 위치의 도시를 저장
 
         // 날씨 받아오는 Retrofit
         val weatherRetrofit = WeatherRetrofitCreators().WeatherRetrofitCreator()
@@ -70,12 +89,47 @@ class CheckFragment : Fragment() {
 
             override fun onResponse(call: Call<WeatherAPIModel>,response: Response<WeatherAPIModel>) {
                 val weather = response.body()?.weather
+                val main = response.body()?.main
+
                 Log.d("TAG", "${weather!![0].main}")
+
+                Log.d("TAG", (main!!.temp-273).toString())
+
+                location_weather = "${weather!![0].main}"
+                location_temp = (main!!.temp-273).toInt().toString()
+
+                weather_tv.text = "${location_weather}"
+                temporature_tv.text =  "${location_temp}"
+                location_tv.text = location_addressLocatlity
+
+                when(weather_tv.text?.toString()) {
+                    "Thunderstorm" -> {
+                        weather_img.setImageResource(R.drawable.thunderstorm)
+                        weather_tv.text = "낙뢰"
+                    }
+                    "Rain" -> {
+                        weather_img.setImageResource(R.drawable.rain)
+                        weather_tv.text ="비"
+                    }
+                    "Snow" -> {
+                        weather_img.setImageResource(R.drawable.snow)
+                        weather_tv.text ="눈"
+                    }
+                    "Clear" -> {
+                        weather_img.setImageResource(R.drawable.clear)
+                        weather_tv.text ="맑음"
+                    }
+                    "Clouds" -> {
+                        weather_img.setImageResource(R.drawable.cloud)
+                        weather_tv.text = "흐림"
+                    }
+                    else -> {
+                        weather_img.setImageResource(R.drawable.mist)
+                        weather_tv.text = "안개"
+                    }
+                }
             }
         })
-
-
-
 
         //체크리스트 목록을 삭제하는 함수
         sub_item_btn.setOnClickListener {
@@ -130,16 +184,33 @@ class CheckFragment : Fragment() {
                     )
 
                 popup.dismiss()
-            }
+        }
 
             checkItemAdapter.notifyDataSetChanged()
         }
 
 
+
         //산책측정 액티비티로 넘어가는 함수
         switch_btn_to_walking.setOnClickListener {
-            var intent = Intent(context, WalkingActivity::class.java)
-            startActivity(intent)
+            val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
+
+            val wBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!).setView(wDialogView)
+
+            val wAlertDialog = wBuilder.show()
+
+            val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
+                wDialogView.select_dog_listView.adapter = selectDogAdapter
+
+            wDialogView.selectDog_popup_delete_btn.setOnClickListener {
+                wAlertDialog.dismiss()
+            }
+
+            wDialogView.selectDog_popup_complete_btn.setOnClickListener {
+                var intent = Intent(context, WalkingActivity::class.java)
+                startActivity(intent)
+                wAlertDialog.dismiss()
+            }
         }
 
     }

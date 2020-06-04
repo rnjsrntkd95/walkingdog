@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             R.id.action_challenge -> {
                 var challengeFragment =
-                    ChallengeFragment(
-                        this
-                    )
+                    ChallengeFragment(this)
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, challengeFragment)
                     .commit()
             }

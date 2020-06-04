@@ -18,15 +18,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 
-                <ImageView
-                        android:id="@+id/drawerMenu_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/list"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:backgroundTint="@color/mainGray"
-                        android:layout_marginLeft="20dp"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -36,6 +27,7 @@
                         android:layout_centerInParent="true"/>
 
                 <ImageView
+                        android:id="@+id/create_challenge"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/write_icon2"
@@ -47,6 +39,7 @@
             </RelativeLayout>
             <!--인기 챌린지 항목-->
             <RelativeLayout
+                    android:id="@+id/popular_challenge_content_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/popular_challenge_title_layout"
@@ -68,6 +61,7 @@
                         android:textStyle="bold"/>
 
                 <TextView
+                        android:id="@+id/popular_challenge_content_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="사랑하는 반려견을 위해 한 달 동안 꾸준한 산책을 해보세요!"
@@ -97,6 +91,7 @@
                         android:text="기간:"/>
 
                 <TextView
+                        android:id="@+id/challenge_period"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Post.WritePost"
+        android:orientation="vertical">
+
+    <RelativeLayout
+            android:id="@+id/topAppbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/weather_bar_shape"
+            android:layout_alignParentTop="true">
+
+        <ImageView
+                android:id="@+id/writePost_back_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/back_arrow"
+                android:layout_marginLeft="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새 게시물"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:id="@+id/wPost_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/topAppbar_layout">
+
+        <RelativeLayout
+                android:id="@+id/imageUpload_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="20dp">
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/image_plus"
+                    android:backgroundTint="@color/mainGray"
+                    android:layout_centerInParent="true"/>
+
+            <ImageView
+                    android:id="@+id/writePost_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/mainGray">
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/wirteComment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:padding="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="문구 입력..."
+                    android:background="@null">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/mainGray">
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center">
+
+            <Button
+                    android:id="@+id/complete_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btn_shape"
+                    android:text="완료"
+                    android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

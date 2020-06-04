@@ -53,9 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/profile_image"
-            android:layout_marginTop="15dp"
-
-        >
+            android:layout_marginTop="15dp">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +74,6 @@
             android:orientation="horizontal"
             android:layout_below="@+id/profile_name"
             tools:listitem="@layout/add_dog_item"
-
             />
 
 </RelativeLayout>
@@ -88,7 +85,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/profile_bottom"
         android:layout_below="@+id/profile_top"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
     <LinearLayout
@@ -187,7 +184,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/account"
+            android:id="@+id/myChallenge_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -202,10 +199,10 @@
                 />
 
         <TextView
-                android:id="@+id/account_text"
+                android:id="@+id/myChallenge_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account"
+                android:text="My Challenge"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
                 android:layout_gravity="center_vertical">
@@ -217,8 +214,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/arrow_right"
-                android:layout_marginLeft="157dp"
-                >
+                android:layout_marginLeft="100dp">
         </ImageView>
 
     </LinearLayout>
@@ -240,6 +236,7 @@
             android:layout_weight="1">
 
         <ImageView
+                android:id="@+id/settings_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/cogwheel"

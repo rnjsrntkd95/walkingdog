@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_entries2">
+        <item >모두 참여</item>
+        <item >요크셔테리어</item>
+        <item >말티즈</item>
+        <item >도베르만</item>
+        <item>푸들</item>
+    </string-array>
+</resources>

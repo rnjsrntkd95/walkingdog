@@ -14,6 +14,7 @@ class MyPhotoActivity : AppCompatActivity() {
         ,MyFeedDTO("제목2","pets")
         , MyFeedDTO("제목1","pets")
         ,MyFeedDTO("제목2","pets")
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +27,6 @@ class MyPhotoActivity : AppCompatActivity() {
         val lm = LinearLayoutManager(this)
         myfeed_recyclerView.layoutManager = lm
         myfeed_recyclerView.setHasFixedSize(true)
-
-
 
     }
 }

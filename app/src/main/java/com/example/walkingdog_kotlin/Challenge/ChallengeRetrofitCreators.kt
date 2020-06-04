@@ -8,8 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ChallengeRetrofitCreators(val context: Context) {
 
-    val serverUrl = context.getString(R.string.server_url)
-
+//    context.getString(R.string.server_url)
+    val serverUrl = "http://10.0.2.2:3000/"
     fun ChallengeRetrofitCreator(): ChallengeRetrofit {
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 

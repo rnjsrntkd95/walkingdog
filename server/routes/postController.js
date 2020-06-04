@@ -1,8 +1,7 @@
-const User = require('../models/user');
-const Animal = require('../models/animal');
-const Walking = require('../models/walking');
-const Post = require('../models/post');
-
+const User = require("../models/user");
+const Animal = require("../models/animal");
+const Walking = require("../models/walking");
+const Post = require("../models/post");
 
 // create: 새로운 게시글 등록
 exports.createPost = async (req, res, next) => {
@@ -22,10 +21,11 @@ exports.createPost = async (req, res, next) => {
             image.push(file.path.replace('public\\', ''))
         }
     }
+  }
 
-    try {
-        const user = await User.findOne({ _id: userData });
-        const walking = await Walking.findOne({ _id: walkingId });
+  try {
+    const user = await User.findOne({ _id: userData });
+    const walking = await Walking.findOne({ _id: walkingId });
 
         const postRegister = new Post({
             content,
@@ -42,17 +42,15 @@ exports.createPost = async (req, res, next) => {
             nickname: user.nickname,
         });
 
-        const resultReg = await Post.create(postRegister);
-        console.log(resultReg);
+    const resultReg = await Post.create(postRegister);
+    console.log(resultReg);
 
-        res.json({});
-
-    } catch (err) {
-        console.log(err);
-        res.json({ error: 1 });
-    }
-}
-
+    res.json({});
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
+};
 
 // 유저의 타임라인 조회
 exports.timeline = async (req, res, next) => {
@@ -92,4 +90,8 @@ exports.timeline = async (req, res, next) => {
         console.log(err);
         res.json({ error: 1 });
     }
-}
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
+};

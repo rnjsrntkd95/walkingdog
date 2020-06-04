@@ -50,6 +50,7 @@
                     android:textStyle="bold"/>
             
             <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/challenge_title_edit_tv"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="제목 입력..."
@@ -75,6 +76,7 @@
                     android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/challenge_content_tv"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:hint="내용 입력..."

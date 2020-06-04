@@ -44,7 +44,6 @@ exports.createPost = async (req, res, next) => {
       user,
       nickname: user.nickname,
     });
-
     const resultReg = await Post.create(postRegister);
     console.log(resultReg);
 

@@ -34,6 +34,10 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
             }
 
+            settings.setOnClickListener {
+                val intent =Intent(context,Settings::class.java)
+                startActivity(intent)
+            }
         }
     }
 

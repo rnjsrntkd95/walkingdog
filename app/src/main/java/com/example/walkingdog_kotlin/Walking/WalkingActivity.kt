@@ -6,17 +6,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
 import net.daum.mf.map.api.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import kotlin.concurrent.timer
 import kotlin.math.*
 
 class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListener,
-    MapView.MapViewEventListener {
+    MapView.MapViewEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
     private val RequestPermissionCode = 1
     private var mapView: MapView? = null
     private var polyline: MapPolyline? = null
@@ -30,13 +35,15 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var tapTimer: Timer? = null
     private val route = ArrayList<ArrayList<Double>>()
     private val toiletLoc = ArrayList<ArrayList<Double>>()
-
-
+    private val walkingAmounts = ArrayList<Double>()
     private var walkingTimer: Timer? = null
     private var time = 0
     private var isTimerRunning: Boolean = false
-
-
+    private var getAddress: Boolean = false
+    private var addressAdmin: String = ""
+    private var addressLocality: String = ""
+    private var addressThoroughfare: String = ""
+    private var animal = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +60,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             timerSet()
             pauseWalking()
             finishWalking()
+            submitResult()
         }
         camera_btn.setOnClickListener {
             timerSet()
@@ -66,6 +74,14 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
 
+    fun findAddress() {
+        val mapReverseGeoCoder =
+            MapReverseGeoCoder(getString(R.string.kakao_app_key), mapPoint, this, this)
+
+        mapReverseGeoCoder.startFindingAddress()
+    }
+
+
     // 카카오맵 연결
     private fun initView() {
         // 위치 권한 설정 확인
@@ -78,9 +94,16 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         mapView!!.setMapViewEventListener(this)
         // 현위치 트래킹 모드 ON
         mapView!!.setZoomLevel(0, true)
-        mapView!!.setCustomCurrentLocationMarkerTrackingImage(R.drawable.labrador_icon, MapPOIItem.ImageOffset(50,50))
-        mapView!!.setCustomCurrentLocationMarkerImage(R.drawable.labrador_icon, MapPOIItem.ImageOffset(50,50))
-        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+        mapView!!.setCustomCurrentLocationMarkerTrackingImage(
+            R.drawable.labrador_icon,
+            MapPOIItem.ImageOffset(50, 50)
+        )
+        mapView!!.setCustomCurrentLocationMarkerImage(
+            R.drawable.labrador_icon,
+            MapPOIItem.ImageOffset(50, 50)
+        )
+        mapView!!.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
         Log.d("트래킹", mapView!!.currentLocationTrackingMode.toString())
         mapView!!.setCurrentLocationEventListener(this)
         polyline = MapPolyline()
@@ -93,9 +116,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
         isPause = true
     }
+
     // 재시작
     private fun restartWalking() {
-        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+        mapView!!.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
     }
 
     // 산책 종료
@@ -118,7 +143,27 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     private fun submitResult() {
+        val pref = getSharedPreferences("pref", MODE_PRIVATE)
+        val userToken = pref.getString("userToken", "")
+        val walkingRetrofit = WalkingRetrofitCreators(this).WalkingRetrofitCreator()
+        walkingRetrofit.createWalking(userToken!!, walkingCalorie, walkingDistance, time, walkingAmounts,
+        addressAdmin, addressLocality, addressThoroughfare, animal, route, toiletLoc).enqueue(object : Callback<CreateWalkingResultModel> {
+            override fun onFailure(call: Call<CreateWalkingResultModel>, t: Throwable) {
+                Log.d("DEBUG", " Walking Retrofit failed!!")
+                Log.d("DEBUG", t.message)
+                Toast.makeText(this@WalkingActivity, "산책 등록에 실패하였습니다. 네트워크를 확인해주세요.", Toast.LENGTH_LONG).show()
+            }
 
+            override fun onResponse(call: Call<CreateWalkingResultModel>, response: Response<CreateWalkingResultModel>) {
+                val error = response.body()!!.error
+                Log.d("ERROR", error.toString())
+
+                // 등록에 실패했을 때 후 처리
+
+                // 산책 등록 후 처리 - 액티비티 이동
+
+            }
+        })
     }
 
     // 배변활동 표시
@@ -133,7 +178,12 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         marker.isCustomImageAutoscale = false
         marker.setCustomImageAnchor(0.5f, 1.0f)
         mapView!!.addPOIItem(marker)
-        toiletLoc.add(arrayListOf(marker.mapPoint.mapPointGeoCoord.latitude, marker.mapPoint.mapPointGeoCoord.longitude))
+        toiletLoc.add(
+            arrayListOf(
+                marker.mapPoint.mapPointGeoCoord.latitude,
+                marker.mapPoint.mapPointGeoCoord.longitude
+            )
+        )
     }
 
     // 위치 권한 설정 확인 함수
@@ -165,7 +215,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     override fun onCurrentLocationUpdate(p0: MapView?, p1: MapPoint?, p2: Float) {
-        if (!isStart){
+        if (!isStart) {
             return
         }
         val lat = p1!!.mapPointGeoCoord.latitude
@@ -206,13 +256,18 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
                 distanceId.text = String.format("%.3f", meterToKillo(walkingDistance))
             }
             // 소모 칼로리 표시
-            walkingCalorie += distance*0.026785714  // 1m당 소모 칼로리
+            walkingCalorie += distance * 0.026785714  // 1m당 소모 칼로리
             calorieView.text = String.format("%.2f", walkingCalorie)
 
             prevLat = lat
             prevLon = lon
         }
         Log.d("DISTANCE", walkingDistance.toString())
+
+        // 변환 주소 가져오기
+        if (!getAddress) {
+            findAddress()
+        }
     }
 
     override fun onCurrentLocationUpdateCancelled(p0: MapView?) {
@@ -224,16 +279,16 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
 
     // 위도, 경도를 거리로 변환 - 리턴 값: Meter 단위
-    private fun haversine (lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+    private fun haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val r = 6372.8;
         val dLat = Math.toRadians(lat2 - lat1);
         val dLon = Math.toRadians(lon2 - lon1);
         val rLat1 = Math.toRadians(lat1);
         val rLat2 = Math.toRadians(lat2);
         var dist = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(rLat1) * cos(rLat2);
-        dist =  2 * asin(sqrt(dist))
+        dist = 2 * asin(sqrt(dist))
 
-        return  r * dist * 1000
+        return r * dist * 1000
     }
 
     private fun meterToKillo(meter: Double): Double {
@@ -302,14 +357,16 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         if (p0!!.currentLocationTrackingMode.toString() == "TrackingModeOff") {
             return
         }
-        p0!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
+        p0!!.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
 
         if (tapTimer != null) {
             tapTimer!!.cancel()
         }
         tapTimer = timer(period = 3000, initialDelay = 3000) {
             p0!!.setMapCenterPoint(mapPoint, true)
-            p0!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+            p0!!.currentLocationTrackingMode =
+                MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
 
             cancel()
         }
@@ -323,5 +380,22 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
     override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
     }
-}
 
+    override fun onReverseGeoCoderFailedToFindAddress(p0: MapReverseGeoCoder?) {
+    }
+
+    override fun onReverseGeoCoderFoundAddress(p0: MapReverseGeoCoder?, p1: String?) {
+        getAddress = true
+        val address = p1!!.split(" ")
+        addressAdmin = address[0]
+        addressLocality = address[1]
+        addressThoroughfare = address[2]
+        val pref = getSharedPreferences("pref", MODE_PRIVATE)
+        val edit = pref.edit()
+        edit.putString("addressAdmin", address[0])
+        edit.putString("addressLocality", address[1])
+        edit.putString("addressThoroughfare", address[2])
+        edit.apply()
+    }
+
+}

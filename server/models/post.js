@@ -29,10 +29,8 @@ const postSchema = new Schema({
         required: true,
         default: 0,
     },
-    routeImage: {
+    walkingId: {
         type: String,
-        // type: Buffer,
-        // contentsType: String,
     },
     walkingTime: {
         type: Number,

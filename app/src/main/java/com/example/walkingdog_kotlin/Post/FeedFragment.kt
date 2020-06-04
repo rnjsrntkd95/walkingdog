@@ -67,29 +67,10 @@ class FeedFragment() : Fragment() {
                 val posts = response.body()?.posts
                 val error = response.body()?.error
                 Log.d("TAG", "error: " + error)
-                Log.d("FEEDddd", posts!![0].image[0])
                 posts!!.forEach(fun(element) {
                     feedList.add(FeedContent(element))
                 })
                 fAdapter.notifyDataSetChanged()
-
-//                locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-//                val locationManager: LocationManager = context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-
-//                val lm: LocationManager = context!!.getSystemService(LOCATION_SERVICE) as LocationManager
-//
-//                var location: Location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-//                if (location == null) {
-//                    location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-//                }
-//                if (location != null) {
-//                    val provider: String = location.getProvider()
-//                    val longitude: Double = location.longitude
-//                    val latitude: Double = location.latitude
-//
-//                    Log.d("TAG", "$longitude, $latitude")
-//                }
             }
         })
     }

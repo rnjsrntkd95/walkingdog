@@ -9,7 +9,7 @@ exports.createChallenge = async (req, res, next) => {
     // const title = req.body.title;
     // const populationLimit = req.body.populationLimit;
     // const endDate = req.body.endDate;
-    
+
     const title = "새로운 챌린지";
     const content = "챌린지 모여라~";
     const populationLimit = 50;
@@ -36,7 +36,7 @@ exports.createChallenge = async (req, res, next) => {
         });
 
         const resultReg = await UserChallenge.create(connection);
-        
+
         res.json({});
     } catch (err) {
         console.log(err);
@@ -52,27 +52,33 @@ exports.joinChallenge = async (req, res, next) => {
     const challengeId = '5ec28c44abe2802874204a43';
     try {
         const user = await User.findOne({ _id: userData });
-        // 같은 챌린지 중복 참여 방지
-        const checkingOverlap = await UserChallenge.find({ userId: user._id, challengeId: challengeId});
-        if (checkingOverlap.length === 0) {
-            const challenge = await Challenge.findOneAndUpdate({ _id: challengeId }, {$inc: { population: 1 }}, { new: true });
-
-            const join = await new UserChallenge({
-                userId: user._id,
-                challengeId: challenge._id,
-            })
-            const resultJoin = await UserChallenge.create(join);
-    
-            const newRecord = await Record({
-                user,
-                challenge,
-                challengeTitle: challenge.title,
-            })
-            const resultNewRecord = await Record.create(newRecord);
-    
-            res.json({});
+        // 이미 가입된 챌린지가 있는지 확인
+        const alreadyJoin = await UserChallenge.findOne({ userId: user._id });
+        if (alreadyJoin) {
+            res.json({ error: 3, challengeId: alreadyJoin.challengeId});
         } else {
-            res.json({ error: 2, msg: '이미 가입된 챌린지입니다.'});
+            // 같은 챌린지 중복 참여 방지
+            const checkingOverlap = await UserChallenge.find({ userId: user._id, challengeId: challengeId });
+            if (checkingOverlap.length === 0) {
+                const challenge = await Challenge.findOneAndUpdate({ _id: challengeId }, { $inc: { population: 1 } }, { new: true });
+
+                const join = await new UserChallenge({
+                    userId: user._id,
+                    challengeId: challenge._id,
+                })
+                const resultJoin = await UserChallenge.create(join);
+
+                const newRecord = await Record({
+                    user,
+                    challenge,
+                    challengeTitle: challenge.title,
+                })
+                const resultNewRecord = await Record.create(newRecord);
+
+                res.json({});
+            } else {
+                res.json({ error: 2, msg: '이미 가입된 챌린지입니다.' });
+            }
         }
     } catch (err) {
         console.log(err);
@@ -85,11 +91,11 @@ exports.searchChallenge = async (req, res, next) => {
     try {
         // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
         const challenges = await Challenge.find({}).sort('-start_date');
-        
+
         res.json({ challenges });
     } catch (err) {
         console.log(err);
-        res.json({ error : 1 });
+        res.json({ error: 1 });
 
     };
 };
@@ -101,12 +107,26 @@ exports.dropChallenge = async (req, res, next) => {
     const userData = '5eba8b5ca76e3e20f4b0659e';
     const challengeId = '5ec28c44abe2802874204a43';
     try {
-        const challenge = await Challenge.findByIdAndUpdate({ _id: challengeId }, { $inc: { population: -1 }});
+        const challenge = await Challenge.findByIdAndUpdate({ _id: challengeId }, { $inc: { population: -1 } });
         await UserChallenge.findOneAndDelete({ userId: userData, challengeId });
         await Record.findOneAndDelete({ user: userData, challenge: challengeId });
         res.json({});
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });
-    }; 
+    };
 };
+
+exports.InfoChallenge = async (req, res, next) => {
+    // const userData = req.userToken.id;
+    // const challengeId = req.body.challengeId;
+
+    try {
+        const challenge = await Challenge.find({ _id: challengeId});
+        const records = await Record.find({ challenge: challengeId }).sort({ "score": -1 });
+        res.json({ records, challenge });
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    }
+}

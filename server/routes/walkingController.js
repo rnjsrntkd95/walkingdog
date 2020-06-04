@@ -6,40 +6,46 @@ const UserChallenge = require('../models/userChallenge');
 
 
 exports.createWalking = async (req, res, next) => {
+    console.log(req.body)
     // const userData = req.userToken.id;
-    const calories = [{animal: "까까", calorie: 30}, {animal: "브라우니", calorie: 20}];
+    const calorie = 0;
     const distance = 0;
     const walkingTime = 0;
-    const walkingAmounts = [{animal: "까까", amount: 40}, {animal: "브라우니", amount: 50}];
+    const walkingAmounts = [];
     const addressAdmin = "경기도";
     const addressLocality = "수원시"
     const addressThoroughfare = "연무동"
     const animal = ["까까", "브라우니"];
     const userData = "5eba8b5ca76e3e20f4b0659e";
-    const requestFile = req.file;
+    // const requestFile = req.file;
     let routeImage = "";
-    let route = []
-    const requestRoute = [[123.123, 123.555], [11.22231, 451.222]]
+    let route = [];
+    const requestWalkingAmounts = [40, 50];
+    const requestRoute = [[123.123, 123.555], [11.22231, 451.222]];
+    const toiletLoc = [[123.123, 123.555], [11.22231, 451.222]];
 
-    // 산책로 Image 처리
-    if (!requestFile) {
-        routeImage = 'uploads\\default.jpg'
-    } else {
-        routeImage = requestFile.path.replace('public\\', '');
-    };
 
     // 산책 경로 위도, 경도 후처리
     requestRoute.forEach((loc) => {
-        route.push({lat: loc[0], lon: loc[1]})
+        route.push({lat: loc[0], lon: loc[1]});
     })
+    
+    // 배변 활동 좌표 위도, 경도 후처리
+    toiletLoc.forEach((loc) => {
+        route.push({lat: loc[0], lon: loc[1]});
+    })
+
+    // 산책량(%) 후처리
+    for (wa in requestWalkingAmounts) {
+        walkingAmounts.push({ animal: animal[wa], amount: requestWalkingAmounts[wa]});
+    }
 
     try {
         const user = await User.findOne({ _id: userData });
         // 새로운 산책 등록
         const walkingRegister = await new Walking({
-            calories,
+            calorie,
             distance,
-            routeImage,
             walkingTime,
             walkingAmounts,
             addressAdmin,
@@ -48,6 +54,7 @@ exports.createWalking = async (req, res, next) => {
             animal,
             user,
             route,
+            toiletLoc,
         });
         const resultReg = await Walking.create(walkingRegister);
         console.log(resultReg);
@@ -70,9 +77,11 @@ exports.createWalking = async (req, res, next) => {
                 const walkingCount = record.walkingCount;
                 const newWalkingCount = walkingCount + 1;
                 const walkingAvg = record.walkingAvg;
+                const score = record.score;
+                score += 75 + walkingAvg;
                 const newWalkingAvg = (walkingCount * walkingAvg + recordWalkingAmount) / newWalkingCount;
 
-                await record.updateOne({ $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg }});
+                await record.updateOne({ $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg, score: score }});
             })
         };
 

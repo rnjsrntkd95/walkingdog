@@ -10,12 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class WalkingRetrofitCreators(val context: Context) {
 
     val serverUrl = context.getString(R.string.server_url)
-    val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
     fun WalkingRetrofitCreator(): WalkingRetrofit {
         val retrofit = Retrofit.Builder()
             .baseUrl(serverUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val walkingRetrofit = retrofit.create(WalkingRetrofit::class.java)

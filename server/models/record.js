@@ -10,6 +10,10 @@ const recordSchema = new Schema({
         type: Number,
         default: 0,
     },
+    score: {
+        type: Number,
+        dafault: 0
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

@@ -2,32 +2,21 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const walkingSchema = new Schema({
-    calories: [{
-        animal: {
-            type: String,
-        },
-        calorie: {
-            type: Number,
-            default: 0,
-        }
-    }],
+    calories: {
+        type: Number,
+        default: 0
+    },
     distance: {
         type: Number,
-        required: true,
         default: 0,
     },
     date: {
         type: Date,
         default: Date.now,
     },
-    routeImage: {
-        type: String,
-        // type: Buffer,
-        // contentsType: String,
-    },
     walkingTime: {
         type: Number,
-        required: true,
+        default: 0
     },
     walkingAmounts: [{
         animal: {
@@ -57,6 +46,14 @@ const walkingSchema = new Schema({
         required: true,
     },
     route: [{
+        lat: {
+            type: Number,
+        },
+        lon: {
+            type: Number
+        }
+    }],
+    toiletLoc: [{
         lat: {
             type: Number,
         },

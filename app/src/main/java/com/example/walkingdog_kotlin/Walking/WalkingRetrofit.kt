@@ -1,15 +1,22 @@
 package com.example.walkingdog_kotlin.Walking
 
+import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface WalkingRetrofit {
-//    @POST("/walking/create")
-//    fun createWalking(@Query("addressAdmin") addressAdmin: String,
-//                    @Query("addressLocality") addressLocality: String,
-//                    @Query("addressThoroughfare") addressThoroughfare: String,
-//                    @Query("userToken") userToken: String): Call<Walking>
-
+    @FormUrlEncoded
+    @POST("/walking/create")
+    fun createWalking(@Field("userToken") userToken: String,
+                      @Field("calorie") calorie: Double,
+                      @Field("distance") distance: Double,
+                      @Field("walkingTime") walkingTime: Int,
+                      @Field("walkingAmounts") walkingAmounts: ArrayList<Double>,
+                      @Field("addressAdmin") addressAdmin: String,
+                      @Field("addressLocality") addressLocality: String,
+                      @Field("addressThoroughfare") addressThoroughfare: String,
+                      @Field("animal") animal: ArrayList<String>,
+                      @Field("route") route: ArrayList<ArrayList<Double>>,
+                      @Field("toiletLoc") toiletLoc: ArrayList<ArrayList<Double>>
+    ): Call<CreateWalkingResultModel>
 }

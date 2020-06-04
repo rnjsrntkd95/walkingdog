@@ -61,7 +61,7 @@ class SessionCallback(val context: Context) : ISessionCallback {
                             val pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE)
                             val edit = pref.edit()
                             edit.putString("userToken", token)
-                            edit.commit()
+                            edit.apply()
 
                             if (nickname != null) {
                                 val intent = Intent(context, MainActivity::class.java)

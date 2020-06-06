@@ -90,3 +90,25 @@ exports.timeline = async (req, res, next) => {
         res.json({ error: 1 });
     }
 }
+
+exports.deletePost = async (req, res, next) => {
+    // const userToken = req.userToken.id;
+    const postId = req.body.postId;
+    const userToken = "5eba8b5ca76e3e20f4b0659e"
+    
+
+    try {
+        const user =  await User.findOne({ _id: userToken });
+        if (!user) {
+            res.json({ error: -1 });
+        } else {
+            const regDelete = await Post.deleteOne({ _id: postId, user: user._id });
+            console.log(regDelete);
+            res.json({});
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    };
+}

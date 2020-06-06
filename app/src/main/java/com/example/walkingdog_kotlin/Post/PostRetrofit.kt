@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin.Post
 
+import com.example.walkingdog_kotlin.Post.Model.DeletePostModel
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.Post.Model.PostModel
 import com.example.walkingdog_kotlin.Post.Model.RouteModel
@@ -20,6 +21,10 @@ interface PostRetrofit {
     fun createPost(@Field("comment") comment: String,
                    @Field("userToken") userToken: String,
                    @Field("image") image: Unit): Call<PostModel>
+
+    @DELETE("post/delete")
+    fun deletePost(@Field("userToken") userToken: String,
+                   @Field("postId") postId: String): Call<DeletePostModel>
 
 
 

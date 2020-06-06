@@ -86,7 +86,7 @@ exports.createWalking = async (req, res, next) => {
             })
         };
 
-        res.json({});
+        res.json({ walkingId: resultReg._id});
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });

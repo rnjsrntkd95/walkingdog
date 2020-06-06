@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.walkingdog_kotlin.Post.Model.DeletePostModel
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.RouteModel
 import com.example.walkingdog_kotlin.R
@@ -140,6 +141,19 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
                         finishMarker.isShowCalloutBalloonOnTouch = false
                         mapView!!.addPOIItem(finishMarker)
 
+                        // 배변 활동 마커
+                        val toiletMarker: MapPOIItem = MapPOIItem()
+                        toiletMarker.itemName = ""
+                        toiletMarker.isShowCalloutBalloonOnTouch = false
+                        toiletMarker.markerType = MapPOIItem.MarkerType.CustomImage
+                        toiletMarker.customImageResourceId =
+                            R.drawable.toilet_activity
+                        toiletMarker.setCustomImageAnchor(0.5f, 1.0f)
+                        toiletLoc!!.forEach(fun(loc) {
+                            toiletMarker.mapPoint = MapPoint.mapPointWithGeoCoord(loc.lat.toDouble(), loc.lon.toDouble() )
+                            mapView!!.addPOIItem(toiletMarker)
+                        })
+
                         // 화면 중앙 정렬
                         val mapPointBounds = MapPointBounds(polyline.mapPoints)
                         mapView!!.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, 100))
@@ -149,6 +163,22 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
                 })
             }
         }
+    }
+
+    fun deletePost(postId: String) {
+        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userToken = pref.getString("userToken", "")
+        val deletePostRetrofit = PostRetrofitCreators(context).PostRetrofitCreator()
+        deletePostRetrofit.deletePost(userToken!!, postId).enqueue(object : Callback<DeletePostModel> {
+            override fun onFailure(call: Call<DeletePostModel>, t: Throwable) {
+                Log.d("DEBUG", " Delete Post Retrofit failed!!")
+                Log.d("DEBUG", t.message)
+            }
+            override fun onResponse(call: Call<DeletePostModel>, response: Response<DeletePostModel>) {
+                val error = response.body()?.error
+                Log.d("ERROR", "$error")
+            }
+        })
     }
 
 

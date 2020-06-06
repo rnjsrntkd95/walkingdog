@@ -44,11 +44,16 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var addressLocality: String = ""
     private var addressThoroughfare: String = ""
     private var animal = ArrayList<String>()
+    private var fullAmount = ArrayList<Double>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walking)
-
+        animal = intent.getStringArrayListExtra("animalName")
+        val weights = intent.getDoubleArrayExtra("animalWeight")
+        weights.forEach(fun(weight) {
+            fullAmount.add(((weight*30)+70)*1.4)
+        })
         // 현재 위치
         initView()
 
@@ -140,6 +145,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         startMarker.isCustomImageAutoscale = false
         startMarker.isShowCalloutBalloonOnTouch = false
         mapView!!.addPOIItem(startMarker)
+
+        // 산책 충족량 확인
+        fullAmount.forEach(fun(amount) {
+            walkingAmounts.add((walkingCalorie / amount) * 100)
+        })
     }
 
     private fun submitResult() {
@@ -155,7 +165,8 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             }
 
             override fun onResponse(call: Call<CreateWalkingResultModel>, response: Response<CreateWalkingResultModel>) {
-                val error = response.body()!!.error
+                val error = response.body()?.error
+                val walkingId = response.body()?.walkingId
                 Log.d("ERROR", error.toString())
 
                 // 등록에 실패했을 때 후 처리

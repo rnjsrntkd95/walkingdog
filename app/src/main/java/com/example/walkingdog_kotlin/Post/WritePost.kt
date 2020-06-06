@@ -38,7 +38,6 @@ class WritePost : AppCompatActivity() {
     )
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
@@ -59,8 +58,6 @@ class WritePost : AppCompatActivity() {
         }
 
 
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,7 +71,7 @@ class WritePost : AppCompatActivity() {
         image_recycler_view.setHasFixedSize(true)
 
 
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
 
             // 만약 여러 장의 이미지를 선택했을 경우
             if (data?.getClipData() != null) {
@@ -118,14 +115,14 @@ class WritePost : AppCompatActivity() {
 //            startActivityForResult(intent, REQUEST_CODE)
 //        }
 
-            var intent = Intent()
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Choose Pictures")
-                , REQUEST_CODE
-            )
+        var intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            Intent.createChooser(intent, "Choose Pictures")
+            , REQUEST_CODE
+        )
 
     }
 

@@ -17,7 +17,6 @@ import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
 import com.example.walkingdog_kotlin.MyChallengeActivity
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
 import kotlinx.android.synthetic.main.fragment_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.view.*
 import retrofit2.Call
@@ -28,9 +27,9 @@ class ChallengeFragment(context: Context) : Fragment() {
 
     var challengeList = arrayListOf<Challenge>(
     )
-    var selected_challenge_title : String? = null
-    var selected_challenge_content : String? = null
-    var selected_challenge_period : String? = null
+    var selectedChallengeTitle : String? = null
+    var selectedChallengeContent : String? = null
+    private var selectedChallengePeriod : String? = null
     var popularChallengeId:String? =null
     var participateChallengeId : String ? = null
 
@@ -151,7 +150,7 @@ class ChallengeFragment(context: Context) : Fragment() {
                     }
                 })
 
-                Toast.makeText(context, "${selected_challenge_title}, ${selected_challenge_period}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${selectedChallengeTitle}, ${selectedChallengePeriod}", Toast.LENGTH_SHORT).show()
                 cAlertDialog.dismiss()
             }
         }

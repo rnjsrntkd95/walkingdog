@@ -25,10 +25,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, val itemClick: (FeedContent) -> Unit) :
-        RecyclerView.Adapter<FeedAdaptor.Holder>() {
+class FeedAdaptor(
+    val context: Context,
+    val feedList: ArrayList<FeedContent>,
+    val itemClick: (FeedContent) -> Unit
+) :
+    RecyclerView.Adapter<FeedAdaptor.Holder>() {
 
-    inner class Holder(itemView: View?, itemClick: (FeedContent) -> Unit) : RecyclerView.ViewHolder(itemView!!) {
+    inner class Holder(itemView: View?, itemClick: (FeedContent) -> Unit) :
+        RecyclerView.ViewHolder(itemView!!) {
         val profileImg = itemView?.findViewById<ImageView>(R.id.myfeed_profile_img)
         val userName = itemView?.findViewById<TextView>(R.id.myfeed_nickname)
         val date = itemView?.findViewById<TextView>(R.id.dateTv)
@@ -43,9 +48,10 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
         val mapIcon = itemView?.findViewById<ImageView>(R.id.map_icon)
 
 
-        fun bind(feedContent : FeedContent, context: Context) {
-            if(feedContent.profileImg != "") {
-                Glide.with(context).load("${context.getString(R.string.server_url)}/${feedContent.profileImg}")
+        fun bind(feedContent: FeedContent, context: Context) {
+            if (feedContent.profileImg != "") {
+                Glide.with(context)
+                    .load("${context.getString(R.string.server_url)}/${feedContent.profileImg}")
 //                        .apply(RequestOptions.overrideOf(300, 250))
                     .apply(RequestOptions.centerCropTransform())
                     .into(profileImg)
@@ -57,9 +63,10 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
             date?.text = feedContent.date.toString()
             location?.text = feedContent.location
             dogName?.text = feedContent.dogName
-            if(feedContent.uploadImg.isNotEmpty()) {
+            if (feedContent.uploadImg.isNotEmpty()) {
                 feedContent.uploadImg.forEach(fun(imageUrl) {
-                    Glide.with(context).load("${context.getString(R.string.server_url)}/${imageUrl}")
+                    Glide.with(context)
+                        .load("${context.getString(R.string.server_url)}/${imageUrl}")
 //                        .apply(RequestOptions.overrideOf(300, 250))
                         .apply(RequestOptions.centerCropTransform())
                         .into(feedImg)
@@ -74,113 +81,138 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
             walkingCal?.text = feedContent.calory.toString()
             likes?.text = feedContent.likes.toString()
 
-            itemView.setOnClickListener { itemClick(feedContent)
+            itemView.setOnClickListener {
+                itemClick(feedContent)
 
-            mapIcon?.setOnClickListener {
-                val mDialogView = LayoutInflater.from(context).inflate(R.layout.map_popup, null)
-                val mBuilder = AlertDialog.Builder(context!!).setView(mDialogView)
-                var mapView: MapView? = null
+                mapIcon?.setOnClickListener {
+                    val mDialogView = LayoutInflater.from(context).inflate(R.layout.map_popup, null)
+                    val mBuilder = AlertDialog.Builder(context!!).setView(mDialogView)
+                    var mapView: MapView? = null
 
-                mBuilder.setOnCancelListener(object: DialogInterface.OnCancelListener {
-                    override fun onCancel(dialog: DialogInterface) {
-                        mapView = null
-                    }
-                })
-
-                val mAlertDialog = mBuilder.show()
-                mDialogView.map_popup_delete_btn.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
-
-                val walkingId = feedContent.walkingId
-                val routeRetrofit = PostRetrofitCreators(context).PostRetrofitCreator()
-                routeRetrofit.getRoute(walkingId).enqueue(object : Callback<RouteModel> {
-                    override fun onFailure(call: Call<RouteModel>, t: Throwable) {
-                        Log.d("DEBUG", " Route Retrofit failed!!")
-                        Log.d("DEBUG", t.message)
-                    }
-                    override fun onResponse(call: Call<RouteModel>, response: Response<RouteModel>) {
-                        val routes = response.body()?.route
-                        val toiletLoc = response.body()?.toiletLoc
-                        mapView = MapView(context)
-                        if (routes!!.size == 0) {
-                            Toast.makeText(context, "산책 경로가 존재하지 않습니다.", Toast.LENGTH_LONG).show()
-                            mAlertDialog.dismiss()
+                    mBuilder.setOnCancelListener(object : DialogInterface.OnCancelListener {
+                        override fun onCancel(dialog: DialogInterface) {
+                            mapView = null
                         }
-                        val mapViewContainer: ViewGroup = mDialogView?.findViewById<View>(R.id.map_layout) as ViewGroup
-                        mapViewContainer.addView(mapView)
+                    })
 
-                        val polyline = MapPolyline()
-
-                        polyline.lineColor = Color.argb(255, 103, 114, 241)
-
-                        routes.forEach(fun(route){
-                            polyline.addPoint(MapPoint.mapPointWithGeoCoord(route.lat.toDouble(), route.lon.toDouble()))
-                        })
-                        mapView!!.addPolyline(polyline)
-                        // 시작 지점 마커
-                        val startMarker = MapPOIItem()
-                        startMarker.itemName = ""
-                        startMarker.mapPoint = polyline.getPoint(0)
-                        startMarker.markerType = MapPOIItem.MarkerType.CustomImage
-                        startMarker.customImageResourceId =
-                            R.drawable.start_walking_icon
-                        startMarker.setCustomImageAnchor(0.5f, 0.5f)
-                        startMarker.isCustomImageAutoscale = false
-                        startMarker.isShowCalloutBalloonOnTouch = false
-                        mapView!!.addPOIItem(startMarker)
-
-                        // 종료 지점 마커
-                        val finishMarker = MapPOIItem()
-                        finishMarker.itemName = ""
-                        finishMarker.mapPoint = polyline.getPoint(polyline.pointCount-1)
-                        finishMarker.markerType = MapPOIItem.MarkerType.CustomImage
-                        finishMarker.customImageResourceId =
-                            R.drawable.labrador_icon
-                        finishMarker.setCustomImageAnchor(0.5f, 0.5f)
-                        finishMarker.isShowCalloutBalloonOnTouch = false
-                        mapView!!.addPOIItem(finishMarker)
-
-                        // 배변 활동 마커
-                        val toiletMarker: MapPOIItem = MapPOIItem()
-                        toiletMarker.itemName = ""
-                        toiletMarker.isShowCalloutBalloonOnTouch = false
-                        toiletMarker.markerType = MapPOIItem.MarkerType.CustomImage
-                        toiletMarker.customImageResourceId =
-                            R.drawable.toilet_activity
-                        toiletMarker.setCustomImageAnchor(0.5f, 1.0f)
-                        toiletLoc!!.forEach(fun(loc) {
-                            toiletMarker.mapPoint = MapPoint.mapPointWithGeoCoord(loc.lat.toDouble(), loc.lon.toDouble() )
-                            mapView!!.addPOIItem(toiletMarker)
-                        })
-
-                        // 화면 중앙 정렬
-                        val mapPointBounds = MapPointBounds(polyline.mapPoints)
-                        mapView!!.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, 100))
-
-
+                    val mAlertDialog = mBuilder.show()
+                    mDialogView.map_popup_delete_btn.setOnClickListener {
+                        mAlertDialog.dismiss()
                     }
-                })
+
+                    val walkingId = feedContent.walkingId
+                    val routeRetrofit = PostRetrofitCreators(context).PostRetrofitCreator()
+                    routeRetrofit.getRoute(walkingId).enqueue(object : Callback<RouteModel> {
+                        override fun onFailure(call: Call<RouteModel>, t: Throwable) {
+                            Log.d("DEBUG", " Route Retrofit failed!!")
+                            Log.d("DEBUG", t.message)
+                        }
+
+                        override fun onResponse(
+                            call: Call<RouteModel>,
+                            response: Response<RouteModel>
+                        ) {
+                            val routes = response.body()?.route
+                            val toiletLoc = response.body()?.toiletLoc
+                            mapView = MapView(context)
+                            if (routes!!.size == 0) {
+                                Toast.makeText(context, "산책 경로가 존재하지 않습니다.", Toast.LENGTH_LONG)
+                                    .show()
+                                mAlertDialog.dismiss()
+                            }
+                            val mapViewContainer: ViewGroup =
+                                mDialogView?.findViewById<View>(R.id.map_layout) as ViewGroup
+                            mapViewContainer.addView(mapView)
+
+                            val polyline = MapPolyline()
+
+                            polyline.lineColor = Color.argb(255, 103, 114, 241)
+
+                            routes.forEach(fun(route) {
+                                polyline.addPoint(
+                                    MapPoint.mapPointWithGeoCoord(
+                                        route.lat.toDouble(),
+                                        route.lon.toDouble()
+                                    )
+                                )
+                            })
+                            mapView!!.addPolyline(polyline)
+                            // 시작 지점 마커
+                            val startMarker = MapPOIItem()
+                            startMarker.itemName = ""
+                            startMarker.mapPoint = polyline.getPoint(0)
+                            startMarker.markerType = MapPOIItem.MarkerType.CustomImage
+                            startMarker.customImageResourceId =
+                                R.drawable.start_walking_icon
+                            startMarker.setCustomImageAnchor(0.5f, 0.5f)
+                            startMarker.isCustomImageAutoscale = false
+                            startMarker.isShowCalloutBalloonOnTouch = false
+                            mapView!!.addPOIItem(startMarker)
+
+                            // 종료 지점 마커
+                            val finishMarker = MapPOIItem()
+                            finishMarker.itemName = ""
+                            finishMarker.mapPoint = polyline.getPoint(polyline.pointCount - 1)
+                            finishMarker.markerType = MapPOIItem.MarkerType.CustomImage
+                            finishMarker.customImageResourceId =
+                                R.drawable.labrador_icon
+                            finishMarker.setCustomImageAnchor(0.5f, 0.5f)
+                            finishMarker.isShowCalloutBalloonOnTouch = false
+                            mapView!!.addPOIItem(finishMarker)
+
+                            // 배변 활동 마커
+                            val toiletMarker: MapPOIItem = MapPOIItem()
+                            toiletMarker.itemName = ""
+                            toiletMarker.isShowCalloutBalloonOnTouch = false
+                            toiletMarker.markerType = MapPOIItem.MarkerType.CustomImage
+                            toiletMarker.customImageResourceId =
+                                R.drawable.toilet_activity
+                            toiletMarker.setCustomImageAnchor(0.5f, 1.0f)
+                            toiletLoc!!.forEach(fun(loc) {
+                                toiletMarker.mapPoint = MapPoint.mapPointWithGeoCoord(
+                                    loc.lat.toDouble(),
+                                    loc.lon.toDouble()
+                                )
+                                mapView!!.addPOIItem(toiletMarker)
+                            })
+
+                            // 화면 중앙 정렬
+                            val mapPointBounds = MapPointBounds(polyline.mapPoints)
+                            mapView!!.moveCamera(
+                                CameraUpdateFactory.newMapPointBounds(
+                                    mapPointBounds,
+                                    100
+                                )
+                            )
+
+
+                        }
+                    })
+                }
             }
         }
-    }
 
-    fun deletePost(postId: String) {
-        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userToken = pref.getString("userToken", "")
-        val deletePostRetrofit = PostRetrofitCreators(context).PostRetrofitCreator()
-        deletePostRetrofit.deletePost(userToken!!, postId).enqueue(object : Callback<DeletePostModel> {
-            override fun onFailure(call: Call<DeletePostModel>, t: Throwable) {
-                Log.d("DEBUG", " Delete Post Retrofit failed!!")
-                Log.d("DEBUG", t.message)
-            }
-            override fun onResponse(call: Call<DeletePostModel>, response: Response<DeletePostModel>) {
-                val error = response.body()?.error
-                Log.d("ERROR", "$error")
-            }
-        })
-    }
+        fun deletePost(postId: String) {
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref.getString("userToken", "")
+            val deletePostRetrofit = PostRetrofitCreators(context).PostRetrofitCreator()
+            deletePostRetrofit.deletePost(userToken!!, postId)
+                .enqueue(object : Callback<DeletePostModel> {
+                    override fun onFailure(call: Call<DeletePostModel>, t: Throwable) {
+                        Log.d("DEBUG", " Delete Post Retrofit failed!!")
+                        Log.d("DEBUG", t.message)
+                    }
 
+                    override fun onResponse(
+                        call: Call<DeletePostModel>,
+                        response: Response<DeletePostModel>
+                    ) {
+                        val error = response.body()?.error
+                        Log.d("ERROR", "$error")
+                    }
+                })
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.feed_item, parent, false)

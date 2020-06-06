@@ -37,25 +37,14 @@ class Statics_RVAdapter(val context: Context, val history_list: ArrayList<Static
 
 
         fun bind (history_list: StaticsItem, context: Context) {
-
-
             /* 나머지 TextView와 String 데이터를 연결한다. */
             history_date?.text = history_list.date
             history_cal?.text = history_list.cal
             history_hour?.text = history_list.hour
             history_minutes?.text = history_list.minutes
             history_sec?.text = history_list.sec
-
-
         }
     }
-
-    constructor(parcel: Parcel) : this(
-        TODO("context"),
-        TODO("history_list")
-    ) {
-    }
-
 }
 
 

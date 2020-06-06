@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Walking.Model.CheckItem
+import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
 import kotlinx.android.synthetic.main.feed_item.view.*

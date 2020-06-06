@@ -139,6 +139,7 @@ class ChallengeFragment(context: Context) : Fragment() {
 
                 var intent = Intent(context, MyChallengeActivity::class.java)
                 startActivity(intent)
+
                 val challengeJoinRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
                 challengeJoinRetrofit.joinChallenge(userToken, _id = "가장 사용자가 많은 ChallengeID를 가져와야 ").enqueue(object : Callback<ChallengeListModel> {
                     override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {

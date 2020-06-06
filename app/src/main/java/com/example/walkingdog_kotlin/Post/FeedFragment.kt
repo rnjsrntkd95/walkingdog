@@ -99,18 +99,6 @@ class FeedFragment() : Fragment() {
                 fAdapter.notifyDataSetChanged()
             }
         })
-
-        mapTest_btn.setOnClickListener {
-            val mDialogView = LayoutInflater.from(context).inflate(R.layout.map_popup, null)
-
-            val mBuilder = AlertDialog.Builder(context!!).setView(mDialogView)
-
-            val mAlertDialog = mBuilder.show()
-
-            mDialogView.map_popup_delete_btn.setOnClickListener {
-                mAlertDialog.dismiss()
-            }
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

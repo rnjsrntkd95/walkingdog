@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
+import com.example.walkingdog_kotlin.MyChallengeActivity
 import kotlinx.android.synthetic.main.fragment_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.view.*
@@ -106,8 +107,9 @@ class ChallengeFragment(context: Context) : Fragment() {
                 selected_challenge_title = cDialogView.select_challenge_title_tv.text.toString()
                 selected_challenge_period = cDialogView.select_challenge_period_tv.text.toString()
 
+                var intent = Intent(context, MyChallengeActivity::class.java)
+                startActivity(intent)
 
-                Toast.makeText(context, "${selected_challenge_title}, ${selected_challenge_period}", Toast.LENGTH_SHORT).show()
                 cAlertDialog.dismiss()
             }
         }

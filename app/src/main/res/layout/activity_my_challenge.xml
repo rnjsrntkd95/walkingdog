@@ -221,69 +221,77 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="참여자 기록 정보"
-                        android:layout_marginBottom="10dp"
-                        android:textStyle="bold"
-                        android:textSize="14dp"/>
+                    android:padding="20dp">
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:background="@drawable/gray_shape">
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="순위"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="닉네임"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="산책 횟수"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="산책 충족량"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="점수"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                </LinearLayout>
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="400dp">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/participatedChallengeListRecyclerview"
+                            android:text="참여자 기록 정보"
+                            android:layout_marginBottom="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="순위"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textStyle="bold"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="닉네임"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textStyle="bold"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="산책 횟수"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textStyle="bold"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="산책 충족량"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textStyle="bold"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="점수"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textStyle="bold"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/participatedChallengeListRecyclerview"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"

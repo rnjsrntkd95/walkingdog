@@ -2,6 +2,7 @@ package com.example.walkingdog_kotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_my_challenge.*
@@ -34,6 +35,14 @@ class MyChallengeActivity : AppCompatActivity() {
         }
 
 
+        var flag = true    //가입 중인 챌린지가 있는지 없는지 구분하는 변수
+
+        if(flag) {      //가입 중인 챌린지가 있다면
+            myRecordLayout.visibility = View.VISIBLE
+        } else {         //가입 중인 챌린지가 없다면
+            //나의 기록을 보여주지 않는다.
+            myRecordLayout.visibility = View.GONE
+        }
 
     }
 }

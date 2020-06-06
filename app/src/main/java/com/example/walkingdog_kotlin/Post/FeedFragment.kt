@@ -41,6 +41,8 @@ class FeedFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val fAdapter = FeedAdaptor(context!!, feedList) { feedContent ->
+
+
         }
 
         feed_recyclerview.adapter = fAdapter

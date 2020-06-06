@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.R
+import kotlinx.android.synthetic.main.myfeed_rv_item.view.*
 
 class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, val itemClick: (FeedContent) -> Unit) :
         RecyclerView.Adapter<FeedAdaptor.Holder>() {
@@ -61,7 +62,9 @@ class FeedAdaptor(val context: Context, val feedList: ArrayList<FeedContent>, va
             walkingCal?.text = feedContent.calory.toString()
             likes?.text = feedContent.likes.toString()
 
-            itemView.setOnClickListener { itemClick(feedContent) }
+            itemView.setOnClickListener { itemClick(feedContent)
+
+            }
 
 
         }

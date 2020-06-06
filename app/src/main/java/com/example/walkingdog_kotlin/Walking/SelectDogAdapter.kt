@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
+import android.widget.Toast
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
 
@@ -18,6 +19,16 @@ class SelectDogAdapter (val context: Context, val selectDogList: ArrayList<Selec
         val selectDog = selectDogList[position]
 
         dogName.text = selectDog.name
+
+
+        dogName.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked) {
+                Toast.makeText(context, "${dogName.text}를 추가했습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "${dogName.text}를 제거했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         return view
     }

@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
+import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.fragment_check.*
 import kotlinx.android.synthetic.main.select_dog_popup.*
 import kotlinx.android.synthetic.main.select_dog_popup.view.*
@@ -183,7 +185,7 @@ class CheckFragment : Fragment() {
             checkItemAdapter.notifyDataSetChanged()
         }
 
-
+        var trr : String? = null
 
         //산책측정 액티비티로 넘어가는 함수
         switch_btn_to_walking.setOnClickListener {
@@ -201,6 +203,7 @@ class CheckFragment : Fragment() {
             }
 
             wDialogView.selectDog_popup_complete_btn.setOnClickListener {
+
                 var intent = Intent(context, WalkingActivity::class.java)
                 startActivity(intent)
                 wAlertDialog.dismiss()

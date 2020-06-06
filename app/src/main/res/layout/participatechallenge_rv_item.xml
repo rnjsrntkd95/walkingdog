@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center">
+        <TextView
+                android:id="@+id/pcRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/pcNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/pcFigure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="산책 횟수"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/pcSatisfy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="산책 충족량"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/pcScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="점수"
+                android:layout_weight="1"
+                android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/mainGray">
+    </LinearLayout>
+</LinearLayout>

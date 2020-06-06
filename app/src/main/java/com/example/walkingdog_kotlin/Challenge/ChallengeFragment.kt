@@ -32,6 +32,7 @@ class ChallengeFragment(context: Context) : Fragment() {
     var selected_challenge_title : String? = null
     var selected_challenge_content : String? = null
     var selected_challenge_period : String? = null
+    var popularChallengeId:String? =null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

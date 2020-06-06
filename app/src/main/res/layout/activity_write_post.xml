@@ -38,24 +38,49 @@
             android:orientation="vertical"
             android:layout_below="@+id/topAppbar_layout">
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/mainGray">
+        </LinearLayout>
+
+<!--이미지 첨부 레이아웃-->
         <RelativeLayout
                 android:id="@+id/imageUpload_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:orientation="vertical"
                 android:padding="20dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진"/>
 
-            <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/image_plus"
-                    android:backgroundTint="@color/mainGray"
-                    android:layout_centerInParent="true"/>
+            <TextView
+                    android:id="@+id/uploadImageTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="추가하기"
+                    android:layout_toLeftOf="@+id/deleteImageTv"
+                    android:layout_marginRight="10dp"/>
 
-            <ImageView
-                    android:id="@+id/writePost_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+            <TextView
+                    android:id="@+id/deleteImageTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="삭제하기"
+                    android:layout_alignParentRight="true"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/image_recycler_view"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
         </RelativeLayout>
 
         <LinearLayout
@@ -63,13 +88,19 @@
                 android:layout_height="2dp"
                 android:background="@color/mainGray">
         </LinearLayout>
-
+<!--내용 작성 레이아웃-->
         <LinearLayout
                 android:id="@+id/wirteComment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내용"/>
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_comment"
@@ -87,7 +118,7 @@
                 android:layout_height="2dp"
                 android:background="@color/mainGray">
         </LinearLayout>
-
+<!--작성 완료 버튼 레이아웃-->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

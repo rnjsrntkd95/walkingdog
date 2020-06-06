@@ -296,11 +296,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:gravity="center">
+
                 <Button
+                        android:id="@+id/cancelChallenge"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:background="@drawable/btn_shape"
-                        android:text="취소하기"/>
+                        android:text="취소하기" />
             </LinearLayout>
 
         </LinearLayout>

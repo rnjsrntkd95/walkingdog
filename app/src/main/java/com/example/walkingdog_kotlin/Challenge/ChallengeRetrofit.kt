@@ -2,6 +2,8 @@ package com.example.walkingdog_kotlin.Challenge
 
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
+import com.example.walkingdog_kotlin.Challenge.Model.ChallengeUserListModel
+import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
 import retrofit2.Call
 import retrofit2.http.*
 import java.time.LocalDate
@@ -26,4 +28,14 @@ interface ChallengeRetrofit {
         @Field("end_date") end_date: LocalDate,
         @Field("userToken") userToken: String
     ): Call<ChallengeModel>
+    @FormUrlEncoded
+    @POST("/challenge/users")
+    fun getUserList(
+        @Field("userToken") userToken: String,
+        @Field("challengeId") challengeId: String
+    ): Call<ChallengeUserListModel>
+    @GET("/challenge/myChallenge")
+    fun getMyChallenge(
+        @Query("userToken") userToken: String
+    ): Call<myChallengeId>
 }

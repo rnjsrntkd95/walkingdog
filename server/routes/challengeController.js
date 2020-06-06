@@ -63,7 +63,6 @@ exports.joinChallenge = async (req, res, next) => {
   console.log(req.body);
   const userData = req.body.userToken;
   const challengeId = req.body._id;
-
   // const userData = "5eba8b5ca76e3e20f4b0659e";
   // const challengeId = "5ec28c44abe2802874204a43";
   try {
@@ -71,7 +70,6 @@ exports.joinChallenge = async (req, res, next) => {
     // 같은 챌린지 중복 참여 방지
     const checkingOverlap = await UserChallenge.find({
       userId: user._id,
-      challengeId: challengeId,
     });
     console.log(checkingOverlap.length);
     if (checkingOverlap.length === 0) {
@@ -94,7 +92,7 @@ exports.joinChallenge = async (req, res, next) => {
       });
       const resultNewRecord = await Record.create(newRecord);
 
-      res.json({});
+      res.json({ error: 0, msg: "챌린지에 가입하셨습니다" });
     } else {
       res.json({ error: 2, msg: "이미 가입된 챌린지가 존재합니다." });
     }
@@ -161,5 +159,42 @@ exports.dropChallenge = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     res.json({ error: 1 });
+  }
+};
+
+// 챌린지에 참여하는 유저 정보를 가져와야함.
+exports.usersInChallenge = async (req, res, next) => {
+  console.log(req.body);
+  const userData = req.body.userToken;
+  const challengeId = req.body.challengeId;
+  try {
+    const myChallenge = await UserChallenge.find({
+      userId: userData,
+    }).populate("userId", "nickname");
+    const challengeUserList = await UserChallenge.find({
+      challengeId: challengeId,
+    })
+      .populate("userId", "nickname")
+      .sort("-score");
+    res.json({ myChallenge, challengeUserList });
+    console.log(myChallenge, challengeUserList);
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
+};
+
+exports.getMyChallengeId = async (req, res, next) => {
+  console.log(req.query);
+  const userData = req.query.userToken;
+  try {
+    const myChallenge = await UserChallenge.find({ userId: userData }).populate(
+      "userId",
+      "nickname"
+    );
+    res.json({ myChallenge });
+    console.log(myChallenge);
+  } catch (err) {
+    console.log(err);
   }
 };

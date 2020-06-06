@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.R
+import kotlinx.android.synthetic.main.feed_item.*
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.map_popup.*
 import kotlinx.android.synthetic.main.map_popup.view.*
+import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +32,8 @@ class FeedFragment() : Fragment() {
 
     var feedList = arrayListOf<FeedContent>(
     )
-    
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
@@ -78,7 +81,7 @@ class FeedFragment() : Fragment() {
         val addressThoroughfare = pref.getString("addressThoroughfare", "")
 
         val postRetrofit = PostRetrofitCreators(context!!).PostRetrofitCreator()
-        postRetrofit.getTimeline(addressAdmin, addressLocality, addressThoroughfare, userToken!!).enqueue(object : Callback<PostListModel> {
+        postRetrofit.getTimeline(addressAdmin, addressLocality, addressThoroughfare).enqueue(object : Callback<PostListModel> {
             override fun onFailure(call: Call<PostListModel>, t: Throwable) {
                 Log.d("DEBUG", " Timeline Retrofit failed!!")
                 Log.d("DEBUG", t.message)
@@ -95,17 +98,7 @@ class FeedFragment() : Fragment() {
             }
         })
 
-        mapTest_btn.setOnClickListener {
-            val mDialogView = LayoutInflater.from(context).inflate(R.layout.map_popup, null)
 
-            val mBuilder = AlertDialog.Builder(context!!).setView(mDialogView)
-
-            val mAlertDialog = mBuilder.show()
-
-            mDialogView.map_popup_delete_btn.setOnClickListener {
-                mAlertDialog.dismiss()
-            }
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

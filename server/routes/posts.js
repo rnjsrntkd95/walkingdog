@@ -24,4 +24,5 @@ router.post('/create', upload.array('img'), controller.createPost);
 router.get('/timeline', controller.timeline);
 
 
+
 module.exports = router;

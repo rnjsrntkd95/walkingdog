@@ -19,5 +19,8 @@ var controller = require('./walkingController');
 
 // Create:새로운 산책 정보 등록
 router.post('/create', controller.createWalking);
+// 산책 경로 제공
+router.get('/route', controller.showRoute);
+
 
 module.exports = router;

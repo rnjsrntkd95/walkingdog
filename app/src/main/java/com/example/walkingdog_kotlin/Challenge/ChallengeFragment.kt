@@ -17,21 +17,18 @@ import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
 import kotlinx.android.synthetic.main.fragment_challenge.*
-import kotlinx.android.synthetic.main.participate_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 class ChallengeFragment(context: Context) : Fragment() {
 
     var challengeList = arrayListOf<Challenge>(
     )
-    var selected_challenge_title : String? = null
-    var selected_challenge_content : String? = null
-    var selected_challenge_period : String? = null
+    private var selectedChallengeTitle : String? = null
+    var selectedChallengeContent : String? = null
+    private var selectedChallengePeriod : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,11 +99,11 @@ class ChallengeFragment(context: Context) : Fragment() {
             cDialogView.select_challenge_period_tv.text = challenge_period.text
 
             cDialogView.participate_btn.setOnClickListener {
-                selected_challenge_title = cDialogView.select_challenge_title_tv.text.toString()
-                selected_challenge_period = cDialogView.select_challenge_period_tv.text.toString()
+                selectedChallengeTitle = cDialogView.select_challenge_title_tv.text.toString()
+                selectedChallengePeriod = cDialogView.select_challenge_period_tv.text.toString()
 
 
-                Toast.makeText(context, "${selected_challenge_title}, ${selected_challenge_period}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${selectedChallengeTitle}, ${selectedChallengePeriod}", Toast.LENGTH_SHORT).show()
                 cAlertDialog.dismiss()
             }
         }

@@ -19,7 +19,7 @@ data class PostModel (
     val id: String,
     val content: String,
     val image: List<String> = listOf(),
-    val routeImage: String,
+    val walkingId: String,
     val walkingTime: Number,
     val addressAdmin: String,
     val addressLocality: String,
@@ -27,4 +27,13 @@ data class PostModel (
     val user: UserProfileModel,
     val nickname: String,
     val created_date: Date
+)
+
+data class RouteModel (
+    val route: ArrayList<LocationModel> = ArrayList<LocationModel>(),
+    val toiletLoc: ArrayList<LocationModel> = ArrayList<LocationModel>()
+)
+data class LocationModel (
+    val lat: String,
+    val lon: String
 )

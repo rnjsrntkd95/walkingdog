@@ -17,6 +17,7 @@ class FeedContent() {
     var distance : Number = 0
     var calory : Number = 0
     var likes : Number = 0
+    var walkingId: String =""
 
     constructor(post: PostModel): this() {
         var animalList: String = ""
@@ -38,6 +39,7 @@ class FeedContent() {
         this.distance = post.distance
         this.calory = post.calorie
         this.likes = post.like
+        this.walkingId = post.walkingId
     }
 
 

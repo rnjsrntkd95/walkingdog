@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_create__challenge.*
+import kotlinx.android.synthetic.main.fragment_challenge.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +36,13 @@ class Create_ChallengeActivity : AppCompatActivity() {
         createChallenge_back_btn.setOnClickListener {
             finish()
         }
+//      챌린지 업데이트 하는 방법 필요.
+//        val cAdapter =
+//            ChallengeRvAdapter(
+//                context!!,
+//                challengeList
+//            )
+//        cRecyclerView.adapter = cAdapter
 
         current_month_tv.text = Integer.parseInt(month).toString()
         current_date_tv.text = Integer.parseInt(date).toString()
@@ -132,8 +140,10 @@ class Create_ChallengeActivity : AppCompatActivity() {
                     Log.d("DEBUG", "Retrofit Success!!")
                     val title = response.body()?.title
                     Log.d("TAG", "title: " + title)
+
                 }
             })
+
             finish()
         }
     }

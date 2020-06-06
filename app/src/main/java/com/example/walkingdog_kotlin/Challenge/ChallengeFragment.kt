@@ -16,14 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
+import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
 import kotlinx.android.synthetic.main.fragment_challenge.*
-import kotlinx.android.synthetic.main.participate_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 class ChallengeFragment(context: Context) : Fragment() {
 
@@ -32,6 +30,10 @@ class ChallengeFragment(context: Context) : Fragment() {
     var selected_challenge_title : String? = null
     var selected_challenge_content : String? = null
     var selected_challenge_period : String? = null
+    var participateChallengeId : String ? = null
+
+    val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
+    val userToken = pref.getString("userToken", "5ebac6bd59e3d32080d6d941")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,20 +56,41 @@ class ChallengeFragment(context: Context) : Fragment() {
         var test = challengeTitle_Textview.text
 
         val cAdapter =
-            ChallengeRvAdapter(
-                context!!,
-                challengeList
-            )
+            ChallengeRvAdapter(context!!, challengeList) { challenge ->
+                val cDialogView = LayoutInflater.from(context).inflate(R.layout.participate_challenge, null)
+
+                val cBuilder = AlertDialog.Builder(context!!).setView(cDialogView).setTitle("일반 챌린지 등록")
+
+                val cAlertDialog = cBuilder.show()
+
+                cDialogView.select_challenge_title_tv.text = challenge.title
+                cDialogView.select_challenge_period_tv.text = challenge.period
+
+                cDialogView.participate_btn.setOnClickListener {
+//                    Toast.makeText(context, "${challenge.id}", Toast.LENGTH_LONG).show()
+                    val challengeSelectRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
+                    challengeSelectRetrofit.joinChallenge(userToken, challenge.id).enqueue(object : Callback<ChallengeListModel> {
+                        override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
+                            Log.d("DEBUG", " Challenge Retrofit failed!!")
+                            Log.d("DEBUG", t.message)
+                        }
+                        override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
+                            Log.d("DEBUG", " Challenge Retrofit Success!!")
+                            val error = response.body()?.msg
+                            Toast.makeText(context, "$error", Toast.LENGTH_LONG).show()
+                        }
+                    })
+                    cAlertDialog.dismiss()
+                }
+
+
+            }
         cRecyclerView.adapter = cAdapter
 
         val lm = LinearLayoutManager(context)
         cRecyclerView.layoutManager = lm
         cRecyclerView.setHasFixedSize(true)
-
-        val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
-        // Data
-        val userToken = pref.getString("userToken", "none")
-
+        //challenges sort by date
         val challengeRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
         challengeRetrofit.getChallengeList(userToken).enqueue(object : Callback<ChallengeListModel> {
             override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
@@ -77,11 +100,18 @@ class ChallengeFragment(context: Context) : Fragment() {
             override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
 
                 val challenges = response.body()?.challenges
+                val popularChallenge = response.body()?.popularChallenge
 
                 challenges!!.forEach(fun(element) {
                     Log.d("element.title : ", element.title)
                     challengeList.add(Challenge(element))
                 })
+
+                Log.d("Challenge", popularChallenge!!.title)
+
+                challengeTitle_Textview.text = popularChallenge!!.title
+                challenge_period.text = popularChallenge!!.start_date.toString() + " ~ " + popularChallenge!!.end_date.toString()
+
                 cAdapter.notifyDataSetChanged()
             }
         })
@@ -90,7 +120,7 @@ class ChallengeFragment(context: Context) : Fragment() {
             var intent = Intent(context, Create_ChallengeActivity::class.java)
             startActivity(intent)
         }
-
+        // challenge를 누르면 challenge id를 받아옴.
         popular_challenge_content_layout.setOnClickListener {
             val cDialogView = LayoutInflater.from(context).inflate(R.layout.participate_challenge, null)
 
@@ -105,6 +135,16 @@ class ChallengeFragment(context: Context) : Fragment() {
                 selected_challenge_title = cDialogView.select_challenge_title_tv.text.toString()
                 selected_challenge_period = cDialogView.select_challenge_period_tv.text.toString()
 
+                val challengeJoinRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
+                challengeJoinRetrofit.joinChallenge(userToken, _id = "가장 사용자가 많은 ChallengeID를 가져와야 ").enqueue(object : Callback<ChallengeListModel> {
+                    override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
+                        Log.d("DEBUG", " Challenge Retrofit failed!!")
+                        Log.d("DEBUG", t.message)
+                    }
+                    override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
+                        Log.d("DEBUG", " Challenge Retrofit Success!!")
+                    }
+                })
 
                 Toast.makeText(context, "${selected_challenge_title}, ${selected_challenge_period}", Toast.LENGTH_SHORT).show()
                 cAlertDialog.dismiss()

@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin.Walking
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -190,11 +191,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private fun isSetLocationPermission() {
         if (ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             requestPermission()
@@ -205,7 +206,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             RequestPermissionCode
         )
         this.recreate()

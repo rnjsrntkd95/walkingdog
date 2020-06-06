@@ -4,7 +4,9 @@ import java.util.*
 
 data class ChallengeListModel (
     val challenges: List<ChallengeModel> = listOf(),
-    val error: Number
+    val popularChallenge: ChallengeModel,
+    val error: Number,
+    val msg: String
 )
 
 data class ChallengeModel (

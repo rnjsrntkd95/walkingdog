@@ -60,87 +60,106 @@ exports.createChallenge = async (req, res, next) => {
 };
 
 exports.joinChallenge = async (req, res, next) => {
-    // const userData = req.userToken.id;
-    const userData = '5eba8b5ca76e3e20f4b0659e';
-    const challengeId = '5ec28c44abe2802874204a43';
-    try {
-        const user = await User.findOne({ _id: userData });
-        // 이미 가입된 챌린지가 있는지 확인
-        const alreadyJoin = await UserChallenge.findOne({ userId: user._id });
-        if (alreadyJoin) {
-            res.json({ error: 3, challengeId: alreadyJoin.challengeId});
-        } else {
-            // 같은 챌린지 중복 참여 방지
-            const checkingOverlap = await UserChallenge.find({ userId: user._id, challengeId: challengeId });
-            if (checkingOverlap.length === 0) {
-                const challenge = await Challenge.findOneAndUpdate({ _id: challengeId }, { $inc: { population: 1 } }, { new: true });
+  console.log(req.body);
+  const userData = req.body.userToken;
+  const challengeId = req.body._id;
 
-                const join = await new UserChallenge({
-                    userId: user._id,
-                    challengeId: challenge._id,
-                })
-                const resultJoin = await UserChallenge.create(join);
+  // const userData = "5eba8b5ca76e3e20f4b0659e";
+  // const challengeId = "5ec28c44abe2802874204a43";
+  try {
+    const user = await User.findOne({ _id: userData });
+    // 같은 챌린지 중복 참여 방지
+    const checkingOverlap = await UserChallenge.find({
+      userId: user._id,
+      challengeId: challengeId,
+    });
+    console.log(checkingOverlap.length);
+    if (checkingOverlap.length === 0) {
+      const challenge = await Challenge.findOneAndUpdate(
+        { _id: challengeId },
+        { $inc: { population: 1 } },
+        { new: true }
+      );
 
-                const newRecord = await Record({
-                    user,
-                    challenge,
-                    challengeTitle: challenge.title,
-                })
-                const resultNewRecord = await Record.create(newRecord);
+      const join = await new UserChallenge({
+        userId: user._id,
+        challengeId: challenge._id,
+      });
+      const resultJoin = await UserChallenge.create(join);
 
-                res.json({});
-            } else {
-                res.json({ error: 2, msg: '이미 가입된 챌린지입니다.' });
-            }
-        }
-    } catch (err) {
-        console.log(err);
-        res.json({ error: 1 });
-    };
+      const newRecord = await Record({
+        user,
+        challenge,
+        challengeTitle: challenge.title,
+      });
+      const resultNewRecord = await Record.create(newRecord);
+
+      res.json({});
+    } else {
+      res.json({ error: 2, msg: "이미 가입된 챌린지가 존재합니다." });
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
 };
-
 
 exports.searchChallenge = async (req, res, next) => {
-
-    try {
-        // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
-        const challenges = await Challenge.find({}).sort('-start_date');
-
-        res.json({ challenges });
-    } catch (err) {
-        console.log(err);
-        res.json({ error: 1 });
-
-    };
+  // res.json({
+  //   challenges: [
+  //     {
+  //       title: "새로운 챌린지",
+  //       content: "챌린지 모여라~",
+  //       population: 50,
+  //       start_date: "2020-06-02",
+  //       end_date: "2020-06-16",
+  //       _id: "5eba8b5ca76e3e20f4b0659e",
+  //     },
+  //   ],
+  //   popularChallenge: [
+  //     {
+  //       title: "인기 챌린지",
+  //       content: "챌린지 모여라~",
+  //       population: 50,
+  //       start_date: "2020-06-02",
+  //       end_date: "2020-06-16",
+  //       _id: "5eba8b5ca76e3e20f4b0659e",
+  //     },
+  //   ],
+  //   error: 1,
+  // });
+  try {
+    // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
+    const challenges = await Challenge.find({}).sort("-start_date");
+    // 인기 챌린지
+    const popularChallenge = await Challenge.findOne({}).sort("-population");
+    console.log(challenges);
+    console.log(popularChallenge);
+    res.json({
+      challenges,
+      popularChallenge,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
 };
-
 
 exports.dropChallenge = async (req, res, next) => {
-    // const userData = req.userToken.id;
-    // const challengeId = req.body.challengeId;
-    const userData = '5eba8b5ca76e3e20f4b0659e';
-    const challengeId = '5ec28c44abe2802874204a43';
-    try {
-        const challenge = await Challenge.findByIdAndUpdate({ _id: challengeId }, { $inc: { population: -1 } });
-        await UserChallenge.findOneAndDelete({ userId: userData, challengeId });
-        await Record.findOneAndDelete({ user: userData, challenge: challengeId });
-        res.json({});
-    } catch (err) {
-        console.log(err);
-        res.json({ error: 1 });
-    };
+  const userData = req.query.userToken;
+  const challengeId = req.query._id;
+  // const userData = "5eba8b5ca76e3e20f4b0659e";
+  // const challengeId = "5ec28c44abe2802874204a43";
+  try {
+    const challenge = await Challenge.findByIdAndUpdate(
+      { _id: challengeId },
+      { $inc: { population: -1 } }
+    );
+    await UserChallenge.findOneAndDelete({ userId: userData, challengeId });
+    await Record.findOneAndDelete({ user: userData, challenge: challengeId });
+    res.json({ msg: "성공적으로 탈퇴하였습니다" });
+  } catch (err) {
+    console.log(err);
+    res.json({ error: 1 });
+  }
 };
-
-exports.InfoChallenge = async (req, res, next) => {
-    // const userData = req.userToken.id;
-    // const challengeId = req.body.challengeId;
-
-    try {
-        const challenge = await Challenge.find({ _id: challengeId});
-        const records = await Record.find({ challenge: challengeId }).sort({ "score": -1 });
-        res.json({ records, challenge });
-    } catch (err) {
-        console.log(err);
-        res.json({ error: 1 });
-    }
-}

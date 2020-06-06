@@ -89,7 +89,12 @@ class CheckFragment : Fragment() {
                 location_weather = "${weather!![0].main}"
                 location_temp = (main!!.temp-273).toInt().toString()
 
-                weather_tv.text = "${location_weather}"
+
+                if(weather_tv == null) {
+                    return
+                } else {
+                    weather_tv.text = "${location_weather}"
+                }
                 temporature_tv.text =  "${location_temp}"
                 location_tv.text = location_addressLocatlity
 

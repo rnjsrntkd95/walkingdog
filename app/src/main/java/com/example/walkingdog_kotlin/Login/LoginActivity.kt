@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
-import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn

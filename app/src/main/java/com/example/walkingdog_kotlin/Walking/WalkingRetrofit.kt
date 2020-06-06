@@ -1,6 +1,8 @@
 package com.example.walkingdog_kotlin.Walking
 
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
+import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
+import com.example.walkingdog_kotlin.Walking.Model.MyPetModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -19,4 +21,7 @@ interface WalkingRetrofit {
                       @Field("route") route: ArrayList<ArrayList<Double>>,
                       @Field("toiletLoc") toiletLoc: ArrayList<ArrayList<Double>>
     ): Call<CreateWalkingResultModel>
+
+    @GET("/animal/mypet")
+    fun getMyPet(@Query("userToken") userToken: String): Call<MyPetListModel>
 }

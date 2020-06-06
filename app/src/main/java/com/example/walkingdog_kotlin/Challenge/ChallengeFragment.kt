@@ -134,8 +134,8 @@ class ChallengeFragment(context: Context) : Fragment() {
             cDialogView.select_challenge_period_tv.text = challenge_period.text
 
             cDialogView.participate_btn.setOnClickListener {
-                selected_challenge_title = cDialogView.select_challenge_title_tv.text.toString()
-                selected_challenge_period = cDialogView.select_challenge_period_tv.text.toString()
+                selectedChallengeTitle = cDialogView.select_challenge_title_tv.text.toString()
+                selectedChallengePeriod = cDialogView.select_challenge_period_tv.text.toString()
 
                 var intent = Intent(context, MyChallengeActivity::class.java)
                 startActivity(intent)
@@ -150,6 +150,7 @@ class ChallengeFragment(context: Context) : Fragment() {
                     }
                 })
 
+                Toast.makeText(context, "${selected_challenge_title}, ${selected_challenge_period}", Toast.LENGTH_SHORT).show()
                 cAlertDialog.dismiss()
             }
         }

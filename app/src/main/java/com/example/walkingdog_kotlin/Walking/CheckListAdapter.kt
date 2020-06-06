@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Walking.Model.CheckItem
 
 class CheckListAdapter (val context: Context, val checkItemList : ArrayList<CheckItem>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {

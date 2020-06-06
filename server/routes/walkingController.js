@@ -20,9 +20,10 @@ exports.createWalking = async (req, res, next) => {
     // const requestFile = req.file;
     let routeImage = "";
     let route = [];
+    let toiletLoc = []
     const requestWalkingAmounts = [40, 50];
     const requestRoute = [[123.123, 123.555], [11.22231, 451.222]];
-    const toiletLoc = [[123.123, 123.555], [11.22231, 451.222]];
+    const requestToiletLoc = [[123.123, 123.555], [11.22231, 451.222]];
 
 
     // 산책 경로 위도, 경도 후처리
@@ -31,8 +32,8 @@ exports.createWalking = async (req, res, next) => {
     })
     
     // 배변 활동 좌표 위도, 경도 후처리
-    toiletLoc.forEach((loc) => {
-        route.push({lat: loc[0], lon: loc[1]});
+    requestToiletLoc.forEach((loc) => {
+        toiletLoc.push({lat: loc[0], lon: loc[1]});
     })
 
     // 산책량(%) 후처리
@@ -85,7 +86,21 @@ exports.createWalking = async (req, res, next) => {
             })
         };
 
-        res.json({});
+        res.json({ walkingId: resultReg._id});
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    }
+}
+
+// 산책 디테일 정보
+exports.showRoute = async (req, res, next) => {
+    const walkingId = req.query.walkingId;
+
+    try {
+        const walking = await Walking.findOne({ _id: walkingId }).select("route toiletLoc");
+        console.log(walking)
+        res.json({ route: walking.route, toiletLoc: walking.toiletLoc });
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });

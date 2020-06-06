@@ -22,6 +22,9 @@ const upload = multer({
 router.post('/create', upload.array('img'), controller.createPost);
 // 타임라인 조회
 router.get('/timeline', controller.timeline);
+// Delete:게시글 삭제
+router.delete("/delete", controller.deletePost);
+
 
 
 module.exports = router;

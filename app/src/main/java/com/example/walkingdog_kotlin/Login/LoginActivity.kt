@@ -19,8 +19,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
 import com.kakao.auth.Session
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,6 +66,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //Kakao Login
         Session.getCurrentSession().addCallback(callback)
+
+        // 산책 체크 리스트 초기화
+        val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userCheckList = pref.getString("checkList", "0")
+        if (userCheckList == "0" || userCheckList == null) {
+            val edit = pref.edit()
+            edit.putString("checkList", "//목줄//물//배변 봉투")
+            edit.apply()
+        }
     }
 
 

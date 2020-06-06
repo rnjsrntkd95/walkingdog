@@ -13,12 +13,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
 import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.fragment_check.*
-import kotlinx.android.synthetic.main.select_dog_popup.*
 import kotlinx.android.synthetic.main.select_dog_popup.view.*
 import kotlinx.android.synthetic.main.select_dog_popup.view.select_dog_listView
 import retrofit2.Call
@@ -28,17 +28,9 @@ import retrofit2.Response
 class CheckFragment : Fragment() {
 
     var checkItemList : ArrayList<CheckItem> = arrayListOf(
-        CheckItem("목줄"),
-        CheckItem("식수"),
-        CheckItem("입마개"),
-        CheckItem("배변봉투")
     )
 
     var selectDogList : ArrayList<SelectDog> = arrayListOf(
-        SelectDog("뽀삐"),
-        SelectDog("금강이"),
-        SelectDog("부가티"),
-        SelectDog("레오")
     )
 
 
@@ -57,11 +49,19 @@ class CheckFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val edit = pref.edit()
 
+        val userCheckList = pref.getString("checkList", "")
+        val checkList = userCheckList.split("//")
+        checkList.forEach(fun(check) {
+            if (check != "") {
+                checkItemList.add(CheckItem(check))
+            }
+        })
         val checkItemAdapter = CheckListAdapter(context!!, checkItemList)
         checkListView.adapter = checkItemAdapter
 
-        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
         val lat: String? = pref.getString("latitude", "0")
         val lon: String? = pref.getString("longitude", "0")
@@ -173,12 +173,15 @@ class CheckFragment : Fragment() {
 
             add_check_btn.setOnClickListener {
                 if(dialogText.text.isNotBlank() && dialogText.text.isNotEmpty())
+                    pref.getString("checkList", "")
+                    val edit = pref.edit()
+                    edit.putString("checkList", userCheckList + "//" + dialogText.text.toString())
+
                     checkItemList.add(
                         CheckItem(
                             dialogText.text.toString()
                         )
                     )
-
                 popup.dismiss()
             }
 
@@ -189,25 +192,69 @@ class CheckFragment : Fragment() {
 
         //산책측정 액티비티로 넘어가는 함수
         switch_btn_to_walking.setOnClickListener {
-            val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref.getString("userToken", "")
+            var myPetInfo = mutableMapOf<String, Double>()
+            // 등록된 애견 정보 가져오기
+            val myPetRetrofit = WalkingRetrofitCreators(context!!).WalkingRetrofitCreator()
+            myPetRetrofit.getMyPet(userToken!!).enqueue(object : Callback<MyPetListModel> {
+                override fun onFailure(call: Call<MyPetListModel>, t: Throwable) {
+                    Log.d("DEBUG", "My Pet Retrofit failed!!")
+                    Log.d("DEBUG", t.message)
+                    Toast.makeText(context!!, "애견 목록 수신에 실패하였습니다. 네트워크를 확인해주세요.", Toast.LENGTH_LONG).show()
+                }
 
-            val wBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!).setView(wDialogView)
+                override fun onResponse(call: Call<MyPetListModel>, response: Response<MyPetListModel>) {
+                    val error = response.body()?.error
+                    val myPetList = response.body()?.myPetList
+                    if (myPetList!!.size == 0) {
+                        var intent = Intent(context, AddPet::class.java)
+                        startActivity(intent)
+                        Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    myPetList!!.forEach(fun(pet) {
+                        selectDogList.add(SelectDog(pet.animalName))
+                        myPetInfo[pet.animalName] = pet.weight
+                    })
+                    // 애견 체크 페이지
+                    val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
+                    val wBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!).setView(wDialogView)
+                    val wAlertDialog = wBuilder.show()
+                    val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
 
-            val wAlertDialog = wBuilder.show()
+                    wDialogView.select_dog_listView.adapter = selectDogAdapter
+                    wDialogView.selectDog_popup_delete_btn.setOnClickListener {
+                        wAlertDialog.dismiss()
+                    }
 
-            val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
-            wDialogView.select_dog_listView.adapter = selectDogAdapter
+                    wDialogView.selectDog_popup_complete_btn.setOnClickListener {
+                        val checkedName = selectDogAdapter.getCheckedName()
+                        if (checkedName.size == 0) {
+                            Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
+                        } else {
+                            myPetInfo.forEach(fun(name, weight) {
+                                if(checkedName.indexOf(name) == -1) {
+                                    myPetInfo.remove(name)
+                                }
+                            })
 
-            wDialogView.selectDog_popup_delete_btn.setOnClickListener {
-                wAlertDialog.dismiss()
-            }
-
-            wDialogView.selectDog_popup_complete_btn.setOnClickListener {
-
-                var intent = Intent(context, WalkingActivity::class.java)
-                startActivity(intent)
-                wAlertDialog.dismiss()
-            }
+                            // 인텐트에 애견 정보 매달기
+                            val animalName = arrayListOf<String>()
+                            val animalWeight = arrayListOf<Double> ()
+                            myPetInfo.forEach(fun(name, weight) {
+                                animalName.add(name)
+                                animalWeight.add(weight)
+                            })
+                            val intent = Intent(context, WalkingActivity::class.java)
+                            intent.putExtra("animalName", animalName)
+                            intent.putExtra("animalWeight", animalWeight)
+                            startActivity(intent)
+                            wAlertDialog.dismiss()
+                        }
+                    }
+                }
+            })
         }
 
     }

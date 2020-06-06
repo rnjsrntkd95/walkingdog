@@ -25,7 +25,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   })
 );
 
@@ -35,7 +35,8 @@ app.set("jwt-secret", config.secret);
 // User Token Decoding
 app.use((req, res, next) => {
   console.log(req.path);
-  if (req.path === "/login") {
+  if (req.path === "/login" || req.path === "/post/timeline"
+    || req.path === "/walking/route") {
     next();
   } else {
     const Jwt = require("jsonwebtoken");

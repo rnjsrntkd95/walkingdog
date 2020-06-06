@@ -6,7 +6,7 @@ const Post = require("../models/post");
 // create: 새로운 게시글 등록
 exports.createPost = async (req, res, next) => {
     // const userData = req.userToken.id;
-    const content = "내용3";
+    const content = "내용2";
     const requestFiles = req.files
     const walkingId = "5ed79c9c9b67a91bd803444d";
     const userData = '5eba8b5ca76e3e20f4b0659e';
@@ -54,10 +54,10 @@ exports.createPost = async (req, res, next) => {
 // 유저의 타임라인 조회
 exports.timeline = async (req, res, next) => {
     // const userData = req.userToken.id;
-    const addressAdmin = req.body.addressAdmin;
-    const addressLocality = req.body.addressLocality;
-    const addressThoroughfare = req.body.addressThoroughfare;
-    const searchType = req.body.searchType;
+    const addressAdmin = req.query.addressAdmin;
+    const addressLocality = req.query.addressLocality;
+    const addressThoroughfare = req.query.addressThoroughfare;
+    const searchType = req.query.searchType;
 
     try {
         if (addressAdmin && addressLocality && searchType) {
@@ -89,4 +89,26 @@ exports.timeline = async (req, res, next) => {
         console.log(err);
         res.json({ error: 1 });
     }
+}
+
+exports.deletePost = async (req, res, next) => {
+    // const userToken = req.userToken.id;
+    const postId = req.body.postId;
+    const userToken = "5eba8b5ca76e3e20f4b0659e"
+    
+
+    try {
+        const user =  await User.findOne({ _id: userToken });
+        if (!user) {
+            res.json({ error: -1 });
+        } else {
+            const regDelete = await Post.deleteOne({ _id: postId, user: user._id });
+            console.log(regDelete);
+            res.json({});
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    };
 }

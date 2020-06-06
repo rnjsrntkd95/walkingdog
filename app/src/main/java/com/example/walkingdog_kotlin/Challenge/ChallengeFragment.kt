@@ -150,6 +150,7 @@ class ChallengeFragment(context: Context) : Fragment() {
                     }
                 })
 
+                
                 cAlertDialog.dismiss()
             }
         }

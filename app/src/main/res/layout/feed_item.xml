@@ -29,7 +29,8 @@
                 android:text="nickname"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/myfeed_profile_img"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/dateTv"
@@ -37,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:text="2020년 5월 1일"
                 android:layout_toLeftOf="@+id/myfeed_locate_text"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/myfeed_locate_text"
@@ -47,7 +49,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/dogNameTv"
@@ -57,7 +60,8 @@
                 android:layout_toRightOf="@id/myfeed_profile_img"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/maplestory_light"/>
 
         <ImageView
                 android:layout_width="20dp"
@@ -132,14 +136,16 @@
                 android:layout_weight="1"
                 android:text="산책시간"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/walkingTimeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="01:10:21" />
+                android:text="01:10:21"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -147,14 +153,16 @@
                 android:layout_weight="1"
                 android:text="거리"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/walkingDistanceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1km" />
+                android:text="1km"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -162,35 +170,16 @@
                 android:layout_weight="1"
                 android:text="칼로리"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:id="@+id/walkingCalory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1500kcal" />
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-            <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/favorite_love" />
-
-            <TextView
-                    android:id="@+id/likesTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100" />
-
-        </LinearLayout>
-
+                android:text="1500kcal"
+                android:fontFamily="@font/maplestory_light"/>
 
     </LinearLayout>
 
@@ -208,7 +197,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="write comments..."/>
+                android:text="write comments..."
+                android:fontFamily="@font/maplestory_light"/>
     </LinearLayout>
 
 

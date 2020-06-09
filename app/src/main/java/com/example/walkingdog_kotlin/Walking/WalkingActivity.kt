@@ -1,6 +1,7 @@
 package com.example.walkingdog_kotlin.Walking
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.walkingdog_kotlin.Post.WritePost
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
@@ -173,6 +175,13 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
                 // 등록에 실패했을 때 후 처리
 
                 // 산책 등록 후 처리 - 액티비티 이동
+                if (error == null) {
+                    val intent = Intent(this@WalkingActivity, WritePost::class.java)
+                    intent.putExtra("walkingId", walkingId)
+                    startActivity(intent)
+                    finish()
+                }
+
 
             }
         })

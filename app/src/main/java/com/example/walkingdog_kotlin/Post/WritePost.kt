@@ -52,18 +52,20 @@ class WritePost : AppCompatActivity() {
 
     val REQUEST_CODE = 200
 
-    var uploadImageList = arrayListOf<UploadImage>(
-    )
-    var imageAbsolutePath = ""
+    var uploadImageList = arrayListOf<UploadImage>()
     var images = ArrayList<MultipartBody.Part>()
-    var fileTest:File? = null
-//    var images: MultipartBody.Part? = null
-
+    var walkingId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
 
+        walkingId = intent.getStringExtra("walkingId")
+        if (walkingId == "") {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         writePost_back_btn.setOnClickListener {

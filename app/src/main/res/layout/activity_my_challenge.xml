@@ -9,7 +9,7 @@
 <!--    상단 앱바-->
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:background="@drawable/weather_bar_shape">
 
         <ImageView
@@ -18,7 +18,8 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/back_arrow"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/white"/>
 
         <TextView
                 android:id="@+id/myChallengeTitle"
@@ -28,7 +29,8 @@
                 android:textSize="16dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
     </RelativeLayout>
 
     <ScrollView
@@ -43,8 +45,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:orientation="horizontal"
-                    android:background="@drawable/gray_shape"
-                    android:layout_margin="20dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/mainGray"
+                    android:layout_margin="10dp"
                     android:elevation="20dp">
                 <!--                2등 레이아웃-->
                 <LinearLayout
@@ -66,7 +69,8 @@
                             android:id="@+id/secondPerson"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2등 닉네임"/>
+                            android:text="2등 닉네임"
+                            android:fontFamily="@font/maplestory_light"/>
                 </LinearLayout>
 <!--                1등 레이아웃-->
                 <LinearLayout
@@ -87,7 +91,8 @@
                             android:id="@+id/firstPerson"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1등 닉네임"/>
+                            android:text="1등 닉네임"
+                            android:fontFamily="@font/maplestory_light"/>
 
                 </LinearLayout>
 
@@ -109,7 +114,8 @@
                             android:id="@+id/thirdPerson"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3등 닉네임"/>
+                            android:text="3등 닉네임"
+                            android:fontFamily="@font/maplestory_light"/>
                 </LinearLayout>
             </LinearLayout>
 <!--             내기록 레이아웃-->
@@ -120,8 +126,10 @@
                     android:orientation="vertical"
                     android:padding="10dp"
                     android:gravity="center"
-                    android:background="@drawable/orange_shape"
-                    android:layout_margin="20dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="#F18C8C"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:elevation="20dp">
                 <TextView
                         android:layout_width="wrap_content"
@@ -129,7 +137,8 @@
                         android:text="나의 기록"
                         android:layout_marginBottom="10dp"
                         android:textStyle="bold"
-                        android:textSize="14dp"/>
+                        android:textSize="14dp"
+                        android:fontFamily="@font/maplestory_light"/>
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -146,12 +155,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="순위"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:id="@+id/rankingFigureTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="수치"/>
+                                android:text="수치"
+                                android:fontFamily="@font/maplestory_light"/>
 
                     </LinearLayout>
                     <!--                내 산책횟수 레이아웃-->
@@ -166,12 +177,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="산책 횟수"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:id="@+id/walkingFigureTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="산책 횟수 수치 "/>
+                                android:text="산책 횟수 수치 "
+                                android:fontFamily="@font/maplestory_light"/>
 
                     </LinearLayout>
                     <!--                    내 산책 충족량 레이아웃-->
@@ -186,12 +199,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="산책 충족량"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:id="@+id/satisfiedQuantityFigureTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="충족량 수치"/>
+                                android:text="충족량 수치"
+                                android:fontFamily="@font/maplestory_light"/>
                     </LinearLayout>
                     <!--                    내 점수 레이아웃-->
                     <LinearLayout
@@ -205,12 +220,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="점수"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:id="@+id/scoreFigureTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="점수 수치"/>
+                                android:text="점수 수치"
+                                android:fontFamily="@font/maplestory_light"/>
 
                     </LinearLayout>
 
@@ -221,21 +238,23 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp">
+                    android:padding="10dp">
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="10dp"
-                        android:background="@drawable/gray_shape">
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/mainGray">
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="참여자 기록 정보"
                             android:layout_marginBottom="10dp"
                             android:textStyle="bold"
-                            android:textSize="14dp"/>
+                            android:textSize="14dp"
+                            android:fontFamily="@font/maplestory_light"/>
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -246,35 +265,40 @@
                                 android:text="순위"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="닉네임"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="산책 횟수"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="산책 충족량"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="점수"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/maplestory_light"/>
                     </LinearLayout>
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -299,10 +323,14 @@
 
                 <Button
                         android:id="@+id/cancelChallenge"
-                        android:layout_width="100dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@drawable/btn_shape"
-                        android:text="취소하기" />
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/green1"
+                        android:text="취소하기"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/maplestory_light"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
@@ -26,6 +27,10 @@ class MyChallengeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_challenge)
+
+        this.window.statusBarColor = (ContextCompat.getColor(this,
+            R.color.green2
+        ))
 
         val mAdapter = PCRvAdapter(this, pcList)
         participatedChallengeListRecyclerview.adapter = mAdapter

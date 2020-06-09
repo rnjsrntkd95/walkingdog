@@ -18,5 +18,8 @@
     <color name="mapboxBlue">#4264fb</color>
     <color name="mapboxGrayLight">#c6d2e1</color>
 
+    <color name="green1">#ACE7DF</color>
+    <color name="green2">#86CFC6</color>
+
     <color name="gray">#cccccc</color>
 </resources>

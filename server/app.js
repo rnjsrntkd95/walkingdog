@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 });
 
 // Use Router
-app.use("/testPost", loginRouter);
+app.use("/login", loginRouter);
 app.use("/animal", animalRouter);
 app.use("/walking", walkingRouter);
 app.use("/post", postRouter);

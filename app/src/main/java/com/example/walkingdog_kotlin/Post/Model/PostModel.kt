@@ -41,3 +41,7 @@ data class LocationModel (
 data class DeletePostModel (
     val error: Int
 )
+
+data class CreatePostModel (
+    val error: Int
+)

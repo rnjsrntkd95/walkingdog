@@ -19,7 +19,7 @@ const upload = multer({
 
 
 // Create:새로운 게시글 등록
-router.post('/create', upload.array('img'), controller.createPost);
+router.post('/create', upload.array("images"), controller.createPost);
 // 타임라인 조회
 router.get('/timeline', controller.timeline);
 // Delete:게시글 삭제

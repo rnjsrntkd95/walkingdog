@@ -1,9 +1,8 @@
 package com.example.walkingdog_kotlin.Post
 
-import com.example.walkingdog_kotlin.Post.Model.DeletePostModel
-import com.example.walkingdog_kotlin.Post.Model.PostListModel
-import com.example.walkingdog_kotlin.Post.Model.PostModel
-import com.example.walkingdog_kotlin.Post.Model.RouteModel
+import com.example.walkingdog_kotlin.Post.Model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -16,11 +15,11 @@ interface PostRetrofit {
     @GET("/walking/route")
     fun getRoute(@Query("walkingId") walkingId: String): Call<RouteModel>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("/post/create")
-    fun createPost(@Field("comment") comment: String,
-                   @Field("userToken") userToken: String,
-                   @Field("image") image: Unit): Call<PostModel>
+    fun createPost(@Header("userToken") userToken: String,
+                   @Part("comment") comment: RequestBody,
+                   @Part images: ArrayList<MultipartBody.Part>): Call<CreatePostModel>
 
     @DELETE("post/delete")
     fun deletePost(@Field("userToken") userToken: String,

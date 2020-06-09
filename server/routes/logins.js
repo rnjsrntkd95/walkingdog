@@ -4,7 +4,7 @@ var controller = require('./loginsController');
 const multer = require('multer');
 
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (req, file, cb) { 
       cb(null, 'public/uploads/users') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
     },
     filename: function (req, file, cb) {
@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { filesize: 5 *  1024 * 1024 }
+    limits: { filesize: 10 *  1024 * 1024 }
 });
 
 

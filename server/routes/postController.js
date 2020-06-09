@@ -6,11 +6,13 @@ const Post = require("../models/post");
 // create: 새로운 게시글 등록
 exports.createPost = async (req, res, next) => {
     // const userData = req.userToken.id;
-    const content = "내용2";
+    // const content = "내용2";
     const requestFiles = req.files
-    const walkingId = "5ed79c9c9b67a91bd803444d";
-    const userData = '5eba8b5ca76e3e20f4b0659e';
+    // const walkingId = "5ed79c9c9b67a91bd803444d";
+    // const userData = '5eba8b5ca76e3e20f4b0659e';
     let image = []
+    console.log(requestFiles)
+    console.log(req.body)
 
 
     // 새로운 POST의 Image 처리 
@@ -21,7 +23,7 @@ exports.createPost = async (req, res, next) => {
             image.push(file.path.replace('public\\', ''))
         }
     }
-
+    
     try {
         const user = await User.findOne({ _id: userData });
         const walking = await Walking.findOne({ _id: walkingId });

@@ -31,6 +31,8 @@ class FeedFragment() : Fragment() {
     }
 
     var feedList = arrayListOf<FeedContent>(
+        FeedContent(),
+        FeedContent()
     )
 
 
@@ -104,11 +106,11 @@ class FeedFragment() : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        //프래그먼트에서 상태바 아이콘 검은색으로 변경하는 코드
-        activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        //프래그먼트에서 상태바 배경색 변경하는 코드
+//        //프래그먼트에서 상태바 아이콘 검은색으로 변경하는 코드
+//        activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
         activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
-            R.color.mainGray
+            R.color.green2
         ))
     }
 }

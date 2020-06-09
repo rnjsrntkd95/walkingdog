@@ -72,7 +72,8 @@ class FeedAdaptor(
                         .into(feedImg)
                 })
             } else {
-                feedImg?.setImageResource(R.mipmap.ic_launcher)
+
+                feedImg?.setImageResource(R.drawable.dog03)
             }
 
             explain?.text = feedContent.explain

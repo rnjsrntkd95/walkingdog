@@ -8,15 +8,15 @@
     <LinearLayout
             android:id="@+id/weather_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/weather_bar_shape"
             android:gravity="center">
 
         <ImageView
                 android:id="@+id/weather_img"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/sunny_icon"
                 android:layout_weight="1"/>

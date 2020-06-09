@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Post.WritePost
+import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
@@ -52,11 +53,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walking)
-        animal = intent.getStringArrayListExtra("animalName")
-        val weights = intent.getDoubleArrayExtra("animalWeight")
-        weights.forEach(fun(weight) {
-            fullAmount.add(((weight*30)+70)*1.4)
-        })
+//        animal = intent.getStringArrayListExtra("animalName")
+//        val weights = intent.getDoubleArrayExtra("animalWeight")
+//        weights.forEach(fun(weight) {
+//            fullAmount.add(((weight*30)+70)*1.4)
+//        })
         // 현재 위치
         initView()
 
@@ -74,6 +75,11 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             timerSet()
             restartWalking()
         }
+
+        this!!.window.statusBarColor = (ContextCompat.getColor(this!!,
+            R.color.white
+        ))
+        this!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
 

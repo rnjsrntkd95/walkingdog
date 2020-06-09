@@ -11,7 +11,9 @@
         android:id="@+id/profile_top"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/bottomten_radius_shape"
+        android:backgroundTint="@color/green2">
 
     <LinearLayout
             android:id="@+id/my_profile"
@@ -21,12 +23,12 @@
             android:layout_marginTop="30dp">
 
         <TextView
-                android:layout_width="150dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="My Profile"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:gravity="center" />
+                android:fontFamily="@font/maplestory_bold"/>
     </LinearLayout>
 
 
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="Park Joon Sung"
                 android:textSize="20dp"
-                />
+                android:fontFamily="@font/maplestory_light"/>
 
     </LinearLayout>
 
@@ -83,10 +85,10 @@
         android:id="@+id/profile_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/profile_bottom"
         android:layout_below="@+id/profile_top"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
     <LinearLayout
             android:id="@+id/my_photos"
@@ -110,7 +112,8 @@
                 android:text="My Photos"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/maplestory_light">
 
         </TextView>
 
@@ -157,7 +160,8 @@
                 android:text="Statics"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/maplestory_light">
 
         </TextView>
 
@@ -205,7 +209,8 @@
                 android:text="My Challenge"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/maplestory_light">
 
         </TextView>
 
@@ -250,7 +255,8 @@
                 android:text="Settings"
                 android:layout_marginLeft="30dp"
                 android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/maplestory_light">
 
         </TextView>
 

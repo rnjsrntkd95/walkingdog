@@ -28,6 +28,7 @@ import retrofit2.Response
 class ChallengeFragment(context: Context) : Fragment() {
 
     var challengeList = arrayListOf<Challenge>(
+
     )
     var selected_challenge_title : String? = null
     var selected_challenge_content : String? = null

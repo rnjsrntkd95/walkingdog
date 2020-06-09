@@ -22,6 +22,13 @@ import retrofit2.Response
 class MyChallengeActivity : AppCompatActivity() {
 
     var pcList = arrayListOf<ParticipateChallenge>(
+        ParticipateChallenge("1", "김현진", "30", "100%", "100"),
+        ParticipateChallenge("2", "권구상", "28", "90%", "95"),
+        ParticipateChallenge("3", "김민정", "25", "85%", "90"),
+        ParticipateChallenge("4", "박준성", "10", "40%", "60"),
+        ParticipateChallenge("5", "이수만", "5", "30%", "40"),
+        ParticipateChallenge("6", "박진영", "3", "10%", "20")
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

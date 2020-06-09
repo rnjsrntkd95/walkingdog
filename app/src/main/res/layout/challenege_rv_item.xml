@@ -12,14 +12,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="챌린지 제목"/>
+            android:text="챌린지 제목"
+            android:textSize="16dp"
+            android:fontFamily="@font/maplestory_bold"/>
 
     <TextView
             android:id="@+id/challengeComment_Textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="challenge comment"
-            android:layout_centerVertical="true"/>
+            android:textSize="14dp"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/maplestory_light"/>
 
     <ImageView
             android:layout_width="20dp"
@@ -35,14 +39,18 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
-            android:text="인원"/>
+            android:text="인원"
+            android:textSize="14dp"
+            android:fontFamily="@font/maplestory_light"/>
 
     <TextView
             android:id="@+id/period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="기간:"/>
+            android:text="기간:"
+            android:textSize="14dp"
+            android:fontFamily="@font/maplestory_light"/>
 
     <TextView
             android:id="@+id/challengePeriod_Textview"
@@ -50,6 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="4월 15일 ~ 4월 21일"
-            android:layout_toRightOf="@+id/period"/>
+            android:layout_toRightOf="@+id/period"
+            android:textSize="14dp"
+            android:fontFamily="@font/maplestory_light"/>
 
 </RelativeLayout>

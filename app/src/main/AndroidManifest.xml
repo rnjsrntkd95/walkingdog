@@ -21,6 +21,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".ProfileAddPetActivity"></activity>
+        <activity android:name=".ProfileAddPet" />
         <activity android:name=".Challenge.Create_ChallengeActivity" />
         <activity android:name=".Post.WritePost" />
         <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
@@ -35,7 +37,6 @@
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Statics" />
-        <activity android:name=".MyChallenge" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" /> <!-- <activity android:name=".WalkingActivity" /> -->
         <activity android:name=".Animal.AddPet" />

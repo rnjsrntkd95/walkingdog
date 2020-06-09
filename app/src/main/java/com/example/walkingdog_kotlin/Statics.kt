@@ -30,11 +30,6 @@ class Statics : AppCompatActivity() {
     var yester=yesterday_month.format(DateTimeFormatter.ofPattern("MM"))
 
 
-
-
-
-
-
     var history_list = arrayListOf<StaticsItem>(
 
         StaticsItem("${today_month}/${today_date}","${kcal}", "00","32","22" ),
@@ -48,12 +43,12 @@ class Statics : AppCompatActivity() {
         setContentView(R.layout.activity_statics)
 
         var sum_kcal=findViewById<TextView>(R.id.sum_kcal_tv)
-//      var sum_time=findViewById<TextView>(R.id.sum_kcal_tv)
+        var sum_time=findViewById<TextView>(R.id.sum_kcal_tv)
 
-        for(i in 0..history_list.size){
-            sum+=(history_list[i].cal).toInt()
-        }
-        sum_kcal.text=sum.toString()
+//        for(i in 0..history_list.size){
+//            sum+=(history_list[i].cal).toInt()
+//        }
+//        sum_kcal.text=sum.toString()
 
 
 
@@ -71,11 +66,6 @@ class Statics : AppCompatActivity() {
         var list =arrayListOf<BarModel>(
         )
 
-//        for(j in 0 until history_list.size()){
-////        if(today_month!=history_list[j]){
-////            list.add(BarModel("${+1}",0.0f, -0xedcbaa)
-////        }
-////        }
 
         for(i in 1..day_arr[today_month.toInt()-1].toInt()) {
             if(i==today_date.toInt()) {

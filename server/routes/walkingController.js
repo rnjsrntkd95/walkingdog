@@ -6,25 +6,21 @@ const UserChallenge = require('../models/userChallenge');
 
 
 exports.createWalking = async (req, res, next) => {
-    console.log(req.body)
-    // const userData = req.userToken.id;
-    const calorie = 0;
-    const distance = 0;
-    const walkingTime = 0;
-    const walkingAmounts = [];
-    const addressAdmin = "경기도";
-    const addressLocality = "수원시"
-    const addressThoroughfare = "연무동"
-    const animal = ["까까", "브라우니"];
-    const userData = "5eba8b5ca76e3e20f4b0659e";
-    // const requestFile = req.file;
-    let routeImage = "";
+    const userData = req.userToken.id;
+    const calorie = req.body.calorie;
+    const distance = req.body.distance;
+    const walkingTime = req.body.walkingTime;
+    const addressAdmin = req.body.addressAdmin;
+    const addressLocality = req.body.addressLocality;
+    const addressThoroughfare = req.body.addressThoroughfare;
+    const animal = req.body.animal;
     let route = [];
     let toiletLoc = []
-    const requestWalkingAmounts = [40, 50];
-    const requestRoute = [[123.123, 123.555], [11.22231, 451.222]];
-    const requestToiletLoc = [[123.123, 123.555], [11.22231, 451.222]];
+    let walkingAmounts = [];
 
+    const requestRoute = req.body.route;
+    const requestToiletLoc = req.body.toiletLoc;
+    const requestWalkingAmounts = req.body.walkingAmounts;
 
     // 산책 경로 위도, 경도 후처리
     requestRoute.forEach((loc) => {
@@ -69,7 +65,7 @@ exports.createWalking = async (req, res, next) => {
 
         // 유저가 챌린지에 참여 중이면 기록 갱신
         const challengeList = await UserChallenge.find({ userId: userData });
-        // console.log(challengeList)
+
         if (challengeList) {
             challengeList.forEach(async challenge => {
                 const challengeId = challenge.challengeId;
@@ -99,7 +95,7 @@ exports.showRoute = async (req, res, next) => {
 
     try {
         const walking = await Walking.findOne({ _id: walkingId }).select("route toiletLoc");
-        console.log(walking)
+
         res.json({ route: walking.route, toiletLoc: walking.toiletLoc });
     } catch (err) {
         console.log(err);

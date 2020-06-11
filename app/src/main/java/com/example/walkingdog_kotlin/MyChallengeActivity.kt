@@ -48,12 +48,12 @@ class MyChallengeActivity : AppCompatActivity() {
 
 //        챌린지 유저 가져오기
         val pref = this.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userToken = pref.getString("userToken", "5ebac6bd59e3d32080d6d941")
+        val userToken = pref.getString("userToken", "")
         val challengeId = intent.getStringExtra("challengeId")
         var code = 0
 
         val challengeDetailRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
-        challengeDetailRetrofit.getUserList(userToken, challengeId).enqueue(object : Callback<ChallengeUserListModel> {
+        challengeDetailRetrofit.getUserList(userToken!!, challengeId).enqueue(object : Callback<ChallengeUserListModel> {
             override fun onFailure(call: Call<ChallengeUserListModel>, t: Throwable) {
                 Log.d("DEBUG", " Challenge Retrofit failed!!")
                 Log.d("DEBUG", t.message)
@@ -97,7 +97,7 @@ class MyChallengeActivity : AppCompatActivity() {
                 }
                 override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
                     Log.d("DEBUG", " Challenge Retrofit SUCCESS!!")
-                    var msg = response.body()?.msg.toString()
+                    val msg = response.body()?.msg.toString()
                     Toast.makeText(this@MyChallengeActivity, "$msg", Toast.LENGTH_LONG).show()
                 }
             })

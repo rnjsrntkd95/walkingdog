@@ -12,8 +12,8 @@ exports.logIn = async (req, res, next) => {
   const secret = req.app.get("jwt-secret");
 
   try {
+    let nickname = "";
     let userObj = await User.findOne({ email, password });
-    let nickname = null;
 
     if (!userObj) {
       // User를 DB에 저장
@@ -22,10 +22,11 @@ exports.logIn = async (req, res, next) => {
         password,
       });
       const resultReg = await User.create(newUser);
-      userObj = await User.findOne({ email, password });
-    } else {
-      //..?
+      userObj = newUser;
     }
+
+    nickname = userObj.nickname;
+    
     // 토큰 발행
     Jwt.sign(
       {
@@ -40,33 +41,34 @@ exports.logIn = async (req, res, next) => {
         subject: "userInfo",
       },
       function (err, loginToken) {
-        if (err) res.json({ err });
+        if (err) res.json({ error: 1 });
         else res.json({ loginToken, nickname });
       }
     );
   } catch (err) {
     if (err.errors.password.message != undefined) {
+      console.log(err)
       res.json({
-        error: "2",
+        error: 2,
         message: err.errors.password.message,
       });
     } else if (err.errors.password.email.message != undefined) {
       res.json({
-        error: "1",
+        error: 3,
         message: err.errors.email.message,
       });
     } else {
-      res.json(err);
+      console.log(err)
+      res.json({ error: 4});
     }
   }
 };
 
 exports.setNickname = async (req, res, next) => {
-  const userData = req.userToken;
+  const userData = req.userToken.id;
   const nickname = req.body.nickname;
-  const requestFiles = req.file;
-  console.log("토큰값: " + req.userToken);
-  console.log(req.body);
+  const requestFile = req.file;
+
   //   if (!requestFiles) {
   //     image.push('uploads\\default.jpg')
   // } else {
@@ -76,7 +78,7 @@ exports.setNickname = async (req, res, next) => {
   // }
   try {
     await User.findOneAndUpdate(
-      { _id: "5ebac6bd59e3d32080d6d941" },
+      { _id: userData },
       { $set: { nickname } },
       {
         new: true,
@@ -87,7 +89,7 @@ exports.setNickname = async (req, res, next) => {
         context: "query",
       }
     );
-    if (requestFiles) {
+    if (requestFile) {
       await User.findOneAndUpdate(
         { _id: "5ebac6bd59e3d32080d6d941" },
         { $set: { profileImage: requestFiles.path.replace("public\\", "") } },
@@ -95,17 +97,18 @@ exports.setNickname = async (req, res, next) => {
       );
     }
 
-    res.json({});
+    res.json({ });
   } catch (err) {
     console.log(err);
     if (err.errors.nickname.message != undefined) {
       res.json({
-        error: "3",
+        error: 3,
         message: err.errors.nickname.message,
       });
+    } else {
+      if (err.code === 11000) res.json({ error: 11000 });
+      else res.json({ error: 10000 });
     }
-    //res 중복으로 오류 뜰텐데 ㄱㅊ
-    if (err.code === 11000) res.json({ error: 11000 });
-    else res.json({ error: 10000 });
+
   }
 };

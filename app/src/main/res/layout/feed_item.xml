@@ -84,8 +84,7 @@
                 android:id="@+id/feed_main_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/toptenradius_shape"
-                android:scaleType="fitXY">
+                android:background="@drawable/toptenradius_shape">
         </ImageView>
 
         <ImageView

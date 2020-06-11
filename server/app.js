@@ -6,6 +6,7 @@ const logger = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const config = require("./config");
+const User = require('./models/user');
 
 // Router
 const loginRouter = require("./routes/logins");
@@ -33,18 +34,30 @@ app.use(
 app.set("jwt-secret", config.secret);
 
 // User Token Decoding
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   console.log(req.path);
   if (req.path === "/login" || req.path === "/post/timeline"
-    || req.path === "/walking/route") {
+    || req.path === "/walking/route" || req.path === "/animal/breed-list"
+    || req.path === "/challenge/search") {
     next();
   } else {
     const Jwt = require("jsonwebtoken");
     const token = req.body.userToken;
-    // if (!token) res.json({ error: -1 })
+    if (!token) {
+      res.json({ error: 1004 });
+      return
+    }
+    // 토큰 해석
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);
-    req.userToken = decodedToken;
+
+    let user = await User.findOne({ _id: decodedToken.id });
+    console.log(`유저접속: ${user.email}`);
+    if (!user) {
+      res.json({ error: 1004 });
+      return
+    }
+    req.userToken = decodedToken;    
     next();
   }
 });

@@ -56,6 +56,8 @@ class SessionCallback(val context: LoginActivity) : ISessionCallback {
                         val token = response.body()?.loginToken
                         val nickname = response.body()?.nickname
 
+                        Log.d("토큰", token + nickname)
+
                         if (token != null) {
                             val pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE)
                             val edit = pref.edit()

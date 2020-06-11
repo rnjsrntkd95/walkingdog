@@ -5,23 +5,13 @@ const Animal = require("../models/animal");
 const UserChallenge = require("../models/userChallenge");
 
 exports.createChallenge = async (req, res, next) => {
-  console.log(req.body);
-  // const userData = req.userToken.id;
-  const userData = req.body.userToken;
+  const userData = req.userToken.id;
   const title = req.body.title;
   const content = req.body.content;
   const breed = req.body.breed;
   const populationLimit = req.body.populationLimit;
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
-
-  // const title = "새로운 챌린지";
-  // const content = "챌린지 모여라~";
-  // const populationLimit = 50;
-  // const start_date = '2020-05-19';
-  // const end_date = "2020-08-01";
-  // const userData = '5eba8b5ca76e3e20f4b0659e';
-  // challenge의 고유 id를 반환해줘야 함.
 
   try {
     if (userData == "0") {
@@ -61,10 +51,9 @@ exports.createChallenge = async (req, res, next) => {
 
 exports.joinChallenge = async (req, res, next) => {
   console.log(req.body);
-  const userData = req.body.userToken;
+  const userData = req.userTokne.id;
   const challengeId = req.body._id;
-  // const userData = "5eba8b5ca76e3e20f4b0659e";
-  // const challengeId = "5ec28c44abe2802874204a43";
+
   try {
     const user = await User.findOne({ _id: userData });
     // 같은 챌린지 중복 참여 방지
@@ -103,29 +92,6 @@ exports.joinChallenge = async (req, res, next) => {
 };
 
 exports.searchChallenge = async (req, res, next) => {
-  // res.json({
-  //   challenges: [
-  //     {
-  //       title: "새로운 챌린지",
-  //       content: "챌린지 모여라~",
-  //       population: 50,
-  //       start_date: "2020-06-02",
-  //       end_date: "2020-06-16",
-  //       _id: "5eba8b5ca76e3e20f4b0659e",
-  //     },
-  //   ],
-  //   popularChallenge: [
-  //     {
-  //       title: "인기 챌린지",
-  //       content: "챌린지 모여라~",
-  //       population: 50,
-  //       start_date: "2020-06-02",
-  //       end_date: "2020-06-16",
-  //       _id: "5eba8b5ca76e3e20f4b0659e",
-  //     },
-  //   ],
-  //   error: 1,
-  // });
   try {
     // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
     const challenges = await Challenge.find({}).sort("-start_date");
@@ -144,10 +110,9 @@ exports.searchChallenge = async (req, res, next) => {
 };
 
 exports.dropChallenge = async (req, res, next) => {
-  const userData = req.query.userToken;
+  const userData = req.userToken.id;
   const challengeId = req.query._id;
-  // const userData = "5eba8b5ca76e3e20f4b0659e";
-  // const challengeId = "5ec28c44abe2802874204a43";
+
   try {
     const challenge = await Challenge.findByIdAndUpdate(
       { _id: challengeId },
@@ -164,8 +129,7 @@ exports.dropChallenge = async (req, res, next) => {
 
 // 챌린지에 참여하는 유저 정보를 가져와야함.
 exports.usersInChallenge = async (req, res, next) => {
-  console.log(req.body);
-  const userData = req.body.userToken;
+  const userData = req.userToken.id;
   const challengeId = req.body.challengeId;
   try {
     const myChallenge = await UserChallenge.find({
@@ -185,16 +149,15 @@ exports.usersInChallenge = async (req, res, next) => {
 };
 
 exports.getMyChallengeId = async (req, res, next) => {
-  console.log(req.query);
-  const userData = req.query.userToken;
+  const userData = req.userToken.id;
   try {
     const myChallenge = await UserChallenge.find({ userId: userData }).populate(
       "userId",
       "nickname"
     );
     res.json({ myChallenge });
-    console.log(myChallenge);
   } catch (err) {
     console.log(err);
+    res.json({ error: 1 });
   }
 };

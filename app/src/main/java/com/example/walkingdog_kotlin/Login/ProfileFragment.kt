@@ -31,53 +31,55 @@ import retrofit2.Response
 
 
 class ProfileFragment : Fragment() {
-        var challenge = ""
-        var isExisted : Boolean = true //현재 신청한 챌린지가 있는지 구분하는 변수
+    private val OPEN_GALLERY = 0
 
-    private val OPEN_GALLERY=0
-    var my_name: String? = null
+
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    //google client
-    private lateinit var googleSignInClient: GoogleSignInClient
 
     private val RC_SIGN_IN = 99
 
-//    private var callback: SessionCallback =
-//        SessionCallback(this)
 
-    var addpet_list= arrayListOf<ProfileItem>(
+    var addpet_list = arrayListOf<ProfileItem>(
 
         ProfileItem("dog00"),
         ProfileItem("dog01")
     )
 
 
-
-    private var auth = FirebaseAuth.getInstance()
-
-
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            return inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
 
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+
+
+        val addpetAdapter = Addpet_RVAdapter(context!!, addpet_list)
+
+        add_recyclerView.adapter = addpetAdapter
+        val lm = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        add_recyclerView.layoutManager = lm
+        add_recyclerView.setHasFixedSize(true)
+
+
+        super.onActivityCreated(savedInstanceState)
+
+
+        var sum_kcal = view?.findViewById<TextView>(R.id.profile_name)
+
+        statics.setOnClickListener {
+            val intent = Intent(context, Statics::class.java)
+            startActivity(intent)
         }
 
-
-        override fun onActivityCreated(savedInstanceState: Bundle?) {
-
-
-            val addpetAdapter=Addpet_RVAdapter(context!!, addpet_list)
-
-            add_recyclerView.adapter=addpetAdapter
-            val lm = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            add_recyclerView.layoutManager = lm
-            add_recyclerView.setHasFixedSize(true)
-
+        myChallenge_layout.setOnClickListener {
+            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref?.getString("userToken", "")
 
             super.onActivityCreated(savedInstanceState)
 
@@ -96,83 +98,79 @@ class ProfileFragment : Fragment() {
                         Log.d("DEBUG", " Challenge Retrofit failed!!")
                         Log.d("DEBUG", t.message)
                     }
-                    override fun onResponse(call: Call<myChallengeId>, response: Response<myChallengeId>) {
-                        challenge = response.body()?.myChallenge!![0].challengeId
-                        Log.d("sdlfjdasljfl", challenge)
+
+                    override fun onResponse(
+                        call: Call<myChallengeId>,
+                        response: Response<myChallengeId>
+                    ) {
+                        val challenge = response.body()?.myChallenge!![0].challengeId
+                        if (challenge == null) {
+                            (activity as MainActivity).bottom_navigation.selectedItemId =
+                                R.id.action_challenge
+                        } else {
+                            val intent = Intent(context, MyChallengeActivity::class.java)
+                            intent.putExtra("challengeId", challenge)
+                            startActivity(intent)
+                        }
                     }
                 })
-                if(isExisted) {     //신청한 챌린지가 존재한다면
-                    var intent = Intent(context, MyChallengeActivity::class.java)
-                    intent.putExtra("challengeId", challenge)
-                    startActivity(intent)
-                } else {
-                    //신청한 챌린지가 없다면
-                    //챌린지 프래그먼트 창으로 이동시킨다.
-                    (activity as MainActivity).bottom_navigation.selectedItemId = R.id.action_challenge
-                }
-
-            }
+        }
 
 //            settings.setOnClickListener {
 //                val intent =Intent(context,Settings::class.java)
 //                startActivity(intent)
 //            }
-            myprofile_img_btn.setOnClickListener(){
+        myprofile_img_btn.setOnClickListener() {
 
-                loadImage()
-            }
+            loadImage()
+        }
 
-            logoutLayout.setOnClickListener {
-                var intent = Intent(context, LoginActivity::class.java)
-                startActivity(intent)
-                auth.signOut()
-                Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
-            }
+        logout_btn.setOnClickListener {
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val edit = pref.edit()
+            edit.remove("userToken")
+            edit.apply()
 
-            add_pet_btn.setOnClickListener{
-                var intent = Intent(context, ProfileAddPetActivity::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+        }
+
+        add_pet_btn.setOnClickListener {
+            var intent = Intent(context, ProfileAddPetActivity::class.java)
+            startActivity(intent)
+        }
 
 
-}
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode==OPEN_GALLERY){
-            if(requestCode==RESULT_OK){
+        if (resultCode == OPEN_GALLERY) {
+            if (requestCode == RESULT_OK) {
 
-                var currentImageUrl:Uri?=data?.data
+                var currentImageUrl: Uri? = data?.data
 
-                try{
-                    val bitmap=MediaStore.Images.Media.getBitmap(context?.contentResolver,currentImageUrl)
+                try {
+                    val bitmap =
+                        MediaStore.Images.Media.getBitmap(context?.contentResolver, currentImageUrl)
                     myprofile_img_btn.setImageBitmap(bitmap)
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
-        } else{
-            Log.d("ActivityResult","something wrong")
+        } else {
+            Log.d("ActivityResult", "something wrong")
         }
     }
 
-    private fun loadImage(){
-        val intent=Intent()
-        intent.type="image/*"
-        intent.action=Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent,"Load Picture"),OPEN_GALLERY)
+    private fun loadImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Load Picture"), OPEN_GALLERY)
     }
-
-    private fun signOut() { // 로그아웃
-        // Firebase sign out
-        firebaseAuth.signOut()
-
-        // Google sign out
-  //      googleSignInClient.signOut().addOnCompleteListener(context) {
-            //updateUI(null)
- //       }
-    }
-
-    }
+}
 
 

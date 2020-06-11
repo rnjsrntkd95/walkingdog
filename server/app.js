@@ -52,7 +52,8 @@ app.use(async (req, res, next) => {
     const decodedToken = Jwt.decode(token, secret);
 
     let user = await User.findOne({ _id: decodedToken.id });
-    console.log(`유저접속: ${user.email}`);
+    console.log("////////////////////////////////////")
+    console.log(`유저접속: ${decodedToken}, ${user.email}`);
     if (!user) {
       res.json({ error: 1004 });
       return

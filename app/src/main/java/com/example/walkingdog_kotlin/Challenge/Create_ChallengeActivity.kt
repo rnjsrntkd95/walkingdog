@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin.Challenge
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -8,6 +9,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
+import com.example.walkingdog_kotlin.Challenge.Model.CreateChallengeResultModel
+import com.example.walkingdog_kotlin.MyChallengeActivity
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_create__challenge.*
 import kotlinx.android.synthetic.main.fragment_challenge.*
@@ -124,22 +127,26 @@ class Create_ChallengeActivity : AppCompatActivity() {
             Log.d("DEBUG2", target.toString())
 
             val pref = PreferenceManager.getDefaultSharedPreferences(this)
-            var userToken = pref.getString("token", "5ebac6bd59e3d32080d6d941")
+            var userToken = pref.getString("token", "")
 
             val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
-             challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<ChallengeModel> {
-                override fun onFailure(call: Call<ChallengeModel>, t: Throwable) {
-                    Log.d("DEBUG", "Retrofit Failed!!")
+             challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<CreateChallengeResultModel> {
+                override fun onFailure(call: Call<CreateChallengeResultModel>, t: Throwable) {
+                    Log.d("DEBUG", "Create Challenge Retrofit Failed!!")
                     Log.d("DEBUG", t.message)
                 }
                 override fun onResponse(
-                    call: Call<ChallengeModel>,
-                    response: Response<ChallengeModel>
+                    call: Call<CreateChallengeResultModel>,
+                    response: Response<CreateChallengeResultModel>
                 ) {
-                    Log.d("DEBUG", "Retrofit Success!!")
-                    val title = response.body()?.title
-                    Log.d("TAG", "title: " + title)
-
+                    Log.d("DEBUG", "Create Challenge Retrofit Success!!")
+                    val challengeId = response.body()?.challengeId
+                    if (challengeId == null || challengeId =="") {
+                        return
+                    }
+                    val intent = Intent(this@Create_ChallengeActivity, MyChallengeActivity::class.java)
+                    intent.putExtra("challengeId", challengeId)
+                    startActivity(intent)
                 }
             })
 

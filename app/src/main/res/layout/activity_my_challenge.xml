@@ -150,25 +150,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
                     <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="44dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_weight="0.5"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical">
+
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="순위"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"
-                                android:fontFamily="@font/maplestory_light"/>
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="순위"
+                                android:textStyle="bold" />
+
                         <TextView
                                 android:id="@+id/rankingFigureTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
-                                android:fontFamily="@font/maplestory_light"/>
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="1" />
 
                     </LinearLayout>
                     <!--                내 산책횟수 레이아웃-->
@@ -323,7 +326,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:gravity="center">
@@ -334,12 +337,23 @@
                         android:layout_height="50dp"
                         android:background="@drawable/tenradius_shape"
                         android:backgroundTint="@color/green1"
-                        android:text="취소하기"
+                        android:text="포기하기"
                         android:textSize="16dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/maplestory_light"/>
-            </LinearLayout>
+                <Button
+                        android:id="@+id/joinChallenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/green1"
+                        android:text="가입하기"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/maplestory_light"/>
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

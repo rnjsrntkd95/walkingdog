@@ -38,7 +38,7 @@ class ChallengeFragment(context: Context) : Fragment() {
     var error = 0
 
     val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
-    val userToken = pref.getString("userToken", "5ebac6bd59e3d32080d6d941")
+    val userToken = pref.getString("userToken", "")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

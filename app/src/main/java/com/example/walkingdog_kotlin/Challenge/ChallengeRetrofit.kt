@@ -1,9 +1,6 @@
 package com.example.walkingdog_kotlin.Challenge
 
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeUserListModel
-import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
+import com.example.walkingdog_kotlin.Challenge.Model.*
 import retrofit2.Call
 import retrofit2.http.*
 import java.time.LocalDate
@@ -13,11 +10,11 @@ interface ChallengeRetrofit {
     fun getChallengeList(@Query ("userToken") userToken: String): Call<ChallengeListModel>
     @DELETE("/challenge/drop")
     fun deleteChallenge(@Query("userToken") userToken: String,
-                        @Query("_id") _id: String): Call<ChallengeListModel>
+                        @Query("_id") _id: String): Call<DropChallengeResultModel>
     @FormUrlEncoded
     @POST("/challenge/join")
     fun joinChallenge(@Field("userToken") userToken: String,
-                      @Field("_id") _id: String): Call<ChallengeListModel>
+                      @Field("_id") _id: String): Call<JoinChallengeResultModel>
     @FormUrlEncoded
     @POST("/challenge/new")
     fun createChallenge(
@@ -27,7 +24,7 @@ interface ChallengeRetrofit {
         @Field("start_date") start_date: LocalDate,
         @Field("end_date") end_date: LocalDate,
         @Field("userToken") userToken: String
-    ): Call<ChallengeModel>
+    ): Call<CreateChallengeResultModel>
     @FormUrlEncoded
     @POST("/challenge/users")
     fun getUserList(

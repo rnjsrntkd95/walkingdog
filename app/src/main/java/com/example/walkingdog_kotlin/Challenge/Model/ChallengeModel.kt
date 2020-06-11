@@ -25,24 +25,40 @@ data class ChallengeModel (
 )
 
 data class ChallengeUserListModel (
-    val challengeUserList: List<user> = listOf(),
-    val myChallenge: List<user> = listOf(),
-    val error: Number,
-    val msg: String
+    val records: ArrayList<user> = arrayListOf(),
+    val myRecord: user,
+    val error: Number
 )
 
 // userId -> nickname을 가져오는 방식으로 바꿔야함.
 data class user (
-    val score: Number,
     val walkingCount: Number,
     val walkingAvg: Number,
-    val userId: nickname,
-    val challengeId: String
+    val score: Number,
+    val user: UserNicknameModel,
+    val challenge: String,
+    val challengeTitle: String
+)
+data class UserNicknameModel (
+    val nickname: String
 )
 data class nickname(
     val _id: String,
     val nickname: String
 )
 data class myChallengeId(
-    val myChallenge: List<user> = listOf()
+    val myChallenge: String
+)
+
+data class CreateChallengeResultModel (
+    val error: Int,
+    val challengeId: String
+)
+
+data class JoinChallengeResultModel (
+    val error: Int
+)
+
+data class DropChallengeResultModel (
+    val error: Int
 )

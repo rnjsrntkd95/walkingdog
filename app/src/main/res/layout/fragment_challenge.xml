@@ -10,8 +10,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/challenge_layout_shape"
-                android:layout_weight="6"
-                android:paddingBottom="10dp">
+                android:backgroundTint="@color/green2"
+                android:layout_weight="10">
 
             <RelativeLayout
                     android:id="@+id/popular_challenge_title_layout"
@@ -24,7 +24,9 @@
                         android:text="인기 챌린지"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/maplestory_bold"/>
 
                 <ImageView
                         android:id="@+id/create_challenge"
@@ -43,11 +45,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/popular_challenge_title_layout"
-                    android:background="@drawable/radius_shape_gray"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/white"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_centerHorizontal="true"
                     android:paddingVertical="20dp"
                     android:paddingHorizontal="10dp">
@@ -58,6 +60,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:text="한 달 동안 꾸준히 도전하기"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/maplestory_light"
                         android:textStyle="bold"/>
 
                 <TextView
@@ -65,7 +69,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="사랑하는 반려견을 위해 한 달 동안 꾸준한 산책을 해보세요!"
-                        android:layout_centerVertical="true"/>
+                        android:textSize="14dp"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/maplestory_light"/>
 
                 <ImageView
                         android:layout_width="20dp"
@@ -81,14 +87,18 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:text="200"
-                        android:layout_marginLeft="5dp"/>
+                        android:textSize="14dp"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/maplestory_light"/>
 
                 <TextView
                         android:id="@+id/period"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:text="기간:"/>
+                        android:text="기간:"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/maplestory_light"/>
 
                 <TextView
                         android:id="@+id/challenge_period"
@@ -96,7 +106,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:text="5월 1일 ~ 5월 31일"
-                        android:layout_toRightOf="@+id/period"/>
+                        android:textSize="14dp"
+                        android:layout_toRightOf="@+id/period"
+                        android:fontFamily="@font/maplestory_light"/>
             </RelativeLayout>
 
         </RelativeLayout>
@@ -116,7 +128,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="우리동네 챌린지"/>
+                        android:text="우리동네 챌린지"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/maplestory_bold"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -124,8 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/village_challenge_title_layout"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp">
 
 
             </androidx.recyclerview.widget.RecyclerView>

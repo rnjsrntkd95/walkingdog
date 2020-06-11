@@ -115,6 +115,7 @@ class AddPet : AppCompatActivity() {
                     }
                 }
             })
+            finish()
         }
 
         petName_editText.addTextChangedListener(object : TextWatcher {

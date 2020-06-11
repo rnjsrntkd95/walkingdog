@@ -121,6 +121,7 @@ class ProfileAddPetActivity : AppCompatActivity() {
                     }
                 }
             })
+            finish()
         }
 
         petName_editText.addTextChangedListener(object : TextWatcher {

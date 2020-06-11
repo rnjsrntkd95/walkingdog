@@ -44,6 +44,23 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        // 토큰 유무에 따른 화면 이동
+        val userToken = pref.getString("userToken", "")
+        if (userToken != null && userToken != "") {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        // 산책 체크 리스트 초기화
+        val userCheckList = pref.getString("checkList", "0")
+        if (userCheckList == "0" || userCheckList == null) {
+            val edit = pref.edit()
+            edit.putString("checkList", "//목줄//물//배변 봉투")
+            edit.apply()
+        }
+
         email_signUp_btn.setOnClickListener {
             var intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
@@ -65,15 +82,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         //Kakao Login
         Session.getCurrentSession().addCallback(callback)
-
-        // 산책 체크 리스트 초기화
-        val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val userCheckList = pref.getString("checkList", "0")
-        if (userCheckList == "0" || userCheckList == null) {
-            val edit = pref.edit()
-            edit.putString("checkList", "//목줄//물//배변 봉투")
-            edit.apply()
-        }
     }
 
 

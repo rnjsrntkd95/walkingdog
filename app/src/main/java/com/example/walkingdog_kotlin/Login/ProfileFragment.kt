@@ -32,11 +32,6 @@ import retrofit2.Response
 
 class ProfileFragment : Fragment() {
     private val OPEN_GALLERY = 0
-
-
-    private lateinit var firebaseAuth: FirebaseAuth
-
-
     private val RC_SIGN_IN = 99
 
 

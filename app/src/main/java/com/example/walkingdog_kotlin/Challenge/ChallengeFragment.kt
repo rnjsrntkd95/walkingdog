@@ -62,19 +62,6 @@ class ChallengeFragment(context: Context) : Fragment() {
 
         val cAdapter =
             ChallengeRvAdapter(context!!, challengeList) { challenge ->
-                val challengeSelectRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
-                challengeSelectRetrofit.joinChallenge(userToken, challenge.id).enqueue(object : Callback<ChallengeListModel> {
-                    override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
-                        Log.d("DEBUG", " Challenge Retrofit failed!!")
-                        Log.d("DEBUG", t.message)
-                    }
-                    override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
-                        Log.d("DEBUG", " Challenge Retrofit Success!!")
-                        val msg = response.body()?.msg
-                        error = response.body()?.error!!.toInt()
-                        Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
-                    }
-                })
                 var intent = Intent(context, MyChallengeActivity::class.java)
                 intent.putExtra("challengeId", challenge.id)
                 startActivity(intent)
@@ -120,22 +107,8 @@ class ChallengeFragment(context: Context) : Fragment() {
         }
 
         popular_challenge_content_layout.setOnClickListener {
-            val challengeJoinRetrofit = ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
-            challengeJoinRetrofit.joinChallenge(userToken, popularChallengeId.toString()).enqueue(object : Callback<ChallengeListModel> {
-                override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
-                    Log.d("DEBUG", " Challenge Retrofit failed!!")
-                    Log.d("DEBUG", t.message)
-                }
-                override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
-                    Log.d("DEBUG", " Challenge Retrofit Success!!")
-                    val msg = response.body()?.msg
-                    error = response.body()?.error!!.toInt()
-                    Toast.makeText(context, "$msg", Toast.LENGTH_LONG).show()
-                }
-            })
-            var intent = Intent(context, MyChallengeActivity::class.java)
-            intent.putExtra("challengeId", popularChallengeId.toString())
-            intent.putExtra("flag", error)
+            val intent = Intent(context, MyChallengeActivity::class.java)
+            intent.putExtra("challengeId", popularChallengeId)
             startActivity(intent)
         }
     }

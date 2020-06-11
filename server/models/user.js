@@ -18,12 +18,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    validate: {
-      validator: function (val) {
-        return val.length <= 10 && val.length >= 5;
-      },
-      message: "password should be less than 5, longer than 15",
-    },
   },
   nickname: {
     type: String,

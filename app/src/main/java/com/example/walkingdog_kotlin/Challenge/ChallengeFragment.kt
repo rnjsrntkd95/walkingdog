@@ -93,6 +93,9 @@ class ChallengeFragment(context: Context) : Fragment() {
             }
             override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
                 val challenges = response.body()?.challenges
+                if(challenges == null || challenges!!.isEmpty()){
+                    return
+                }
                 val popularChallenge = response.body()?.popularChallenge
                 if(popularChallenge != null){
                     popularChallengeId = popularChallenge!!._id

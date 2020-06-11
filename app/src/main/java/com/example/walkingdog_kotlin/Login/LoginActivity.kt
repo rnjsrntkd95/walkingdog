@@ -131,11 +131,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.d("DEBUG", t.message)
                             Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                         }
-
                         override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                             Log.d("TAG", "Login Retrofit Success!!")
                             val token = response.body()?.loginToken
                             val nickname = response.body()?.nickname
+                            val error = response.body()?.error
+
+                            Log.d("토큰", token + nickname + error)
 
                             if (token != null) {
                                 val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)

@@ -22,7 +22,6 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
         <activity android:name=".ProfileAddPetActivity"></activity>
-        <activity android:name=".ProfileAddPet" />
         <activity android:name=".Walking.WalkingListActivity"></activity>
         <activity android:name=".MyChallengeActivity" />
         <activity android:name=".Challenge.Create_ChallengeActivity" />
@@ -33,7 +32,7 @@
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key" />
 
-        <activity android:name=".StartActivity" />
+        <activity android:name=".MainActivity" />
         <activity
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
@@ -43,7 +42,7 @@
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".Walking.WalkingActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

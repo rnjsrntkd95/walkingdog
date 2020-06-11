@@ -19,7 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitCreators(val context: Context) {
 
+//    val serverUrl = context.getString(R.string.server_url)
+
     val serverUrl = context.getString(R.string.server_url)
+
 
     fun LoginRetrofitCreator(email: String, password: String): LoginRetrofit {
         val retrofit = Retrofit.Builder()

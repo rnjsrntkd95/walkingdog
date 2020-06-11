@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Post.WritePost
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
@@ -34,13 +37,20 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var prevLon: Double? = null
     private var walkingDistance: Double = 0.0
     private var walkingCalorie: Double = 0.0
-    private var isStart: Boolean = true
+    private var isStart: Boolean = false
     private var isPause: Boolean = false
     private var tapTimer: Timer? = null
     private val route = ArrayList<ArrayList<Double>>()
     private val toiletLoc = ArrayList<ArrayList<Double>>()
     private val walkingAmounts = ArrayList<Double>()
     private var walkingTimer: Timer? = null
+    private var runningDogImageTimer: Timer? = null
+    private var runningDogImage = arrayOf(
+        R.drawable.running_dog_1, R.drawable.running_dog_2
+        , R.drawable.running_dog_3, R.drawable.running_dog_4, R.drawable.running_dog_5
+        , R.drawable.running_dog_6, R.drawable.running_dog_7, R.drawable.running_dog_8
+    )
+    private var runningDogImageCounter: Int = 1
     private var time = 0
     private var isTimerRunning: Boolean = false
     private var getAddress: Boolean = false
@@ -49,43 +59,97 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var addressThoroughfare: String = ""
     private var animal = ArrayList<String>()
     private var fullAmount = ArrayList<Double>()
+    private var amountTest = 320.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walking)
-//        animal = intent.getStringArrayListExtra("animalName")
-//        val weights = intent.getDoubleArrayExtra("animalWeight")
-//        weights.forEach(fun(weight) {
+
+        var weights: DoubleArray? = null
+        val extra = intent.extras
+
+//        if (extra != null) {
+//            val nameData = intent.getStringArrayListExtra("animalName")
+//            val weightData = intent.getDoubleArrayExtra("animalWeight")
+//            if (nameData != null && weightData != null) {
+//                animal = nameData
+//                weights = weightData
+//
+//            } else {
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//                return
+//            }
+//        } else {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//            return
+//        }
+//
+//        weights!!.forEach(fun(weight) {
 //            fullAmount.add(((weight*30)+70)*1.4)
 //        })
+
+        pauseFab.visibility = View.GONE
+        toiletFab.visibility = View.GONE
+
         // 현재 위치
         initView()
 
         playFab.setOnClickListener {
+            if (!isPause) {
+                isStart = true
+            } else {
+                isPause = false
+            }
             timerSet()
-            toiletActivity()
+            runningDog()
+            pauseFab.visibility = View.VISIBLE
+            toiletFab.visibility = View.VISIBLE
+            playFab.visibility = View.GONE
+            resetFab.visibility = View.GONE
+
+        }
+        pauseFab.setOnClickListener {
+            isPause = true
+
+            stopRunningDog()
+            timerSet()
+            pauseFab.visibility = View.GONE
+            toiletFab.visibility = View.GONE
+            playFab.visibility = View.VISIBLE
+            resetFab.visibility = View.VISIBLE
+
         }
         resetFab.setOnClickListener {
-            timerSet()
-            pauseWalking()
-            finishWalking()
-            submitResult()
+            isStart = false
+            if (walkingDistance != 0.0) {
+                finishWalking()
+                submitResult()
+            }
+            pauseFab.visibility = View.GONE
+            toiletFab.visibility = View.GONE
+            playFab.visibility = View.VISIBLE
+            resetFab.visibility = View.VISIBLE
+
+        }
+        toiletFab.setOnClickListener {
+            if (isStart && mapPoint != null) {
+                toiletActivity()
+            }
         }
         camera_btn.setOnClickListener {
-            timerSet()
-            restartWalking()
         }
 
-        this!!.window.statusBarColor = (ContextCompat.getColor(this!!,
-            R.color.white
-        ))
-        this!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        this.window.statusBarColor = (ContextCompat.getColor(this, R.color.white))
+        this.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
 
     fun findAddress() {
@@ -127,6 +191,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
     // 일시 정지
     private fun pauseWalking() {
+        stopRunningDog()
         mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
         isPause = true
     }
@@ -139,6 +204,8 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
     // 산책 종료
     private fun finishWalking() {
+        stopRunningDog()
+        mapView!!.addPolyline(polyline)
         mapView!!.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
         val mapPointBounds = MapPointBounds(polyline!!.mapPoints)
         mapView!!.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, 100))
@@ -162,18 +229,28 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     private fun submitResult() {
+        return
         val pref = getSharedPreferences("pref", MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
         val walkingRetrofit = WalkingRetrofitCreators(this).WalkingRetrofitCreator()
-        walkingRetrofit.createWalking(userToken!!, walkingCalorie, walkingDistance, time, walkingAmounts,
-        addressAdmin, addressLocality, addressThoroughfare, animal, route, toiletLoc).enqueue(object : Callback<CreateWalkingResultModel> {
+        walkingRetrofit.createWalking(
+            userToken!!, walkingCalorie, walkingDistance, time, walkingAmounts,
+            addressAdmin, addressLocality, addressThoroughfare, animal, route, toiletLoc
+        ).enqueue(object : Callback<CreateWalkingResultModel> {
             override fun onFailure(call: Call<CreateWalkingResultModel>, t: Throwable) {
                 Log.d("DEBUG", " Walking Retrofit failed!!")
                 Log.d("DEBUG", t.message)
-                Toast.makeText(this@WalkingActivity, "산책 등록에 실패하였습니다. 네트워크를 확인해주세요.", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@WalkingActivity,
+                    "산책 등록에 실패하였습니다. 네트워크를 확인해주세요.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
-            override fun onResponse(call: Call<CreateWalkingResultModel>, response: Response<CreateWalkingResultModel>) {
+            override fun onResponse(
+                call: Call<CreateWalkingResultModel>,
+                response: Response<CreateWalkingResultModel>
+            ) {
                 val error = response.body()?.error
                 val walkingId = response.body()?.walkingId
                 Log.d("ERROR", error.toString())
@@ -187,8 +264,6 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
                     startActivity(intent)
                     finish()
                 }
-
-
             }
         })
     }
@@ -242,31 +317,17 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     override fun onCurrentLocationUpdate(p0: MapView?, p1: MapPoint?, p2: Float) {
-        if (!isStart) {
+        if (!isStart || isPause) {
             return
         }
         val lat = p1!!.mapPointGeoCoord.latitude
         val lon = p1!!.mapPointGeoCoord.longitude
-
         route.add(arrayListOf(lat, lon))
-        if (isPause) {
-            val pausePolyline = MapPolyline()
-            pausePolyline.lineColor = Color.argb(255, 243, 136, 71)
-            pausePolyline.addPoint(mapPoint)
-            pausePolyline.addPoint(p1)
-            p0!!.addPolyline(pausePolyline)
-            isPause = false
-        } else {
-            val newPolyline = MapPolyline()
-            newPolyline.lineColor = Color.argb(255, 103, 114, 241)
-            if (mapPoint != null) {
-                newPolyline.addPoint(mapPoint)
-            }
-            newPolyline.addPoint(p1)
-            p0!!.addPolyline(newPolyline)
-        }
+
         mapPoint = p1
         polyline!!.addPoint(p1)
+        p0!!.removePolyline(polyline)
+        p0.addPolyline(polyline)
 
         if (prevLat == null && prevLon == null) {
             prevLat = lat
@@ -285,12 +346,12 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             // 소모 칼로리 표시
             walkingCalorie += distance * 0.026785714  // 1m당 소모 칼로리
             calorieView.text = String.format("%.2f", walkingCalorie)
+            // 충족량 표시
+            amountView.text = String.format("%.1f", walkingCalorie / amountTest * 100)
 
             prevLat = lat
             prevLon = lon
         }
-        Log.d("DISTANCE", walkingDistance.toString())
-
         // 변환 주소 가져오기
         if (!getAddress) {
             findAddress()
@@ -365,6 +426,22 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         walkingTimer?.cancel()
     }
 
+    private fun runningDog() {
+        runningDogImageTimer = timer(period = 100) {
+            runOnUiThread {
+                runningDogImg.setBackgroundResource(runningDogImage[runningDogImageCounter++])
+                if (runningDogImageCounter > 7) {
+                    runningDogImageCounter = 0
+                }
+            }
+        }
+    }
+
+    private fun stopRunningDog() {
+        runningDogImageTimer!!.cancel()
+        runningDogImg.setBackgroundResource(runningDogImage[0])
+    }
+
     override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
     }
 
@@ -391,10 +468,8 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             tapTimer!!.cancel()
         }
         tapTimer = timer(period = 3000, initialDelay = 3000) {
-            p0!!.setMapCenterPoint(mapPoint, true)
             p0!!.currentLocationTrackingMode =
                 MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
-
             cancel()
         }
     }

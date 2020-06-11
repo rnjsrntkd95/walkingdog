@@ -161,6 +161,7 @@
                 android:layout_weight="1"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/amountView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -211,7 +212,7 @@
             android:padding="20dp"
             android:gravity="center">
 
-        <LinearLayout
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -224,11 +225,20 @@
                         android:background="@drawable/play_icon"
                         android:backgroundTint="#626262"/>
 
+            <Button
+                    android:id="@+id/toiletFab"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/toilet_icon"
+                    android:backgroundTint="#626262" />
 
-        </LinearLayout>
 
 
-        <LinearLayout
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -242,9 +252,14 @@
                     android:background="@drawable/reset_icon"
                     android:backgroundTint="#626262"
                     />
+            <Button
+                    android:id="@+id/pauseFab"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/pause_icon"
+                    android:backgroundTint="#626262"/>
 
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <LinearLayout

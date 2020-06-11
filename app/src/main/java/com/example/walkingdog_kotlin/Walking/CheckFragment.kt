@@ -11,18 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CheckItem
-import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
-import kotlinx.android.synthetic.main.feed_item.view.*
 import kotlinx.android.synthetic.main.fragment_check.*
-import kotlinx.android.synthetic.main.select_dog_popup.view.*
-import kotlinx.android.synthetic.main.select_dog_popup.view.select_dog_listView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,6 +49,7 @@ class CheckFragment : Fragment() {
         val edit = pref.edit()
 
         val userCheckList = pref.getString("checkList", "")
+        Log.d("체크리스트", userCheckList)
         val checkList = userCheckList.split("//")
         checkList.forEach(fun(check) {
             if (check != "") {
@@ -169,21 +164,25 @@ class CheckFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             val dialogView = layoutInflater.inflate(R.layout.add_checklist_popup, null)
             val dialogText = dialogView.findViewById<EditText>(R.id.add_item_editText)
-            val add_check_btn = dialogView.findViewById<Button>(R.id.add_check_btn)
+            val addCheckBtn = dialogView.findViewById<Button>(R.id.add_check_btn)
 
             val popup = builder.setView(dialogView).show()
 
-            add_check_btn.setOnClickListener {
-                if(dialogText.text.isNotBlank() && dialogText.text.isNotEmpty())
-                    pref.getString("checkList", "")
+            addCheckBtn.setOnClickListener {
+                if(dialogText.text.isNotBlank() && dialogText.text.isNotEmpty()) {
+
+
+                    val usl: String? = pref.getString("checkList", "")
                     val edit = pref.edit()
-                    edit.putString("checkList", userCheckList + "//" + dialogText.text.toString())
+                    edit.putString("checkList", usl + "//" + dialogText.text.toString())
+                    edit.apply()
 
                     checkItemList.add(
                         CheckItem(
                             dialogText.text.toString()
                         )
                     )
+                }
                 popup.dismiss()
             }
 

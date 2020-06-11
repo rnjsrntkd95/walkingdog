@@ -6,9 +6,8 @@ const Breed = require('../models/breed');
 exports.checkBreedList = async (req, res, next) => {
     try {
         const breedList = await Breed.find().select('breed');
-
+        console.log(breedList);
         res.json({breedList})
-        // res.json(breedList.toJSON())
     } catch (err) {
         console.log(err);
     }
@@ -22,7 +21,6 @@ exports.register = async (req, res, next) => {
     const age = req.body.age;
     const weight = req.body.weight;
     const gender = req.body.gender;
-    console.log(userData, breed, animalName, age, weight, gender)
 
     try {
         const userId = await User.findOne({ _id: userData });
@@ -40,27 +38,24 @@ exports.register = async (req, res, next) => {
         res.json({});
     } catch (err) {
         console.log(err);
-        /* Validation 검사 해서 올바르지 않은 item 반환
 
-        */
         res.json({error: 1});
     }
 }
 
 // 유저에게 등록된 동물 List
 exports.searchPet = async (req, res, next) => {
-    req.userId = '5eba8b5ca76e3e20f4b0659e';
-    
+    const userData = req.userToken.id;
     const userId = req.userId;
 
     try {
         const user = await User.findOne({ _id: userId });
         const myPetList = await Animal.find({ user });
 
-        res.json({myPetList});
+        res.json({ myPetList });
     } catch (err) {
         console.log(err);
-        console.log({ error: 1 });
+        res.json({ error: 1 });
     }
 }
 

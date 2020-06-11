@@ -26,9 +26,6 @@ import retrofit2.Response
 
 
 class ProfileFragment : Fragment() {
-        var challenge = ""
-        var isExisted : Boolean = true //현재 신청한 챌린지가 있는지 구분하는 변수
-
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -59,22 +56,17 @@ class ProfileFragment : Fragment() {
                         Log.d("DEBUG", t.message)
                     }
                     override fun onResponse(call: Call<myChallengeId>, response: Response<myChallengeId>) {
-                        challenge = response.body()?.myChallenge!![0].challengeId
-                        Log.d("sdlfjdasljfl", challenge)
+                        val challenge = response.body()?.myChallenge!![0].challengeId
+                        if (challenge == null) {
+                            (activity as MainActivity).bottom_navigation.selectedItemId = R.id.action_challenge
+                        } else {
+                            var intent = Intent(context, MyChallengeActivity::class.java)
+                            intent.putExtra("challengeId", challenge)
+                            startActivity(intent)
+                        }
                     }
                 })
-                if(isExisted) {     //신청한 챌린지가 존재한다면
-                    var intent = Intent(context, MyChallengeActivity::class.java)
-                    intent.putExtra("challengeId", challenge)
-                    startActivity(intent)
-                } else {
-                    //신청한 챌린지가 없다면
-                    //챌린지 프래그먼트 창으로 이동시킨다.
-                    (activity as MainActivity).bottom_navigation.selectedItemId = R.id.action_challenge
-                }
-
             }
-
         }
     }
 

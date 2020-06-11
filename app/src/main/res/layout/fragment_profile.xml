@@ -121,7 +121,8 @@
 <!--    산책통계, 내 챌린지 레이아웃-->
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
 
         <!--    산책통계 레이아웃-->
         <LinearLayout
@@ -193,11 +194,12 @@
     
 <!--로그아웃 레이아웃-->
     <LinearLayout
-            android:id="@+id/logoutLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="0.3">
 
         <LinearLayout
+                android:id="@+id/logoutLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/tenradius_shape"

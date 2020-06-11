@@ -68,73 +68,64 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+//        myChallengeLayout.setOnClickListener {
+//            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+//            val userToken = pref?.getString("userToken", "")
+//        }
+
         myChallengeLayout.setOnClickListener {
             val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-            val userToken = pref?.getString("userToken", "")
+            val userToken = pref?.getString("userToken", "5ebac6bd59e3d32080d6d941")
 
-            super.onActivityCreated(savedInstanceState)
+            val challengeDetailRetrofit =
+                ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
+            challengeDetailRetrofit.getMyChallenge(userToken!!)
+                .enqueue(object : Callback<myChallengeId> {
+                    override fun onFailure(call: Call<myChallengeId>, t: Throwable) {
+                        Log.d("DEBUG", " Challenge Retrofit failed!!")
+                        Log.d("DEBUG", t.message)
+                    }
 
-            walkingStaticLayout.setOnClickListener {
-                val intent = Intent(context, Statics::class.java)
-                startActivity(intent)
-            }
-
-            myChallengeLayout.setOnClickListener {
-                val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val userToken = pref?.getString("userToken", "5ebac6bd59e3d32080d6d941")
-
-                val challengeDetailRetrofit =
-                    ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
-                challengeDetailRetrofit.getMyChallenge(userToken!!)
-                    .enqueue(object : Callback<myChallengeId> {
-                        override fun onFailure(call: Call<myChallengeId>, t: Throwable) {
-                            Log.d("DEBUG", " Challenge Retrofit failed!!")
-                            Log.d("DEBUG", t.message)
+                    override fun onResponse(
+                        call: Call<myChallengeId>,
+                        response: Response<myChallengeId>
+                    ) {
+                        val challenge = response.body()?.myChallenge!![0].challengeId
+                        if (challenge == null) {
+                            (activity as MainActivity).bottom_navigation.selectedItemId =
+                                R.id.action_challenge
+                        } else {
+                            val intent = Intent(context, MyChallengeActivity::class.java)
+                            intent.putExtra("challengeId", challenge)
+                            startActivity(intent)
                         }
-
-                        override fun onResponse(
-                            call: Call<myChallengeId>,
-                            response: Response<myChallengeId>
-                        ) {
-                            val challenge = response.body()?.myChallenge!![0].challengeId
-                            if (challenge == null) {
-                                (activity as MainActivity).bottom_navigation.selectedItemId =
-                                    R.id.action_challenge
-                            } else {
-                                val intent = Intent(context, MyChallengeActivity::class.java)
-                                intent.putExtra("challengeId", challenge)
-                                startActivity(intent)
-                            }
-                        }
-                    })
-            }
-
-//            settings.setOnClickListener {
-//                val intent =Intent(context,Settings::class.java)
-//                startActivity(intent)
-//            }
-            myprofile_img_btn.setOnClickListener() {
-
-                loadImage()
-            }
-
-            logoutLayout.setOnClickListener {
-                val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val edit = pref.edit()
-                edit.remove("userToken")
-                edit.apply()
-
-                val intent = Intent(context, LoginActivity::class.java)
-                startActivity(intent)
-                Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
-            }
-
-            add_pet_btn.setOnClickListener {
-                var intent = Intent(context, ProfileAddPetActivity::class.java)
-                startActivity(intent)
-            }
-
+                    }
+                })
         }
+
+        myprofile_img_btn.setOnClickListener() {
+            loadImage()
+        }
+
+        logoutLayout.setOnClickListener {
+            Toast.makeText(context!!, "눌렸음", Toast.LENGTH_SHORT).show()
+
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val edit = pref.edit()
+            edit.remove("userToken")
+            edit.apply()
+
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+        }
+
+        add_pet_btn.setOnClickListener {
+            var intent = Intent(context, ProfileAddPetActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

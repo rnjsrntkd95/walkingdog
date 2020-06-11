@@ -5,21 +5,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".Login.Information.NicknameFragment"
-        android:background="@color/mainBlue">
+        tools:context=".Login.Information.NicknameFragment">
 
     <RelativeLayout
             android:id="@+id/add_pet_title_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/mainBlue">
+            android:layout_height="50dp"
+            android:background="@drawable/bottomten_radius_shape"
+            android:backgroundTint="@color/green2">
 
         <ImageButton
                 android:id="@+id/previous_btn_addPet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/mainBlue"
-                android:src="@drawable/back_arrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"/>
@@ -28,9 +28,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="펫 등록"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
 
         <TextView
                 android:id="@+id/pass_tv"
@@ -40,14 +41,14 @@
                 android:text="건너뛰기"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/maplestory_light"/>
     </RelativeLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/add_pet_title_layout"
-            android:background="@drawable/loginform_background">
+            android:layout_below="@id/add_pet_title_layout">
             <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -58,15 +59,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/rv_image_area"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/image_plus"/>
 
                     <LinearLayout
                             android:layout_width="280dp"
@@ -79,14 +73,16 @@
                         <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="이름"/>
+                                android:text="이름"
+                                android:fontFamily="@font/maplestory_bold"/>
 
                         <EditText
                                 android:id="@+id/petName_editText"
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
                                 android:hint="강아지의 이름을 입력하세요"
-                                android:layout_marginBottom="10dp"/>
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"/>
 
                         <LinearLayout
                                 android:layout_width="match_parent"
@@ -100,7 +96,8 @@
                                 <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="몸무게"/>
+                                        android:text="몸무게"
+                                        android:fontFamily="@font/maplestory_bold"/>
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
@@ -111,7 +108,8 @@
                                             android:layout_width="70dp"
                                             android:layout_height="50dp"
                                             android:layout_marginBottom="10dp"
-                                            android:inputType="number"/>
+                                            android:inputType="number"
+                                            android:fontFamily="@font/maplestory_light"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,7 +124,8 @@
                                         android:layout_height="50dp"
                                         android:text="kg"
                                         android:gravity="center"
-                                        android:layout_marginTop="30dp"/>
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/maplestory_light"/>
                             </LinearLayout>
 
 
@@ -138,7 +137,8 @@
                                 <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="나이"/>
+                                        android:text="나이"
+                                        android:fontFamily="@font/maplestory_bold"/>
 
                                 <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
@@ -149,7 +149,8 @@
                                             android:layout_width="60dp"
                                             android:layout_height="50dp"
                                             android:layout_marginBottom="10dp"
-                                            android:inputType="number"/>
+                                            android:inputType="number"
+                                            android:fontFamily="@font/maplestory_light"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,7 +165,8 @@
                                         android:layout_height="50dp"
                                         android:text="살"
                                         android:gravity="center"
-                                        android:layout_marginTop="30dp"/>
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/maplestory_light"/>
                             </LinearLayout>
 
 
@@ -175,6 +177,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="견종"
+                                android:fontFamily="@font/maplestory_bold"
                                 android:layout_marginBottom="5dp"/>
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -188,7 +191,8 @@
                         <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="성별"/>
+                                android:text="성별"
+                                android:fontFamily="@font/maplestory_bold"/>
 
                         <LinearLayout
                                 android:layout_width="match_parent"
@@ -202,7 +206,8 @@
                                     android:background="@drawable/breed_shape"
                                     android:textOff="male"
                                     android:textOn="male"
-                                    android:text="male" />
+                                    android:text="male"
+                                    android:fontFamily="@font/maplestory_light"/>
 
                             <LinearLayout
                                     android:layout_width="30dp"
@@ -218,7 +223,8 @@
                                     android:background="@drawable/breed_shape"
                                     android:textOff="female"
                                     android:textOn="female"
-                                    android:text="female" />
+                                    android:text="female"
+                                    android:fontFamily="@font/maplestory_light"/>
 
                         </LinearLayout>
 
@@ -232,12 +238,14 @@
             <Button
                     android:id="@+id/finish_btn_addPet"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:background="@drawable/bottomnavigation_shape"
+                    android:layout_height="50dp"
                     android:textColor="@color/white"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/green3"
                     android:text="@string/finish"
                     android:layout_alignParentBottom="true"
-                    android:textSize="20dp"/>
+                    android:textSize="16dp"
+                    android:layout_margin="20dp"/>
 
 
     </RelativeLayout>

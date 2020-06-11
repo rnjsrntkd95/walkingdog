@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
@@ -44,6 +45,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        this.window.statusBarColor = (ContextCompat.getColor(this,
+            R.color.green1
+        ))
+
         val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
         // 토큰 유무에 따른 화면 이동
         val userToken = pref.getString("userToken", "")
@@ -61,10 +66,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             edit.apply()
         }
 
-        email_signUp_btn.setOnClickListener {
-            var intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
 
 //        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }

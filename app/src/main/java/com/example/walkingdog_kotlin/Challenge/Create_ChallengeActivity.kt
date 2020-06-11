@@ -126,7 +126,6 @@ class Create_ChallengeActivity : AppCompatActivity() {
             val pref = PreferenceManager.getDefaultSharedPreferences(this)
             var userToken = pref.getString("token", "5ebac6bd59e3d32080d6d941")
 
-            Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
             val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
              challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<ChallengeModel> {
                 override fun onFailure(call: Call<ChallengeModel>, t: Throwable) {

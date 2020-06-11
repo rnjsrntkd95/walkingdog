@@ -44,10 +44,10 @@ class AddPet : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_pet)
 
-        rv_image_area.setOnClickListener { loadImage() }
 
         val bAdapter = BreedAdapter(this, breedList, View.OnClickListener {  }) { breed ->
             petBreed = breed.breed
+            Toast.makeText(this, petBreed, Toast.LENGTH_SHORT).show()
         }
 
         breed_rv.adapter = bAdapter
@@ -115,7 +115,6 @@ class AddPet : AppCompatActivity() {
                     }
                 }
             })
-            finish()
         }
 
         petName_editText.addTextChangedListener(object : TextWatcher {
@@ -194,18 +193,5 @@ class AddPet : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == Gallery) {
-            if(resultCode == RESULT_OK) {
-                var dataUri = data?.data
-                try {
-                    var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
-                    rv_image_area.setImageBitmap(bitmap)
-                } catch (e:Exception) {
-                    Toast.makeText(this, "$e", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            //somthing wrong
-        }
     }
 }

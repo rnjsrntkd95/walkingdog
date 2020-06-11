@@ -1,6 +1,7 @@
 package com.example.walkingdog_kotlin
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +11,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
-import com.example.walkingdog_kotlin.Challenge.Model.Challenge
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeListModel
-import com.example.walkingdog_kotlin.Challenge.Model.ChallengeUserListModel
+import com.example.walkingdog_kotlin.Challenge.Model.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_my_challenge.*
 import kotlinx.android.synthetic.main.fragment_challenge.*
 import retrofit2.Call
@@ -46,11 +46,18 @@ class MyChallengeActivity : AppCompatActivity() {
         participatedChallengeListRecyclerview.layoutManager = lm
         participatedChallengeListRecyclerview.setHasFixedSize(true)
 
-//        챌린지 유저 가져오기
+        // 챌린지 유저 가져오기
         val pref = this.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
-        val challengeId = intent.getStringExtra("challengeId")
-        var code = 0
+        var challengeId = ""
+        val extra = intent.extras
+        if (extra != null) {
+            challengeId = intent.getStringExtra("challengeId")
+            if (challengeId == null || challengeId == "") {
+                finish()
+                bottom_navigation.selectedItemId = R.id.action_challenge
+            }
+        }
 
         val challengeDetailRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
         challengeDetailRetrofit.getUserList(userToken!!, challengeId).enqueue(object : Callback<ChallengeUserListModel> {
@@ -59,29 +66,44 @@ class MyChallengeActivity : AppCompatActivity() {
                 Log.d("DEBUG", t.message)
             }
             override fun onResponse(call: Call<ChallengeUserListModel>, response: Response<ChallengeUserListModel>) {
-                val users = response.body()?.challengeUserList
-                val myChallenge = response.body()?.myChallenge
+                val records = response.body()?.records
+                val myRecord = response.body()?.myRecord
+
+                if (myRecord != null) {
+                    //가입 중인 챌린지가 있다면
+                    myRecordLayout.visibility = View.VISIBLE
+                    joinChallenge.visibility = View.GONE
+                } else {
+                    //가입 중인 챌린지가 없다면
+                    myRecordLayout.visibility = View.GONE
+                    cancelChallenge.visibility = View.GONE
+                }
+
                 var rankCounter = 1
                 var myrank = 0
-                users!!.forEach(fun(element) {
-                    pcList.add(ParticipateChallenge(rankCounter.toString(), element.userId.nickname, element.walkingCount.toString(), element.walkingAvg.toString(), element.score.toString()))
-                    if(element.userId._id.equals(userToken)){
+                // 전체 기록들 반영
+                records!!.forEach(fun(record) {
+                    pcList.add(ParticipateChallenge("${rankCounter}", record.user.nickname,
+                        "${record.walkingCount}", "${record.walkingAvg}", "${record.score}"))
+                    if (record.user.nickname == myRecord!!.user.nickname) {
                         myrank = rankCounter
                     }
                     rankCounter++
-                    mAdapter.notifyDataSetChanged()
                 })
+                mAdapter.notifyDataSetChanged()
+
+                // 내 기록 반영
                 rankingFigureTv.text = myrank.toString()
-                walkingFigureTv.text = myChallenge!![0].walkingCount.toString()
-                satisfiedQuantityFigureTv.text = myChallenge!![0].walkingAvg.toString()
-                scoreFigureTv.text = myChallenge!![0].score.toString()
+                walkingFigureTv.text = myRecord!!.walkingCount.toString()
+                satisfiedQuantityFigureTv.text = myRecord.walkingAvg.toString()
+                scoreFigureTv.text = myRecord.score.toString()
 
                 if(pcList.size > 3){
                     firstPerson.text = pcList[0].nickName
                     secondPerson.text = pcList[1].nickName
                     thirdPerson.text = pcList[2].nickName
                 }
-                //리스트가 바로 업데이트 되도록 추가해야함
+
             }
         })
         myChallenge_back_btn.setOnClickListener {
@@ -90,29 +112,46 @@ class MyChallengeActivity : AppCompatActivity() {
 
         cancelChallenge.setOnClickListener{
             val challengeCancelRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
-            challengeCancelRetrofit.deleteChallenge(userToken, _id = challengeId).enqueue(object : Callback<ChallengeListModel> {
-                override fun onFailure(call: Call<ChallengeListModel>, t: Throwable) {
-                    Log.d("DEBUG", " Challenge Retrofit failed!!")
+            challengeCancelRetrofit.deleteChallenge(userToken, challengeId).enqueue(object : Callback<DropChallengeResultModel> {
+                override fun onFailure(call: Call<DropChallengeResultModel>, t: Throwable) {
+                    Log.d("DEBUG", "Drop Challenge Retrofit failed!!")
                     Log.d("DEBUG", t.message)
                 }
-                override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
-                    Log.d("DEBUG", " Challenge Retrofit SUCCESS!!")
-                    val msg = response.body()?.msg.toString()
-                    Toast.makeText(this@MyChallengeActivity, "$msg", Toast.LENGTH_LONG).show()
+                override fun onResponse(call: Call<DropChallengeResultModel>, response: Response<DropChallengeResultModel>) {
+                    Log.d("DEBUG", "Drop Challenge Retrofit SUCCESS!!")
+                    val error = response.body()?.error
+                    if (error == 1) {
+                        Toast.makeText(this@MyChallengeActivity, "챌린지 탈퇴 실패하였습니다.", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this@MyChallengeActivity, "챌린지 탈퇴하였습니다.", Toast.LENGTH_LONG).show()
+                    }
                 }
             })
             finish()
         }
-        var flag = true
-        code = intent.getIntExtra("flag", 0)
-        Log.d("codecode", code.toString())
-        if(code != 0) flag = false
-        if(flag) {      //가입 중인 챌린지가 있다면
-            myRecordLayout.visibility = View.VISIBLE
-        } else {         //가입 중인 챌린지가 없다면
-            //나의 기록을 보여주지 않는다.
-            myRecordLayout.visibility = View.GONE
-        }
 
+        joinChallenge.setOnClickListener {
+            val challengeJoinRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
+            challengeJoinRetrofit.joinChallenge(userToken, challengeId).enqueue(object : Callback<JoinChallengeResultModel> {
+                override fun onFailure(call: Call<JoinChallengeResultModel>, t: Throwable) {
+                    Log.d("DEBUG", "Join Challenge Retrofit failed!!")
+                    Log.d("DEBUG", t.message)
+                }
+                override fun onResponse(call: Call<JoinChallengeResultModel>, response: Response<JoinChallengeResultModel>) {
+                    Log.d("DEBUG", "JoinChallenge Retrofit SUCCESS!!")
+                    val error = response.body()?.error
+                    if (error == 2) {
+                        Toast.makeText(this@MyChallengeActivity, "이미 가입된 챌린지가 존재합니다.", Toast.LENGTH_LONG).show()
+                    } else if (error == 1) {
+                        Toast.makeText(this@MyChallengeActivity, "챌린지 가입에 실패하였습니다.", Toast.LENGTH_LONG).show()
+                    }
+
+                    val intent = Intent(this@MyChallengeActivity, MyChallengeActivity::class.java)
+                    intent.putExtra("challengeId", challengeId)
+                    startActivity(intent)
+                    finish()
+                }
+            })
+        }
     }
 }

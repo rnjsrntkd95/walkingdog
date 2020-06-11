@@ -50,7 +50,6 @@ exports.createPost = async (req, res, next) => {
 
 // 유저의 타임라인 조회
 exports.timeline = async (req, res, next) => {
-    const userData = req.userToken.id;
     const addressAdmin = req.query.addressAdmin;
     const addressLocality = req.query.addressLocality;
     const addressThoroughfare = req.query.addressThoroughfare;
@@ -78,7 +77,6 @@ exports.timeline = async (req, res, next) => {
         } else {
             // 위치 정보가 없거나 검색 타입이 없을 때
             const posts = await Post.find({ }).populate('user', 'profileImage');
-            console.log(posts)
             res.json({ posts, error: 0 })
         }
     } catch (err) {

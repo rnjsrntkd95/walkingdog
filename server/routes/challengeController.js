@@ -41,7 +41,7 @@ exports.createChallenge = async (req, res, next) => {
 
     const resultReg = await UserChallenge.create(connection);
 
-    res.json({});
+    res.json({ challengeId: challengeId._id });
   } catch (err) {
     console.log(err);
 
@@ -50,7 +50,6 @@ exports.createChallenge = async (req, res, next) => {
 };
 
 exports.joinChallenge = async (req, res, next) => {
-  console.log(req.body);
   const userData = req.userTokne.id;
   const challengeId = req.body._id;
 
@@ -81,7 +80,7 @@ exports.joinChallenge = async (req, res, next) => {
       });
       const resultNewRecord = await Record.create(newRecord);
 
-      res.json({ error: 0, msg: "챌린지에 가입하셨습니다" });
+      res.json({ });
     } else {
       res.json({ error: 2, msg: "이미 가입된 챌린지가 존재합니다." });
     }
@@ -132,16 +131,12 @@ exports.usersInChallenge = async (req, res, next) => {
   const userData = req.userToken.id;
   const challengeId = req.body.challengeId;
   try {
-    const myChallenge = await UserChallenge.find({
-      userId: userData,
-    }).populate("userId", "nickname");
-    const challengeUserList = await UserChallenge.find({
-      challengeId: challengeId,
-    })
-      .populate("userId", "nickname")
-      .sort("-score");
-    res.json({ myChallenge, challengeUserList });
-    console.log(myChallenge, challengeUserList);
+    const user  = await User.findOne({ _id: userData });
+
+    const records = await Record.find({ challenge: challengeId }).populate("user", "nickname").sort("-score");
+    const myRecord = await Record.findOne({ user: userData, challenge: challengeId });
+
+    res.json({ records, myRecord });
   } catch (err) {
     console.log(err);
     res.json({ error: 1 });
@@ -151,10 +146,8 @@ exports.usersInChallenge = async (req, res, next) => {
 exports.getMyChallengeId = async (req, res, next) => {
   const userData = req.userToken.id;
   try {
-    const myChallenge = await UserChallenge.find({ userId: userData }).populate(
-      "userId",
-      "nickname"
-    );
+    const myChallenge = await UserChallenge.find({ userId: userData }).challengeId;
+
     res.json({ myChallenge });
   } catch (err) {
     console.log(err);

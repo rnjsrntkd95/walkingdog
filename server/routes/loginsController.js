@@ -6,7 +6,7 @@ const Breed = require("../models/breed");
 const Jwt = require("jsonwebtoken");
 
 exports.logIn = async (req, res, next) => {
-  console.log(req.body);
+  console.log("로그인ㅇㅇㅇ");
   const email = req.body.email;
   const password = req.body.password;
   const secret = req.app.get("jwt-secret");

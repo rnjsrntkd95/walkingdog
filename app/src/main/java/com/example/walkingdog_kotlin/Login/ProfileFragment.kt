@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
 
             myChallengeLayout.setOnClickListener {
                 val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val userToken = pref?.getString("userToken", "5ebac6bd59e3d32080d6d941")
+                val userToken = pref?.getString("userToken", "")
 
                 val challengeDetailRetrofit =
                     ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
@@ -91,13 +91,12 @@ class ProfileFragment : Fragment() {
                             Log.d("DEBUG", " Challenge Retrofit failed!!")
                             Log.d("DEBUG", t.message)
                         }
-
                         override fun onResponse(
                             call: Call<myChallengeId>,
                             response: Response<myChallengeId>
                         ) {
-                            val challenge = response.body()?.myChallenge!![0].challengeId
-                            if (challenge == null) {
+                            val challenge = response.body()?.myChallenge
+                            if (challenge == null || challenge == "") {
                                 (activity as MainActivity).bottom_navigation.selectedItemId =
                                     R.id.action_challenge
                             } else {

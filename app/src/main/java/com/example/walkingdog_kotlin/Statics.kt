@@ -2,27 +2,55 @@ package com.example.walkingdog_kotlin
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Walking.StaticsItem
 import kotlinx.android.synthetic.main.activity_statics.*
 import org.eazegraph.lib.charts.BarChart
 import org.eazegraph.lib.models.BarModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class Statics : AppCompatActivity() {
 
+    var month : String? = null
+    var day: String? = null
+    var kcal = 52.6
+    var sum_time:String?=null
+    var sum =0
+
+    var now = LocalDate.now()
+    var today_month = now.format(DateTimeFormatter.ofPattern("MM"))
+    var today_date = now.format(DateTimeFormatter.ofPattern("dd"))
+    var yesterday_month =now.minusDays(4)
+    var yester=yesterday_month.format(DateTimeFormatter.ofPattern("MM"))
+
+
     var history_list = arrayListOf<StaticsItem>(
 
-        StaticsItem("Today","26.4", "00","32","22" )
-        ,StaticsItem("Yesterday","34.7","00","41","10")
-        , StaticsItem("2 days ago","50.1","01","05","36")
-        ,StaticsItem("3 days ago","42.3","00","56","45")
+        StaticsItem("${today_month}/${today_date}","${kcal}", "00","32","22" ),
+        StaticsItem("06/22","10","00","20","10")
     )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statics)
+
+        var sum_kcal=findViewById<TextView>(R.id.sum_kcal_tv)
+        var sum_time=findViewById<TextView>(R.id.sum_kcal_tv)
+
+//        for(i in 0..history_list.size){
+//            sum+=(history_list[i].cal).toInt()
+//        }
+//        sum_kcal.text=sum.toString()
+
+
 
         val historyAdapter=Statics_RVAdapter(this, history_list)
         history_recyclerview.adapter=historyAdapter
@@ -31,21 +59,31 @@ class Statics : AppCompatActivity() {
         history_recyclerview.layoutManager = lm
         history_recyclerview.setHasFixedSize(true)
 
+        var day_arr = listOf("31","28","31","30","31","30","31","31","30","31","30","31")
+
         val mBarChart: BarChart = findViewById<View>(R.id.barchart) as BarChart
 
+        var list =arrayListOf<BarModel>(
+        )
 
-        mBarChart.addBar(BarModel(2.3f, -0xedcbaa))
-        mBarChart.addBar(BarModel(2f, -0xcbcbaa))
-        mBarChart.addBar(BarModel(3.3f, -0xa9cbaa))
-        mBarChart.addBar(BarModel(1.1f, -0x78c0aa))
-        mBarChart.addBar(BarModel(2.7f, -0xa9480f))
-        mBarChart.addBar(BarModel(2f, -0xcbcbaa))
-        mBarChart.addBar(BarModel(0.4f, -0xe00b54))
-        mBarChart.addBar(BarModel(4f, -0xe45b1a))
 
+        for(i in 1..day_arr[today_month.toInt()-1].toInt()) {
+            if(i==today_date.toInt()) {
+                list.add(BarModel("${i}", "${kcal}".toFloat(), -0xedcbaa))
+            } else {
+                list.add(BarModel("${i}",0.0f, -0xedcbaa))
+            }
+
+        }
+
+
+        mBarChart.addBarList(list)
         mBarChart.startAnimation()
 
 
+//        statics_btn.setOnClickListener {
+//            Toast.makeText(this,calendar.get(Calendar.DATE),Toast.LENGTH_LONG).show()
+//        }
     }
 
 }

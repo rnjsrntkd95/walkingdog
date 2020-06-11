@@ -1,22 +1,28 @@
-package com.example.walkingdog_kotlin.Animal
+package com.example.walkingdog_kotlin
 
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Gallery
 import android.widget.Toast
 import android.widget.ToggleButton
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.walkingdog_kotlin.Animal.AnimalRetrofitCreators
+import com.example.walkingdog_kotlin.Animal.BreedAdapter
 import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import com.example.walkingdog_kotlin.Animal.Model.Breed
 import com.example.walkingdog_kotlin.Animal.Model.SetNewAnimalModel
+import com.example.walkingdog_kotlin.Login.ProfileFragment
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_add_pet.*
@@ -27,7 +33,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class AddPet : AppCompatActivity() {
+class ProfileAddPetActivity : AppCompatActivity() {
 
     var breedList = arrayListOf<Breed>(
     )
@@ -42,7 +48,7 @@ class AddPet : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_pet)
+        setContentView(R.layout.activity_profile_add_pet)
 
         rv_image_area.setOnClickListener { loadImage() }
 
@@ -106,12 +112,12 @@ class AddPet : AppCompatActivity() {
                     val error = response.body()?.error
 
                     if (error == null) {
-                        val intent = Intent(this@AddPet, MainActivity::class.java)
+                        val intent = Intent(this@ProfileAddPetActivity, ProfileFragment::class.java)
                         startActivity(intent)
-                        (this@AddPet as Activity).finish()
+                        (this@ProfileAddPetActivity as Activity).finish()
                     } else if (error == 1) {
                         val errItem = response.body()?.item
-                        Toast.makeText(this@AddPet, "올바르지 않은 "+ errItem.toString() + " 입니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ProfileAddPetActivity, "올바르지 않은 "+ errItem.toString() + " 입니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
@@ -208,4 +214,6 @@ class AddPet : AppCompatActivity() {
             //somthing wrong
         }
     }
+
 }
+

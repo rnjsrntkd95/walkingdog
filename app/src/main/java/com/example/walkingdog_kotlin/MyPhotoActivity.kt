@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.model.MyFeedDTO
 import kotlinx.android.synthetic.main.activity_my_photo.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class MyPhotoActivity : AppCompatActivity() {
 

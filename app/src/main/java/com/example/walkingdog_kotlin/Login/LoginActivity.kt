@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
-import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -90,8 +89,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // onActivityResult
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Log.i("Log", "session get current session")
-            return
+                Log.i("Log", "session get current session")
+                return
         }
         super.onActivityResult(requestCode, resultCode, data)
 

@@ -32,7 +32,7 @@ class BreedAdapter (val context:Context, val breedList:ArrayList<Breed>, var mCa
             val dataItem = breedList.get(position) as Breed
             if (dataItem.isSelected) {
                 context?.let { ContextCompat.getColor(it, R.color.mainOrange) }
-                    ?.let { holder.itemView.setBackgroundResource(R.drawable.male_breed_shape) }
+                    ?.let { holder.itemView.setBackgroundResource(R.drawable.green_breed_shape) }
 
             } else {
                 context?.let { ContextCompat.getColor(it, R.color.gray) }

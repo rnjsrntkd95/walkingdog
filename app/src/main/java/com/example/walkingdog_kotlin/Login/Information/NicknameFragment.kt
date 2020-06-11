@@ -45,11 +45,6 @@ class NicknameFragment(context: Context) : Fragment() {
             (activity as SignUpActivity).finish()
         }
 
-        pass_tv.setOnClickListener {
-            var intent = Intent(context, AddPet::class.java)
-            startActivity(intent)
-        }
-
         next_btn_nickname.setOnClickListener {
             val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
             val userToken = pref.getString("userToken", "none")
@@ -79,6 +74,9 @@ class NicknameFragment(context: Context) : Fragment() {
                     }
                 }
             })
+
+            var intent = Intent(context, AddPet::class.java)
+            startActivity(intent)
         }
     }
 }

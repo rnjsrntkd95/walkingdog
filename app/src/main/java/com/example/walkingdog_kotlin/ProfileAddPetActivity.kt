@@ -50,8 +50,6 @@ class ProfileAddPetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_add_pet)
 
-        rv_image_area.setOnClickListener { loadImage() }
-
         val bAdapter = BreedAdapter(this, breedList, View.OnClickListener {  }) { breed ->
             petBreed = breed.breed
         }
@@ -200,19 +198,6 @@ class ProfileAddPetActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == Gallery) {
-            if(resultCode == RESULT_OK) {
-                var dataUri = data?.data
-                try {
-                    var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
-                    rv_image_area.setImageBitmap(bitmap)
-                } catch (e:Exception) {
-                    Toast.makeText(this, "$e", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            //somthing wrong
-        }
     }
 
 }

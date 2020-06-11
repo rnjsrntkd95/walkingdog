@@ -18,6 +18,7 @@ import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.Post.Model.PostModel
 import com.example.walkingdog_kotlin.Post.Model.UserProfileModel
 import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Statics
 import kotlinx.android.synthetic.main.feed_item.*
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.map_popup.*
@@ -59,7 +60,7 @@ class FeedFragment() : Fragment() {
         feed_recyclerview.setHasFixedSize(true)
 
         writeBtn.setOnClickListener {
-            var intent = Intent(context, WritePost::class.java)
+            var intent = Intent(context, Statics::class.java)
             startActivity(intent)
         }
 

@@ -54,23 +54,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-                android:id="@+id/email_signUp_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_above="@+id/kakao_signUp_layout"
-                android:layout_marginBottom="15dp">
 
-            <Button
-                    android:id="@+id/email_signUp_btn"
-                    android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:text="TEST BUTTON"
-                    android:background="@drawable/tenradius_shape"
-                    android:backgroundTint="@color/white"
-                    android:fontFamily="@font/maplestory_bold"/>
-        </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/kakao_signUp_layout"

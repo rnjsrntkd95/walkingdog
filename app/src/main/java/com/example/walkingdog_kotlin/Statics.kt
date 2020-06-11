@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Walking.StaticsItem
 import kotlinx.android.synthetic.main.activity_statics.*
@@ -41,6 +42,11 @@ class Statics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statics)
+
+        //프래그먼트에서 상태바 배경색 변경하는 코드
+        this.window.statusBarColor = (ContextCompat.getColor(this,
+            R.color.green2
+        ))
 
         var sum_kcal=findViewById<TextView>(R.id.sum_kcal_tv)
         var sum_time=findViewById<TextView>(R.id.sum_kcal_tv)

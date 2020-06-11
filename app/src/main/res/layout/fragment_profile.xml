@@ -12,96 +12,97 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:orientation="vertical"
-        >
-<!--    마이페이지 텍스트 레이아웃-->
+        android:background="@drawable/bottomten_radius_shape"
+        android:backgroundTint="@color/green2">
+
+<!-- 내정보 레이아웃   -->
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="20dp">
+            android:layout_height="50dp">
         <TextView
                 android:id="@+id/my_profile_text"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
-                android:text="My Profile"
-                android:textSize="30dp"
+                android:text="내 정보"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_centerInParent="true"/>
-
-        <ImageView
-                android:id="@+id/logout_btn"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
-                android:src="@drawable/logout"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-        </ImageView>
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
 
     </RelativeLayout>
-<!--    프로필사진, 이름 레이아웃-->
+<!--    프로필사진, 이름, 강아지목록 레이아웃-->
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:background="@drawable/tenradius_shape"
+            android:backgroundTint="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="64dp"
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.65"
+                android:orientation="vertical"
+                android:gravity="center">
 
-                >
+            <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="64dp"
+                    android:layout_marginBottom="10dp">
+
+                <ImageView
+                        android:id="@+id/myprofile_img_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/dog07">
+                </ImageView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김민정"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/maplestory_light" />
+
+        </LinearLayout>
+<!--        내 강아지 리스트 레이아웃-->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.35"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:layout_margin="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/add_recyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+            </androidx.recyclerview.widget.RecyclerView>
 
             <ImageView
-                    android:id="@+id/myprofile_img_btn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/dog07">
+                    android:id="@+id/add_pet_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/add"
+                    android:backgroundTint="#5a5a5a"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/add_recyclerView">
+
             </ImageView>
 
-        </androidx.cardview.widget.CardView>
-
-
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Park Joon Sung"
-                android:textSize="20dp"
-                />
-    </LinearLayout>
-<!--    강아지 리스트 레이아웃-->
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
-            >
-
-        <androidx.recyclerview.widget.RecyclerView
-
-                android:id="@+id/add_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                android:layout_below="@+id/profile_name"
-                tools:listitem="@layout/add_dog_item"
-                />
-        <ImageView
-                android:id="@+id/add_pet_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/add"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="15dp">
-
-        </ImageView>
+        </RelativeLayout>
 
 
 
@@ -109,116 +110,121 @@
 
 </LinearLayout>
 
-
+<!--산책통계, 내챌린지, 로그아웃 레이아웃-->
 <LinearLayout
         android:id="@+id/profile_bottom"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/profile_bottom"
+        android:layout_height="match_parent"
         android:layout_below="@+id/profile_top"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical">
-
-
+        android:orientation="vertical"
+        android:padding="10dp">
+<!--    산책통계, 내 챌린지 레이아웃-->
     <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/statics"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="250dp">
 
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/barchart" />
+        <!--    산책통계 레이아웃-->
+        <LinearLayout
+                android:id="@+id/walkingStaticLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:orientation="vertical"
+                android:gravity="center">
 
-        <TextView
-                android:id="@+id/statics_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Statics"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/dogbone"
+                    android:layout_marginBottom="10dp"/>
 
-        </TextView>
+            <TextView
+                    android:id="@+id/statics_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 통계"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="172dp"
-                >
-        </ImageView>
+        </LinearLayout>
+        <!--    중간에 공간만들어주는 레이아웃-->
+        <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="200dp">
+        </LinearLayout>
+        <!--내 챌린지 레이아웃-->
+        <LinearLayout
+                android:id="@+id/myChallengeLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:gravity="center"
+                android:orientation="vertical">
 
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/mychallengeicon"
+                    android:layout_marginBottom="10dp"/>
 
+            <TextView
+                    android:id="@+id/account_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내 챌린지"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
+
+        </LinearLayout>
 
     </LinearLayout>
-
+    
     <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/myChallenge_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/user2"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                />
-
-        <TextView
-                android:id="@+id/account_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Account"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
-
-        </TextView>
-
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="157dp"
-                >
-        </ImageView>
+            android:layout_height="10dp">
 
     </LinearLayout>
-
+    
+<!--로그아웃 레이아웃-->
     <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
+            android:id="@+id/logoutLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/logout"
+                    android:layout_marginBottom="10dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
+
+        </LinearLayout>
 
     </LinearLayout>
+    
+
+
 
 
  </LinearLayout>

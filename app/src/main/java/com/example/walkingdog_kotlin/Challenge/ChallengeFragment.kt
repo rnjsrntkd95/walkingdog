@@ -47,12 +47,12 @@ class ChallengeFragment(context: Context) : Fragment() {
         return inflater.inflate(R.layout.fragment_challenge, container, false)
 
 
-        //프래그먼트에서 상태바 아이콘 검은색으로 변경하는 코드
-        activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        //프래그먼트에서 상태바 배경색 변경하는 코드
-        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
-            R.color.mainBlue
-        ))
+//        //프래그먼트에서 상태바 아이콘 검은색으로 변경하는 코드
+//        activity!!.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+//        //프래그먼트에서 상태바 배경색 변경하는 코드
+//        activity!!.window.statusBarColor = (ContextCompat.getColor(context!!,
+//            R.color.mainBlue
+//        ))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

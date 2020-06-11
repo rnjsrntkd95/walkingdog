@@ -9,7 +9,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mainBlue">
+            android:background="@color/green1">
 
         <LinearLayout
                 android:id="@+id/appName_layout"
@@ -26,15 +26,15 @@
                     android:layout_height="wrap_content"
                     android:text="워킹멍"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"/>
+                    android:textSize="40dp"
+                    android:fontFamily="@font/maplestory_bold"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="나랑 산책하개"
-                    android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,9 +46,10 @@
                 android:layout_marginTop="50dp">
 
             <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/splash_icon">
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/logo2"
+                    android:layout_marginLeft="15dp">
             </ImageView>
         </LinearLayout>
 
@@ -66,7 +67,9 @@
                     android:layout_width="320dp"
                     android:layout_height="50dp"
                     android:text="TEST BUTTON"
-                    android:background="@color/mainSkin"/>
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/maplestory_bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +83,7 @@
             <com.kakao.usermgmt.LoginButton
                     android:id="@+id/btn_kakaoSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"/>
 
         </LinearLayout>
 

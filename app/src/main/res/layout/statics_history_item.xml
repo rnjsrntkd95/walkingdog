@@ -4,26 +4,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        >
-    <TextView
-            android:id="@+id/history_date"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Today"
-        android:gravity="center_vertical"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold"
-            android:layout_weight="0.9"
-
-            >
-
-</TextView>
-
+        android:background="@drawable/tenradius_shape"
+        android:backgroundTint="@color/white"
+        android:layout_marginBottom="10dp">
+<!--날짜 레이아웃-->
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="center">
+
+        <TextView
+                android:id="@+id/history_date"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Today"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
+
+    </LinearLayout>
+<!--칼로리 레이아웃-->
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
 
@@ -31,89 +35,95 @@
                 android:id="@+id/history_cal"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:text="175.6"
-                android:textColor="#000000"
-                android:textSize="20dp">
-
-        </TextView>
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
                 android:text="kcal"
-                android:textColor="#000000"
-                android:textSize="20dp">
-
-        </TextView>
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
 
     </LinearLayout>
-
+<!--시간 레이아웃-->
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:gravity="center">
+        <TextView
+                android:id="@+id/history_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="00"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
+
+        <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:text=":"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:fontFamily="@font/maplestory_light"/>
+
+        <TextView
+                android:id="@+id/history_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="00"
+                android:gravity="center_vertical"
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
+
+        <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:text=":"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:fontFamily="@font/maplestory_light"/>
+
+        <TextView
+                android:id="@+id/history_sec"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="00"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:fontFamily="@font/maplestory_light"/>
+    </LinearLayout>
+
+<!--    작성버튼 레이아웃-->
+    <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center">
 
+        <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/writepencil">
 
-    <TextView
-        android:id="@+id/history_hour"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="00"
-            android:textColor="#000000"
-        android:gravity="center_vertical"
-        android:textSize="20dp"
+        </ImageView>
 
-        >
-</TextView>
-
-    <TextView
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
-            android:text=":"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp">
-
-    </TextView>
-    <TextView
-            android:id="@+id/history_minutes"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="00"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-            android:textColor="#000000"
-
-            >
-    </TextView>
-
-    <TextView
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
-            android:text=":"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp">
-
-    </TextView>
-    <TextView
-            android:id="@+id/history_sec"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="00"
-            android:textColor="#000000"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-
-            >
-    </TextView>
     </LinearLayout>
+
+
+    <!--    <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center">-->
+
+<!--    </LinearLayout>-->
+
+
 </LinearLayout>

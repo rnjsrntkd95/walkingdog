@@ -81,15 +81,12 @@ class ProfileFragment : Fragment() {
 
             super.onActivityCreated(savedInstanceState)
 
-
-            var sum_kcal=view?.findViewById<TextView>(R.id.profile_name)
-
-            statics.setOnClickListener {
+            walkingStaticLayout.setOnClickListener {
                 val intent =Intent(context,Statics::class.java)
                 startActivity(intent)
             }
 
-            myChallenge_layout.setOnClickListener {
+            myChallengeLayout.setOnClickListener {
                 val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
                 val userToken = pref?.getString("userToken", "5ebac6bd59e3d32080d6d941")
 
@@ -125,7 +122,7 @@ class ProfileFragment : Fragment() {
                 loadImage()
             }
 
-            logout_btn.setOnClickListener {
+            logoutLayout.setOnClickListener {
                 var intent = Intent(context, LoginActivity::class.java)
                 startActivity(intent)
                 auth.signOut()

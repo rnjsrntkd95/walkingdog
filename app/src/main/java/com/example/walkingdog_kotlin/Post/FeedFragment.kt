@@ -35,9 +35,6 @@ class FeedFragment() : Fragment() {
     }
 
     var feedList = arrayListOf<FeedContent>(
-        FeedContent(),
-        FeedContent(),
-        FeedContent()
     )
 
 
@@ -98,6 +95,7 @@ class FeedFragment() : Fragment() {
             override fun onResponse(call: Call<PostListModel>, response: Response<PostListModel>) {
                 val posts = response.body()?.posts
                 val error = response.body()?.error
+
                 Log.d("TAG", "error: " + error)
                 posts!!.forEach(fun(element) {
                     feedList.add(FeedContent(element))

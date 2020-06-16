@@ -6,27 +6,11 @@ const userChallengeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
-    index: true,
   },
   challengeId: {
     type: String,
     required: true,
   },
-  score: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  walkingCount: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  walkingAvg: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
 });
 
-module.exports = mongoose.model("userChallege", userChallengeSchema);
+module.exports = mongoose.model("userChallenge", userChallengeSchema);

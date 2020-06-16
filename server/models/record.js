@@ -12,7 +12,7 @@ const recordSchema = new Schema({
     },
     score: {
         type: Number,
-        dafault: 0
+        default: 0,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

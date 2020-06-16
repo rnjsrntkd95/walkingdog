@@ -18,6 +18,7 @@ import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
 import com.example.walkingdog_kotlin.MyChallengeActivity
 import com.example.walkingdog_kotlin.Challenge.Model.ChallengeModel
+import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.ReformatDate
 import kotlinx.android.synthetic.main.fragment_challenge.*
 import kotlinx.android.synthetic.main.participate_challenge.view.*
@@ -65,6 +66,7 @@ class ChallengeFragment(context: Context) : Fragment() {
                 var intent = Intent(context, MyChallengeActivity::class.java)
                 intent.putExtra("challengeId", challenge.id)
                 startActivity(intent)
+                (activity as MainActivity).finish()
             }
         cRecyclerView.adapter = cAdapter
 
@@ -86,7 +88,7 @@ class ChallengeFragment(context: Context) : Fragment() {
                 val popularChallenge = response.body()?.popularChallenge
                 if(popularChallenge != null){
                     popularChallengeId = popularChallenge!!._id
-                    Log.d("Challenge", popularChallenge!!.title)
+                    Log.d("인기챌린지", popularChallenge.title)
                     challengeTitle_Textview.text = popularChallenge!!.title
                     challenge_period.text = ReformatDate("MM월 dd일", popularChallenge!!.start_date) + " ~ " +
                             ReformatDate("MM월 dd일", popularChallenge!!.end_date)
@@ -94,7 +96,6 @@ class ChallengeFragment(context: Context) : Fragment() {
                     personnel.text = popularChallenge!!.population.toString()
                 }
                 challenges!!.forEach(fun(element) {
-                    Log.d("element.title : ", element.title)
                     challengeList.add(Challenge(element))
                 })
                 cAdapter.notifyDataSetChanged()
@@ -104,12 +105,14 @@ class ChallengeFragment(context: Context) : Fragment() {
         create_challenge.setOnClickListener {
             var intent = Intent(context, Create_ChallengeActivity::class.java)
             startActivity(intent)
+            (activity as MainActivity).finish()
         }
 
         popular_challenge_content_layout.setOnClickListener {
             val intent = Intent(context, MyChallengeActivity::class.java)
             intent.putExtra("challengeId", popularChallengeId)
             startActivity(intent)
+            (activity as MainActivity).finish()
         }
     }
 }

@@ -12,8 +12,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.walkingdog_kotlin.GlideApp
 import com.example.walkingdog_kotlin.Post.Model.DeletePostModel
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.RouteModel
@@ -50,11 +51,10 @@ class FeedAdaptor(
 
         fun bind(feedContent: FeedContent, context: Context) {
             if (feedContent.profileImg != "") {
-                Glide.with(context)
+                GlideApp.with(context)
                     .load("${context.getString(R.string.server_url)}/${feedContent.profileImg}")
-//                        .apply(RequestOptions.overrideOf(300, 250))
-                    .apply(RequestOptions.centerCropTransform())
-                    .into(profileImg)
+                    .apply(RequestOptions.centerInsideTransform().override(500,500))
+                    .into(profileImg!!)
             } else {
                 profileImg?.setImageResource(R.mipmap.ic_launcher)
             }
@@ -65,14 +65,12 @@ class FeedAdaptor(
             dogName?.text = feedContent.dogName
             if (feedContent.uploadImg.isNotEmpty()) {
                 feedContent.uploadImg.forEach(fun(imageUrl) {
-                    Glide.with(context)
+                    GlideApp.with(context)
                         .load("${context.getString(R.string.server_url)}/${imageUrl}")
-//                        .apply(RequestOptions.overrideOf(300, 250))
-                        .apply(RequestOptions.centerCropTransform())
-                        .into(feedImg)
+                        .apply(RequestOptions.centerInsideTransform())
+                        .into(feedImg!!)
                 })
             } else {
-
                 feedImg?.setImageResource(R.drawable.dog03)
             }
 

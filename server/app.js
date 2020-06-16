@@ -42,7 +42,10 @@ app.use(async (req, res, next) => {
     next();
   } else {
     const Jwt = require("jsonwebtoken");
-    const token = req.body.userToken;
+    let token = req.body.userToken;
+    if (!token) {
+      token = req.query.userToken;
+    }
     if (!token) {
       console.log("토큰없음")
       res.json({ error: 1004 });

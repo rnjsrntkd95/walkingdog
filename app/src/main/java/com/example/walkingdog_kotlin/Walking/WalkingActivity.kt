@@ -15,8 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Post.WritePost
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Camera
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
+import com.example.walkingdog_kotlin.Statics
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
 import net.daum.mf.map.api.*
@@ -141,6 +143,8 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             }
         }
         camera_btn.setOnClickListener {
+            val intent = Intent(this, Camera::class.java)
+            startActivity(intent)
         }
 
         this.window.statusBarColor = (ContextCompat.getColor(this, R.color.white))
@@ -259,7 +263,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
                 // 산책 등록 후 처리 - 액티비티 이동
                 if (error == null) {
-                    val intent = Intent(this@WalkingActivity, WritePost::class.java)
+                    val intent = Intent(this@WalkingActivity, Statics::class.java)
                     intent.putExtra("walkingId", walkingId)
                     startActivity(intent)
                     finish()

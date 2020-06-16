@@ -139,6 +139,13 @@ class CheckFragment : Fragment() {
             var dIndex:Int = 9999   //더미 값
 
             delete_check_btn.setOnClickListener {
+                var usl: String? = pref.getString("checkList", "")
+                usl = usl!!.replace("//${dialogText.text}", "")
+                val edit = pref.edit()
+                edit.remove("checkList")
+                edit.putString("checkList", usl)
+                edit.apply()
+
                 //삭제하려는 텍스트와 같은 텍스트를 갖는 요소의 인덱스를 찾고 저장
                 for(i in 0 until checkItemList.size) {
                     if(dialogText.text.toString() == checkItemList[i].item) {

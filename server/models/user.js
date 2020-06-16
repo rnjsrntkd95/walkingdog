@@ -40,7 +40,7 @@ const userSchema = new Schema({
   },
   profileImage: {
     type: String,
-    default: "uploads\\default_profile.jpg",
+    default: "uploads\\default_profile.png",
   },
 });
 

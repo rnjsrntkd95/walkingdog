@@ -32,7 +32,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="워킹멍:나만 따라오개!"
+                android:text="워킹멍:나랑 산책하개!"
                 android:textSize="20dp"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/maplestory_bold"/>

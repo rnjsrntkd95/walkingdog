@@ -9,7 +9,7 @@ router.post("/join", controller.joinChallenge);
 // 챌린지 리스트 검색
 router.get("/search", controller.searchChallenge);
 // 챌린지 탈퇴: 유저의 중도 포기
-router.delete("/drop", controller.dropChallenge);
+router.post("/drop", controller.dropChallenge);
 //usersInChallenge
 router.post("/users", controller.usersInChallenge);
 //getMyChallengeId

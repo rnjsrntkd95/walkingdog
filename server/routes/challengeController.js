@@ -57,7 +57,7 @@ exports.createChallenge = async (req, res, next) => {
 };
 
 exports.joinChallenge = async (req, res, next) => {
-  const userData = req.userTokne.id;
+  const userData = req.userToken.id;
   const challengeId = req.body._id;
 
   try {
@@ -100,10 +100,10 @@ exports.joinChallenge = async (req, res, next) => {
 exports.searchChallenge = async (req, res, next) => {
   try {
     // 정렬: 시작 날짜가 현재 날짜와 가까운 순서로 반환
-    const challenges = await Challenge.find({}).sort("-start_date");
+    const challenges = await Challenge.find({}).sort("-create_date");
     // 인기 챌린지
     const popularChallenge = await Challenge.findOne({}).sort("-population");
-    console.log(challenges);
+    console.log("인기챌린지");
     console.log(popularChallenge);
     res.json({
       challenges,
@@ -116,8 +116,10 @@ exports.searchChallenge = async (req, res, next) => {
 };
 
 exports.dropChallenge = async (req, res, next) => {
+  console.log("마이바디");
+  console.log(req.body)
   const userData = req.userToken.id;
-  const challengeId = req.query._id;
+  const challengeId = req.body._id;
 
   try {
     const challenge = await Challenge.findByIdAndUpdate(
@@ -141,8 +143,10 @@ exports.usersInChallenge = async (req, res, next) => {
     const user  = await User.findOne({ _id: userData });
 
     const records = await Record.find({ challenge: challengeId }).populate("user", "nickname").sort("-score");
-    const myRecord = await Record.findOne({ user: userData, challenge: challengeId });
-
+    const myRecord = await Record.findOne({ user: userData, challenge: challengeId }).populate("user", "nickname");
+    console.log("마이챌린지 유무")
+    console.log(myRecord)
+    console.log("////////")
     res.json({ records, myRecord });
   } catch (err) {
     console.log(err);
@@ -153,9 +157,8 @@ exports.usersInChallenge = async (req, res, next) => {
 exports.getMyChallengeId = async (req, res, next) => {
   const userData = req.userToken.id;
   try {
-    const myChallenge = await UserChallenge.find({ userId: userData }).challengeId;
-
-    res.json({ myChallenge });
+    const myChallenge = await UserChallenge.findOne({ userId: userData });
+    res.json({ myChallenge: myChallenge.challengeId });
   } catch (err) {
     console.log(err);
     res.json({ error: 1 });

@@ -8,9 +8,11 @@ import java.time.LocalDate
 interface ChallengeRetrofit {
     @GET("/challenge/search")
     fun getChallengeList(@Query ("userToken") userToken: String): Call<ChallengeListModel>
-    @DELETE("/challenge/drop")
-    fun deleteChallenge(@Query("userToken") userToken: String,
-                        @Query("_id") _id: String): Call<DropChallengeResultModel>
+
+    @FormUrlEncoded
+    @POST("/challenge/drop")
+    fun deleteChallenge(@Field("userToken") userToken: String,
+                        @Field("_id") _id: String): Call<DropChallengeResultModel>
     @FormUrlEncoded
     @POST("/challenge/join")
     fun joinChallenge(@Field("userToken") userToken: String,

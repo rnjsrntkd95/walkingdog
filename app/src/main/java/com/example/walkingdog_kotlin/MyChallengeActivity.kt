@@ -22,13 +22,6 @@ import retrofit2.Response
 class MyChallengeActivity : AppCompatActivity() {
 
     var pcList = arrayListOf<ParticipateChallenge>(
-        ParticipateChallenge("1", "김현진", "30", "100%", "100"),
-        ParticipateChallenge("2", "권구상", "28", "90%", "95"),
-        ParticipateChallenge("3", "김민정", "25", "85%", "90"),
-        ParticipateChallenge("4", "박준성", "10", "40%", "60"),
-        ParticipateChallenge("5", "이수만", "5", "30%", "40"),
-        ParticipateChallenge("6", "박진영", "3", "10%", "20")
-
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +47,9 @@ class MyChallengeActivity : AppCompatActivity() {
         if (extra != null) {
             challengeId = extra.getString("challengeId","")
             if (challengeId == null || challengeId == "") {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("cFlag", true)
+                startActivity(intent)
                 finish()
                 return
             }
@@ -68,9 +64,14 @@ class MyChallengeActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ChallengeUserListModel>, response: Response<ChallengeUserListModel>) {
                 val records = response.body()?.records
                 val myRecord = response.body()?.myRecord
+                val error = response.body()?.error
 
-                Log.d("레코드들", records.toString())
-                Log.d("나의 레코드", myRecord.toString())
+                if (error == 1) {
+                    return
+                }
+
+                myChallengeTitle.text = records!![0].challengeTitle
+
 
                 if (myRecord != null) {
                     //가입 중인 챌린지가 있다면
@@ -88,18 +89,29 @@ class MyChallengeActivity : AppCompatActivity() {
                 records!!.forEach(fun(record) {
                     pcList.add(ParticipateChallenge("${rankCounter}", record.user.nickname,
                         "${record.walkingCount}", "${record.walkingAvg}", "${record.score}"))
-                    if (record.user.nickname == myRecord!!.user.nickname) {
-                        myrank = rankCounter
+                    if (myRecord != null){
+                        if (record.user.nickname == myRecord.user.nickname) {
+                            myrank = rankCounter
+                        }
                     }
-                    rankCounter++
+                    if (record.score != 0) {
+                        rankCounter++
+                    }
                 })
                 mAdapter.notifyDataSetChanged()
 
-                // 내 기록 반영
-                rankingFigureTv.text = myrank.toString()
-                walkingFigureTv.text = myRecord!!.walkingCount.toString()
-                satisfiedQuantityFigureTv.text = myRecord.walkingAvg.toString()
-                scoreFigureTv.text = myRecord.score.toString()
+                if (myRecord != null) {
+                    // 내 기록 반영
+                    if (myRecord.score == 0) {
+                        rankingFigureTv.text = "-"
+                    } else{
+
+                        rankingFigureTv.text = myrank.toString()
+                    }
+                    walkingFigureTv.text = myRecord.walkingCount.toString()
+                    satisfiedQuantityFigureTv.text = myRecord.walkingAvg.toString()
+                    scoreFigureTv.text = myRecord.score.toString()
+                }
 
                 if(pcList.size > 3){
                     firstPerson.text = pcList[0].nickName
@@ -110,10 +122,14 @@ class MyChallengeActivity : AppCompatActivity() {
             }
         })
         myChallenge_back_btn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("cFlag", true)
+            startActivity(intent)
             finish()
         }
 
         cancelChallenge.setOnClickListener{
+
             val challengeCancelRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
             challengeCancelRetrofit.deleteChallenge(userToken, challengeId).enqueue(object : Callback<DropChallengeResultModel> {
                 override fun onFailure(call: Call<DropChallengeResultModel>, t: Throwable) {
@@ -127,10 +143,13 @@ class MyChallengeActivity : AppCompatActivity() {
                         Toast.makeText(this@MyChallengeActivity, "챌린지 탈퇴 실패하였습니다.", Toast.LENGTH_LONG).show()
                     } else {
                         Toast.makeText(this@MyChallengeActivity, "챌린지 탈퇴하였습니다.", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@MyChallengeActivity, MainActivity::class.java)
+                        intent.putExtra("cFlag", true)
+                        startActivity(intent)
+                        finish()
                     }
                 }
             })
-            finish()
         }
 
         joinChallenge.setOnClickListener {
@@ -156,5 +175,13 @@ class MyChallengeActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@MyChallengeActivity, MainActivity::class.java)
+        intent.putExtra("cFlag", true)
+        startActivity(intent)
+        finish()
     }
 }

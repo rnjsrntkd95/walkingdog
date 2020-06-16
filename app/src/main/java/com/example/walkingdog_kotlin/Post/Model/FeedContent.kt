@@ -11,7 +11,7 @@ class FeedContent() {
     var date : String = ""
     var location : String = ""
     var dogName : String = ""
-    var uploadImg : List<String> = listOf()
+    var uploadImg : MutableList<String> = mutableListOf()
     var explain : String = ""
     var time : Number = 0
     var distance : Number = 0
@@ -29,13 +29,13 @@ class FeedContent() {
             animalList = animalList + post.animal[animalIndex] + ", "
         }
         this.profileImg = post.user.profileImage
-        Log.d("이미지", "프로필이미지")
-        Log.d("이미지", "${this.profileImg}")
         this.userName = post.nickname
         this.date = ReformatDate("yyyy년 MM월 dd일", post.created_date)
         this.location = post.addressAdmin + " " + post.addressLocality
         this.dogName = animalList
-        this.uploadImg = post.image
+        post.image.forEach(fun(img){
+            this.uploadImg.add(img)
+        })
         this.explain = post.content
         this.time = post.walkingTime
         this.distance = post.distance

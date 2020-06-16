@@ -21,7 +21,7 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class Create_ChallengeActivity : AppCompatActivity() {
+class Create_ChallengeActivity() : AppCompatActivity() {
 
     var now = LocalDate.now()
     var month = now.format(DateTimeFormatter.ofPattern("MM"))
@@ -119,7 +119,6 @@ class Create_ChallengeActivity : AppCompatActivity() {
 
             val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
             val userToken = pref.getString("userToken", "")
-            Log.d("유저토큰을 보자", userToken)
 
             val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
              challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<CreateChallengeResultModel> {
@@ -141,6 +140,7 @@ class Create_ChallengeActivity : AppCompatActivity() {
                     val intent = Intent(this@Create_ChallengeActivity, MyChallengeActivity::class.java)
                     intent.putExtra("challengeId", challengeId)
                     startActivity(intent)
+                    finish()
                 }
             })
 

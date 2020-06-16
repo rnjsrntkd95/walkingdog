@@ -116,6 +116,7 @@ class ProfileFragment : Fragment() {
                             val intent = Intent(context, MyChallengeActivity::class.java)
                             intent.putExtra("challengeId", challenge)
                             startActivity(intent)
+                            (activity as MainActivity).finish()
                         }
                     }
                 })

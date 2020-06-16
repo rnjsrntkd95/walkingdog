@@ -1,6 +1,7 @@
 package com.example.walkingdog_kotlin
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,11 @@ class PCRvAdapter (val context: Context, val pcList: ArrayList<ParticipateChalle
         val score = itemView?.findViewById<TextView>(R.id.pcScore)
 
         fun bind(participateChallenge : ParticipateChallenge, context: Context) {
-            rank?.text = participateChallenge.rank
+            if (participateChallenge.score == "0") {
+                rank?.text = "-"
+            } else {
+                rank?.text = participateChallenge.rank
+            }
             nickName?.text = participateChallenge.nickName
             figure?.text = participateChallenge.walkingFigure
             satisfy?.text = participateChallenge.walingsatisfy

@@ -34,7 +34,7 @@ data class ChallengeUserListModel (
 data class user (
     val walkingCount: Number,
     val walkingAvg: Number,
-    val score: Number,
+    val score: Int,
     val user: UserNicknameModel,
     val challenge: String,
     val challengeTitle: String

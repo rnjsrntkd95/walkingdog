@@ -70,14 +70,14 @@
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/maplestory_bold"/>
 
-
         <ListView
                 android:id="@+id/checkListView"
-                android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:divider="#ffffff">
 
         </ListView>
 
@@ -85,7 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/checkListView"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp">
 
             <Button
                     android:id="@+id/sub_item_btn"
@@ -96,11 +97,10 @@
                     android:textColor="@color/white"
                     android:background="@drawable/tenradius_shape"
                     android:backgroundTint="#f18c8c"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/maplestory_bold"/>
 
             <LinearLayout
-                    android:layout_width="30dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"/>
 
             <Button
@@ -112,7 +112,6 @@
                     android:textColor="@color/white"
                     android:background="@drawable/tenradius_shape"
                     android:backgroundTint="#f18c8c"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/maplestory_bold"/>
 
         </LinearLayout>

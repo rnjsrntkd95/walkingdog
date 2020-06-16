@@ -83,7 +83,9 @@
             <com.google.android.gms.common.SignInButton
                     android:id="@+id/btn_googleSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/colorAccent"/>
 
         </LinearLayout>
     </RelativeLayout>

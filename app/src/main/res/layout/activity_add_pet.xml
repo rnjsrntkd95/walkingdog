@@ -245,7 +245,8 @@
                     android:text="@string/finish"
                     android:layout_alignParentBottom="true"
                     android:textSize="16dp"
-                    android:layout_margin="20dp"/>
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/maplestory_bold"/>
 
 
     </RelativeLayout>

@@ -4,18 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Gallery
 import android.widget.Toast
-import android.widget.ToggleButton
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Animal.AnimalRetrofitCreators
 import com.example.walkingdog_kotlin.Animal.BreedAdapter
@@ -23,15 +16,11 @@ import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import com.example.walkingdog_kotlin.Animal.Model.Breed
 import com.example.walkingdog_kotlin.Animal.Model.SetNewAnimalModel
 import com.example.walkingdog_kotlin.Login.ProfileFragment
-import com.example.walkingdog_kotlin.MainActivity
-import com.example.walkingdog_kotlin.R
-import kotlinx.android.synthetic.main.activity_add_pet.*
-import kotlinx.android.synthetic.main.breed_rv_item.*
-import kotlinx.android.synthetic.main.feed_item.*
+import kotlinx.android.synthetic.main.activity_profile_add_pet.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
+
 
 class ProfileAddPetActivity : AppCompatActivity() {
 
@@ -83,13 +72,7 @@ class ProfileAddPetActivity : AppCompatActivity() {
             finish()
         }
 
-        pass_tv.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        finish_btn_addPet.setOnClickListener {
+        finish_btn_addPet2.setOnClickListener {
             val pref = getSharedPreferences("pref", MODE_PRIVATE)
             // Data
             val userToken = pref.getString("userToken", "none")

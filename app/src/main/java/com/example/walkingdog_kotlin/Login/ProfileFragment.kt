@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.*
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
@@ -37,8 +38,8 @@ class ProfileFragment : Fragment() {
 
     var addpet_list = arrayListOf<ProfileItem>(
 
-        ProfileItem("dog00"),
-        ProfileItem("dog01")
+        ProfileItem("까까"),
+        ProfileItem("뽀삐")
     )
 
 

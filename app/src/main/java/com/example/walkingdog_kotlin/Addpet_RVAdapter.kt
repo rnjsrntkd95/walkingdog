@@ -27,21 +27,12 @@ class Addpet_RVAdapter (val context: Context, val addpet_list: ArrayList<Profile
     }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val pet_img = itemView?.findViewById<ImageView>(R.id.add_dog_img)
 
+        var dogName = itemView?.findViewById<TextView>(R.id.myDogName)
 
 
         fun bind (addpet_list: ProfileItem, context: Context) {
-
-            if (addpet_list.image != "") {
-                val resourceId = context.resources.getIdentifier(addpet_list.image, "drawable", context.packageName)
-                pet_img?.setImageResource(resourceId)
-            } else {
-                pet_img?.setImageResource(R.mipmap.ic_launcher)
-            }
-
-
-
+            dogName?.text = addpet_list.name
         }
     }
 

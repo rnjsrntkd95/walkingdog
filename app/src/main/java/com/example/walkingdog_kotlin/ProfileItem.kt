@@ -1,3 +1,3 @@
 package com.example.walkingdog_kotlin
 
-class ProfileItem(val image: String)
+class ProfileItem(val name: String)

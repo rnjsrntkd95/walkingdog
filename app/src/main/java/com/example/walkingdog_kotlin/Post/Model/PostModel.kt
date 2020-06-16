@@ -3,7 +3,7 @@ package com.example.walkingdog_kotlin.Post.Model
 import java.util.*
 
 data class PostListModel (
-    val posts: List<PostModel> = listOf(),
+    val posts: ArrayList<PostModel> = arrayListOf(),
     val error: Number
 )
 data class UserProfileModel (

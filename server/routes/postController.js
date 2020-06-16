@@ -77,6 +77,7 @@ exports.timeline = async (req, res, next) => {
         } else {
             // 위치 정보가 없거나 검색 타입이 없을 때
             const posts = await Post.find({ }).populate('user', 'profileImage');
+            console.log(posts)
             res.json({ posts, error: 0 })
         }
     } catch (err) {

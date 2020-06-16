@@ -29,6 +29,8 @@ class FeedContent() {
             animalList = animalList + post.animal[animalIndex] + ", "
         }
         this.profileImg = post.user.profileImage
+        Log.d("이미지", "프로필이미지")
+        Log.d("이미지", "${this.profileImg}")
         this.userName = post.nickname
         this.date = ReformatDate("yyyy년 MM월 dd일", post.created_date)
         this.location = post.addressAdmin + " " + post.addressLocality

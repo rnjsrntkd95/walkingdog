@@ -38,12 +38,13 @@ app.use(async (req, res, next) => {
   console.log(req.path);
   if (req.path === "/login" || req.path === "/post/timeline"
     || req.path === "/walking/route" || req.path === "/animal/breed-list"
-    || req.path === "/challenge/search") {
+    || req.path === "/challenge/search" || req.path.includes("/uploads")) {
     next();
   } else {
     const Jwt = require("jsonwebtoken");
     const token = req.body.userToken;
     if (!token) {
+      console.log("토큰없음")
       res.json({ error: 1004 });
       return
     }
@@ -54,10 +55,11 @@ app.use(async (req, res, next) => {
     let user = await User.findOne({ _id: decodedToken.id });
     console.log("////////////////////////////////////")
     console.log(`유저접속: ${decodedToken}, ${user.email}`);
-    if (!user) {
-      res.json({ error: 1004 });
-      return
-    }
+    // if (user != null) {
+    //   console.log("널접근")
+    //   res.json({ error: 1004 });
+    //   return
+    // }
     req.userToken = decodedToken;    
     next();
   }

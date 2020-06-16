@@ -32,16 +32,23 @@ exports.createChallenge = async (req, res, next) => {
       producer,
     });
 
-    const challengeId = await Challenge.create(newChallenge);
+    const newChallengeReg = await Challenge.create(newChallenge);
 
     const connection = await new UserChallenge({
       userId: producer._id,
-      challengeId: challengeId._id,
+      challengeId: newChallengeReg._id,
     });
 
     const resultReg = await UserChallenge.create(connection);
 
-    res.json({ challengeId: challengeId._id });
+    const newRecord = await Record({
+      user: producer,
+      challenge: newChallenge,
+      challengeTitle: newChallengeReg.title,
+    });
+    const resultNewRecord = await Record.create(newRecord);
+
+    res.json({ challengeId: newChallengeReg._id });
   } catch (err) {
     console.log(err);
 

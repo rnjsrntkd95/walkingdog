@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin.Challenge
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,13 +40,6 @@ class Create_ChallengeActivity : AppCompatActivity() {
         createChallenge_back_btn.setOnClickListener {
             finish()
         }
-//      챌린지 업데이트 하는 방법 필요.
-//        val cAdapter =
-//            ChallengeRvAdapter(
-//                context!!,
-//                challengeList
-//            )
-//        cRecyclerView.adapter = cAdapter
 
         current_month_tv.text = Integer.parseInt(month).toString()
         current_date_tv.text = Integer.parseInt(date).toString()
@@ -121,13 +115,11 @@ class Create_ChallengeActivity : AppCompatActivity() {
             var targetMonth = if(target_month_tv.text.toString().length == 1) "0"+target_month_tv.text.toString() else target_month_tv.text.toString()
             var targetDate = if(target_date_tv.text.toString().length == 1) "0"+target_date_tv.text.toString() else target_date_tv.text.toString()
             var today = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-            Log.d("DEBUG", today.toString())
-            Log.d("DEBUG1", now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
             var target = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
-            Log.d("DEBUG2", target.toString())
 
-            val pref = PreferenceManager.getDefaultSharedPreferences(this)
-            var userToken = pref.getString("token", "")
+            val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref.getString("userToken", "")
+            Log.d("유저토큰을 보자", userToken)
 
             val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
              challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<CreateChallengeResultModel> {
@@ -141,6 +133,8 @@ class Create_ChallengeActivity : AppCompatActivity() {
                 ) {
                     Log.d("DEBUG", "Create Challenge Retrofit Success!!")
                     val challengeId = response.body()?.challengeId
+                    val error = response.body()?.error
+                    Log.d("ERROR", error.toString())
                     if (challengeId == null || challengeId =="") {
                         return
                     }

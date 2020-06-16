@@ -51,7 +51,7 @@ class ProfileFragment : Fragment() {
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-
+        super.onActivityCreated(savedInstanceState)
 
         val addpetAdapter = Addpet_RVAdapter(context!!, addpet_list)
 
@@ -60,69 +60,7 @@ class ProfileFragment : Fragment() {
         add_recyclerView.layoutManager = lm
         add_recyclerView.setHasFixedSize(true)
 
-
-        super.onActivityCreated(savedInstanceState)
-
-        walkingStaticLayout.setOnClickListener {
-            val intent = Intent(context, Statics::class.java)
-            startActivity(intent)
-        }
-
-//        myChallengeLayout.setOnClickListener {
-//            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-//            val userToken = pref?.getString("userToken", "")
-//        }
-
-        myChallengeLayout.setOnClickListener {
-            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-            val userToken = pref?.getString("userToken", "5ebac6bd59e3d32080d6d941")
-
-            val challengeDetailRetrofit =
-                ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
-            challengeDetailRetrofit.getMyChallenge(userToken!!)
-                .enqueue(object : Callback<myChallengeId> {
-                    override fun onFailure(call: Call<myChallengeId>, t: Throwable) {
-                        Log.d("DEBUG", " Challenge Retrofit failed!!")
-                        Log.d("DEBUG", t.message)
-                    }
-
-            walkingStaticLayout.setOnClickListener {
-                val intent = Intent(context, Statics::class.java)
-                startActivity(intent)
-            }
-
-            myChallengeLayout.setOnClickListener {
-                val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val userToken = pref?.getString("userToken", "")
-
-                val challengeDetailRetrofit =
-                    ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
-                challengeDetailRetrofit.getMyChallenge(userToken!!)
-                    .enqueue(object : Callback<myChallengeId> {
-                        override fun onFailure(call: Call<myChallengeId>, t: Throwable) {
-                            Log.d("DEBUG", " Challenge Retrofit failed!!")
-                            Log.d("DEBUG", t.message)
-                        }
-                        override fun onResponse(
-                            call: Call<myChallengeId>,
-                            response: Response<myChallengeId>
-                        ) {
-                            val challenge = response.body()?.myChallenge
-                            if (challenge == null || challenge == "") {
-                                (activity as MainActivity).bottom_navigation.selectedItemId =
-                                    R.id.action_challenge
-                            } else {
-                                val intent = Intent(context, MyChallengeActivity::class.java)
-                                intent.putExtra("challengeId", challenge)
-                                startActivity(intent)
-                            }
-                        }
-                    })
-            }
-
         logoutLayout.setOnClickListener {
-            Toast.makeText(context!!, "눌렸음", Toast.LENGTH_SHORT).show()
-
             val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
             val edit = pref.edit()
             edit.remove("userToken")
@@ -138,8 +76,52 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        walkingStaticLayout.setOnClickListener {
+            val intent = Intent(context, Statics::class.java)
+            startActivity(intent)
+        }
 
+//        myChallengeLayout.setOnClickListener {
+//            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+//            val userToken = pref?.getString("userToken", "")
+//        }
+
+        walkingStaticLayout.setOnClickListener {
+            val intent = Intent(context, Statics::class.java)
+            startActivity(intent)
+        }
+
+        myChallengeLayout.setOnClickListener {
+            val pref = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref?.getString("userToken", "")
+
+            val challengeDetailRetrofit =
+                ChallengeRetrofitCreators(context!!).ChallengeRetrofitCreator()
+            challengeDetailRetrofit.getMyChallenge(userToken!!)
+                .enqueue(object : Callback<myChallengeId> {
+                    override fun onFailure(call: Call<myChallengeId>, t: Throwable) {
+                        Log.d("DEBUG", " Challenge Retrofit failed!!")
+                        Log.d("DEBUG", t.message)
+                    }
+
+                    override fun onResponse(
+                        call: Call<myChallengeId>,
+                        response: Response<myChallengeId>
+                    ) {
+                        val challenge = response.body()?.myChallenge
+                        if (challenge == null || challenge == "") {
+                            (activity as MainActivity).bottom_navigation.selectedItemId =
+                                R.id.action_challenge
+                        } else {
+                            val intent = Intent(context, MyChallengeActivity::class.java)
+                            intent.putExtra("challengeId", challenge)
+                            startActivity(intent)
+                        }
+                    }
+                })
+        }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

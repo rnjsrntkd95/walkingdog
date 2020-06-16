@@ -52,10 +52,10 @@ class MyChallengeActivity : AppCompatActivity() {
         var challengeId = ""
         val extra = intent.extras
         if (extra != null) {
-            challengeId = intent.getStringExtra("challengeId")
+            challengeId = extra.getString("challengeId","")
             if (challengeId == null || challengeId == "") {
                 finish()
-                bottom_navigation.selectedItemId = R.id.action_challenge
+                return
             }
         }
 
@@ -68,6 +68,9 @@ class MyChallengeActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ChallengeUserListModel>, response: Response<ChallengeUserListModel>) {
                 val records = response.body()?.records
                 val myRecord = response.body()?.myRecord
+
+                Log.d("레코드들", records.toString())
+                Log.d("나의 레코드", myRecord.toString())
 
                 if (myRecord != null) {
                     //가입 중인 챌린지가 있다면

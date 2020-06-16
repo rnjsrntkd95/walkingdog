@@ -60,23 +60,21 @@ class WritePost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
 
-        val extra = intent.extras
-        if (extra != null) {
-            val data = extra.getString("walkingId")
-            if (data != null) {
-                walkingId = data
-            } else {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        } else {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-
+//        val extra = intent.extras
+//        if (extra != null) {
+//            val data = extra.getString("walkingId")
+//            if (data != null) {
+//                walkingId = data
+//            } else {
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            }
+//        } else {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
 
         writePost_back_btn.setOnClickListener {
             finish()

@@ -1,5 +1,6 @@
 package com.example.walkingdog_kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.walkingdog_kotlin.Post.WritePost
 import com.example.walkingdog_kotlin.Walking.StaticsItem
 import kotlinx.android.synthetic.main.activity_statics.*
 import org.eazegraph.lib.charts.BarChart
@@ -58,7 +60,25 @@ class Statics : AppCompatActivity() {
 
 
 
-        val historyAdapter=Statics_RVAdapter(this, history_list)
+        val historyAdapter=Statics_RVAdapter(this, history_list) {staticsItem ->
+
+            //산책 히스토리 리스트 중 한개를 선택했을 때
+
+            finish()    //Statics 액티비티 종료하고
+
+            val intent = Intent(this, WritePost::class.java)    //포스트작성 액티비티 열기
+            startActivity(intent)
+
+//            선택한 산책 히스토리의 대한 정보를 변수에 저장 한거임. intent.putExtra로 넘겨주면 될듯
+//            var cal = staticsItem.cal
+//            var date = staticsItem.date
+//            var hour = staticsItem.hour
+//            var minutes = staticsItem.minutes
+//            var sec = staticsItem.sec
+
+
+        }
+
         history_recyclerview.adapter=historyAdapter
 
         val lm = LinearLayoutManager(this)

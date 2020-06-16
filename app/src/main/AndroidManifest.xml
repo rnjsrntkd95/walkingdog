@@ -36,13 +36,13 @@
         <activity
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".StartActivity" />
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Statics" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".Walking.WalkingActivity" />
         <activity android:name=".Animal.AddPet" />
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

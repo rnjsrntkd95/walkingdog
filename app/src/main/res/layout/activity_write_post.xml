@@ -10,7 +10,7 @@
     <RelativeLayout
             android:id="@+id/topAppbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:background="@drawable/weather_bar_shape"
             android:layout_alignParentTop="true">
 
@@ -20,6 +20,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white"
                 android:layout_marginLeft="20dp"/>
 
         <TextView
@@ -27,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="새 게시물"
                 android:textSize="16dp"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -55,7 +56,8 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="사진"/>
+                    android:text="사진"
+                    android:fontFamily="@font/maplestory_bold"/>
 
             <TextView
                     android:id="@+id/uploadImageTv"
@@ -63,14 +65,16 @@
                     android:layout_height="wrap_content"
                     android:text="추가하기"
                     android:layout_toLeftOf="@+id/deleteImageTv"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/maplestory_light"/>
 
             <TextView
                     android:id="@+id/deleteImageTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="삭제하기"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="@font/maplestory_light"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/image_recycler_view"
@@ -100,14 +104,16 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="내용"/>
+                    android:text="내용"
+                    android:fontFamily="@font/maplestory_bold"/>
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_comment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="문구 입력..."
-                    android:background="@null">
+                    android:background="@null"
+                    android:fontFamily="@font/maplestory_light">
 
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -129,9 +135,11 @@
                     android:id="@+id/complete_btn"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/btn_shape"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/green3"
                     android:text="완료"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/maplestory_bold"/>
 
         </LinearLayout>
 

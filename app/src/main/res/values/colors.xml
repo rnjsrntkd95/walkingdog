@@ -22,5 +22,8 @@
     <color name="green2">#86CFC6</color>
     <color name="green3">#64b8ac</color>
 
+    <color name="red1">#f18c8c</color>
+    <color name="red2">#f16e6d</color>
+
     <color name="gray">#cccccc</color>
 </resources>

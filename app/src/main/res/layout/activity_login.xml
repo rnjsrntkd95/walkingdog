@@ -65,7 +65,7 @@
                 android:layout_marginBottom="15dp">
 
             <Button
-                    android:id="@+id/btn_kakaoSignIn"
+                    android:id="@+id/btn_kakaoCustomSignIn"
                     android:layout_width="320dp"
                     android:layout_height="50dp"
                     android:background="@drawable/kakaobackground"
@@ -74,10 +74,11 @@
                     android:paddingLeft="20dp"
                     android:fontFamily="@font/maplestory_light"/>
 
-<!--            <com.kakao.usermgmt.LoginButton-->
-<!--                    android:id="@+id/btn_kakaoSignIn"-->
-<!--                    android:layout_width="320dp"-->
-<!--                    android:layout_height="50dp"/>-->
+            <com.kakao.usermgmt.LoginButton
+                    android:id="@+id/btn_kakaoSignIn"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:visibility="gone"/>
 
         </LinearLayout>
 

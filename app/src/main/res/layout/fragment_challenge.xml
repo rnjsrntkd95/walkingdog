@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="한 달 동안 꾸준히 도전하기"
+                        android:text="Walking Dog"
                         android:textSize="16dp"
                         android:fontFamily="@font/maplestory_light"
                         android:textStyle="bold"/>
@@ -68,9 +68,9 @@
                         android:id="@+id/popular_challenge_content_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="사랑하는 반려견을 위해 한 달 동안 꾸준한 산책을 해보세요!"
+                        android:text="새로운 챌린지를 등록하세요."
                         android:textSize="14dp"
-                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
                         android:fontFamily="@font/maplestory_light"/>
 
                 <ImageView
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:text="5월 1일 ~ 5월 31일"
+                        android:text="-월 -일 ~ -월 -일"
                         android:textSize="14dp"
                         android:layout_toRightOf="@+id/period"
                         android:fontFamily="@font/maplestory_light"/>

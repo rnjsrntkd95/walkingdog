@@ -21,6 +21,8 @@ var controller = require('./walkingController');
 router.post('/create', controller.createWalking);
 // 산책 경로 제공
 router.get('/route', controller.showRoute);
+// 사용자의 산책 통계 자료 제공
+router.get('/static', controller.showMyStatic);
 
 
 module.exports = router;

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Animal.AddPet
+import com.example.walkingdog_kotlin.Login.LoginActivity
 import com.example.walkingdog_kotlin.Login.Model.SetNicknameModel
 import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
@@ -66,7 +67,7 @@ class NicknameFragment(context: Context) : Fragment() {
                     if (error == 0) {
                         val intent = Intent(context, AddPet::class.java)
                         startActivity(intent)
-                        (context as Activity).finish()
+                        (context as LoginActivity).finish()
                     } else if (error == 11000) {
                         nickname_status_text.text = "이미 등록된 닉네임입니다."
                     } else if (error == 3) {
@@ -74,9 +75,6 @@ class NicknameFragment(context: Context) : Fragment() {
                     }
                 }
             })
-
-            var intent = Intent(context, AddPet::class.java)
-            startActivity(intent)
         }
     }
 }

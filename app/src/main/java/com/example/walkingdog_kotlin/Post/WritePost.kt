@@ -60,21 +60,22 @@ class WritePost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_post)
 
-//        val extra = intent.extras
-//        if (extra != null) {
-//            val data = extra.getString("walkingId")
-//            if (data != null) {
-//                walkingId = data
-//            } else {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//        } else {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        val extra = intent.extras
+        if (extra != null) {
+            val data = extra.getString("walkingId")
+            if (data != null) {
+                walkingId = data
+                Log.d("산책아이디 확인", walkingId)
+            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         writePost_back_btn.setOnClickListener {
             finish()
@@ -104,6 +105,7 @@ class WritePost : AppCompatActivity() {
             finish()
         }
         uploadImageTv.setOnClickListener {
+            Log.d("테스팅","ㅇㅇ")
             setupPermission()
         }
 
@@ -179,6 +181,8 @@ class WritePost : AppCompatActivity() {
         val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest()
+        } else {
+            openGalleryForImages()
         }
     }
 

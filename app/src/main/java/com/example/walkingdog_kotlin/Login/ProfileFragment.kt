@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +20,9 @@ import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
+import com.example.walkingdog_kotlin.Walking.Statics
 import kotlinx.android.synthetic.main.activity_main.*
 
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -73,8 +71,9 @@ class ProfileFragment : Fragment() {
         }
 
         add_pet_btn.setOnClickListener {
-            var intent = Intent(context, ProfileAddPetActivity::class.java)
+            var intent = Intent(context, AddPet::class.java)
             startActivity(intent)
+            (activity as MainActivity).finish()
         }
 
         walkingStaticLayout.setOnClickListener {

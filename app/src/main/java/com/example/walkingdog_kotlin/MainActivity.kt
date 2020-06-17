@@ -87,14 +87,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                                 // Default 처리 필요
 
                             } else {
-                                Log.d("TAG", address.toString())
                                 for (addressIndex in address) {
                                     if (addressIndex.adminArea != null &&
                                         addressIndex.locality != null &&
                                         addressIndex.thoroughfare != null){
-                                        edit.putString("addressAdmin", address[0].adminArea.toString())
-                                        edit.putString("addressLocality", address[0].locality.toString())
-                                        edit.putString("addressThoroughfare", address[0].thoroughfare.toString())
+                                        edit.putString("addressAdmin", addressIndex.adminArea.toString())
+                                        edit.putString("addressLocality", addressIndex.locality.toString())
+                                        edit.putString("addressThoroughfare", addressIndex.thoroughfare.toString())
                                         edit.commit()
                                         break
                                     }
@@ -145,8 +144,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val extras = intent.extras
         if(extras != null) {
             val cFlag = extras.getBoolean("cFlag", false)
+            val pFlag = extras.getBoolean("pFlag", false)
             if (cFlag) {
                 bottom_navigation.selectedItemId = R.id.action_challenge
+            } else if (pFlag) {
+                bottom_navigation.selectedItemId = R.id.action_profile
             } else {
                 bottom_navigation.selectedItemId = R.id.action_home
             }

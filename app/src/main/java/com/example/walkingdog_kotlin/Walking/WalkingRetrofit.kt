@@ -3,6 +3,7 @@ package com.example.walkingdog_kotlin.Walking
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
 import com.example.walkingdog_kotlin.Walking.Model.MyPetModel
+import com.example.walkingdog_kotlin.Walking.Model.MyWalkingStaticModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,4 +25,7 @@ interface WalkingRetrofit {
 
     @GET("/animal/mypet")
     fun getMyPet(@Query("userToken") userToken: String): Call<MyPetListModel>
+
+    @GET("/walking/static")
+    fun getMyWalkingStatic(@Query("userToken") userToken: String): Call<MyWalkingStaticModel>
 }

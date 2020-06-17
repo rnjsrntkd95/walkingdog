@@ -70,6 +70,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 //        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }
 
+        btn_kakaoCustomSignIn.setOnClickListener { btn_kakaoSignIn.performClick() }
+
         //Google 로그인 옵션 구성. requestIdToken 및 Email 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.google_oauth_client_id))

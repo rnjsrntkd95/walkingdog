@@ -107,8 +107,9 @@ class AddPet : AppCompatActivity() {
 
                     if (error == null) {
                         val intent = Intent(this@AddPet, MainActivity::class.java)
+                        intent.putExtra("pFlag", true)
                         startActivity(intent)
-                        (this@AddPet as Activity).finish()
+                        finish()
                     } else if (error == 1) {
                         val errItem = response.body()?.item
                         Toast.makeText(this@AddPet, "올바르지 않은 "+ errItem.toString() + " 입니다.", Toast.LENGTH_SHORT).show()
@@ -193,5 +194,13 @@ class AddPet : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@AddPet, MainActivity::class.java)
+        intent.putExtra("pFlag", true)
+        startActivity(intent)
+        finish()
     }
 }

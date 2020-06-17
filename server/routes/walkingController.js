@@ -102,3 +102,17 @@ exports.showRoute = async (req, res, next) => {
         res.json({ error: 1 });
     }
 }
+
+exports.showMyStatic = async (req, res, next) => {
+    const userData = req.userToken.id;
+
+    try {
+        const walkings = await Walking.find({ user: userData }).sort("-date");
+        console.log(walkings)
+        res.json({ walkings });
+
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 1 });
+    }
+}

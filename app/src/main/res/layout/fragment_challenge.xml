@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:text="200"
+                        android:text="0"
                         android:textSize="14dp"
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/maplestory_light"/>

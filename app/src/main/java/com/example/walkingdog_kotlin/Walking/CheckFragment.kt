@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Animal.AddPet
+import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CheckItem
 import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
@@ -223,6 +224,7 @@ class CheckFragment : Fragment() {
                         Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
                         return
                     }
+                    selectDogList.clear()
                     myPetList!!.forEach(fun(pet) {
                         selectDogList.add(SelectDog(pet.animalName))
                         myPetInfo[pet.animalName] = pet.weight
@@ -261,6 +263,7 @@ class CheckFragment : Fragment() {
                             intent.putExtra("animalWeight", animalWeight)
                             startActivity(intent)
                             wAlertDialog.dismiss()
+                            (activity as MainActivity).finish()
                         }
                     }
                 }

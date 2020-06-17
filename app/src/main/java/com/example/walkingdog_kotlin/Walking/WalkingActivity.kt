@@ -229,7 +229,6 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     }
 
     private fun submitResult() {
-        return
         val pref = getSharedPreferences("pref", MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
         val walkingRetrofit = WalkingRetrofitCreators(this).WalkingRetrofitCreator()
@@ -256,9 +255,16 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
                 Log.d("ERROR", error.toString())
 
                 // 등록에 실패했을 때 후 처리
+                if (error == 1) {
+                    Toast.makeText(
+                        this@WalkingActivity,
+                        "산책 등록에 실패하였습니다. 네트워크를 확인해주세요.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
 
                 // 산책 등록 후 처리 - 액티비티 이동
-                if (error == null) {
+                if (error == null || error == 0) {
                     val intent = Intent(this@WalkingActivity, Statics::class.java)
                     intent.putExtra("walkingId", walkingId)
                     startActivity(intent)
@@ -322,6 +328,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         }
         val lat = p1!!.mapPointGeoCoord.latitude
         val lon = p1!!.mapPointGeoCoord.longitude
+
         route.add(arrayListOf(lat, lon))
 
         mapPoint = p1
@@ -498,6 +505,13 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         edit.putString("addressLocality", address[1])
         edit.putString("addressThoroughfare", address[2])
         edit.apply()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

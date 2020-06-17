@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.Post.WritePost
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.ReformatDate
@@ -93,6 +94,7 @@ class Statics : AppCompatActivity() {
                         staticMonth = month
                         chartList.clear()
                         for(i in 1..day_arr[staticMonth.toInt()-1].toInt()) {
+
                             chartList.add(BarModel("${i}일", 0F,
                                 Color.parseColor(chartColor[day.toInt() % chartColor.size])))
                         }
@@ -133,7 +135,6 @@ class Statics : AppCompatActivity() {
 
                     history_list.add(StaticsItem("$month/$day", String.format("%.1f", walking.calories.toFloat()),
                         sHour, sMin, sSec, walking._id))
-
                     chartList[day.toInt()-1] = BarModel("${day.toInt()}일",
                         walking.calories.toFloat(), Color.parseColor(chartColor[day.toInt() % chartColor.size]))
                 })
@@ -181,5 +182,13 @@ class Statics : AppCompatActivity() {
         }
 
         return "$sHour:$sMin:$sSec"
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("pFlag", true)
+        startActivity(intent)
+        finish()
     }
 }

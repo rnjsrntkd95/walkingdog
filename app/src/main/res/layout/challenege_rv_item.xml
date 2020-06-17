@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="기간:"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:fontFamily="@font/maplestory_light"/>
 
     <TextView
@@ -59,7 +59,7 @@
             android:layout_alignParentBottom="true"
             android:text="4월 15일 ~ 4월 21일"
             android:layout_toRightOf="@+id/period"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:fontFamily="@font/maplestory_light"/>
 
 </RelativeLayout>

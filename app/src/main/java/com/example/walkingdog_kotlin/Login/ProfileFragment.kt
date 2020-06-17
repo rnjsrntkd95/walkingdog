@@ -124,6 +124,7 @@ class ProfileFragment (context: Context): Fragment() {
         walkingStaticLayout.setOnClickListener {
             val intent = Intent(context, Statics::class.java)
             startActivity(intent)
+            (activity as MainActivity).finish()
         }
 
 //        myChallengeLayout.setOnClickListener {

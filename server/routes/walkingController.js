@@ -3,45 +3,71 @@ const Animal = require('../models/animal');
 const Walking = require('../models/walking');
 const Record = require('../models/record');
 const UserChallenge = require('../models/userChallenge');
+const { request } = require('../app');
 
 
 exports.createWalking = async (req, res, next) => {
     const userData = req.userToken.id;
-    const calorie = req.body.calorie;
+    const calories = req.body.calorie;
     const distance = req.body.distance;
     const walkingTime = req.body.walkingTime;
     const addressAdmin = req.body.addressAdmin;
     const addressLocality = req.body.addressLocality;
     const addressThoroughfare = req.body.addressThoroughfare;
-    const animal = req.body.animal;
+    const requestAnimal = req.body.animal;
+    let animal = [];
+    let amountTemp = [];
     let route = [];
     let toiletLoc = []
     let walkingAmounts = [];
+    
 
     const requestRoute = req.body.route;
     const requestToiletLoc = req.body.toiletLoc;
     const requestWalkingAmounts = req.body.walkingAmounts;
 
+    // 동물 후처리
+    if (typeof(requestAnimal) == "string") {
+        animal[0] = requestAnimal;
+    } else {
+        animal = requestAnimal;
+    }
+
     // 산책 경로 위도, 경도 후처리
     requestRoute.forEach((loc) => {
-        route.push({lat: loc[0], lon: loc[1]});
-    })
-    
-    // 배변 활동 좌표 위도, 경도 후처리
-    requestToiletLoc.forEach((loc) => {
-        toiletLoc.push({lat: loc[0], lon: loc[1]});
+        loc = loc.replace('[', "");
+        loc = loc.replace(']', "");
+        const location = loc.split(',');
+        route.push({ lat: location[0], lon: location[1]});
     })
 
+    // 배변 활동 좌표 위도, 경도 후처리
+    if(requestToiletLoc) {
+        requestToiletLoc.forEach((loc) => {
+            loc = loc.replace('[', "");
+            loc = loc.replace(']', "");
+            const location = loc.split(',');
+            toiletLoc.push({lat: location[0], lon: location[1]});
+        })
+    }
+
+
     // 산책량(%) 후처리
-    for (wa in requestWalkingAmounts) {
-        walkingAmounts.push({ animal: animal[wa], amount: requestWalkingAmounts[wa]});
+    if (typeof(requestWalkingAmounts) == "string") {
+        amountTemp[0] = requestWalkingAmounts;
+    } else {
+        amountTemp = requestWalkingAmounts;
+    }
+
+    for (wa in amountTemp) {
+        walkingAmounts.push({ animal: animal[wa], amount: amountTemp[wa]});
     }
 
     try {
         const user = await User.findOne({ _id: userData });
         // 새로운 산책 등록
         const walkingRegister = await new Walking({
-            calorie,
+            calories,
             distance,
             walkingTime,
             walkingAmounts,
@@ -108,9 +134,7 @@ exports.showMyStatic = async (req, res, next) => {
 
     try {
         const walkings = await Walking.find({ user: userData }).sort("-date");
-        console.log(walkings)
         res.json({ walkings });
-
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });

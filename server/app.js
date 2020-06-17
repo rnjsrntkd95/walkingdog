@@ -43,15 +43,23 @@ app.use(async (req, res, next) => {
   } else {
     const Jwt = require("jsonwebtoken");
     let token = req.body.userToken;
+    console.log(req.headers);
+    console.log("토큰확인1" + token)
     if (!token) {
       token = req.query.userToken;
       console.log("토큰"+token)
     }
+    console.log("토큰확인2" + token)
+
     if (!token) {
-      console.log("토큰없음")
+      token = req.headers.usertoken;
+    }
+
+    if (!token) {
       res.json({ error: 1004 });
       return
     }
+
     // 토큰 해석
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);

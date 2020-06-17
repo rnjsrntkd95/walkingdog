@@ -14,12 +14,6 @@ exports.createChallenge = async (req, res, next) => {
   const end_date = req.body.end_date;
 
   try {
-    if (userData == "0") {
-      res.json({
-        message: "user not found",
-        error: 1,
-      });
-    }
     const producer = await User.findOne({ _id: userData });
 
     const newChallenge = await new Challenge({

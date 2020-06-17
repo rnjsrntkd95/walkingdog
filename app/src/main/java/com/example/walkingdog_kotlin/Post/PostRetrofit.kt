@@ -18,6 +18,7 @@ interface PostRetrofit {
     @Multipart
     @POST("/post/create")
     fun createPost(@Header("userToken") userToken: String,
+                   @Header("walkingId") walkingId: String,
                    @Part("comment") comment: RequestBody,
                    @Part images: ArrayList<MultipartBody.Part>): Call<CreatePostModel>
 

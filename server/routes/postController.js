@@ -8,7 +8,9 @@ exports.createPost = async (req, res, next) => {
     const userData = req.userToken.id;
     const requestFiles = req.files
     const content = req.body.comment;
+    const walkingId = req.headers.walkingid;
     let image = []
+ 
 
     // 새로운 POST의 Image 처리 
     if (requestFiles == null || requestFiles.length == 0) {

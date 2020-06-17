@@ -81,12 +81,13 @@ class WritePost : AppCompatActivity() {
             finish()
         }
         complete_btn.setOnClickListener {
-            var comment = RequestBody.create(MediaType.parse("text/plain"), edit_comment.text.toString())     // 새로운 피드 내용
+            val comment = RequestBody.create(MediaType.parse("text/plain"), edit_comment.text.toString())     // 새로운 피드 내용
             val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
-            val userToken = pref.getString("userToken", "")
+            var userToken = pref.getString("userToken", "")
+            Log.d("유저토큰확인", userToken)
 
             val createPostRetrofit = PostRetrofitCreators(this).PostRetrofitCreator()
-            createPostRetrofit.createPost(userToken!!, comment, images).enqueue(object : Callback<CreatePostModel> {
+            createPostRetrofit.createPost(userToken!!,walkingId, comment, images).enqueue(object : Callback<CreatePostModel> {
                 override fun onFailure(call: Call<CreatePostModel>, t: Throwable) {
                     Log.d("DEBUG", " Create Post Retrofit failed!!")
                     Log.d("DEBUG", t.message)
@@ -94,22 +95,21 @@ class WritePost : AppCompatActivity() {
 
                 override fun onResponse(call: Call<CreatePostModel>, response: Response<CreatePostModel>) {
                     val error = response.body()?.error
+                    Log.d("ERROR", error.toString())
 
-                    if (error == null) {
+                    if (error == null || error == 0) {
                         var intent = Intent(this@WritePost, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                 }
             })
 
-            finish()
         }
+
         uploadImageTv.setOnClickListener {
-            Log.d("테스팅","ㅇㅇ")
             setupPermission()
         }
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

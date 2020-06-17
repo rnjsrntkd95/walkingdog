@@ -109,13 +109,13 @@ class Create_ChallengeActivity() : AppCompatActivity() {
 
 
         createChallenge_complete_btn.setOnClickListener {
-            var title = challenge_title_edit_tv.text.toString()
-            var content = challenge_content_tv.text.toString()
-            var breed = create_challenge_breed_tv.text.toString()
-            var targetMonth = if(target_month_tv.text.toString().length == 1) "0"+target_month_tv.text.toString() else target_month_tv.text.toString()
-            var targetDate = if(target_date_tv.text.toString().length == 1) "0"+target_date_tv.text.toString() else target_date_tv.text.toString()
-            var today = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-            var target = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
+            val title = challenge_title_edit_tv.text.toString()
+            val content = challenge_content_tv.text.toString()
+            val breed = create_challenge_breed_tv.text.toString()
+            val targetMonth = if(target_month_tv.text.toString().length == 1) "0"+target_month_tv.text.toString() else target_month_tv.text.toString()
+            val targetDate = if(target_date_tv.text.toString().length == 1) "0"+target_date_tv.text.toString() else target_date_tv.text.toString()
+            val today = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+            val target = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy")).toString() + "-" + targetMonth + "-" + targetDate)
 
             val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
             val userToken = pref.getString("userToken", "")
@@ -143,8 +143,6 @@ class Create_ChallengeActivity() : AppCompatActivity() {
                     finish()
                 }
             })
-
-            finish()
         }
     }
 }

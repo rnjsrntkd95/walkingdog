@@ -64,7 +64,6 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
         var weights: ArrayList<String>? = null
         val extra = intent.extras
-        Log.d("진입","goTdmsspe")
 
         if (extra != null) {
             val nameData = intent.getStringArrayListExtra("animalName")
@@ -87,7 +86,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
         }
 
         weights.forEach(fun(weight) {
-            fullAmount.add(((weight.toDouble()*30)+70)*1.4)
+            fullAmount.add(((weight.toDouble()*30)+70)*1.4 / 2)
         })
 
         pauseFab.visibility = View.GONE
@@ -265,10 +264,19 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
 
                 // 산책 등록 후 처리 - 액티비티 이동
                 if (error == null || error == 0) {
-                    val intent = Intent(this@WalkingActivity, Statics::class.java)
-                    intent.putExtra("walkingId", walkingId)
-                    startActivity(intent)
-                    finish()
+                    Toast.makeText(
+                        this@WalkingActivity,
+                        "3초 후 산책이 종료됩니다.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    timer(period = 3000, initialDelay = 3000) {
+                        val intent = Intent(this@WalkingActivity, Statics::class.java)
+                        intent.putExtra("walkingId", walkingId)
+                        startActivity(intent)
+                        finish()
+                        cancel()
+                    }
+
                 }
             }
         })

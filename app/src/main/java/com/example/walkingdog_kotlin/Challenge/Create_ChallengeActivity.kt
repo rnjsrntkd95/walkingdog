@@ -95,23 +95,23 @@ class Create_ChallengeActivity() : AppCompatActivity() {
             }
 
         }
-        breed_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                create_challenge_breed_tv.text = breed_spinner.getItemAtPosition(position).toString()
-
-            }
-
-        }
+//        breed_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                create_challenge_breed_tv.text = breed_spinner.getItemAtPosition(position).toString()
+//
+//            }
+//
+//        }
 
 
         createChallenge_complete_btn.setOnClickListener {
             val title = challenge_title_edit_tv.text.toString()
             val content = challenge_content_tv.text.toString()
-            val breed = create_challenge_breed_tv.text.toString()
+//            val breed = create_challenge_breed_tv.text.toString()
             val targetMonth = if(target_month_tv.text.toString().length == 1) "0"+target_month_tv.text.toString() else target_month_tv.text.toString()
             val targetDate = if(target_date_tv.text.toString().length == 1) "0"+target_date_tv.text.toString() else target_date_tv.text.toString()
             val today = LocalDate.parse(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
@@ -121,7 +121,7 @@ class Create_ChallengeActivity() : AppCompatActivity() {
             val userToken = pref.getString("userToken", "")
 
             val challengeCreateRetrofit = ChallengeRetrofitCreators(this).ChallengeRetrofitCreator()
-             challengeCreateRetrofit.createChallenge(title, content, breed, today, target, userToken).enqueue(object : Callback<CreateChallengeResultModel> {
+             challengeCreateRetrofit.createChallenge(title, content, today, target, userToken).enqueue(object : Callback<CreateChallengeResultModel> {
                 override fun onFailure(call: Call<CreateChallengeResultModel>, t: Throwable) {
                     Log.d("DEBUG", "Create Challenge Retrofit Failed!!")
                     Log.d("DEBUG", t.message)

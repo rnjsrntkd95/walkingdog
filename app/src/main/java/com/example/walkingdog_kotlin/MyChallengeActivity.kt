@@ -65,6 +65,8 @@ class MyChallengeActivity : AppCompatActivity() {
                 val records = response.body()?.records
                 val myRecord = response.body()?.myRecord
                 val error = response.body()?.error
+                Log.d("ERROR", error.toString())
+                Log.d("레코드들", records.toString())
 
                 if (error == 1) {
                     return

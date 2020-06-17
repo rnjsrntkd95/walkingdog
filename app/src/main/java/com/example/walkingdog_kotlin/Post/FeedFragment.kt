@@ -72,7 +72,6 @@ class FeedFragment() : Fragment() {
         val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)
         // Data
         val userToken = pref.getString("userToken", "")
-        Log.d("유저토큰을보자 타임라인", userToken)
 
         val addressAdmin = pref.getString("addressAdmin", "")
         val addressLocality = pref.getString("addressLocality", "")

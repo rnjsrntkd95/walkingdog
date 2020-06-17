@@ -22,7 +22,7 @@ interface ChallengeRetrofit {
     fun createChallenge(
         @Field("title") title: String,
         @Field("content") content: String,
-        @Field("breed") breed: String,
+//        @Field("breed") breed: String,
         @Field("start_date") start_date: LocalDate,
         @Field("end_date") end_date: LocalDate,
         @Field("userToken") userToken: String

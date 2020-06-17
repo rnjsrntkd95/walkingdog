@@ -206,6 +206,8 @@ class CheckFragment : Fragment() {
             val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
             val userToken = pref.getString("userToken", "")
             var myPetInfo = mutableMapOf<String, Double>()
+            var readyToDeletePet = mutableMapOf<String, Double>()
+
             // 등록된 애견 정보 가져오기
             val myPetRetrofit = WalkingRetrofitCreators(context!!).WalkingRetrofitCreator()
             myPetRetrofit.getMyPet(userToken!!).enqueue(object : Callback<MyPetListModel> {
@@ -228,6 +230,7 @@ class CheckFragment : Fragment() {
                     myPetList!!.forEach(fun(pet) {
                         selectDogList.add(SelectDog(pet.animalName))
                         myPetInfo[pet.animalName] = pet.weight
+                        readyToDeletePet[pet.animalName] = pet.weight
                     })
                     // 애견 체크 페이지
                     val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
@@ -245,10 +248,11 @@ class CheckFragment : Fragment() {
                         if (checkedName.size == 0) {
                             Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
                         } else {
-                            myPetInfo.forEach(fun(name, weight) {
-                                if(checkedName.indexOf(name) == -1) {
-                                    myPetInfo.remove(name)
-                                }
+                            checkedName.forEach(fun(name) {
+                                readyToDeletePet.remove(name)
+                            })
+                            readyToDeletePet.keys.forEach(fun(name) {
+                                myPetInfo.remove(name)
                             })
 
                             // 인텐트에 애견 정보 매달기

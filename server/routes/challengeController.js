@@ -8,7 +8,7 @@ exports.createChallenge = async (req, res, next) => {
   const userData = req.userToken.id;
   const title = req.body.title;
   const content = req.body.content;
-  const breed = req.body.breed;
+  // const breed = req.body.breed;
   const populationLimit = req.body.populationLimit;
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
@@ -19,7 +19,7 @@ exports.createChallenge = async (req, res, next) => {
     const newChallenge = await new Challenge({
       title,
       content,
-      breed,
+      // breed,
       start_date,
       end_date,
       populationLimit,
@@ -129,12 +129,15 @@ exports.dropChallenge = async (req, res, next) => {
 exports.usersInChallenge = async (req, res, next) => {
   const userData = req.userToken.id;
   const challengeId = req.body.challengeId;
+  
+  console.log("챌린지아이디"+challengeId)
   try {
     const user  = await User.findOne({ _id: userData });
 
     const records = await Record.find({ challenge: challengeId }).populate("user", "nickname").sort("-score");
     const myRecord = await Record.findOne({ user: userData, challenge: challengeId }).populate("user", "nickname");
-
+    console.log("레코드들")
+    console.log(records)
     res.json({ records, myRecord });
   } catch (err) {
     console.log(err);

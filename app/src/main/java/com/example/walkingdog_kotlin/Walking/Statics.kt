@@ -85,6 +85,7 @@ class Statics : AppCompatActivity() {
             override fun onResponse(call: Call<MyWalkingStaticModel>, response: Response<MyWalkingStaticModel>) {
                 val error = response.body()?.error
                 val walkings = response.body()?.walkings
+                var sumStatic: MutableList<Double> = mutableListOf()
                 Log.d("DEBUG", error.toString())
 
                 walkings!!.forEach(fun(walking) {
@@ -93,12 +94,10 @@ class Statics : AppCompatActivity() {
                     if (staticMonth == "") {
                         staticMonth = month
                         chartList.clear()
-                        for(i in 1..day_arr[staticMonth.toInt()-1].toInt()) {
 
-                            chartList.add(BarModel("${i}일", 0F,
-                                Color.parseColor(chartColor[day.toInt() % chartColor.size])))
-                        }
                         staticMonth_view.text = "${month.toInt()}"
+
+                        sumStatic = MutableList<Double>(day_arr[staticMonth.toInt()-1].toInt()) {0.0}
                     }
 
                     val time = walking.walkingTime
@@ -135,9 +134,15 @@ class Statics : AppCompatActivity() {
 
                     history_list.add(StaticsItem("$month/$day", String.format("%.1f", walking.calories.toFloat()),
                         sHour, sMin, sSec, walking._id))
-                    chartList[day.toInt()-1] = BarModel("${day.toInt()}일",
-                        walking.calories.toFloat(), Color.parseColor(chartColor[day.toInt() % chartColor.size]))
+
+                    sumStatic[day.toInt()-1] = sumStatic[day.toInt()-1]+walking.calories.toFloat()
+
                 })
+                // 차트 그리기
+                for (day in 0 until sumStatic.size-1) {
+                    chartList.add(BarModel("${day+1}일",
+                        sumStatic[day].toFloat(), Color.parseColor(chartColor[day % chartColor.size])))
+                }
 
                 historyAdapter.notifyDataSetChanged()
 

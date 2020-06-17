@@ -22,8 +22,8 @@ exports.createWalking = async (req, res, next) => {
     let walkingAmounts = [];
     
 
-    const requestRoute = req.body.route;
-    const requestToiletLoc = req.body.toiletLoc;
+    let requestRoute = req.body.route;
+    let requestToiletLoc = req.body.toiletLoc;
     const requestWalkingAmounts = req.body.walkingAmounts;
 
     // 동물 후처리
@@ -40,30 +40,54 @@ exports.createWalking = async (req, res, next) => {
         const location = loc.split(',');
         route.push({ lat: location[0], lon: location[1]});
     })
+    if(requestRoute) {
+        if (typeof(requestRoute) == "string") {
+            requestRoute = requestRoute.replace('[', "");
+            requestRoute = requestRoute.replace(']', "");
+            const location = requestRoute.split(',');
+            route.push({lat: location[0], lon: location[1]});
+        } else {
+            requestRoute.forEach((loc) => {
+                loc = loc.replace('[', "");
+                loc = loc.replace(']', "");
+                const location = loc.split(',');
+                route.push({ lat: location[0], lon: location[1]});
+            })
+        }
+    }
+    
 
     // 배변 활동 좌표 위도, 경도 후처리
     if(requestToiletLoc) {
-        console.log(requestToiletLoc)
-        console.log("똥싸기 처리")
-        requestToiletLoc.forEach((loc) => {
-            loc = loc.replace('[', "");
-            loc = loc.replace(']', "");
-            const location = loc.split(',');
+        if (typeof(requestToiletLoc) == "string") {
+            requestToiletLoc = requestToiletLoc.replace('[', "");
+            requestToiletLoc = requestToiletLoc.replace(']', "");
+            const location = requestToiletLoc.split(',');
             toiletLoc.push({lat: location[0], lon: location[1]});
-        })
+        } else {
+            requestToiletLoc.forEach((loc) => {
+                loc = loc.replace('[', "");
+                loc = loc.replace(']', "");
+                const location = loc.split(',');
+                toiletLoc.push({lat: location[0], lon: location[1]});
+            })
+        }
     }
 
 
     // 산책량(%) 후처리
-    if (typeof(requestWalkingAmounts) == "string") {
-        amountTemp[0] = requestWalkingAmounts;
-    } else {
-        amountTemp = requestWalkingAmounts;
+    if (requestWalkingAmounts) {
+        if (typeof(requestWalkingAmounts) == "string") {
+            amountTemp[0] = requestWalkingAmounts;
+        } else {
+            amountTemp = requestWalkingAmounts;
+        }
+        for (wa in amountTemp) {
+            walkingAmounts.push({ animal: animal[wa], amount: amountTemp[wa]});
+        }
     }
 
-    for (wa in amountTemp) {
-        walkingAmounts.push({ animal: animal[wa], amount: amountTemp[wa]});
-    }
+
 
     try {
         const user = await User.findOne({ _id: userData });
@@ -87,26 +111,30 @@ exports.createWalking = async (req, res, next) => {
         let recordWalkingAmount = 0;
 
         walkingAmounts.forEach((walking) => {
-            recordWalkingAmount += walking.amount
+            recordWalkingAmount += parseInt(walking.amount);
         })
-        recordWalkingAmount / walkingAmounts.length
+        recordWalkingAmount = recordWalkingAmount / walkingAmounts.length
 
         // 유저가 챌린지에 참여 중이면 기록 갱신
         const challengeList = await UserChallenge.find({ userId: userData });
-        console.log("가입된 챌린지 확인" + challengeList)
         if (challengeList) {
             challengeList.forEach(async challenge => {
                 const challengeId = challenge.challengeId;
-                
-                const record = await Record.findOne({ challenge: challengeId });
-                const walkingCount = record.walkingCount;
-                const newWalkingCount = walkingCount + 1;
-                const walkingAvg = record.walkingAvg;
-                let score = record.score;
-                score += 75 + walkingAvg;
-                const newWalkingAvg = (walkingCount * walkingAvg + recordWalkingAmount) / newWalkingCount;
+                try {
+                    const record = await Record.findOne({ user: userData, challenge: challengeId });                
+                    const walkingCount = record.walkingCount;
+                    const newWalkingCount = walkingCount + 1;
+                    const walkingAvg = record.walkingAvg;
+                    let score = record.score;
+                    score += 75 + parseInt(walkingAvg);
+                    const newWalkingAvg = (walkingCount * walkingAvg + recordWalkingAmount) / newWalkingCount;
 
-                await record.updateOne({ $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg, score: score }});
+                    const updateRecordReg = await Record.findOneAndUpdate({ _id: record._id}, { $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg, score: score }}, { timestamps: false });
+
+                } catch (err) {
+                    console.log(err)
+                }
+
             })
         } else {
             console.log("가입된 챌린지 없음")

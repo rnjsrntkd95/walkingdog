@@ -19,7 +19,7 @@
                 android:id="@+id/statics_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="통계"
+                android:text="나의 산책 기록"
                 android:textSize="16dp"
                 android:fontFamily="@font/maplestory_bold">
         </TextView>
@@ -64,12 +64,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text=""
+                        android:textColor="@color/green2"
                         android:textSize="20dp"
                         android:fontFamily="@font/maplestory_bold"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="월 통계"
+                        android:text="월 산책 통계"
+                        android:textColor="@color/green2"
                         android:textSize="20dp"
                         android:fontFamily="@font/maplestory_bold"/>
 

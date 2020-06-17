@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Camera
+import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
@@ -56,38 +57,38 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private var addressThoroughfare: String = ""
     private var animal = ArrayList<String>()
     private var fullAmount = ArrayList<Double>()
-    private var amountTest = 320.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walking)
 
-        var weights: DoubleArray? = null
+        var weights: ArrayList<String>? = null
         val extra = intent.extras
+        Log.d("진입","goTdmsspe")
 
-//        if (extra != null) {
-//            val nameData = intent.getStringArrayListExtra("animalName")
-//            val weightData = intent.getDoubleArrayExtra("animalWeight")
-//            if (nameData != null && weightData != null) {
-//                animal = nameData
-//                weights = weightData
-//
-//            } else {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//                return
-//            }
-//        } else {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//            return
-//        }
-//
-//        weights!!.forEach(fun(weight) {
-//            fullAmount.add(((weight*30)+70)*1.4)
-//        })
+        if (extra != null) {
+            val nameData = intent.getStringArrayListExtra("animalName")
+            val weightData = intent.getStringArrayListExtra("animalWeight")
+            if (nameData != null && weightData != null) {
+                animal = nameData
+                weights = weightData
+
+            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                return
+            }
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        weights.forEach(fun(weight) {
+            fullAmount.add(((weight.toDouble()*30)+70)*1.4)
+        })
 
         pauseFab.visibility = View.GONE
         toiletFab.visibility = View.GONE
@@ -346,7 +347,7 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
             walkingCalorie += distance * 0.026785714  // 1m당 소모 칼로리
             calorieView.text = String.format("%.2f", walkingCalorie)
             // 충족량 표시
-            amountView.text = String.format("%.1f", walkingCalorie / amountTest * 100)
+            amountView.text = String.format("%.1f", walkingCalorie / fullAmount[0] * 100)
 
             prevLat = lat
             prevLon = lon

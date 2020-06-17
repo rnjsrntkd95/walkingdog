@@ -91,6 +91,7 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/maplestory_light"/>
 
+
                 <TextView
                         android:id="@+id/period"
                         android:layout_width="wrap_content"

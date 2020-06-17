@@ -6,7 +6,6 @@ var controller = require('./animalsController');
 router.get('/breed-list', controller.checkBreedList);
 // 등록된 애견 확인
 router.get('/mypet', controller.searchPet);
-
 // 새로운 애견 등록
 router.post('/register', controller.register);
 

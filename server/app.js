@@ -45,6 +45,7 @@ app.use(async (req, res, next) => {
     let token = req.body.userToken;
     if (!token) {
       token = req.query.userToken;
+      console.log("토큰"+token)
     }
     if (!token) {
       console.log("토큰없음")
@@ -54,17 +55,15 @@ app.use(async (req, res, next) => {
     // 토큰 해석
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);
-
-    let user = await User.findOne({ _id: decodedToken.id });
-    console.log("////////////////////////////////////")
-    console.log(`유저접속: ${decodedToken}, ${user.email}`);
-    // if (user != null) {
-    //   console.log("널접근")
-    //   res.json({ error: 1004 });
-    //   return
-    // }
-    req.userToken = decodedToken;    
-    next();
+    try {
+      let user = await User.findOne({ _id: decodedToken.id });
+      console.log("////////////////////////////////////")
+      console.log(`유저접속: ${decodedToken}, ${user.email}`);
+      req.userToken = decodedToken;
+      next();
+    } catch (err) {
+      res.json({ error: 1004 });
+    }
   }
 });
 

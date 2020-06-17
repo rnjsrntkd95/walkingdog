@@ -5,3 +5,15 @@ data class LoginModel (
     val nickname: String,
     val error: Number
 )
+
+data class MyProfileModel (
+    val error: Int,
+    val nickname: String,
+    val profile: String,
+    val myPetList: ArrayList<PetModel> = arrayListOf()
+)
+
+data class PetModel (
+    val animalName: String
+
+)

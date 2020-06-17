@@ -17,6 +17,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     val RequestPermissionCode = 1
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
             }
             R.id.action_profile -> {
-                var profileFragment = ProfileFragment()
+                var profileFragment = ProfileFragment(this)
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, profileFragment)
                     .commit()
             }
@@ -78,28 +79,31 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
                         val geocoder: Geocoder = Geocoder(this)
                         var address: List<Address>? = null
+                        try {
+                            address = geocoder.getFromLocation(location.latitude, location.longitude, 10)
 
-                        address = geocoder.getFromLocation(location.latitude, location.longitude, 10)
+                            if (address != null) {
+                                if (address.size == 0) {
+                                    Log.d("TAG", "해당 주소 없음")
+                                    // Default 처리 필요
 
-                        if (address != null) {
-                            if (address.size == 0) {
-                                Log.d("TAG", "해당 주소 없음")
-                                // Default 처리 필요
-
-                            } else {
-                                for (addressIndex in address) {
-                                    if (addressIndex.adminArea != null &&
-                                        addressIndex.locality != null &&
-                                        addressIndex.thoroughfare != null){
-                                        edit.putString("addressAdmin", addressIndex.adminArea.toString())
-                                        edit.putString("addressLocality", addressIndex.locality.toString())
-                                        edit.putString("addressThoroughfare", addressIndex.thoroughfare.toString())
-                                        edit.commit()
-                                        break
+                                } else {
+                                    for (addressIndex in address) {
+                                        if (addressIndex.adminArea != null &&
+                                            addressIndex.locality != null &&
+                                            addressIndex.thoroughfare != null){
+                                            edit.putString("addressAdmin", addressIndex.adminArea.toString())
+                                            edit.putString("addressLocality", addressIndex.locality.toString())
+                                            edit.putString("addressThoroughfare", addressIndex.thoroughfare.toString())
+                                            edit.commit()
+                                            break
+                                        }
                                     }
-                                }
 
+                                }
                             }
+                        }catch (e: Exception) {
+                            Log.d("TAG", "Location get failed!!")
                         }
                     } else {
                         Log.d("TAG", "Location get failed!!")

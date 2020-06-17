@@ -11,12 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CheckItem
+import com.example.walkingdog_kotlin.Walking.Model.MyPetListModel
 import com.example.walkingdog_kotlin.Walking.Model.WeatherAPIModel
 import com.example.walkingdog_kotlin.Walking.Model.SelectDog
 import kotlinx.android.synthetic.main.fragment_check.*
+import kotlinx.android.synthetic.main.select_dog_popup.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -196,77 +200,72 @@ class CheckFragment : Fragment() {
             checkItemAdapter.notifyDataSetChanged()
         }
 
-        var trr : String? = null
-
         //산책측정 액티비티로 넘어가는 함수
         switch_btn_to_walking.setOnClickListener {
-//            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
-//            val userToken = pref.getString("userToken", "")
-//            var myPetInfo = mutableMapOf<String, Double>()
-//            // 등록된 애견 정보 가져오기
-//            val myPetRetrofit = WalkingRetrofitCreators(context!!).WalkingRetrofitCreator()
-//            myPetRetrofit.getMyPet(userToken!!).enqueue(object : Callback<MyPetListModel> {
-//                override fun onFailure(call: Call<MyPetListModel>, t: Throwable) {
-//                    Log.d("DEBUG", "My Pet Retrofit failed!!")
-//                    Log.d("DEBUG", t.message)
-//                    Toast.makeText(context!!, "애견 목록 수신에 실패하였습니다. 네트워크를 확인해주세요.", Toast.LENGTH_LONG).show()
-//                }
-//
-//                override fun onResponse(call: Call<MyPetListModel>, response: Response<MyPetListModel>) {
-//                    val error = response.body()?.error
-//                    val myPetList = response.body()?.myPetList
-//                    if (myPetList!!.size == 0) {
-//                        var intent = Intent(context, AddPet::class.java)
-//                        startActivity(intent)
-//                        Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
-//                        return
-//                    }
-//                    myPetList!!.forEach(fun(pet) {
-//                        selectDogList.add(SelectDog(pet.animalName))
-//                        myPetInfo[pet.animalName] = pet.weight
-//                    })
-//                    // 애견 체크 페이지
-//                    val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
-//                    val wBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!).setView(wDialogView)
-//                    val wAlertDialog = wBuilder.show()
-//                    val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
-//
-//                    wDialogView.select_dog_listView.adapter = selectDogAdapter
-//                    wDialogView.selectDog_popup_delete_btn.setOnClickListener {
-//                        wAlertDialog.dismiss()
-//                    }
-//
-//                    wDialogView.selectDog_popup_complete_btn.setOnClickListener {
-//                        val checkedName = selectDogAdapter.getCheckedName()
-//                        if (checkedName.size == 0) {
-//                            Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
-//                        } else {
-//                            myPetInfo.forEach(fun(name, weight) {
-//                                if(checkedName.indexOf(name) == -1) {
-//                                    myPetInfo.remove(name)
-//                                }
-//                            })
-//
-//                            // 인텐트에 애견 정보 매달기
-//                            val animalName = arrayListOf<String>()
-//                            val animalWeight = arrayListOf<Double> ()
-//                            myPetInfo.forEach(fun(name, weight) {
-//                                animalName.add(name)
-//                                animalWeight.add(weight)
-//                            })
-//                            val intent = Intent(context, WalkingActivity::class.java)
-//                            intent.putExtra("animalName", animalName)
-//                            intent.putExtra("animalWeight", animalWeight)
-//                            startActivity(intent)
-//                            wAlertDialog.dismiss()
-//                        }
-//                    }
-//                }
-//            })
-            var intent = Intent(context, WalkingActivity::class.java)
-            startActivity(intent)
-        }
+            val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val userToken = pref.getString("userToken", "")
+            var myPetInfo = mutableMapOf<String, Double>()
+            // 등록된 애견 정보 가져오기
+            val myPetRetrofit = WalkingRetrofitCreators(context!!).WalkingRetrofitCreator()
+            myPetRetrofit.getMyPet(userToken!!).enqueue(object : Callback<MyPetListModel> {
+                override fun onFailure(call: Call<MyPetListModel>, t: Throwable) {
+                    Log.d("DEBUG", "My Pet Retrofit failed!!")
+                    Log.d("DEBUG", t.message)
+                    Toast.makeText(context!!, "애견 목록 수신에 실패하였습니다. 네트워크를 확인해주세요.", Toast.LENGTH_LONG).show()
+                }
 
+                override fun onResponse(call: Call<MyPetListModel>, response: Response<MyPetListModel>) {
+                    val error = response.body()?.error
+                    val myPetList = response.body()?.myPetList
+                    if (myPetList!!.size == 0) {
+                        var intent = Intent(context, AddPet::class.java)
+                        startActivity(intent)
+                        Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    myPetList!!.forEach(fun(pet) {
+                        selectDogList.add(SelectDog(pet.animalName))
+                        myPetInfo[pet.animalName] = pet.weight
+                    })
+                    // 애견 체크 페이지
+                    val wDialogView = LayoutInflater.from(context).inflate(R.layout.select_dog_popup, null)
+                    val wBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!).setView(wDialogView)
+                    val wAlertDialog = wBuilder.show()
+                    val selectDogAdapter = SelectDogAdapter(context!!, selectDogList)
+
+                    wDialogView.select_dog_listView.adapter = selectDogAdapter
+                    wDialogView.selectDog_popup_delete_btn.setOnClickListener {
+                        wAlertDialog.dismiss()
+                    }
+
+                    wDialogView.selectDog_popup_complete_btn.setOnClickListener {
+                        val checkedName = selectDogAdapter.getCheckedName()
+                        if (checkedName.size == 0) {
+                            Toast.makeText(context!!, "한 마리 이상의 애견을 체크해주세요.", Toast.LENGTH_LONG).show()
+                        } else {
+                            myPetInfo.forEach(fun(name, weight) {
+                                if(checkedName.indexOf(name) == -1) {
+                                    myPetInfo.remove(name)
+                                }
+                            })
+
+                            // 인텐트에 애견 정보 매달기
+                            val animalName = arrayListOf<String>()
+                            val animalWeight = arrayListOf<String>()
+                            myPetInfo.forEach(fun(name, weight) {
+                                animalName.add(name)
+                                animalWeight.add("$weight")
+                            })
+                            val intent = Intent(context, WalkingActivity::class.java)
+                            intent.putExtra("animalName", animalName)
+                            intent.putExtra("animalWeight", animalWeight)
+                            startActivity(intent)
+                            wAlertDialog.dismiss()
+                        }
+                    }
+                }
+            })
+        }
     }
 
 

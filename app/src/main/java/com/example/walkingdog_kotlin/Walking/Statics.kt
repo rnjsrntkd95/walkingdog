@@ -21,25 +21,13 @@ import org.eazegraph.lib.models.BarModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 class Statics : AppCompatActivity() {
-    var now = LocalDate.now()
     var staticMonth: String = ""
 
-    var month : String? = null
-    var day: String? = null
-    var kcal = 52.6
-    var sum_time:String?=null
-    var sum =0
-
-    var today_month = now.format(DateTimeFormatter.ofPattern("M"))
-    var today_date = now.format(DateTimeFormatter.ofPattern("dd"))
-    var yesterday_month =now.minusDays(4)
-    var yester=yesterday_month.format(DateTimeFormatter.ofPattern("MM"))
-
+    var thisMonthCalories: Double = 0.0
+    var thisMonthTime: Int = 0
 
     var day_arr = listOf("31","28","31","30","31","30","31","31","30","31","30","31")
     var chartList =arrayListOf<BarModel>()
@@ -56,8 +44,8 @@ class Statics : AppCompatActivity() {
         setContentView(R.layout.activity_statics)
 
         val mBarChart: BarChart = findViewById<View>(R.id.barchart) as BarChart
-        var sum_kcal=findViewById<TextView>(R.id.sum_kcal_tv)
-        var sum_time=findViewById<TextView>(R.id.sum_time_tv)
+        var sumKcal=findViewById<TextView>(R.id.sum_kcal_tv)
+        var sumTime=findViewById<TextView>(R.id.sum_time_tv)
 
         //프래그먼트에서 상태바 배경색 변경하는 코드
         this.window.statusBarColor = (ContextCompat.getColor(this,
@@ -137,6 +125,12 @@ class Statics : AppCompatActivity() {
                         sSec = "$sec"
                     }
 
+                    // 해당 Month 칼로리, 시간 합계
+                    if(month == staticMonth) {
+                        thisMonthCalories += walking.calories.toDouble()
+                        thisMonthTime += time
+                    }
+
                     history_list.add(StaticsItem("$month/$day", String.format("%.1f", walking.calories.toFloat()),
                         sHour, sMin, sSec, walking._id))
 
@@ -152,35 +146,40 @@ class Statics : AppCompatActivity() {
                 mBarChart.barMargin = 10F
                 mBarChart.animationTime = 1000
                 mBarChart.startAnimation()
+
+                sumKcal.text = String.format("%.1f", thisMonthCalories)
+                sumTime.text = timeToString(thisMonthTime)
+
             }
         })
-
-
-
-
-
-
-
-
-
-//        for(i in 0..history_list.size){
-//            sum+=(history_list[i].cal).toInt()
-//        }
-//        sum_kcal.text=sum.toString()
-
-
-
-
-
-
-
-
-
-
-
-//        statics_btn.setOnClickListener {
-//            Toast.makeText(this,calendar.get(Calendar.DATE),Toast.LENGTH_LONG).show()
-//        }
     }
 
+    private fun timeToString(time: Int): String {
+        val hour = (time / 144000) % 24 // 1시간
+        val min = (time / 6000) % 60 // 1분
+        val sec = (time / 100) % 60 // 1초
+        var sHour: String = "--"
+        var sMin: String = "--"
+        var sSec: String = "--"
+
+        if (hour < 10) { // 시
+            sHour = "0$hour"
+        } else {
+            sHour = "$hour"
+        }
+
+        if (min < 10) { // 분
+            sMin = "0$min"
+        } else {
+            sMin = "$min"
+        }
+
+        if (sec < 10) {
+            sSec = "0$sec"
+        } else {
+            sSec = "$sec"
+        }
+
+        return "$sHour:$sMin:$sSec"
+    }
 }

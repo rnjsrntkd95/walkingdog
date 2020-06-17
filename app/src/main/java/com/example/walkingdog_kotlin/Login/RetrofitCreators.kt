@@ -45,4 +45,15 @@ class RetrofitCreators(val context: Context) {
 
         return nicknameRetrofit
     }
+
+    fun ProfileRetrofit(): LoginRetrofit {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(serverUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val profileRetrofit = retrofit.create(LoginRetrofit::class.java)
+
+        return profileRetrofit
+    }
 }

@@ -103,8 +103,6 @@ exports.searchChallenge = async (req, res, next) => {
     const challenges = await Challenge.find({}).sort("-create_date");
     // 인기 챌린지
     const popularChallenge = await Challenge.findOne({}).sort("-population");
-    console.log("인기챌린지");
-    console.log(popularChallenge);
     res.json({
       challenges,
       popularChallenge,
@@ -116,8 +114,6 @@ exports.searchChallenge = async (req, res, next) => {
 };
 
 exports.dropChallenge = async (req, res, next) => {
-  console.log("마이바디");
-  console.log(req.body)
   const userData = req.userToken.id;
   const challengeId = req.body._id;
 
@@ -144,9 +140,7 @@ exports.usersInChallenge = async (req, res, next) => {
 
     const records = await Record.find({ challenge: challengeId }).populate("user", "nickname").sort("-score");
     const myRecord = await Record.findOne({ user: userData, challenge: challengeId }).populate("user", "nickname");
-    console.log("마이챌린지 유무")
-    console.log(myRecord)
-    console.log("////////")
+
     res.json({ records, myRecord });
   } catch (err) {
     console.log(err);

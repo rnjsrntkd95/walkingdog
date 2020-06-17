@@ -46,13 +46,12 @@ exports.register = async (req, res, next) => {
 // 유저에게 등록된 동물 List
 exports.searchPet = async (req, res, next) => {
     const userData = req.userToken.id;
-    const userId = req.userId;
 
     try {
-        const user = await User.findOne({ _id: userId });
+        const user = await User.findOne({ _id: userData });
         const myPetList = await Animal.find({ user });
-
-        res.json({ myPetList });
+        console.log(myPetList)
+        res.json({ nickname: user.nickname, profile: user.profileImage, myPetList });
     } catch (err) {
         console.log(err);
         res.json({ error: 1 });

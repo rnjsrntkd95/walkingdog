@@ -21,6 +21,7 @@ const userSchema = new Schema({
   },
   nickname: {
     type: String,
+    default: "주인님",
     unique: true,
     sparse: true,
     validate: {

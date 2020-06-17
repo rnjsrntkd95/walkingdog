@@ -99,11 +99,10 @@ exports.setNickname = async (req, res, next) => {
 
     res.json({ });
   } catch (err) {
-    console.log(err);
-    if (err.errors.nickname.message != undefined) {
+    console.log(err.codeName);
+    if (err.codeName != "DuplicateKey") {
       res.json({
-        error: 3,
-        message: err.errors.nickname.message,
+        error: 3
       });
     } else {
       if (err.code === 11000) res.json({ error: 11000 });

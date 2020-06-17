@@ -65,15 +65,17 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                    android:id="@+id/user_nickname_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="김민정"
-                    android:textSize="16dp"
+                    android:text="주인님!"
+                    android:textSize="20dp"
+                    android:textColor="@color/green3"
                     android:fontFamily="@font/maplestory_light" />
 
         </LinearLayout>
 <!--        내 강아지 리스트 레이아웃-->
-        <RelativeLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.25"
@@ -81,28 +83,50 @@
                 android:backgroundTint="@color/mainGray"
                 android:layout_margin="10dp">
 
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp">
+
+                <TextView
+                        android:id="@+id/add_pet_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maplestory_light"
+                        android:text="반려동물을 등록해주세요!"
+                        android:textColor="@color/green3"
+                        android:textSize="20dp" />
+
+
             <androidx.recyclerview.widget.RecyclerView
 
-                    android:id="@+id/add_recyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                android:id="@+id/add_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
             </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
 
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
             <ImageView
                     android:id="@+id/add_pet_btn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:background="@drawable/add"
                     android:backgroundTint="#5a5a5a"
-                    android:layout_gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp">
-
             </ImageView>
+            </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
 

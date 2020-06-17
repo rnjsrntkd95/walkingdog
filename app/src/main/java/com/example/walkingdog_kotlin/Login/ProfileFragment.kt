@@ -1,9 +1,9 @@
 package com.example.walkingdog_kotlin.Login
 
-import android.R.attr
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -16,9 +16,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.request.RequestOptions
 import com.example.walkingdog_kotlin.*
+import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
+import com.example.walkingdog_kotlin.Login.Model.MyProfileModel
 import com.example.walkingdog_kotlin.Walking.Statics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -27,17 +30,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment (context: Context): Fragment() {
 
     val REQUEST_CODE = 100
 
-    var addpet_list = arrayListOf<ProfileItem>(
-
-        ProfileItem("까까"),
-        ProfileItem("뽀삐")
-    )
-
-
+    var addpetList = arrayListOf<ProfileItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,19 +47,62 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        myprofile_img_btn.setOnClickListener {
-            Toast.makeText(context, "asdsa", Toast.LENGTH_SHORT).show()
-            openGalleryForImage()
-
-        }
-
-
-        val addpetAdapter = Addpet_RVAdapter(context!!, addpet_list)
-
+        val addpetAdapter = Addpet_RVAdapter(context!!, addpetList)
         add_recyclerView.adapter = addpetAdapter
         val lm = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         add_recyclerView.layoutManager = lm
         add_recyclerView.setHasFixedSize(true)
+
+        myprofile_img_btn.setOnClickListener {
+            openGalleryForImage()
+        }
+
+        user_nickname_view.setOnClickListener {
+            val intent = Intent(context!!, SignUpActivity::class.java)
+            startActivity(intent)
+            (activity as MainActivity).finish()
+        }
+
+        // 프로필 정보 요청
+        val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val userToken = pref.getString("userToken", "")
+        val loginRetrofit = RetrofitCreators(context!!).ProfileRetrofit()
+        loginRetrofit.getMyProfile(userToken!!).enqueue(object : Callback<MyProfileModel> {
+            override fun onFailure(call: Call<MyProfileModel>, t: Throwable) {
+                Log.d("DEBUG", "Profile Retrofit failed!!")
+                Log.d("DEBUG", t.message)
+            }
+
+            override fun onResponse(call: Call<MyProfileModel>, response: Response<MyProfileModel>) {
+                val error = response.body()?.error
+                val profileURL = response.body()?.profile
+                Log.d("ERROR", "$error")
+                if (error == 1) {
+                    return
+                }
+                // 프로필 이미지 로드
+                if (profileURL != null || profileURL != "") {
+                    GlideApp.with(context!!)
+                        .load("${context!!.getString(R.string.server_url)}/${profileURL}")
+                        .apply(RequestOptions.centerInsideTransform().override(500,500))
+                        .into(myprofile_img_btn)
+                    myprofile_img_btn.background = null
+                }
+
+
+                val userNickName = response.body()?.nickname
+                val myPet = response.body()?.myPetList
+                user_nickname_view.text = userNickName
+                if (myPet != null && myPet.size != 0) {
+                    myPet!!.forEach(fun(pet) {
+                        addpetList.add(ProfileItem(pet.animalName))
+                    })
+                    addpetAdapter.notifyDataSetChanged()
+                    add_pet_text_view.visibility = View.GONE
+                }
+            }
+        })
+
 
         logoutLayout.setOnClickListener {
             val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)

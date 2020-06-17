@@ -85,8 +85,9 @@ class MyChallengeActivity : AppCompatActivity() {
 
                 var rankCounter = 1
                 var myrank = 0
+
                 // 전체 기록들 반영
-                records!!.forEach(fun(record) {
+                records.forEach(fun(record) {
                     pcList.add(ParticipateChallenge("${rankCounter}", record.user.nickname,
                         "${record.walkingCount}", "${record.walkingAvg}", "${record.score}"))
                     if (myRecord != null){

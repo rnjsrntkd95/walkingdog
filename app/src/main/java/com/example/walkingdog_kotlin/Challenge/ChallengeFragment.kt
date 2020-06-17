@@ -87,9 +87,9 @@ class ChallengeFragment(context: Context) : Fragment() {
                 }
                 val popularChallenge = response.body()?.popularChallenge
                 if(popularChallenge != null){
-                    popularChallengeId = popularChallenge!!._id
+                    popularChallengeId = popularChallenge._id
                     Log.d("인기챌린지", popularChallenge.title)
-                    challengeTitle_Textview.text = popularChallenge!!.title
+                    challengeTitle_Textview.text = popularChallenge.title
                     challenge_period.text = ReformatDate("MM월 dd일", popularChallenge!!.start_date) + " ~ " +
                             ReformatDate("MM월 dd일", popularChallenge!!.end_date)
                     popular_challenge_content_tv.text = popularChallenge!!.content

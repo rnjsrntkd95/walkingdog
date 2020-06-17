@@ -22,7 +22,14 @@ class SignUpActivity : AppCompatActivity() {
         val nicknameFragment = NicknameFragment(this)
         supportFragmentManager.beginTransaction().replace(R.id.signUp_content, nicknameFragment)
             .commit()
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("pFlag", true)
+        startActivity(intent)
+        finish()
     }
 
     fun finishActivity() {  //액티비티 종료 함수

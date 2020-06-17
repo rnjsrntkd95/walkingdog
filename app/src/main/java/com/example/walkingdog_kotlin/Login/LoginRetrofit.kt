@@ -1,6 +1,7 @@
 package com.example.walkingdog_kotlin.Login
 
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
+import com.example.walkingdog_kotlin.Login.Model.MyProfileModel
 import com.example.walkingdog_kotlin.Login.Model.SetNicknameModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -17,4 +18,7 @@ interface LoginRetrofit {
     @PUT("/login/nickname")
     fun setNickname(@Field("userToken") userToken: String,
                     @Field("nickname") nickname: String): Call<SetNicknameModel>
+
+    @GET("/animal/mypet")
+    fun getMyProfile(@Query("userToken") userToken: String): Call<MyProfileModel>
 }

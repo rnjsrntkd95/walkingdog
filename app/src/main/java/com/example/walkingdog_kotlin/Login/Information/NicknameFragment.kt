@@ -17,6 +17,7 @@ import com.example.walkingdog_kotlin.Login.LoginActivity
 import com.example.walkingdog_kotlin.Login.Model.SetNicknameModel
 import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
+import com.example.walkingdog_kotlin.MainActivity
 
 import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.fragment_nickname.*
@@ -37,6 +38,7 @@ class NicknameFragment(context: Context) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -65,9 +67,10 @@ class NicknameFragment(context: Context) : Fragment() {
                     Log.d("TAG", error.toString())
 
                     if (error == 0) {
-                        val intent = Intent(context, AddPet::class.java)
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.putExtra("pFlag", true)
                         startActivity(intent)
-                        (context as LoginActivity).finish()
+                        (activity as SignUpActivity).finish()
                     } else if (error == 11000) {
                         nickname_status_text.text = "이미 등록된 닉네임입니다."
                     } else if (error == 3) {

@@ -130,15 +130,15 @@ exports.usersInChallenge = async (req, res, next) => {
   const userData = req.userToken.id;
   const challengeId = req.body.challengeId;
   
-  console.log("챌린지아이디"+challengeId)
   try {
     const user  = await User.findOne({ _id: userData });
+    const challenge = await Challenge.findOne({ _id: challengeId });
+    console.log(challenge.title)
 
     const records = await Record.find({ challenge: challengeId }).populate("user", "nickname").sort("-score");
     const myRecord = await Record.findOne({ user: userData, challenge: challengeId }).populate("user", "nickname");
-    console.log("레코드들")
-    console.log(records)
-    res.json({ records, myRecord });
+
+    res.json({ challengeTitle: challenge.title, records, myRecord });
   } catch (err) {
     console.log(err);
     res.json({ error: 1 });

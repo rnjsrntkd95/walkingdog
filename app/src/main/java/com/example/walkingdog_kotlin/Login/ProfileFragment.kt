@@ -3,7 +3,6 @@ package com.example.walkingdog_kotlin.Login
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -21,6 +20,7 @@ import com.example.walkingdog_kotlin.*
 import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
+import com.example.walkingdog_kotlin.Challenge.MyChallengeActivity
 import com.example.walkingdog_kotlin.Login.Model.MyProfileModel
 import com.example.walkingdog_kotlin.Walking.Statics
 import kotlinx.android.synthetic.main.activity_main.*

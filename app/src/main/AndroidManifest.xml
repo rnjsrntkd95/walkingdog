@@ -23,7 +23,7 @@
             android:usesCleartextTraffic="true">
         <activity android:name=".ProfileAddPetActivity"></activity>
         <activity android:name=".Walking.WalkingListActivity"></activity>
-        <activity android:name=".MyChallengeActivity" />
+        <activity android:name=".Challenge.MyChallengeActivity" />
         <activity android:name=".Challenge.Create_ChallengeActivity" />
         <activity android:name=".Post.WritePost" />
         <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->

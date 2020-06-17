@@ -34,12 +34,6 @@ exports.createWalking = async (req, res, next) => {
     }
 
     // 산책 경로 위도, 경도 후처리
-    requestRoute.forEach((loc) => {
-        loc = loc.replace('[', "");
-        loc = loc.replace(']', "");
-        const location = loc.split(',');
-        route.push({ lat: location[0], lon: location[1]});
-    })
     if(requestRoute) {
         if (typeof(requestRoute) == "string") {
             requestRoute = requestRoute.replace('[', "");
@@ -136,9 +130,7 @@ exports.createWalking = async (req, res, next) => {
                 }
 
             })
-        } else {
-            console.log("가입된 챌린지 없음")
-        };
+        }
 
         res.json({ walkingId: resultReg._id});
     } catch (err) {

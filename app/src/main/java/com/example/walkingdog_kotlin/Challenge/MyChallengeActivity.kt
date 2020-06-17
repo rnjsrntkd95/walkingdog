@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Challenge
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 import com.example.walkingdog_kotlin.Challenge.Model.*
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.walkingdog_kotlin.MainActivity
+import com.example.walkingdog_kotlin.PCRvAdapter
+import com.example.walkingdog_kotlin.ParticipateChallenge
+import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_my_challenge.*
-import kotlinx.android.synthetic.main.fragment_challenge.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,17 +62,19 @@ class MyChallengeActivity : AppCompatActivity() {
                 Log.d("DEBUG", t.message)
             }
             override fun onResponse(call: Call<ChallengeUserListModel>, response: Response<ChallengeUserListModel>) {
+                val challengeTitle = response.body()?.challengeTitle
                 val records = response.body()?.records
                 val myRecord = response.body()?.myRecord
                 val error = response.body()?.error
                 Log.d("ERROR", error.toString())
                 Log.d("레코드들", records.toString())
+                Log.d("챌린지 제목", challengeTitle)
 
                 if (error == 1) {
                     return
                 }
 
-                myChallengeTitle.text = records!![0].challengeTitle
+                myChallengeTitle.text = challengeTitle
 
 
                 if (myRecord != null) {
@@ -89,9 +91,13 @@ class MyChallengeActivity : AppCompatActivity() {
                 var myrank = 0
 
                 // 전체 기록들 반영
-                records.forEach(fun(record) {
-                    pcList.add(ParticipateChallenge("${rankCounter}", record.user.nickname,
-                        "${record.walkingCount}", "${record.walkingAvg}", "${record.score}"))
+                records?.forEach(fun(record) {
+                    pcList.add(
+                        ParticipateChallenge(
+                            "${rankCounter}", record.user.nickname,
+                            "${record.walkingCount}", "${record.walkingAvg}", "${record.score}"
+                        )
+                    )
                     if (myRecord != null){
                         if (record.user.nickname == myRecord.user.nickname) {
                             myrank = rankCounter

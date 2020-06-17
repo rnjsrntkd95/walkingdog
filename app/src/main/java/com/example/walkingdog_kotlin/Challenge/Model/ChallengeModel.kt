@@ -25,6 +25,7 @@ data class ChallengeModel (
 )
 
 data class ChallengeUserListModel (
+    val challengeTitle: String,
     val records: ArrayList<user> = arrayListOf(),
     val myRecord: user,
     val error: Number

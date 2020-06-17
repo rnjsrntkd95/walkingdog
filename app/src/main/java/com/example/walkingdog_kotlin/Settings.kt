@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.walkingdog_kotlin.Login.LoginActivity
-import com.example.walkingdog_kotlin.Login.SessionCallback
+import com.example.walkingdog_kotlin.Login.MySessionCallback
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_settings.*

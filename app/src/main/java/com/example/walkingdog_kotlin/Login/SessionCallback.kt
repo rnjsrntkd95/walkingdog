@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SessionCallback(val context: LoginActivity) : ISessionCallback {
+class MySessionCallback(val context: LoginActivity) : ISessionCallback {
     override fun onSessionOpenFailed(exception: KakaoException?) {
         Log.e("Log", "Session Call back :: onSessionOpenFailed: ${exception?.message}")
     }

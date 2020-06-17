@@ -1,6 +1,5 @@
 package com.example.walkingdog_kotlin.Login
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -38,8 +37,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     //private const val TAG = "GoogleActivity"
     private val RC_SIGN_IN = 99
     //Kakao Session Callback
-    private var callback: SessionCallback =
-        SessionCallback(this)
+    private var callback: MySessionCallback =
+        MySessionCallback(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,8 +99,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // onActivityResult
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-                Log.i("Log", "session get current session")
-                return
+            Log.i("Log", "session get current session")
+            return
         }
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -156,7 +155,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 edit.putString("userToken", token)
                                 edit.apply()
 
-                                if (nickname != null) {
+                                if (nickname != null && nickname != "주인님") {
                                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                                     startActivity(intent)
@@ -219,7 +218,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //Kakao destory 메모리 누수 방지?
-    @SuppressLint("MissingSuperCall")
     override fun onDestroy() {
         super.onDestroy()
         Session.getCurrentSession().removeCallback(callback)

@@ -126,6 +126,7 @@ class FeedAdaptor(
                             val toiletLoc = response.body()?.toiletLoc
                             mapView = null
                             mapView = MapView(context)
+//                            mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
                             if (routes!!.size == 0) {
                                 Toast.makeText(context, "산책 경로가 존재하지 않습니다.", Toast.LENGTH_LONG)
                                     .show()

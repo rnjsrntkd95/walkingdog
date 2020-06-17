@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:backgroundTint="@color/white"
         android:orientation="vertical"
-        tools:context=".MyChallengeActivity">
+        tools:context=".Challenge.MyChallengeActivity">
     <!--    상단 앱바-->
     <RelativeLayout
             android:layout_width="match_parent"

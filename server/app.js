@@ -6,6 +6,7 @@ const logger = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const config = require("./config");
+const User = require('./models/user');
 
 // Router
 const loginRouter = require("./routes/logins");
@@ -13,6 +14,7 @@ const animalRouter = require("./routes/animals");
 const walkingRouter = require("./routes/walkings");
 const postRouter = require("./routes/posts");
 const challengeRouter = require("./routes/challenges");
+const commentRouter = require("./routes/comment");
 
 // MongoDB Connect
 const mongodb = require("./db.js");
@@ -24,7 +26,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   })
 );
 
@@ -32,20 +34,46 @@ app.use(
 app.set("jwt-secret", config.secret);
 
 // User Token Decoding
-app.use((req, res, next) => {
-  console.log(req.path)
-  if (req.path === "/login") {
+app.use(async (req, res, next) => {
+  console.log(req.path);
+  if (req.path === "/login" || req.path === "/post/timeline"
+    || req.path === "/walking/route" || req.path === "/animal/breed-list"
+    || req.path === "/challenge/search" || req.path.includes("/uploads")) {
     next();
   } else {
     const Jwt = require("jsonwebtoken");
-    const token = req.body.userToken
-    // if (!token) res.json({ error: -1 })
+    let token = req.body.userToken;
+    console.log(req.headers);
+    console.log("토큰확인1" + token)
+    if (!token) {
+      token = req.query.userToken;
+      console.log("토큰"+token)
+    }
+    console.log("토큰확인2" + token)
+
+    if (!token) {
+      token = req.headers.usertoken;
+    }
+
+    if (!token) {
+      res.json({ error: 1004 });
+      return
+    }
+
+    // 토큰 해석
     const secret = req.app.get("jwt-secret");
     const decodedToken = Jwt.decode(token, secret);
-    req.userToken = decodedToken;
-    next();
+    try {
+      let user = await User.findOne({ _id: decodedToken.id });
+      console.log("////////////////////////////////////")
+      console.log(`유저접속: ${decodedToken}, ${user.email}`);
+      req.userToken = decodedToken;
+      next();
+    } catch (err) {
+      res.json({ error: 1004 });
+    }
   }
-})
+});
 
 // Use Router
 app.use("/login", loginRouter);
@@ -53,6 +81,7 @@ app.use("/animal", animalRouter);
 app.use("/walking", walkingRouter);
 app.use("/post", postRouter);
 app.use("/challenge", challengeRouter);
+app.use("/comment", commentRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

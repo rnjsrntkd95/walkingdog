@@ -11,13 +11,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/mainGray">
+            android:background="@color/green1">
 
         <ImageButton
                 android:id="@+id/close_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"/>
     </RelativeLayout>
@@ -40,8 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="촬영"
-                android:background="@color/mainGray"
-                android:textColor="@color/black"/>
+                android:background="@color/green1"
+                android:textColor="@color/white"
+                android:fontFamily="@font/maplestory_bold"/>
 
     </LinearLayout>
 

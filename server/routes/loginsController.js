@@ -6,13 +6,14 @@ const Breed = require("../models/breed");
 const Jwt = require("jsonwebtoken");
 
 exports.logIn = async (req, res, next) => {
+  console.log("로그인ㅇㅇㅇ");
   const email = req.body.email;
   const password = req.body.password;
   const secret = req.app.get("jwt-secret");
 
   try {
+    let nickname = "";
     let userObj = await User.findOne({ email, password });
-    let nickname = null
 
     if (!userObj) {
       // User를 DB에 저장
@@ -21,10 +22,11 @@ exports.logIn = async (req, res, next) => {
         password,
       });
       const resultReg = await User.create(newUser);
-      userObj = await User.findOne({ email, password });
-    } else {
-        nickname = userObj.nickname
+      userObj = newUser;
     }
+
+    nickname = userObj.nickname;
+    
     // 토큰 발행
     Jwt.sign(
       {
@@ -37,27 +39,75 @@ exports.logIn = async (req, res, next) => {
         expiresIn: "1d",
         issuer: "walkingDog",
         subject: "userInfo",
-      },function(err, loginToken) {
-        if (err) res.json({})
+      },
+      function (err, loginToken) {
+        if (err) res.json({ error: 1 });
         else res.json({ loginToken, nickname });
       }
     );
-} catch (err) {
-    console.log(err);
-    res.json({});
+  } catch (err) {
+    if (err.errors.password.message != undefined) {
+      console.log(err)
+      res.json({
+        error: 2,
+        message: err.errors.password.message,
+      });
+    } else if (err.errors.password.email.message != undefined) {
+      res.json({
+        error: 3,
+        message: err.errors.email.message,
+      });
+    } else {
+      console.log(err)
+      res.json({ error: 4});
+    }
   }
 };
 
 exports.setNickname = async (req, res, next) => {
-    const userData = req.userToken;
-    const nickname = req.body.nickname;
+  const userData = req.userToken.id;
+  const nickname = req.body.nickname;
+  const requestFile = req.file;
 
-    try {
-        const user = await User.findOneAndUpdate({_id: "5eba8b5ca76e3e20f4b0659e"}, {nickname});
-        res.json({});
-    } catch (err) {
-        console.log(err);
-        if (err.code === 11000) res.json({error: 11000})
-        else res.json({error: 10000});
+  //   if (!requestFiles) {
+  //     image.push('uploads\\default.jpg')
+  // } else {
+  //     for (file of requestFiles) {
+  //         image.push(file.path.replace('public\\', ''))
+  //     }
+  // }
+  try {
+    await User.findOneAndUpdate(
+      { _id: userData },
+      { $set: { nickname } },
+      {
+        new: true,
+        // findOneAndUpdate에서 validation을 하기 위해 추가.
+        upsert: true,
+        setDefaultsOnInsert: true,
+        runValidators: true,
+        context: "query",
+      }
+    );
+    if (requestFile) {
+      await User.findOneAndUpdate(
+        { _id: "5ebac6bd59e3d32080d6d941" },
+        { $set: { profileImage: requestFiles.path.replace("public\\", "") } },
+        { new: true }
+      );
     }
+
+    res.json({ });
+  } catch (err) {
+    console.log(err.codeName);
+    if (err.codeName != "DuplicateKey") {
+      res.json({
+        error: 3
+      });
+    } else {
+      if (err.code === 11000) res.json({ error: 11000 });
+      else res.json({ error: 10000 });
+    }
+
+  }
 };

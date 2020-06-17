@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">walkingdog_kotlin</string>
+    <string name="app_name">워킹멍:나랑 산책하개</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">다음</string>
@@ -10,6 +10,4 @@
     <string name="input_name">이름을 입력하세요</string>
     <string name="input_nickname">사용할 닉네임을 입력하세요</string>
     <string name="input_phoneNum">핸드폰 번호를 입력하세요</string>
-
-    <string name="mapbox_access_token">pk.eyJ1IjoianNwYXJrMjIwMSIsImEiOiJja2E3dWloMDkwOGJtMnRtcmU1aXk4eGhuIn0.z4V849uf62WdmWRAjRiHeg</string>
 </resources>

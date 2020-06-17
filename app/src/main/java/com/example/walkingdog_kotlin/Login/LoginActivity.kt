@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
-import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,8 +19,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
 import com.kakao.auth.Session
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,13 +45,32 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        email_signUp_btn.setOnClickListener {
-            var intent = Intent(this, SignUpActivity::class.java)
+        this.window.statusBarColor = (ContextCompat.getColor(this,
+            R.color.green1
+        ))
+
+        val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        // 토큰 유무에 따른 화면 이동
+        val userToken = pref.getString("userToken", "")
+        if (userToken != null && userToken != "") {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
+
+        // 산책 체크 리스트 초기화
+        val userCheckList = pref.getString("checkList", "0")
+        if (userCheckList == "0" || userCheckList == null) {
+            val edit = pref.edit()
+            edit.putString("checkList", "//목줄//물//배변 봉투")
+            edit.apply()
+        }
+
 
 //        btn_googleSignIn.setOnClickListener (this) // 구글 로그인 버튼
         btn_googleSignIn.setOnClickListener { signIn() }
+
+        btn_kakaoCustomSignIn.setOnClickListener { btn_kakaoSignIn.performClick() }
 
         //Google 로그인 옵션 구성. requestIdToken 및 Email 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -77,8 +100,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     // onActivityResult
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Log.i("Log", "session get current session")
-            return
+                Log.i("Log", "session get current session")
+                return
         }
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -119,17 +142,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Log.d("DEBUG", t.message)
                             Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                         }
-
                         override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                             Log.d("TAG", "Login Retrofit Success!!")
                             val token = response.body()?.loginToken
                             val nickname = response.body()?.nickname
+                            val error = response.body()?.error
+
+                            Log.d("토큰", token + nickname + error)
 
                             if (token != null) {
                                 val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
                                 val edit = pref.edit()
                                 edit.putString("userToken", token)
-                                edit.commit()
+                                edit.apply()
 
                                 if (nickname != null) {
                                     val intent = Intent(this@LoginActivity, MainActivity::class.java)

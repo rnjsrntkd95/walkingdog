@@ -44,10 +44,10 @@ class AddPet : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_pet)
 
-        rv_image_area.setOnClickListener { loadImage() }
 
         val bAdapter = BreedAdapter(this, breedList, View.OnClickListener {  }) { breed ->
             petBreed = breed.breed
+            Toast.makeText(this, petBreed, Toast.LENGTH_SHORT).show()
         }
 
         breed_rv.adapter = bAdapter
@@ -107,8 +107,9 @@ class AddPet : AppCompatActivity() {
 
                     if (error == null) {
                         val intent = Intent(this@AddPet, MainActivity::class.java)
+                        intent.putExtra("pFlag", true)
                         startActivity(intent)
-                        (this@AddPet as Activity).finish()
+                        finish()
                     } else if (error == 1) {
                         val errItem = response.body()?.item
                         Toast.makeText(this@AddPet, "올바르지 않은 "+ errItem.toString() + " 입니다.", Toast.LENGTH_SHORT).show()
@@ -193,18 +194,13 @@ class AddPet : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == Gallery) {
-            if(resultCode == RESULT_OK) {
-                var dataUri = data?.data
-                try {
-                    var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
-                    rv_image_area.setImageBitmap(bitmap)
-                } catch (e:Exception) {
-                    Toast.makeText(this, "$e", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } else {
-            //somthing wrong
-        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@AddPet, MainActivity::class.java)
+        intent.putExtra("pFlag", true)
+        startActivity(intent)
+        finish()
     }
 }

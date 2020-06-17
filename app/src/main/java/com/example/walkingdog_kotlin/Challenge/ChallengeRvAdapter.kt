@@ -10,10 +10,10 @@ import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Challenge.Model.Challenge
 
 
-class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Challenge>) :
+class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Challenge>, val itemClick: (Challenge) -> Unit) :
     RecyclerView.Adapter<ChallengeRvAdapter.Holder>() {
 
-    inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    inner class Holder(itemView: View?, itemClick: (Challenge) -> Unit) : RecyclerView.ViewHolder(itemView!!) {
         val challengeTitle = itemView?.findViewById<TextView>(R.id.challengeTitle_Textview)
         val challengeComment = itemView?.findViewById<TextView>(R.id.challengeComment_Textview)
         val challengePeriod = itemView?.findViewById<TextView>(R.id.challengePeriod_Textview)
@@ -26,13 +26,15 @@ class ChallengeRvAdapter(val context: Context, val challengeList: ArrayList<Chal
             challengeComment?.text = challenge.comment
             challengePeriod?.text = challenge.period
             challengeNumber?.text = challenge.number
+
+            itemView.setOnClickListener { itemClick(challenge) }
         }
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.challenege_rv_item, parent, false)
-        return Holder(view)
+        return Holder(view, itemClick)
     }
 
     override fun getItemCount(): Int {

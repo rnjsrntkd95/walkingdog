@@ -9,7 +9,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mainBlue">
+            android:background="@color/green1">
 
         <LinearLayout
                 android:id="@+id/appName_layout"
@@ -26,15 +26,15 @@
                     android:layout_height="wrap_content"
                     android:text="워킹멍"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"/>
+                    android:textSize="40dp"
+                    android:fontFamily="@font/maplestory_bold"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="나랑 산책하개"
-                    android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,28 +46,15 @@
                 android:layout_marginTop="50dp">
 
             <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/splash_icon">
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/logo2"
+                    android:layout_marginLeft="15dp">
             </ImageView>
         </LinearLayout>
 
 
-        <LinearLayout
-                android:id="@+id/email_signUp_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_above="@+id/kakao_signUp_layout"
-                android:layout_marginBottom="15dp">
 
-            <Button
-                    android:id="@+id/email_signUp_btn"
-                    android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:text="TEST BUTTON"
-                    android:background="@color/mainSkin"/>
-        </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/kakao_signUp_layout"
@@ -77,10 +64,21 @@
                 android:layout_above="@+id/google_signUp_layout"
                 android:layout_marginBottom="15dp">
 
+            <Button
+                    android:id="@+id/btn_kakaoCustomSignIn"
+                    android:layout_width="320dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/kakaobackground"
+                    android:text="카카오 계정으로 로그인"
+                    android:textSize="16sp"
+                    android:paddingLeft="20dp"
+                    android:fontFamily="@font/maplestory_light"/>
+
             <com.kakao.usermgmt.LoginButton
                     android:id="@+id/btn_kakaoSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -92,11 +90,23 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="40dp">
 
-
-            <com.google.android.gms.common.SignInButton
+            <Button
                     android:id="@+id/btn_googleSignIn"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:background="@drawable/googlebackground2"
+                    android:text="구글 계정으로 로그인"
+                    android:textSize="16sp"
+                    android:paddingLeft="20dp"
+                    android:fontFamily="@font/maplestory_light"/>
+
+
+<!--            <com.google.android.gms.common.SignInButton-->
+<!--                    android:id="@+id/btn_googleSignIn"-->
+<!--                    android:layout_width="320dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:background="@drawable/tenradius_shape"-->
+<!--                    android:backgroundTint="@color/colorAccent"/>-->
 
         </LinearLayout>
     </RelativeLayout>

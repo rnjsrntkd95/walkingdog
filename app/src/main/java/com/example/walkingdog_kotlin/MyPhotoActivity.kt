@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.model.MyFeedDTO
 import kotlinx.android.synthetic.main.activity_my_photo.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class MyPhotoActivity : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ class MyPhotoActivity : AppCompatActivity() {
         ,MyFeedDTO("제목2","pets")
         , MyFeedDTO("제목1","pets")
         ,MyFeedDTO("제목2","pets")
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +28,6 @@ class MyPhotoActivity : AppCompatActivity() {
         val lm = LinearLayoutManager(this)
         myfeed_recyclerView.layoutManager = lm
         myfeed_recyclerView.setHasFixedSize(true)
-
-
 
     }
 }

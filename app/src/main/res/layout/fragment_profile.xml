@@ -7,268 +7,252 @@
         tools:context=".Login.ProfileFragment">
 
 
-<RelativeLayout
+<LinearLayout
         android:id="@+id/profile_top"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="@drawable/bottomten_radius_shape"
+        android:backgroundTint="@color/green2">
 
-    <LinearLayout
-            android:id="@+id/my_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp">
-
+<!-- 내정보 레이아웃   -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
         <TextView
+                android:id="@+id/my_profile_text"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
-                android:text="My Profile"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:gravity="center" />
-    </LinearLayout>
-
-
-    <LinearLayout
-            android:id="@+id/profile_image"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/my_profile"
-            android:layout_marginTop="25dp">
-
-        <ImageView
-                android:layout_width="97dp"
-                android:layout_height="100dp"
-                android:src="@drawable/myprofile_img"></ImageView>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/profile_image"
-            android:layout_marginTop="15dp"
-
-        >
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Park Joon Sung"
+                android:text="내 정보"
                 android:textSize="20dp"
-                />
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
 
-    </LinearLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/add_recyclerView"
+    </RelativeLayout>
+<!--    프로필사진, 이름, 강아지목록 레이아웃-->
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="horizontal"
-            android:layout_below="@+id/profile_name"
-            tools:listitem="@layout/add_dog_item"
+            android:background="@drawable/tenradius_shape"
+            android:backgroundTint="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-            />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.65"
+                android:orientation="vertical"
+                android:gravity="center">
 
-</RelativeLayout>
+            <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="64dp"
+                    android:layout_marginBottom="10dp">
+
+                <ImageView
+                        android:id="@+id/myprofile_img_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/add_profile">
+                </ImageView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                    android:id="@+id/user_nickname_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주인님!"
+                    android:textSize="20dp"
+                    android:textColor="@color/green3"
+                    android:fontFamily="@font/maplestory_light" />
+
+        </LinearLayout>
+<!--        내 강아지 리스트 레이아웃-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:layout_margin="10dp">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp">
+
+                <TextView
+                        android:id="@+id/add_pet_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maplestory_light"
+                        android:text="반려동물을 등록해주세요!"
+                        android:textColor="@color/green3"
+                        android:textSize="20dp" />
 
 
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/add_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+            </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+            <ImageView
+                    android:id="@+id/add_pet_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/add"
+                    android:backgroundTint="#5a5a5a"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp">
+            </ImageView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<!--산책통계, 내챌린지, 로그아웃 레이아웃-->
 <LinearLayout
         android:id="@+id/profile_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/profile_bottom"
         android:layout_below="@+id/profile_top"
-        android:layout_marginBottom="80dp"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:padding="10dp">
+<!--    산책통계, 내 챌린지 레이아웃-->
     <LinearLayout
-            android:id="@+id/my_photos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
 
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/photos"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-        />
+        <!--    산책통계 레이아웃-->
+        <LinearLayout
+                android:id="@+id/walkingStaticLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:orientation="vertical"
+                android:gravity="center">
 
-        <TextView
-                android:id="@+id/my_phots_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Photos"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/dogbone"
+                    android:layout_marginBottom="10dp"/>
 
-        </TextView>
+            <TextView
+                    android:id="@+id/statics_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 통계"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="130dp"
-                >
+        </LinearLayout>
+        <!--    중간에 공간만들어주는 레이아웃-->
+        <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="200dp">
+        </LinearLayout>
+        <!--내 챌린지 레이아웃-->
+        <LinearLayout
+                android:id="@+id/myChallengeLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </ImageView>
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/mychallengeicon"
+                    android:layout_marginBottom="10dp"/>
 
+            <TextView
+                    android:id="@+id/account_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내 챌린지"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
+
+        </LinearLayout>
 
     </LinearLayout>
-
+    
     <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/statics"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/barchart" />
-
-        <TextView
-                android:id="@+id/statics_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Statics"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
-
-        </TextView>
-
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="172dp"
-                >
-        </ImageView>
-
-
+            android:layout_height="10dp">
 
     </LinearLayout>
-
+    
+<!--로그아웃 레이아웃-->
     <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/account"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="0.3">
 
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/user2"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                />
+        <LinearLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tenradius_shape"
+                android:backgroundTint="@color/mainGray"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-                android:id="@+id/account_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Account"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/logout"
+                    android:layout_marginBottom="10dp"/>
 
-        </TextView>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/maplestory_bold">
+            </TextView>
 
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="157dp"
-                >
-        </ImageView>
+        </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#a6a6a6"
-            >
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/settings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/cogwheel"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                />
-        <TextView
-                android:id="@+id/settings_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:layout_marginLeft="30dp"
-                android:textSize="25dp"
-                android:layout_gravity="center_vertical">
-
-        </TextView>
-
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right"
-                android:layout_marginLeft="157dp"
-                >
-        </ImageView>
-
-    </LinearLayout>
+    
 
 
-</LinearLayout>
+
+
+ </LinearLayout>
 
 </RelativeLayout>

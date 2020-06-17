@@ -8,42 +8,49 @@
     <LinearLayout
             android:id="@+id/weather_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/weather_bar_shape"
             android:gravity="center">
 
         <ImageView
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:id="@+id/weather_img"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/sunny_icon"
                 android:layout_weight="1"/>
 
         <TextView
+                android:id="@+id/weather_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:text="Sunny"
-                android:layout_weight="1"/>
+                android:text="맑음"
+                android:layout_weight="1"
+                android:fontFamily="@font/maplestory_bold"/>
 
         <TextView
+                android:id="@+id/temporature_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:text="27"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:fontFamily="@font/maplestory_bold"/>
 
         <TextView
+                android:id="@+id/location_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:text="수원시"
                 android:layout_marginRight="20dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:fontFamily="@font/maplestory_bold"/>
 
     </LinearLayout>
 
@@ -60,14 +67,17 @@
                 android:text="체크 리스트"
                 android:textSize="20dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"/>
-
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/maplestory_bold"/>
 
         <ListView
                 android:id="@+id/checkListView"
                 android:layout_width="200dp"
-                android:layout_height="280dp"
-                android:layout_centerInParent="true">
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:divider="#ffffff">
 
         </ListView>
 
@@ -75,7 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/checkListView"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp">
 
             <Button
                     android:id="@+id/sub_item_btn"
@@ -84,11 +95,12 @@
                     android:text="-"
                     android:textSize="20dp"
                     android:textColor="@color/white"
-                    android:background="@drawable/orange_btn_shape"
-                    android:layout_marginTop="10dp"/>
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="#f18c8c"
+                    android:fontFamily="@font/maplestory_bold"/>
 
             <LinearLayout
-                    android:layout_width="30dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"/>
 
             <Button
@@ -98,8 +110,9 @@
                     android:text="+"
                     android:textSize="20dp"
                     android:textColor="@color/white"
-                    android:background="@drawable/orange_btn_shape"
-                    android:layout_marginTop="10dp"/>
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="#f18c8c"
+                    android:fontFamily="@font/maplestory_bold"/>
 
         </LinearLayout>
 
@@ -112,10 +125,12 @@
             android:text="완료"
             android:textSize="16dp"
             android:textColor="@color/mainGray"
-            android:background="@drawable/btn_shape"
+            android:background="@drawable/tenradius_shape"
+            android:backgroundTint="@color/green3"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/maplestory_light"/>
 
 
 </RelativeLayout>

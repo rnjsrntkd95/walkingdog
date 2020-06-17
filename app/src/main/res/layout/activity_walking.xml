@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:mapbox="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map_all"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".WalkingActivity">
+        tools:context=".Walking.WalkingActivity">
 <!--지도 레이아웃-->
-    <LinearLayout
+    <RelativeLayout
+            android:id="@+id/map_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.5"
+            android:layout_weight="7.5"
             android:gravity="center">
 
-<!--    <com.mapbox.mapboxsdk.maps.MapView-->
-<!--            android:id="@+id/mapView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            mapbox:mapbox_cameraTargetLat = "37.5326"-->
-<!--            mapbox:mapbox_cameraTargetLng = "127.0246"-->
-<!--            mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"-->
-<!--            mapbox:mapbox_cameraZoom="12" />-->
+        <RelativeLayout
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        </RelativeLayout>
+
+        <ImageView
+                android:id="@+id/runningDogImg"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:background="@drawable/running_dog_1"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
 
 
+    </RelativeLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGray">
 
     </LinearLayout>
 
@@ -30,91 +45,183 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainGray"
-            android:layout_weight="1.5"
-            android:gravity="center">
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <TextView
-                android:id="@+id/minTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
-        <TextView
-                android:id="@+id/secTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
+        <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:gravity="center">
+            <TextView
+                    android:id="@+id/minTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textSize="35dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"
+                    android:gravity="center"/>
+        </LinearLayout>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/maplestory_light"
+                android:gravity="center"/>
+        <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:gravity="center">
+            <TextView
+                    android:id="@+id/secTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textSize="35dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"
+                    android:gravity="center"/>
+        </LinearLayout>
         <TextView
-                android:id="@+id/milliTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
+                android:text=":"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/maplestory_light"
+                android:gravity="center"/>
+        <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:gravity="center">
+            <TextView
+                    android:id="@+id/milliTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textSize="35dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"
+                    android:gravity="center"/>
+        </LinearLayout>
+
     </LinearLayout>
 
-<!--거리 , 칼로리 레이아웃-->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainGray"
+            android:layout_weight="0.3"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이동 거리"
+                android:fontFamily="@font/maplestory_light"
+                android:gravity="center"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="충족량"
+                android:fontFamily="@font/maplestory_light"
+                android:gravity="center"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="소모 칼로리"
+                android:fontFamily="@font/maplestory_light"
+                android:gravity="center"/>
+    </LinearLayout>
+
+<!--퍼센트, 거리 , 칼로리 레이아웃-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
             android:layout_weight="0.5"
             android:gravity="center">
 
+
+
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
             <TextView
+                    android:id="@+id/distanceId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"/>
 
             <TextView
+                    android:id="@+id/digitId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="m"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"/>
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/amountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"
+                    android:textColor="@color/green2"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/maplestory_light"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:text="%"
+                    android:textColor="@color/green2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+            <TextView
+                    android:id="@+id/calorieView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="kcal"
                     android:textSize="20dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/maplestory_light"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -122,39 +229,59 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/mainGray"
-            android:layout_weight="1.5"
+            android:background="@color/white"
+            android:layout_weight="1.2"
             android:padding="20dp"
             android:gravity="center">
 
-        <LinearLayout
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
+
+                <Button
+                        android:id="@+id/playFab"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/play_icon"
+                        android:backgroundTint="#626262"/>
 
             <Button
-                    android:id="@+id/playFab"
+                    android:id="@+id/toiletFab"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/play_icon"/>
+                    android:background="@drawable/toilet_icon"
+                    android:backgroundTint="#626262" />
 
-        </LinearLayout>
 
 
-        <LinearLayout
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
+
 
             <Button
                     android:id="@+id/resetFab"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/dog_house" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/reset_icon"
+                    android:backgroundTint="#626262"
+                    />
+            <Button
+                    android:id="@+id/pauseFab"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/pause_icon"
+                    android:backgroundTint="#626262"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -162,12 +289,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
-
-            <ImageButton
-                    android:id="@+id/camera_btn"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/camera"/>
+                <ImageButton
+                        android:id="@+id/camera_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/camera"
+                        android:backgroundTint="#626262"/>
         </LinearLayout>
 
     </LinearLayout>

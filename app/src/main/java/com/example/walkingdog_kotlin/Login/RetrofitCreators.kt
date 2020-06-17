@@ -19,7 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitCreators(val context: Context) {
 
+//    val serverUrl = context.getString(R.string.server_url)
+
     val serverUrl = context.getString(R.string.server_url)
+
 
     fun LoginRetrofitCreator(email: String, password: String): LoginRetrofit {
         val retrofit = Retrofit.Builder()
@@ -41,5 +44,16 @@ class RetrofitCreators(val context: Context) {
         val nicknameRetrofit = retrofit.create(LoginRetrofit::class.java)
 
         return nicknameRetrofit
+    }
+
+    fun ProfileRetrofit(): LoginRetrofit {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(serverUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val profileRetrofit = retrofit.create(LoginRetrofit::class.java)
+
+        return profileRetrofit
     }
 }

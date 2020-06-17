@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.example.walkingdog_kotlin.Login.Model.LoginModel
 import com.example.walkingdog_kotlin.MainActivity
 import com.kakao.auth.ISessionCallback
@@ -19,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SessionCallback(val context: Context) : ISessionCallback {
+class SessionCallback(val context: LoginActivity) : ISessionCallback {
     override fun onSessionOpenFailed(exception: KakaoException?) {
         Log.e("Log", "Session Call back :: onSessionOpenFailed: ${exception?.message}")
     }
@@ -57,11 +56,13 @@ class SessionCallback(val context: Context) : ISessionCallback {
                         val token = response.body()?.loginToken
                         val nickname = response.body()?.nickname
 
+                        Log.d("토큰", token + nickname)
+
                         if (token != null) {
                             val pref = context.getSharedPreferences("pref", Context.MODE_PRIVATE)
                             val edit = pref.edit()
                             edit.putString("userToken", token)
-                            edit.commit()
+                            edit.apply()
 
                             if (nickname != null) {
                                 val intent = Intent(context, MainActivity::class.java)

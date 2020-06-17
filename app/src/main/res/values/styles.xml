@@ -16,6 +16,11 @@
         <item name="android:windowBackground">@drawable/dog_sole</item>
     </style>
 
+    <style name="MyItemFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/maplestory_light</item>
+    </style>
+
+
 
 
 </resources>

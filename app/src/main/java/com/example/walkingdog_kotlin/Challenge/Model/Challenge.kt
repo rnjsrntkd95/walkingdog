@@ -7,6 +7,7 @@ class Challenge () {
     var comment:String = ""
     var period:String = ""
     var number:String = ""
+    var id:String = ""
 
     constructor(challenge: ChallengeModel): this() {
         this.title = challenge.title
@@ -14,5 +15,6 @@ class Challenge () {
         this.period = ReformatDate("MM월 dd일", challenge.start_date) + " ~ " +
                 ReformatDate("MM월 dd일", challenge.end_date)
         this.number = challenge.population.toString()
+        this.id = challenge._id
     }
 }

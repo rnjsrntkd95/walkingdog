@@ -77,14 +77,13 @@ class ChallengeFragment(context: Context) : Fragment() {
             }
             override fun onResponse(call: Call<ChallengeListModel>, response: Response<ChallengeListModel>) {
                 val challenges = response.body()?.challenges
+                val popularChallenge = response.body()?.popularChallenge
                 if(challenges == null || challenges!!.isEmpty()){
                     return
                 }
-                val popularChallenge = response.body()?.popularChallenge
                 if(popularChallenge != null){
                     popularChallengeId = popularChallenge._id
-                    Log.d("인기챌린지", popularChallenge.title)
-                    challengeTitle_Textview.text = popularChallenge.title
+                    challengeTitle_Textview.text = popularChallenge!!.title
                     challenge_period.text = ReformatDate("MM월 dd일", popularChallenge!!.start_date) + " ~ " +
                             ReformatDate("MM월 dd일", popularChallenge!!.end_date)
                     popular_challenge_content_tv.text = popularChallenge!!.content

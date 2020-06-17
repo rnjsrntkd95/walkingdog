@@ -36,7 +36,7 @@ class Camera : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
 
         //상태바 색을 그레이로 변경
-        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.mainGray))
+        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.green1))
 
         //상태바 아이콘 색 플레그(흰색->검은색)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

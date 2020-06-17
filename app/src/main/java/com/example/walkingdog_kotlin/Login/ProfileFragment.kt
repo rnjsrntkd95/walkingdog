@@ -1,30 +1,25 @@
 package com.example.walkingdog_kotlin.Login
 
-import android.app.Activity.RESULT_OK
+import android.R.attr
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.*
-import com.example.walkingdog_kotlin.Animal.AddPet
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
-
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
 import kotlinx.android.synthetic.main.activity_main.*
-
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,9 +27,8 @@ import retrofit2.Response
 
 
 class ProfileFragment : Fragment() {
-    private val OPEN_GALLERY = 0
-    private val RC_SIGN_IN = 99
 
+    val REQUEST_CODE = 100
 
     var addpet_list = arrayListOf<ProfileItem>(
 
@@ -42,7 +36,7 @@ class ProfileFragment : Fragment() {
         ProfileItem("뽀삐")
     )
 
-    
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +48,13 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        myprofile_img_btn.setOnClickListener {
+            Toast.makeText(context, "asdsa", Toast.LENGTH_SHORT).show()
+            openGalleryForImage()
+
+        }
+
 
         val addpetAdapter = Addpet_RVAdapter(context!!, addpet_list)
 
@@ -128,32 +129,36 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == OPEN_GALLERY) {
-            if (requestCode == RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+            //////////////첫번째방법//////////
+//            myprofile_img_btn.setImageURI(data?.data) // handle chosen image
+            //////////////////////////
 
-                var currentImageUrl: Uri? = data?.data
+            ///////////////////두번째방법/////////////////////
+            val imageUri: Uri = data!!.data
+            val bitmap =
+                MediaStore.Images.Media.getBitmap(context!!.getContentResolver(), imageUri)
 
-                try {
-                    val bitmap =
-                        MediaStore.Images.Media.getBitmap(
-                            context?.contentResolver,
-                            currentImageUrl
-                        )
-                    myprofile_img_btn.setImageBitmap(bitmap)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-        } else {
-            Log.d("ActivityResult", "something wrong")
+//            myprofile_img_btn.setImageBitmap(bitmap)
+
+            ///////////////////////////////////////////
+
+            ////////////////////비트맵을 drawable로 바꿔서 배경화면으로 설정하는 법/////////////////////////////
+            val d: Drawable = BitmapDrawable(resources, bitmap)
+            myprofile_img_btn.setBackground(d)
+
+
+
         }
+
+
     }
 
-    fun loadImage() {
-        val intent = Intent()
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Load Picture"), OPEN_GALLERY)
+        startActivityForResult(intent, REQUEST_CODE)
     }
+
 
 }

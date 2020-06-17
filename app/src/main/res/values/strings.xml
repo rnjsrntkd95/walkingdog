@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">walkingdog_kotlin</string>
+    <string name="app_name">워킹멍:나랑 산책하개</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next">다음</string>

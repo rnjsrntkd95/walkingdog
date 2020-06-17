@@ -9,5 +9,6 @@
             android:layout_height="50dp"
             android:text="myDog"
             android:textSize="16dp"
-            android:buttonTint="@color/mainOrange"/>
+            android:buttonTint="@color/red1"
+            android:fontFamily="@font/maplestory_light"/>
 </RelativeLayout>

@@ -24,7 +24,8 @@
             app:menu="@menu/bottom_navigation_menu"
             android:background="@drawable/bottomnavigation_shape"
             app:itemIconTint="@color/mainGray"
-            app:itemTextColor="@color/mainGray">
+            app:itemTextColor="@color/mainGray"
+            app:itemTextAppearanceActive="@style/MyItemFont">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

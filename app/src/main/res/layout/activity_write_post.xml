@@ -50,7 +50,7 @@
                 android:id="@+id/imageUpload_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:orientation="vertical"
                 android:padding="20dp">
             <TextView
@@ -79,8 +79,9 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/image_recycler_view"
                     android:layout_width="300dp"
-                    android:layout_height="200dp"
-                    android:layout_centerInParent="true">
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true">
 
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -97,7 +98,7 @@
                 android:id="@+id/wirteComment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:padding="20dp"
                 android:orientation="vertical">
 

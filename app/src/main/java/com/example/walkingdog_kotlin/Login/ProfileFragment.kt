@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
         ProfileItem("뽀삐")
     )
 
+    
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

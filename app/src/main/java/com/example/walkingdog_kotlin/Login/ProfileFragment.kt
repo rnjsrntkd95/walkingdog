@@ -113,6 +113,7 @@ class ProfileFragment (context: Context): Fragment() {
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
             Toast.makeText(context, "로그아웃 되었습니다.", Toast.LENGTH_LONG).show()
+            (activity as MainActivity).finish()
         }
 
         add_pet_btn.setOnClickListener {

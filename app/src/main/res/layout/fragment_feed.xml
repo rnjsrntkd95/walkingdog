@@ -20,12 +20,12 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp">
 
-            <ImageView
-                    android:id="@+id/filter_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/filter_icon"
-                    android:backgroundTint="@color/white"/>
+<!--            <ImageView-->
+<!--                    android:id="@+id/filter_btn"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/filter_icon"-->
+<!--                    android:backgroundTint="@color/white"/>-->
 
         </LinearLayout>
 

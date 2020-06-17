@@ -36,6 +36,7 @@ class FeedFragment() : Fragment() {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,20 +54,20 @@ class FeedFragment() : Fragment() {
             startActivity(intent)
         }
 
-        filter_btn.setOnClickListener {
-            val popupMenu : PopupMenu = PopupMenu(context, filter_btn)
-            popupMenu.menuInflater.inflate(R.menu.post_popup_menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                when(item.itemId) {
-                    R.id.action_location ->
-                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-                    R.id.action_breed ->
-                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-                }
-                true
-            })
-            popupMenu.show()
-        }
+//        filter_btn.setOnClickListener {
+//            val popupMenu : PopupMenu = PopupMenu(context, filter_btn)
+//            popupMenu.menuInflater.inflate(R.menu.post_popup_menu, popupMenu.menu)
+//            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+//                when(item.itemId) {
+//                    R.id.action_location ->
+//                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+//                    R.id.action_breed ->
+//                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
+//                }
+//                true
+//            })
+//            popupMenu.show()
+//        }
 
         //// TimeLine Retrofit ////
         val pref = context!!.getSharedPreferences("pref", MODE_PRIVATE)

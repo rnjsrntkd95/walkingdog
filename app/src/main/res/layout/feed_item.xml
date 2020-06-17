@@ -152,7 +152,8 @@
             android:text="explain content"
             android:layout_below="@+id/feed_main_img_layout"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/maplestory_light"/>
 
     <LinearLayout
             android:id="@+id/feed_walking_info_layout"

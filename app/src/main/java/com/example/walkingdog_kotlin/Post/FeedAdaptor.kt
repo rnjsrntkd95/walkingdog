@@ -47,6 +47,8 @@ class FeedAdaptor(
         val walkingCal = itemView?.findViewById<TextView>(R.id.walkingCalory)
         val likes = itemView?.findViewById<TextView>(R.id.likesTv)
         val mapIcon = itemView?.findViewById<ImageView>(R.id.map_icon)
+        val digit = itemView?.findViewById<TextView>(R.id.distance_digit_view)
+
 
 
         fun bind(feedContent: FeedContent, context: Context) {
@@ -75,9 +77,18 @@ class FeedAdaptor(
             }
 
             explain?.text = feedContent.explain
-            walkingTime?.text = feedContent.time.toString()
-            walkingDistance?.text = feedContent.distance.toString()
-            walkingCal?.text = feedContent.calory.toString()
+            walkingTime?.text = timeToString(feedContent.time.toInt())
+
+            var distance = feedContent.distance.toFloat()
+            if (distance < 1000) {
+                digit?.text = "m"
+                walkingDistance?.text = String.format("%.1f", feedContent.distance.toFloat())
+            } else {
+                digit?.text = "km"
+                walkingDistance?.text = String.format("%.3f", feedContent.distance.toFloat() / 1000)
+            }
+
+            walkingCal?.text = String.format("%.1f", feedContent.calory.toFloat())
             likes?.text = feedContent.likes.toString()
 
             itemView.setOnClickListener {
@@ -113,6 +124,7 @@ class FeedAdaptor(
                         ) {
                             val routes = response.body()?.route
                             val toiletLoc = response.body()?.toiletLoc
+                            mapView = null
                             mapView = MapView(context)
                             if (routes!!.size == 0) {
                                 Toast.makeText(context, "산책 경로가 존재하지 않습니다.", Toast.LENGTH_LONG)
@@ -224,5 +236,34 @@ class FeedAdaptor(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(feedList[position], context)
+    }
+
+    private fun timeToString(time: Int): String {
+        val hour = (time / 144000) % 24 // 1시간
+        val min = (time / 6000) % 60 // 1분
+        val sec = (time / 100) % 60 // 1초
+        var sHour: String = "--"
+        var sMin: String = "--"
+        var sSec: String = "--"
+
+        if (hour < 10) { // 시
+            sHour = "0$hour"
+        } else {
+            sHour = "$hour"
+        }
+
+        if (min < 10) { // 분
+            sMin = "0$min"
+        } else {
+            sMin = "$min"
+        }
+
+        if (sec < 10) {
+            sSec = "0$sec"
+        } else {
+            sSec = "$sec"
+        }
+
+        return "$sHour:$sMin:$sSec"
     }
 }

@@ -28,7 +28,7 @@ exports.createPost = async (req, res, next) => {
         const postRegister = new Post({
             content,
             image,
-            calorie: walking.calorie,
+            calorie: walking.calories,
             distance: walking.distance,
             walkingId: walking._id,
             walkingTime: walking.walkingTime,

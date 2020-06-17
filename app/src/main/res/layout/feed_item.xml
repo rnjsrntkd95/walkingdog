@@ -178,6 +178,7 @@
                 android:text="-"
                 android:fontFamily="@font/maplestory_light"/>
         <TextView
+                android:id="@+id/distance_digit_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

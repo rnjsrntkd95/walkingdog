@@ -43,6 +43,8 @@ exports.createWalking = async (req, res, next) => {
 
     // 배변 활동 좌표 위도, 경도 후처리
     if(requestToiletLoc) {
+        console.log(requestToiletLoc)
+        console.log("똥싸기 처리")
         requestToiletLoc.forEach((loc) => {
             loc = loc.replace('[', "");
             loc = loc.replace(']', "");
@@ -91,7 +93,7 @@ exports.createWalking = async (req, res, next) => {
 
         // 유저가 챌린지에 참여 중이면 기록 갱신
         const challengeList = await UserChallenge.find({ userId: userData });
-
+        console.log("가입된 챌린지 확인" + challengeList)
         if (challengeList) {
             challengeList.forEach(async challenge => {
                 const challengeId = challenge.challengeId;
@@ -100,12 +102,14 @@ exports.createWalking = async (req, res, next) => {
                 const walkingCount = record.walkingCount;
                 const newWalkingCount = walkingCount + 1;
                 const walkingAvg = record.walkingAvg;
-                const score = record.score;
+                let score = record.score;
                 score += 75 + walkingAvg;
                 const newWalkingAvg = (walkingCount * walkingAvg + recordWalkingAmount) / newWalkingCount;
 
                 await record.updateOne({ $set: { walkingCount: newWalkingCount, walkingAvg: newWalkingAvg, score: score }});
             })
+        } else {
+            console.log("가입된 챌린지 없음")
         };
 
         res.json({ walkingId: resultReg._id});

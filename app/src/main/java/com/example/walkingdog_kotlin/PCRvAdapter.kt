@@ -40,7 +40,7 @@ class PCRvAdapter (val context: Context, val pcList: ArrayList<ParticipateChalle
             }
             nickName?.text = participateChallenge.nickName
             figure?.text = participateChallenge.walkingFigure
-            satisfy?.text = participateChallenge.walingsatisfy
+            satisfy?.text = String.format("%.1f", participateChallenge.walingsatisfy.toFloat())
             score?.text = participateChallenge.score
         }
     }

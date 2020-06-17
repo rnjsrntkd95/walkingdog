@@ -110,11 +110,11 @@ class MyChallengeActivity : AppCompatActivity() {
                         rankingFigureTv.text = myrank.toString()
                     }
                     walkingFigureTv.text = myRecord.walkingCount.toString()
-                    satisfiedQuantityFigureTv.text = myRecord.walkingAvg.toString()
+                    satisfiedQuantityFigureTv.text = String.format("%.1f", myRecord.walkingAvg.toFloat())
                     scoreFigureTv.text = myRecord.score.toString()
                 }
 
-                if(pcList.size > 3){
+                if(pcList.size >= 3){
                     firstPerson.text = pcList[0].nickName
                     secondPerson.text = pcList[1].nickName
                     thirdPerson.text = pcList[2].nickName

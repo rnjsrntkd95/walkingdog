@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical"
+        tools:context=".Challenge.MyChallengeActivity">
+    <!--    상단 앱바-->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/weather_bar_shape">
+
+        <ImageView
+                android:id="@+id/myChallenge_back_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white" />
+
+        <TextView
+                android:id="@+id/myChallengeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"
+                android:text="챌린지"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <!--순위 레이아웃-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/mainGray"
+                    android:elevation="20dp"
+                    android:orientation="horizontal">
+                <!--                2등 레이아웃-->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                    <ImageView
+                            android:id="@+id/silverMedal"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/trophy2" />
+
+                    <TextView
+                            android:id="@+id/secondPerson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/maplestory_bold"
+                            android:text="-"
+                            android:textSize="16dp" />
+                </LinearLayout>
+                <!--                1등 레이아웃-->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                    <ImageView
+                            android:id="@+id/goldMedal"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/trophy1" />
+
+                    <TextView
+                            android:id="@+id/firstPerson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/maplestory_bold"
+                            android:text="-"
+                            android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <!--                3등 레이아웃-->
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                    <ImageView
+                            android:id="@+id/bronzeMedal"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/trophy3" />
+
+                    <TextView
+                            android:id="@+id/thirdPerson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/maplestory_bold"
+                            android:text="-"
+                            android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!--             내기록 레이아웃-->
+            <LinearLayout
+                    android:id="@+id/myRecordLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="#F18C8C"
+                    android:elevation="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/maplestory_light"
+                        android:text="나의 기록"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    <LinearLayout
+                            android:layout_width="44dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="순위"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:id="@+id/rankingFigureTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="-" />
+
+                    </LinearLayout>
+                    <!--                내 산책횟수 레이아웃-->
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="산책 횟수"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:id="@+id/walkingFigureTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="30" />
+
+                    </LinearLayout>
+                    <!--                    내 산책 충족량 레이아웃-->
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="산책 충족량"
+                                android:textStyle="bold" />
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            <TextView
+                                    android:id="@+id/satisfiedQuantityFigureTv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/maplestory_light"
+                                    android:text="100" />
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/maplestory_light"
+                                    android:text="%" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--                    내 점수 레이아웃-->
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="점수"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:id="@+id/scoreFigureTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/maplestory_light"
+                                android:text="100" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--                 내 순위 레이아웃-->
+            </LinearLayout>
+            <!--            전체 참여자 순위 리스트-->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/mainGray"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/maplestory_light"
+                            android:text="참여자 기록 정보"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:fontFamily="@font/maplestory_light"
+                                android:gravity="center"
+                                android:text="순위"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/maplestory_light"
+                                android:gravity="center"
+                                android:text="닉네임"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maplestory_light"
+                                android:gravity="center"
+                                android:text="산책 횟수"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maplestory_light"
+                                android:gravity="center"
+                                android:text="산책 충족량"
+                                android:textStyle="bold" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/maplestory_light"
+                                android:gravity="center"
+                                android:text="점수"
+                                android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/participatedChallengeListRecyclerview"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center">
+
+                <Button
+                        android:id="@+id/cancelChallenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/green1"
+                        android:fontFamily="@font/maplestory_light"
+                        android:text="포기하기"
+                        android:textSize="16dp" />
+
+                <Button
+                        android:id="@+id/joinChallenge"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/tenradius_shape"
+                        android:backgroundTint="@color/green1"
+                        android:fontFamily="@font/maplestory_light"
+                        android:text="가입하기"
+                        android:textSize="16dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

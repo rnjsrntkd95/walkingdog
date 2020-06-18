@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Settings"
+        android:layout_margin="10dp"
+        >
+
+    <LinearLayout
+            android:id="@+id/settings_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                >
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/settings_first_line"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#000000"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/settings_title"
+            >
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_first_line"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            >
+
+        <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                >
+
+        </TextView>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000"
+                android:layout_marginTop="5dp"
+                >
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--                android:id="@+id/sign_out"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="회원탈퇴"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="20dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                >-->
+
+<!--        </TextView>-->
+
+<!--        <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="#000000"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                >-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

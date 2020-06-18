@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#"
+                android:textSize="20sp"
+                android:fontFamily="@font/maplestory_bold"
+                android:textColor="@color/green3"/>
+
+        <TextView
+                android:id="@+id/myDogName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강아지 이름"
+                android:textSize="20sp"
+                android:fontFamily="@font/maplestory_bold"
+                android:textColor="@color/green3"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+

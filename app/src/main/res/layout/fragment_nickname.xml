@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Login.Information.NicknameFragment">
+
+    <RelativeLayout
+            android:id="@+id/nickname_signUp_comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bottomten_radius_shape"
+            android:backgroundTint="@color/green2">
+
+        <ImageButton
+                android:id="@+id/previous_btn_nickname"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/nickname_signUp_comment_layout">
+
+        <LinearLayout
+                android:id="@+id/nickname_edit_layout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <EditText
+                        android:id="@+id/nickname_edittext"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/input_nickname"
+                        android:fontFamily="@font/maplestory_light">
+                </EditText>
+
+                <TextView
+                        android:id="@+id/nickname_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/mainOrange"
+                        android:fontFamily="@font/maplestory_light"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/nickname_layout_name"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/next_btn_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/green3"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/white"
+                    android:text="@string/next"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/maplestory_light"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

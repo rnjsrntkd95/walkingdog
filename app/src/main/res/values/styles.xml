@@ -1,0 +1,27 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/mainBlue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <!--Status Bar 배경색 -->
+        <item name="android:statusBarColor">@color/mainBlue</item>
+    </style>
+
+    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/dog_sole</item>
+    </style>
+
+    <style name="MyItemFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/maplestory_light</item>
+    </style>
+
+
+
+
+</resources>
+

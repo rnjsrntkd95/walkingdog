@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.example.walkingdog_kotlin">
+    <!-- INTERNET Connect -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Google Login -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 위치 정보 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 화면 캡처 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+            android:name=".Login.GlobalApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/app_icon"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
+        <activity android:name=".ProfileAddPetActivity"></activity>
+        <activity android:name=".Walking.WalkingListActivity"></activity>
+        <activity android:name=".Challenge.MyChallengeActivity" />
+        <activity android:name=".Challenge.Create_ChallengeActivity" />
+        <activity android:name=".Post.WritePost" />
+        <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
+        <!-- 카카오 앱 키 사용 -->
+        <meta-data
+                android:name="com.kakao.sdk.AppKey"
+                android:value="@string/kakao_app_key" />
+
+        <activity android:name=".MainActivity" />
+        <activity
+                android:name=".Login.SignUpActivity"
+                android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Walking.Statics" />
+        <activity android:name=".Settings" />
+        <activity android:name=".MyPhotoActivity" />
+        <activity android:name=".Walking.WalkingActivity" />
+        <activity android:name=".Animal.AddPet" />
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

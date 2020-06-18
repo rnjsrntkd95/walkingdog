@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Login.Information.NicknameFragment">
+
+    <RelativeLayout
+            android:id="@+id/add_pet_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bottomten_radius_shape"
+            android:backgroundTint="@color/green2">
+
+        <ImageButton
+                android:id="@+id/previous_btn_addPet"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/back_arrow"
+                android:backgroundTint="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="펫 등록"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/maplestory_bold"/>
+
+        <TextView
+                android:id="@+id/pass_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="건너뛰기"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/maplestory_light"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/add_pet_title_layout">
+            <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/finish_btn_addPet"
+                    android:layout_centerHorizontal="true">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                    <LinearLayout
+                            android:layout_width="280dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="이름"
+                                android:fontFamily="@font/maplestory_bold"/>
+
+                        <EditText
+                                android:id="@+id/petName_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:hint="강아지의 이름을 입력하세요"
+                                android:layout_marginBottom="10dp"
+                                android:fontFamily="@font/maplestory_light"/>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="몸무게"
+                                        android:fontFamily="@font/maplestory_bold"/>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+                                    <EditText
+                                            android:id="@+id/petWeight_editText"
+                                            android:layout_width="70dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:inputType="number"
+                                            android:fontFamily="@font/maplestory_light"/>
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="50dp"
+                                        android:text="kg"
+                                        android:gravity="center"
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/maplestory_light"/>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="나이"
+                                        android:fontFamily="@font/maplestory_bold"/>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+                                    <EditText
+                                            android:id="@+id/petAge_editText"
+                                            android:layout_width="60dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:inputType="number"
+                                            android:fontFamily="@font/maplestory_light"/>
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="70dp"
+                                    android:layout_height="match_parent">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="50dp"
+                                        android:text="살"
+                                        android:gravity="center"
+                                        android:layout_marginTop="30dp"
+                                        android:fontFamily="@font/maplestory_light"/>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="견종"
+                                android:fontFamily="@font/maplestory_bold"
+                                android:layout_marginBottom="5dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/breed_rv"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="10dp">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="성별"
+                                android:fontFamily="@font/maplestory_bold"/>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            <ToggleButton
+                                    android:id="@+id/male_btn"
+                                    android:layout_width="120dp"
+                                    android:layout_height="50dp"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/breed_shape"
+                                    android:textOff="male"
+                                    android:textOn="male"
+                                    android:text="male"
+                                    android:fontFamily="@font/maplestory_light"/>
+
+                            <LinearLayout
+                                    android:layout_width="30dp"
+                                    android:layout_height="match_parent">
+
+                            </LinearLayout>
+
+                            <ToggleButton
+                                    android:id="@+id/female_btn"
+                                    android:layout_width="120dp"
+                                    android:layout_height="50dp"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/breed_shape"
+                                    android:textOff="female"
+                                    android:textOn="female"
+                                    android:text="female"
+                                    android:fontFamily="@font/maplestory_light"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+            <Button
+                    android:id="@+id/finish_btn_addPet"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/tenradius_shape"
+                    android:backgroundTint="@color/green3"
+                    android:text="@string/finish"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="16dp"
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/maplestory_bold"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

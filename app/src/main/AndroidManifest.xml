@@ -21,7 +21,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileAddPetActivity"></activity>
+        <activity android:name=".Profile.ProfileAddPetActivity"></activity>
         <activity android:name=".Walking.WalkingListActivity"></activity>
         <activity android:name=".Challenge.MyChallengeActivity" />
         <activity android:name=".Challenge.Create_ChallengeActivity" />

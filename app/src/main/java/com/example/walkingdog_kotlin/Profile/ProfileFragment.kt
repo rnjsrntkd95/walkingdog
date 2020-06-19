@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin.Login
+package com.example.walkingdog_kotlin.Profile
 
 import android.app.Activity
 import android.content.Context
@@ -18,10 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.walkingdog_kotlin.*
 import com.example.walkingdog_kotlin.Animal.AddPet
+import com.example.walkingdog_kotlin.Animal.Addpet_RVAdapter
 import com.example.walkingdog_kotlin.Challenge.ChallengeRetrofitCreators
 import com.example.walkingdog_kotlin.Challenge.Model.myChallengeId
 import com.example.walkingdog_kotlin.Challenge.MyChallengeActivity
+import com.example.walkingdog_kotlin.Login.LoginActivity
 import com.example.walkingdog_kotlin.Login.Model.MyProfileModel
+import com.example.walkingdog_kotlin.Login.RetrofitCreators
+import com.example.walkingdog_kotlin.Login.SignUpActivity
 import com.example.walkingdog_kotlin.Walking.Statics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -47,7 +51,11 @@ class ProfileFragment (context: Context): Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val addpetAdapter = Addpet_RVAdapter(context!!, addpetList)
+        val addpetAdapter =
+            Addpet_RVAdapter(
+                context!!,
+                addpetList
+            )
         add_recyclerView.adapter = addpetAdapter
         val lm = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         add_recyclerView.layoutManager = lm
@@ -66,7 +74,9 @@ class ProfileFragment (context: Context): Fragment() {
         // 프로필 정보 요청
         val pref = context!!.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
-        val loginRetrofit = RetrofitCreators(context!!).ProfileRetrofit()
+        val loginRetrofit = RetrofitCreators(
+            context!!
+        ).ProfileRetrofit()
         loginRetrofit.getMyProfile(userToken!!).enqueue(object : Callback<MyProfileModel> {
             override fun onFailure(call: Call<MyProfileModel>, t: Throwable) {
                 Log.d("DEBUG", "Profile Retrofit failed!!")
@@ -95,7 +105,11 @@ class ProfileFragment (context: Context): Fragment() {
                 user_nickname_view.text = userNickName
                 if (myPet != null && myPet.size != 0) {
                     myPet!!.forEach(fun(pet) {
-                        addpetList.add(ProfileItem(pet.animalName))
+                        addpetList.add(
+                            ProfileItem(
+                                pet.animalName
+                            )
+                        )
                     })
                     addpetAdapter.notifyDataSetChanged()
                     add_pet_text_view.visibility = View.GONE

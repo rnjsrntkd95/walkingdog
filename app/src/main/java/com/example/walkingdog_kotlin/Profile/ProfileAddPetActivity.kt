@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.example.walkingdog_kotlin.Animal.BreedAdapter
 import com.example.walkingdog_kotlin.Animal.Model.BreedListModel
 import com.example.walkingdog_kotlin.Animal.Model.Breed
 import com.example.walkingdog_kotlin.Animal.Model.SetNewAnimalModel
-import com.example.walkingdog_kotlin.Login.ProfileFragment
+import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_profile_add_pet.*
 import retrofit2.Call
 import retrofit2.Callback

@@ -10,7 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.app.ActivityCompat
 import com.example.walkingdog_kotlin.Challenge.ChallengeFragment
-import com.example.walkingdog_kotlin.Login.ProfileFragment
+import com.example.walkingdog_kotlin.Profile.ProfileFragment
 import com.example.walkingdog_kotlin.Post.FeedFragment
 import com.example.walkingdog_kotlin.Walking.CheckFragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
             }
             R.id.action_profile -> {
-                var profileFragment = ProfileFragment(this)
+                var profileFragment =
+                    ProfileFragment(this)
                 supportFragmentManager.beginTransaction().replace(R.id.main_content_layout, profileFragment)
                     .commit()
             }

@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.walkingdog_kotlin.Post.Model.FeedContent
 import com.example.walkingdog_kotlin.Post.Model.PostListModel
 import com.example.walkingdog_kotlin.R
-import com.example.walkingdog_kotlin.Walking.Statics
+import com.example.walkingdog_kotlin.Profile.Statics
 import kotlinx.android.synthetic.main.fragment_feed.*
 import retrofit2.Call
 import retrofit2.Callback

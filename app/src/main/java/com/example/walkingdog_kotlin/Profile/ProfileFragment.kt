@@ -26,7 +26,6 @@ import com.example.walkingdog_kotlin.Login.LoginActivity
 import com.example.walkingdog_kotlin.Login.Model.MyProfileModel
 import com.example.walkingdog_kotlin.Login.RetrofitCreators
 import com.example.walkingdog_kotlin.Login.SignUpActivity
-import com.example.walkingdog_kotlin.Walking.Statics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import retrofit2.Call

@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin.Walking
+package com.example.walkingdog_kotlin.Profile
 
 class StaticsItem(val date:String, val cal:String, val hour:String, val minutes:String, val sec:String, val walkingId:String) {
 

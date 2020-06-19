@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin.Walking
+package com.example.walkingdog_kotlin.Profile
 
 import android.content.Intent
 import android.graphics.Color
@@ -16,6 +16,7 @@ import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.ReformatDate
 import com.example.walkingdog_kotlin.Statics_RVAdapter
 import com.example.walkingdog_kotlin.Walking.Model.MyWalkingStaticModel
+import com.example.walkingdog_kotlin.Walking.WalkingRetrofitCreators
 import kotlinx.android.synthetic.main.activity_statics.*
 import org.eazegraph.lib.charts.BarChart
 import org.eazegraph.lib.models.BarModel
@@ -72,7 +73,9 @@ class Statics : AppCompatActivity() {
         // 산책 통계 기록 요청
         val pref = getSharedPreferences("pref", MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
-        val walkingRetrofit = WalkingRetrofitCreators(this).WalkingRetrofitCreator()
+        val walkingRetrofit = WalkingRetrofitCreators(
+            this
+        ).WalkingRetrofitCreator()
         walkingRetrofit.getMyWalkingStatic(userToken!!).enqueue(object :
             Callback<MyWalkingStaticModel> {
             override fun onFailure(call: Call<MyWalkingStaticModel>, t: Throwable) {
@@ -132,8 +135,12 @@ class Statics : AppCompatActivity() {
                         thisMonthTime += time
                     }
 
-                    history_list.add(StaticsItem("$month/$day", String.format("%.1f", walking.calories.toFloat()),
-                        sHour, sMin, sSec, walking._id))
+                    history_list.add(
+                        StaticsItem(
+                            "$month/$day", String.format("%.1f", walking.calories.toFloat()),
+                            sHour, sMin, sSec, walking._id
+                        )
+                    )
 
                     sumStatic[day.toInt()-1] = sumStatic[day.toInt()-1]+walking.calories.toFloat()
 

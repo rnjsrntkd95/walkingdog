@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.walkingdog_kotlin.MainActivity
+import com.example.walkingdog_kotlin.Profile.Statics
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel
 import kotlinx.android.synthetic.main.activity_walking.*
@@ -229,7 +230,9 @@ class WalkingActivity : AppCompatActivity(), MapView.CurrentLocationEventListene
     private fun submitResult() {
         val pref = getSharedPreferences("pref", MODE_PRIVATE)
         val userToken = pref.getString("userToken", "")
-        val walkingRetrofit = WalkingRetrofitCreators(this).WalkingRetrofitCreator()
+        val walkingRetrofit = WalkingRetrofitCreators(
+            this
+        ).WalkingRetrofitCreator()
         walkingRetrofit.createWalking(
             userToken!!, walkingCalorie, walkingDistance, time, walkingAmounts,
             addressAdmin, addressLocality, addressThoroughfare, animal, route, toiletLoc

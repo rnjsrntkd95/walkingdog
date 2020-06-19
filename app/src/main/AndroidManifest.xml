@@ -37,7 +37,7 @@
                 android:name=".Login.SignUpActivity"
                 android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Walking.Statics" />
+        <activity android:name=".Profile.Statics" />
         <activity android:name=".Settings" />
         <activity android:name=".MyPhotoActivity" />
         <activity android:name=".Walking.WalkingActivity" />

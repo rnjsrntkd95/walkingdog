@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.walkingdog_kotlin.Post.WritePost
 import com.example.walkingdog_kotlin.Walking.StaticsItem
-import com.example.walkingdog_kotlin.model.MyFeedDTO
 
 class Statics_RVAdapter(val mContext: Context, val staticsItem: ArrayList<StaticsItem>,
                         val itemClick: (StaticsItem) -> Unit):

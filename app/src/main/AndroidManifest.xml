@@ -26,7 +26,7 @@
         <activity android:name=".Challenge.MyChallengeActivity" />
         <activity android:name=".Challenge.Create_ChallengeActivity" />
         <activity android:name=".Post.WritePost" />
-        <activity android:name=".Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
+        <activity android:name=".Walking.Camera" /> <!-- <activity android:name=".Animal.AddPet" /> -->
         <!-- 카카오 앱 키 사용 -->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"

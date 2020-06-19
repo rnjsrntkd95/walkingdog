@@ -1,4 +1,4 @@
-package com.example.walkingdog_kotlin
+package com.example.walkingdog_kotlin.Walking
 
 import android.Manifest
 import android.content.Intent
@@ -13,9 +13,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.Surface
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.walkingdog_kotlin.R
 import kotlinx.android.synthetic.main.activity_camera.*
 import java.io.File
 import java.io.FileOutputStream
@@ -36,7 +36,9 @@ class Camera : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
 
         //상태바 색을 그레이로 변경
-        window.statusBarColor = (ContextCompat.getColor(applicationContext, R.color.green1))
+        window.statusBarColor = (ContextCompat.getColor(applicationContext,
+            R.color.green1
+        ))
 
         //상태바 아이콘 색 플레그(흰색->검은색)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

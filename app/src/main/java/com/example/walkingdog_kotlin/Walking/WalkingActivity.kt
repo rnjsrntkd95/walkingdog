@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.walkingdog_kotlin.Camera
 import com.example.walkingdog_kotlin.MainActivity
 import com.example.walkingdog_kotlin.R
 import com.example.walkingdog_kotlin.Walking.Model.CreateWalkingResultModel

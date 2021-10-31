@@ -10,7 +10,7 @@
 ---------------------------------------
 
 ## 🔍Pages Introduction
-![워킹독움짤](https://user-images.githubusercontent.com/52883945/119128018-0d77f180-ba70-11eb-8316-0f1d7c190732.gif)
+![워킹멍움짤](https://user-images.githubusercontent.com/52883945/119128018-0d77f180-ba70-11eb-8316-0f1d7c190732.gif)
 
 ---------------------------------------
 
@@ -62,5 +62,5 @@
 ## 🎞Video
 > Youtube URI : [https://youtu.be/XY09-W97CjU](https://youtu.be/XY09-W97CjU)
 
-[![워킹독: 나랑 산책하개](http://img.youtube.com/vi/XY09-W97CjU/0.jpg)](https://youtu.be/XY09-W97CjU) 
+[![워킹멍: 나랑 산책하개](http://img.youtube.com/vi/XY09-W97CjU/0.jpg)](https://youtu.be/XY09-W97CjU) 
 
